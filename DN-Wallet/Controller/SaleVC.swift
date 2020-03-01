@@ -8,13 +8,23 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SaleVC: UIViewController {
 
+    
+    //MARK:- Outlets
+    @IBOutlet weak var qrCodeImage: UIImageView!
+    @IBOutlet weak var infoLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    
+    //MARK:- Actions
+    @IBAction func downlaodQRCodeBtn(_ sender: Any) {
+    }
+    
 }
 
