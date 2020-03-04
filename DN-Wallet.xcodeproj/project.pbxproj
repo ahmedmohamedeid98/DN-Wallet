@@ -19,6 +19,12 @@
 		04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF2240B1EE300F781D8 /* PayVC.swift */; };
 		04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF4240B1F0100F781D8 /* ChargeVC.swift */; };
 		04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */; };
+		047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */; };
+		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
+		047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* SignUpVC.swift */; };
+		047FA8B8240E1F0B0097DD06 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047FA8B7240E1F0B0097DD06 /* Authentication.storyboard */; };
+		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
+		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +44,12 @@
 		04792AF2240B1EE300F781D8 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
 		04792AF4240B1F0100F781D8 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
+		047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startControllerForTest.swift; sourceTree = "<group>"; };
+		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		047FA8B4240E1E910097DD06 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		047FA8B7240E1F0B0097DD06 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
+		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,15 +82,15 @@
 		04792AD12409FE8F00F781D8 /* DN-Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				0491D854240E3A050014E34C /* Extension */,
 				04792AD22409FE8F00F781D8 /* AppDelegate.swift */,
 				04792AD42409FE8F00F781D8 /* SceneDelegate.swift */,
 				04792AEB2409FF4700F781D8 /* Support files */,
 				04792AEA2409FF3F00F781D8 /* Model */,
 				04792AE92409FF3500F781D8 /* View */,
 				04792AE82409FF2200F781D8 /* Controller */,
-				04792ADA2409FE9000F781D8 /* Main.storyboard */,
+				047FA8B6240E1EB30097DD06 /* Storyboard */,
 				04792ADD2409FEA900F781D8 /* Assets.xcassets */,
-				04792ADF2409FEA900F781D8 /* LaunchScreen.storyboard */,
 				04792AE22409FEA900F781D8 /* Info.plist */,
 			);
 			path = "DN-Wallet";
@@ -92,6 +104,9 @@
 				04792AF2240B1EE300F781D8 /* PayVC.swift */,
 				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
 				04792AF0240A03CC00F781D8 /* SideMenuVC.swift */,
+				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
+				047FA8B2240E1E700097DD06 /* SignInVC.swift */,
+				047FA8B4240E1E910097DD06 /* SignUpVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -99,6 +114,7 @@
 		04792AE92409FF3500F781D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				047FA8B9240E36440097DD06 /* userInput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +135,24 @@
 				04792AEC2409FF8E00F781D8 /* DN-Wallet-Bridging-Header.h */,
 			);
 			path = "Support files";
+			sourceTree = "<group>";
+		};
+		047FA8B6240E1EB30097DD06 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				04792ADA2409FE9000F781D8 /* Main.storyboard */,
+				04792ADF2409FEA900F781D8 /* LaunchScreen.storyboard */,
+				047FA8B7240E1F0B0097DD06 /* Authentication.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		0491D854240E3A050014E34C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0491D855240E3A330014E34C /* extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047FA8B8240E1F0B0097DD06 /* Authentication.storyboard in Resources */,
 				04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */,
 				04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */,
 				04792ADC2409FE9000F781D8 /* Main.storyboard in Resources */,
@@ -194,10 +229,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
+				0491D856240E3A330014E34C /* extension.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
+				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
+				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
+				047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */,
 				04792AD72409FE8F00F781D8 /* HomeVC.swift in Sources */,
 				04792AF1240A03CC00F781D8 /* SideMenuVC.swift in Sources */,
+				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
@@ -346,6 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "DN-Wallet/DN-Wallet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65KFFC5UGQ;
 				INFOPLIST_FILE = "DN-Wallet/Info.plist";
@@ -367,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "DN-Wallet/DN-Wallet.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 65KFFC5UGQ;
 				INFOPLIST_FILE = "DN-Wallet/Info.plist";
