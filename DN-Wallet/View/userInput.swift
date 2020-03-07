@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@IBDesignable
+
 class userInput: UIView {
 
     let image: UIImageView = {

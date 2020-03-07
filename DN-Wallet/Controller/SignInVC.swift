@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@IBDesignable
+
 class SignInVC: UIViewController {
 
     @IBOutlet weak var emailContainerView: userInput!
@@ -17,6 +17,8 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        signInOutlet.layer.cornerRadius = 20.0
         emailContainerView.configureInputField(imageName: "mail", placeholder: "Email", isSecure: false)
         passwordContainerView.configureInputField(imageName: "password", placeholder: "Password", isSecure: true)
     }

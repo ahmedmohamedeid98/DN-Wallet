@@ -35,5 +35,10 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func nextBtnPressed(_ sender: UIButton) {
+        let st = UIStoryboard(name: "Authentication", bundle: .main)
+        let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
+        
+        vc?.modalPresentationStyle = .fullScreen
+        present(vc!, animated: true)
     }
 }
