@@ -645,7 +645,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="Xdg-NC-XJz">
             <objects>
-                <viewController id="JwW-80-vcR" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="startScreanID" id="JwW-80-vcR" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M0X-l0-i9b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

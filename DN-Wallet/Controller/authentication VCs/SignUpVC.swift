@@ -8,23 +8,28 @@
 
 import UIKit
 
-class SignUpVC: UIViewController {
+@IBDesignable class SignUpVC: UIViewController {
 
     
     @IBOutlet weak var usernameContainer: userInput!
     @IBOutlet weak var emailContainer: userInput!
     @IBOutlet weak var passwordContainer: userInput!
     @IBOutlet weak var confirmPasswordContainer: userInput!
+    @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
     
-    
+    @IBOutlet weak var nextBtnOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        usernameContainer.configureInputField(imageName: "username", placeholder: "Username", isSecure: false)
-        emailContainer.configureInputField(imageName: "mail", placeholder: "Email", isSecure: false)
-        passwordContainer.configureInputField(imageName: "password", placeholder: "Password", isSecure: true)
-        confirmPasswordContainer.configureInputField(imageName: "password", placeholder: "Confirm the password", isSecure: true)
+        usernameContainer.configureInputField(imageName: "person",systemImage: true, placeholder: "Username", isSecure: false)
+        emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
+        passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
+        confirmPasswordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Confirm the password", isSecure: true)
+        nextBtnOutlet.layer.cornerRadius = 20.0
+        
+        steppedProgressBar.titles = ["", "", ""]
+        steppedProgressBar.currentTab = 1
     }
     
 

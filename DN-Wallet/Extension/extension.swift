@@ -8,9 +8,12 @@
 
 import UIKit
 
+
+
+//MARK:- UIView - layoutConstraint
 extension UIView {
     
-    func constraints(_ top:NSLayoutYAxisAnchor? = nil, left:NSLayoutXAxisAnchor? = nil, right:NSLayoutXAxisAnchor? = nil, bottom:NSLayoutYAxisAnchor? = nil, margins:UIEdgeInsets = .zero, size: CGSize = .zero){
+    func DNLayoutConstraint(_ top:NSLayoutYAxisAnchor? = nil, left:NSLayoutXAxisAnchor? = nil, right:NSLayoutXAxisAnchor? = nil, bottom:NSLayoutYAxisAnchor? = nil, margins:UIEdgeInsets = .zero, size: CGSize = .zero, centerH: Bool = false, centerV: Bool = false){
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -34,7 +37,84 @@ extension UIView {
         if size.width != 0 {
             constraintArray.append(widthAnchor.constraint(equalToConstant: size.width))
         }
+        if centerH {
+            constraintArray.append(centerXAnchor.constraint(equalTo: superview!.centerXAnchor))
+        }
+        if centerV {
+            constraintArray.append(centerYAnchor.constraint(equalTo: superview!.centerYAnchor))
+        }
         
         NSLayoutConstraint.activate(constraintArray)
+    }
+    
+}
+
+
+
+//MARK:- AppColor
+extension UIColor {
+    
+    enum DN {
+        case DarkBlue
+        case LightBlue
+        case DarkGray
+        case LightGray
+        case Black
+        case White
+        
+        func color() -> UIColor {
+            switch self {
+            case .DarkBlue:
+                return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+            case .LightBlue:
+                return #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+            case .DarkGray:
+                return #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            case .LightGray:
+                return #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+            case .Black:
+                return #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            case .White:
+                return #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
+        }
+        
+    }
+}
+
+//MARK:- AppFont
+extension UIFont {
+    enum DN {
+        case Bold
+        case SemiBlod
+        case Regular
+        case Light
+        
+        func font(size: CGFloat = 20) -> UIFont {
+            switch self {
+                
+            case .Bold:
+                return .systemFont(ofSize: size, weight: .bold)
+            case .SemiBlod:
+                return .systemFont(ofSize: size, weight: .semibold)
+            case .Regular:
+                return .systemFont(ofSize: size, weight: .regular)
+            case .Light:
+                return .systemFont(ofSize: size, weight: .light)
+            }
+        
+        }
+
+    }
+}
+
+extension UITextField {
+    func stopSmartActions(){
+        self.autocorrectionType = .no
+        self.autocapitalizationType = .none
+        self.smartDashesType = .no
+        self.smartInsertDeleteType = .no
+        self.smartQuotesType = .no
+        self.spellCheckingType = .no
     }
 }

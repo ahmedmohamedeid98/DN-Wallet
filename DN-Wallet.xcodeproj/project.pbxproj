@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C2241500C30056567A /* NSAttributedString+JK.swift */; };
+		040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C3241500C30056567A /* SteppedProgressBar.swift */; };
+		040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C4241500C30056567A /* CGPoint+JK.swift */; };
+		040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C5241500C30056567A /* UIImage+UIColor.swift */; };
+		045A2FAD241BE7AF00A0C643 /* Services.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045A2FAC241BE7AF00A0C643 /* Services.storyboard */; };
+		046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046732B724198EFE00DD436D /* FPEnterEmailVC.swift */; };
+		046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046732B924198F3300DD436D /* FPResetPasswordVC.swift */; };
 		04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD22409FE8F00F781D8 /* AppDelegate.swift */; };
 		04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD42409FE8F00F781D8 /* SceneDelegate.swift */; };
 		04792AD72409FE8F00F781D8 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD62409FE8F00F781D8 /* HomeVC.swift */; };
@@ -26,11 +33,20 @@
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
 		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
 		0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */; };
+		049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D1DFA241A7C02003DF669 /* passwordContainer.swift */; };
 		04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */; };
 		04E9448E2412D9A7000EA14B /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448D2412D9A7000EA14B /* OTP.swift */; };
+		04F4AD182415490A008CF051 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AD172415490A008CF051 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040B03C2241500C30056567A /* NSAttributedString+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+JK.swift"; sourceTree = "<group>"; };
+		040B03C3241500C30056567A /* SteppedProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppedProgressBar.swift; sourceTree = "<group>"; };
+		040B03C4241500C30056567A /* CGPoint+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+JK.swift"; sourceTree = "<group>"; };
+		040B03C5241500C30056567A /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
+		045A2FAC241BE7AF00A0C643 /* Services.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Services.storyboard; sourceTree = "<group>"; };
+		046732B724198EFE00DD436D /* FPEnterEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPEnterEmailVC.swift; sourceTree = "<group>"; };
+		046732B924198F3300DD436D /* FPResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPResetPasswordVC.swift; sourceTree = "<group>"; };
 		04792ACF2409FE8F00F781D8 /* DN-Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DN-Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04792AD22409FE8F00F781D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04792AD42409FE8F00F781D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,8 +70,10 @@
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
 		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpConfirmEmailVC.swift; sourceTree = "<group>"; };
+		049D1DFA241A7C02003DF669 /* passwordContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwordContainer.swift; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoneVC.swift; sourceTree = "<group>"; };
 		04E9448D2412D9A7000EA14B /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
+		04F4AD172415490A008CF051 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +87,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040B03C1241500A60056567A /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				040B03C4241500C30056567A /* CGPoint+JK.swift */,
+				040B03C2241500C30056567A /* NSAttributedString+JK.swift */,
+				040B03C3241500C30056567A /* SteppedProgressBar.swift */,
+				040B03C5241500C30056567A /* UIImage+UIColor.swift */,
+			);
+			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		045A2FAE241BE7E200A0C643 /* authentication VCs */ = {
+			isa = PBXGroup;
+			children = (
+				047FA8B2240E1E700097DD06 /* SignInVC.swift */,
+				047FA8B4240E1E910097DD06 /* SignUpVC.swift */,
+				04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */,
+				0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */,
+			);
+			path = "authentication VCs";
+			sourceTree = "<group>";
+		};
+		045A2FAF241BE84F00A0C643 /* tabController VCs */ = {
+			isa = PBXGroup;
+			children = (
+				04792AD62409FE8F00F781D8 /* HomeVC.swift */,
+				04792AD82409FE8F00F781D8 /* SaleVC.swift */,
+				04792AF2240B1EE300F781D8 /* PayVC.swift */,
+				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
+				04792AF0240A03CC00F781D8 /* SideMenuVC.swift */,
+			);
+			path = "tabController VCs";
+			sourceTree = "<group>";
+		};
+		046732B624198EA600DD436D /* forgetPassword VCs */ = {
+			isa = PBXGroup;
+			children = (
+				046732B724198EFE00DD436D /* FPEnterEmailVC.swift */,
+				046732B924198F3300DD436D /* FPResetPasswordVC.swift */,
+			);
+			path = "forgetPassword VCs";
+			sourceTree = "<group>";
+		};
 		04792AC62409FE8F00F781D8 = {
 			isa = PBXGroup;
 			children = (
@@ -88,9 +149,10 @@
 		04792AD12409FE8F00F781D8 /* DN-Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				0491D854240E3A050014E34C /* Extension */,
 				04792AD22409FE8F00F781D8 /* AppDelegate.swift */,
 				04792AD42409FE8F00F781D8 /* SceneDelegate.swift */,
+				04F4AD16241548C9008CF051 /* Protocols */,
+				0491D854240E3A050014E34C /* Extension */,
 				04792AEB2409FF4700F781D8 /* Support files */,
 				04792AEA2409FF3F00F781D8 /* Model */,
 				04792AE92409FF3500F781D8 /* View */,
@@ -105,16 +167,10 @@
 		04792AE82409FF2200F781D8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04792AD62409FE8F00F781D8 /* HomeVC.swift */,
-				04792AD82409FE8F00F781D8 /* SaleVC.swift */,
-				04792AF2240B1EE300F781D8 /* PayVC.swift */,
-				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
-				04792AF0240A03CC00F781D8 /* SideMenuVC.swift */,
+				045A2FAF241BE84F00A0C643 /* tabController VCs */,
 				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
-				047FA8B2240E1E700097DD06 /* SignInVC.swift */,
-				047FA8B4240E1E910097DD06 /* SignUpVC.swift */,
-				04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */,
-				0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */,
+				045A2FAE241BE7E200A0C643 /* authentication VCs */,
+				046732B624198EA600DD436D /* forgetPassword VCs */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -124,6 +180,7 @@
 			children = (
 				047FA8B9240E36440097DD06 /* userInput.swift */,
 				04E9448D2412D9A7000EA14B /* OTP.swift */,
+				049D1DFA241A7C02003DF669 /* passwordContainer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -138,6 +195,7 @@
 		04792AEB2409FF4700F781D8 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
+				040B03C1241500A60056567A /* ProgressBar */,
 				04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */,
 				04792AED2409FF8F00F781D8 /* SWRevealViewController.h */,
 				04792AEE2409FF8F00F781D8 /* SWRevealViewController.m */,
@@ -152,6 +210,7 @@
 				04792ADA2409FE9000F781D8 /* Main.storyboard */,
 				04792ADF2409FEA900F781D8 /* LaunchScreen.storyboard */,
 				047FA8B7240E1F0B0097DD06 /* Authentication.storyboard */,
+				045A2FAC241BE7AF00A0C643 /* Services.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -162,6 +221,14 @@
 				0491D855240E3A330014E34C /* extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		04F4AD16241548C9008CF051 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AD172415490A008CF051 /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +294,7 @@
 				04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */,
 				04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */,
 				04792ADC2409FE9000F781D8 /* Main.storyboard in Resources */,
+				045A2FAD241BE7AF00A0C643 /* Services.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,20 +308,28 @@
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
 				0491D856240E3A330014E34C /* extension.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
+				04F4AD182415490A008CF051 /* Protocols.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
+				040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */,
 				047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */,
 				04E9448E2412D9A7000EA14B /* OTP.swift in Sources */,
 				04792AD72409FE8F00F781D8 /* HomeVC.swift in Sources */,
 				04792AF1240A03CC00F781D8 /* SideMenuVC.swift in Sources */,
+				040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */,
+				049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
 				04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */,
+				046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */,
+				040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
+				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
+				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

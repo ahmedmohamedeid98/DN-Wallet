@@ -8,19 +8,21 @@
 
 import UIKit
 
-class SignUpPhoneVC: UIViewController, UITextFieldDelegate {
-
+class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol {
+    
     //MARK:- Outlets
     @IBOutlet weak var welcomeInfoMessage: UITextView!
     @IBOutlet weak var phoneNumberContainer: UIView!
     @IBOutlet weak var dropDownCountry: DropDown!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var confirmCodeInfoMessage: UITextView!
-    @IBOutlet weak var optContainerView: OTP!
-    
+    @IBOutlet weak var opt: OTP!
     @IBOutlet weak var sendConfirmatioCodeOutlet: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorContainer: UIView!
+    @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
+    
+    
     
     //MARK:- Properities
     
@@ -29,16 +31,21 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        optContainerView.isHidden = true
+        
+        opt.delegate = self
+        opt.isHidden = true
         confirmCodeInfoMessage.isHidden = true
         activityIndicatorContainer.isHidden = true
         
-        phoneNumberContainer.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        phoneNumberContainer.layer.borderWidth = 0.5
-        phoneNumberContainer.layer.cornerRadius = 20
+        phoneNumberContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        phoneNumberContainer.layer.borderWidth = 1
+        phoneNumberContainer.layer.cornerRadius = 4
         dropDownConfiguration()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(resetKeyboardState))
         self.view.addGestureRecognizer(tapGesture)
+        
+        steppedProgressBar.titles = ["", "", ""]
+        steppedProgressBar.currentTab = 2
         
        
     }
@@ -53,6 +60,26 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate {
     //Its Id Values and its optional
     dropDownCountry.optionIds = [1,23,54]
     }
+    
+    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
+        activityIndicatorContainer.isHidden = false
+        activityIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicatorContainer.isHidden = true
+            if "\(tf1)\(tf2)\(tf3)\(tf4)" == "1122" {
+                self.opt.errorMsg.isHidden = true
+                let st = UIStoryboard(name: "Authentication", bundle: .main)
+                let vc = st.instantiateViewController(identifier: "signUpConfirmEmailVCID") as? SignUpConfirmEmailVC
+                vc?.modalPresentationStyle = .fullScreen
+                self.present(vc!, animated: true)
+            }else {
+                self.opt.reset()
+                self.opt.errorMsg.isHidden = false
+            }
+        }
+    }
+    
 
     @IBAction func backBtnPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -61,12 +88,13 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate {
     @IBAction func sendConfirmationCodeBtnPressed(_ sender: UIButton) {
         activityIndicatorContainer.isHidden = false
         activityIndicator.startAnimating()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        sendConfirmatioCodeOutlet.setTitle("resend confirmation message", for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.activityIndicatorContainer.isHidden = true
             self.activityIndicator.stopAnimating()
-            self.optContainerView.isHidden = false
+            self.opt.isHidden = false
             self.confirmCodeInfoMessage.isHidden = false
+            
         }
         
         

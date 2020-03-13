@@ -19,8 +19,8 @@ class SignInVC: UIViewController {
         super.viewDidLoad()
        
         signInOutlet.layer.cornerRadius = 20.0
-        emailContainerView.configureInputField(imageName: "mail", placeholder: "Email", isSecure: false)
-        passwordContainerView.configureInputField(imageName: "password", placeholder: "Password", isSecure: true)
+        emailContainerView.configureInputField(imageName: "envelope", systemImage: true, placeholder: "Email", isSecure: false)
+        passwordContainerView.configureInputField(imageName: "lock", systemImage: true, placeholder: "Password", isSecure: true)
     }
     
 
@@ -32,7 +32,9 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func forgetPasswordPressed(_ sender: Any) {
-        
+        let forgetPassVC = FPEnterEmailVC()
+        forgetPassVC.modalPresentationStyle = .fullScreen
+        self.present(forgetPassVC, animated: true, completion: nil)
     }
     @IBAction func signInBtnPressed(_ sender: Any) {
         
