@@ -8,65 +8,25 @@
 
 import UIKit
 
+let keyColor = UIColor.DN.DarkBlue.color()
+let valueColor = UIColor.DN.Black.color()
+
 class HistoryDetailsCell: UITableViewCell {
     
-
-    private let to: UILabel = {
-       let lb = UILabel()
-        lb.text = "Email"
-        lb.configureLabel()
-        return lb
-    }()
     
-    private let amount: UILabel = {
-       let lb = UILabel()
-        lb.text = "Amount"
-        lb.configureLabel()
-        return lb
-    }()
+    //MARK:- key label
+    private let to = UILabel().DNLabel(text: "Email", color: keyColor)
+    private let amount = UILabel().DNLabel(text: "Amount", color: keyColor)
+    private let date = UILabel().DNLabel(text: "Date", color: keyColor)
     
-    private let date: UILabel = {
-       let lb = UILabel()
-        lb.text = "Date"
-        lb.configureLabel()
-        return lb
-    }()
+    //MARK:- value label
+    private(set) var toEmail = UILabel().DNLabel(text: "aa@gmail.com", color: valueColor)
+    private(set) var amountNumber = UILabel().DNLabel(text: "25 $", color: valueColor)
+    private(set) var dateValue = UILabel().DNLabel(text: "2/1/2020", color: valueColor)
     
-    var toEmail: UILabel = {
-       let lb = UILabel()
-        lb.text = "alg2154@gmail.com"
-        lb.configureLabel()
-        return lb
-    }()
-    
-    
-    var amountNumber: UILabel = {
-       let lb = UILabel()
-        lb.text = "25$"
-        lb.configureLabel()
-        return lb
-    }()
-    
-    var dateValue: UILabel = {
-       let lb = UILabel()
-        lb.text = "21/7/2020"
-        lb.configureLabel()
-        return lb
-    }()
-    var stackContrainer = UIView()
-    
-    func setupStackContainerShadow() {
-        stackContrainer.layer.cornerRadius = 5.0
-        stackContrainer.layer.shadowOpacity = 1.0
-        stackContrainer.layer.shadowColor = UIColor.black.cgColor
-        stackContrainer.layer.shadowOffset = CGSize(width: -1, height: 1)
-        stackContrainer.layer.masksToBounds = false
-        stackContrainer.layer.shadowRadius = 3.0
-        stackContrainer.layer.shouldRasterize = true
-    }
-    
-    
-    func setupStackView() {
+    // setup layout constraint
+    private var stackContrainer = UIView()
+    private func setupStackView() {
         let HstackLabel = UIStackView(arrangedSubviews: [to, amount, date])
         let HstackValue = UIStackView(arrangedSubviews: [toEmail, amountNumber, dateValue])
         let Vstack = UIStackView(arrangedSubviews: [HstackLabel, HstackValue])
@@ -81,16 +41,20 @@ class HistoryDetailsCell: UITableViewCell {
         stackContrainer.addSubview(Vstack)
         stackContrainer.DNLayoutConstraint(topAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, margins: UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 10))
         Vstack.DNLayoutConstraint(stackContrainer.topAnchor, left: stackContrainer.leftAnchor, right: stackContrainer.rightAnchor, bottom: stackContrainer.bottomAnchor)
-        
-        
     }
     
+    /// set history details cell's values
+    /// - parameters
+    ///     - email : your organization or individuals email
+    ///     - amount: the amount which is transaction
+    ///     - date : the date in which this transaction happen
     func configureCell(email: String, amount: String, date: String) {
         self.toEmail.text = email
         self.amountNumber.text = amount
         self.dateValue.text = date
     }
     
+    /// Cell : setup the view and all the internal subviews for the tableView cell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //self.backgroundColor = .white
@@ -102,25 +66,15 @@ class HistoryDetailsCell: UITableViewCell {
     }
     
    
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
 
-extension UILabel {
-    func configureLabel() {
-        self.textColor = .black
-        self.font = UIFont.DN.Regular.font(size: 14)
-        self.textAlignment = .left
-        self.layer.borderColor = UIColor.DN.LightGray.color().cgColor
-        self.layer.borderWidth = 0.5
-    }
 }
 
 extension UIStackView {
+    /// initialization for horizental stack 'axis -> horizental', 'distribution -> fillEq', 'alignment -> fill' and spacing -> 8
     func configureHstack() {
         self.axis = .vertical
         self.distribution = .fillEqually
@@ -128,10 +82,31 @@ extension UIStackView {
         self.spacing = 8
     }
     
+    /// initialization for vertical stack 'axis -> vertical', 'distribution -> fill', 'alignment -> fill' and spacing -> 10
     func configureVstack() {
         self.axis = .horizontal
         self.distribution = .fill
         self.alignment = .fill
         self.spacing = 10
+    }
+}
+
+extension UILabel {
+    /// create custom Lable
+    /// - Parameters:
+    ///   - text: set initiale text, this value change latter
+    ///   - color: set the textColor, not change latter
+    func DNLabel(text: String, fontSize: CGFloat = 14, color: UIColor, align: NSTextAlignment = .left, withBorder: Bool = true) -> UILabel {
+        let lb = UILabel()
+        lb.text = text
+        lb.backgroundColor = .white
+        lb.textColor = color
+        lb.font = UIFont.DN.Regular.font(size: fontSize)
+        lb.textAlignment = align
+        if withBorder {
+            lb.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            lb.layer.borderWidth = 0.5
+        }
+        return lb
     }
 }

@@ -59,8 +59,17 @@ class HistoryDetailsVC: UIViewController {
         setupTableView()
         setupLayout()
         tableViewData = firstSemgentData
+        
     }
     
+    // convert the status bar color from black to white
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     
     
     /// Initialize navigation bar

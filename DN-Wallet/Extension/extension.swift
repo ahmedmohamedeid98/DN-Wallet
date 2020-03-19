@@ -47,6 +47,16 @@ extension UIView {
         NSLayoutConstraint.activate(constraintArray)
     }
     
+    func DNLayoutConstraintFill(top: CGFloat = 0, left: CGFloat = 0, right: CGFloat = 0, bottom: CGFloat = 0){
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: (superview?.safeAreaLayoutGuide.topAnchor)!, constant: top).isActive = true
+        self.leftAnchor.constraint(equalTo: (superview?.safeAreaLayoutGuide.leftAnchor)!, constant: left).isActive = true
+        self.rightAnchor.constraint(equalTo: (superview?.safeAreaLayoutGuide.rightAnchor)!, constant: -right).isActive = true
+        self.bottomAnchor.constraint(equalTo: (superview?.safeAreaLayoutGuide.bottomAnchor)!, constant: bottom).isActive = true
+    }
+    
+    
+    
 }
 
 
@@ -73,7 +83,7 @@ extension UIColor {
             case .LightGray:
                 return #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
             case .Black:
-                return #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                return #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
             case .White:
                 return #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }
