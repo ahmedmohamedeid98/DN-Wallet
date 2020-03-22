@@ -19,13 +19,19 @@ class startControllerForTest: UIViewController {
 
     @IBAction func login(_ sender: Any) {
         //let storyboard = UIStoryboard(name: "Services", bundle: .main)
-        //let vc = storyboard.instantiateViewController(withIdentifier: "signInVCID") as? SignInVC
+        //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
         //let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
-        let vc = DonationDetailsVC()
+        let vc = DonationVC()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     
     @IBAction func signup(_ sender: Any) {
+        //let storyboard = UIStoryboard(name: "Services", bundle: .main)
+        //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
+        //let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
+        let vc = DonationDetailsVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }

@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class DonationDetailsVC: UIViewController {
 
+    
+    var org : CharityOrg!
+    //var org = CharityOrg(Id: 0,name:"57357 Hospital", email: "57357@gmail.com", logo: UIImage(), image: UIImage(), title: "57357 Hospital", location_lat: 30.022715, location_log: 31.237870, address: "Zeinhom, El-Sayeda Zainab, Cairp Governorate" , contactUs: "19057" , about: "57357 Hospital, located in Cairo, Egypt, is a hospital specializing in children's cancer.[citation needed] Fundraising for the hospital, including well-attended benefit festivals, started in 1998, with a target date for opening of December 2003.[1] It eventually opened in 2007.[2]", vision: "To be the unique worldwide icon of change towards a cancer‐ free childhood", founders: "Ola Ghabour, Sjerif Abouel Naga, Fakery Abdel Hamid, Somaya Abouelenein, Sohair Farghaly")
+    // organization location
+    var orgLocation: CLLocationCoordinate2D!
+    
     // status bar background
     var statusBar: UIView = {
         let vw = UIView()
@@ -20,8 +27,8 @@ class DonationDetailsVC: UIViewController {
     // navigation bar contain dismiss button - and organization title
     var navBar: UIView = {
         let vw = UIView()
-        vw.backgroundColor = .black
-        vw.alpha = 0.2
+        vw.backgroundColor = UIColor.DN.DarkBlue.color()
+        vw.alpha = 0.7
         return vw
     }()
     
@@ -35,51 +42,87 @@ class DonationDetailsVC: UIViewController {
     // view controller title which will be organization title
     var orgTitle : UILabel = {
         let lb = UILabel()
-        lb.textColor = .white
-        lb.text = "Organization Name"
+        lb.textColor = UIColor.DN.White.color()
         lb.font = UIFont.DN.Regular.font(size: 18)
         return lb
     }()
     
     // back button dismiss the view controller
-    var backButton : UIButton = {
+    var dismissButton : UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        btn.tintColor = .white
+        btn.tintColor = UIColor.DN.White.color()
         return btn
+    }()
+    
+    var orgMapView : MKMapView!
+    
+    var location : DNDetailsView = {
+        let view = DNDetailsView()
+        view.title.text = "Location"
+        return view
+    }()
+    
+    
+    var vision : DNDetailsView = {
+        let view = DNDetailsView()
+        view.title.text = "Our Vision"
+        return view
     }()
     
     var address : DNDetailsView = {
         let view = DNDetailsView()
         view.title.text = "Address"
-        view.detailsView.text = "Zeinhom, El-Sayeda Zainab, Cairp Governorate"
         return view
     }()
     var founder : DNDetailsView = {
         let view = DNDetailsView()
         view.title.text = "Founders"
-        view.detailsView.text = "Ola Ghabour, Sjerif Abouel Naga, Fakery Abdel Hamid, Somaya Abouelenein, Sohair Farghaly"
         return view
     }()
     var mobile : DNDetailsView = {
         let view = DNDetailsView()
         view.title.text = "Mobile"
-        view.detailsView.text = "19057"
         return view
     }()
     var about : DNDetailsView = {
         let view = DNDetailsView()
         view.title.text = "About"
-        view.detailsView.text = "57357 Hospital, located in Cairo, Egypt, is a hospital specializing in children's cancer.[citation needed] Fundraising for the hospital, including well-attended benefit festivals, started in 1998, with a target date for opening of December 2003.[1] It eventually opened in 2007.[2]"
         return view
     }()
     
+    let scrollView : UIScrollView = {
+        let scrollV = UIScrollView()
+        scrollV.alwaysBounceVertical = true
+        //scrollV.bouncesZoom = false
+        let screanSize = UIScreen.main.bounds
+        scrollV.contentSize = CGSize(width: screanSize.width - 16 , height: 750)
+        //scrollV.backgroundColor = .cyan
+        return scrollV
+    }()
+    
+    //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavBar()
+        view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)//.white
+        
+        setupMapView()
+        orgMapView.delegate = self
         setupLayout()
+        
+        
+        // just for test
+        orgTitle.text = org.title!
+        mobile.detailsView.text = org.contactUs!
+        address.detailsView.text = org.address!
+        about.detailsView.text = org.about!
+        vision.detailsView.text = org.vision!
+        founder.detailsView.text = org.founders!
+        
+        dismissButton.addTarget(self, action: #selector(backBtnWasPressedb), for: .touchUpInside)
+        
     }
+    
     // convert the status bar color from black to white
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -89,34 +132,74 @@ class DonationDetailsVC: UIViewController {
         .lightContent
     }
     
-    func setupNavBar() {
-        view.addSubview(statusBar)
-        navBar.addSubview(backButton)
-        navBar.addSubview(orgTitle)
-        statusBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 20))
-        orgTitle.DNLayoutConstraint(centerH: true, centerV: true)
-        backButton.DNLayoutConstraint(left: navBar.leftAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), size: CGSize(width: 30, height: 30), centerV: true)
+    
+    //MARK:- setup subviews
+    
+    func setupMapView() {
+        orgMapView = MKMapView()
+        // specify organization's location
+        orgLocation = CLLocationCoordinate2D(latitude: org.location_lat!, longitude: org.location_log!)
+        let regoin = MKCoordinateRegion(center: orgLocation, latitudinalMeters: 10000, longitudinalMeters: 1000)
+        orgMapView.setRegion(regoin, animated: true)
+        
+        // add Annotation
+        orgMapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        let organizationAnnotation = DNAnnotation(coordinate: orgLocation, title: org.title!, subtitle: org.about!)
+        orgMapView.addAnnotation(organizationAnnotation)
     }
     
+    
+    //MARK:- setup layout constraints
     func setupLayout() {
+        view.addSubview(statusBar)
         view.addSubview(orgBackgroundImage)
-        orgBackgroundImage.addSubview(navBar)
+        view.addSubview(navBar)
+        navBar.addSubview(orgTitle)
+        navBar.addSubview(dismissButton)
+        // setup status bar constraint
+        statusBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 20))
+        // setup organization background image constraint
         orgBackgroundImage.DNLayoutConstraint(statusBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 200))
-        navBar.DNLayoutConstraint(orgBackgroundImage.topAnchor, left: orgBackgroundImage.leftAnchor, right: orgBackgroundImage.rightAnchor, size: CGSize(width: 0, height: 50))
-        let Vstack = UIStackView(arrangedSubviews: [address, founder, mobile, about])
-        view.addSubview(Vstack)
-        address.DNLayoutConstraint(size: CGSize(width: 0, height: 40))
-        founder.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
-        mobile.DNLayoutConstraint(size: CGSize(width: 0, height: 40))
-        Vstack.axis = .vertical
+        // setup nav bar constraints
+        navBar.DNLayoutConstraint(statusBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 50))
+        orgTitle.DNLayoutConstraint(centerH: true, centerV: true)
+        dismissButton.DNLayoutConstraint(left: navBar.leftAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), size: CGSize(width: 30, height: 30))
+        dismissButton.centerYAnchor.constraint(equalTo: navBar.centerYAnchor).isActive = true
+        // setup details constraint
+        let Vstack = UIStackView(arrangedSubviews: [location, address,vision, founder, mobile, about])
         Vstack.backgroundColor = .red
+        Vstack.axis = .vertical
         Vstack.distribution = .fillProportionally
         Vstack.alignment = .fill
         Vstack.spacing = 8
-        Vstack.DNLayoutConstraint(orgBackgroundImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        
-        
-        
+        view.addSubview(scrollView)
+        scrollView.addSubview(Vstack)
+        location.detailsView.addSubview(orgMapView)
+        orgMapView.DNLayoutConstraintFill()
+        location.DNLayoutConstraint(size: CGSize(width: 0, height: 200))
+        address.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
+        vision.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
+        founder.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
+        mobile.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
+        scrollView.DNLayoutConstraint(orgBackgroundImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 16, left: 16, bottom: 20, right: 16))
+        Vstack.DNLayoutConstraint(size: CGSize(width: view.frame.width - 16, height: 750))
     }
+    
+    //MARK:- Button Action
+    @objc func backBtnWasPressedb() {
+           dismiss(animated: true, completion: nil)
+       }
 
+}
+
+extension DonationDetailsVC: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let orgAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier) as? MKMarkerAnnotationView {
+            orgAnnotation.animatesWhenAdded = true
+            orgAnnotation.titleVisibility = .adaptive
+            orgAnnotation.subtitleVisibility = .adaptive
+            return orgAnnotation
+        }
+        return nil
+    }
 }

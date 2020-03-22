@@ -10,10 +10,14 @@ class DNDetailsView: UIView {
     
     var title :UILabel = {
         let lb = UILabel()
-        lb.backgroundColor = .white
-        lb.textColor = UIColor.DN.DarkBlue.color()
-        lb.font = UIFont.DN.Regular.font(size: 16)
-        lb.textAlignment = .left
+        lb.backgroundColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .white//UIColor.DN.DarkBlue.color()
+        lb.font = UIFont.DN.Regular.font(size: 18)
+        lb.textAlignment = .center
+        lb.layer.shadowColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+        lb.layer.shadowOpacity = 1.0
+        lb.layer.shadowOffset = CGSize(width: 0, height: 1)
+        lb.layer.shadowRadius = 0.0
         //lb.layer.borderColor = UIColor.DN.LightGray.color().cgColor
         //lb.layer.borderWidth = 0.5
         return lb
@@ -22,21 +26,23 @@ class DNDetailsView: UIView {
         let details = UITextView()
         details.isEditable = false
         details.font = UIFont.DN.Regular.font(size: 14)
-        details.textColor = UIColor.DN.Black.color()
-        details.layer.borderColor = UIColor.DN.LightBlue.color().cgColor
-        details.layer.borderWidth = 0.5
+        details.backgroundColor = .white
+        details.textColor = .black
+        //details.layer.borderColor = UIColor.DN.LightBlue.color().cgColor
+        //details.layer.borderWidth = 0.5
         return details
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupLayout()
     }
     
     fileprivate func setupLayout() {
         addSubview(detailsView)
         addSubview(title)
-        detailsView.DNLayoutConstraintFill(top: 15, left: 0, right: 0, bottom: 0)
-        title.DNLayoutConstraint(left: detailsView.leftAnchor,bottom: detailsView.topAnchor)
+        detailsView.DNLayoutConstraint(title.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor)
+        title.DNLayoutConstraint(topAnchor, left: leftAnchor, right: rightAnchor, size: CGSize(width: 0, height: 20))
     }
     
     required init?(coder: NSCoder) {

@@ -22,6 +22,7 @@
 		0465C6CE2421BD110032506D /* ExchangeCurrencyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6CD2421BD110032506D /* ExchangeCurrencyVC.swift */; };
 		046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046732B724198EFE00DD436D /* FPEnterEmailVC.swift */; };
 		046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046732B924198F3300DD436D /* FPResetPasswordVC.swift */; };
+		0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467D75A2425673200C67D7C /* DNAnnotation.swift */; };
 		047040C224202BDF00BBAAF5 /* HDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C124202BDF00BBAAF5 /* HDetails.swift */; };
 		047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C524202F5A00BBAAF5 /* HistoryDetailsVC.swift */; };
 		047040C82420488D00BBAAF5 /* AddNewCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C72420488D00BBAAF5 /* AddNewCardVC.swift */; };
@@ -54,6 +55,7 @@
 		04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */; };
 		04E9448E2412D9A7000EA14B /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448D2412D9A7000EA14B /* OTP.swift */; };
 		04F4AD182415490A008CF051 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AD172415490A008CF051 /* Protocols.swift */; };
+		04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD28C324256D6B00E41EAC /* CharityOrg.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,7 @@
 		0465C6CD2421BD110032506D /* ExchangeCurrencyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCurrencyVC.swift; sourceTree = "<group>"; };
 		046732B724198EFE00DD436D /* FPEnterEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPEnterEmailVC.swift; sourceTree = "<group>"; };
 		046732B924198F3300DD436D /* FPResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPResetPasswordVC.swift; sourceTree = "<group>"; };
+		0467D75A2425673200C67D7C /* DNAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAnnotation.swift; sourceTree = "<group>"; };
 		047040C124202BDF00BBAAF5 /* HDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDetails.swift; sourceTree = "<group>"; };
 		047040C524202F5A00BBAAF5 /* HistoryDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsVC.swift; sourceTree = "<group>"; };
 		047040C72420488D00BBAAF5 /* AddNewCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardVC.swift; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 		04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoneVC.swift; sourceTree = "<group>"; };
 		04E9448D2412D9A7000EA14B /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
 		04F4AD172415490A008CF051 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		04FD28C324256D6B00E41EAC /* CharityOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityOrg.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +234,7 @@
 				0465C6CB2421A70D0032506D /* MyContactCell.swift */,
 				04B1C90E2422C7760062D54F /* DonationCell.swift */,
 				04B1C9122422EC620062D54F /* DNDetailsView.swift */,
+				0467D75A2425673200C67D7C /* DNAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				047040C124202BDF00BBAAF5 /* HDetails.swift */,
 				047040C9242050B800BBAAF5 /* PaymentCard.swift */,
 				0465C6A524211D300032506D /* Currency.swift */,
+				04FD28C324256D6B00E41EAC /* CharityOrg.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,6 +419,8 @@
 				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
+				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
+				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,
 				045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

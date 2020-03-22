@@ -8,8 +8,39 @@
 
 import UIKit
 
-class DonationVC: UIViewController {
 
+class DonationVC: UIViewController {
+    
+    let data: [CharityOrg] = [CharityOrg(Id: 0,name:"57357 Hospital", email: "57357@gmail.com", logo: UIImage(), image: UIImage(), title: "57357 Hospital", location_lat: 30.022715, location_log: 31.237870, address: "Zeinhom, El-Sayeda Zainab, Cairp Governorate" , contactUs: "19057" , about: "57357 Hospital, located in Cairo, Egypt, is a hospital specializing in children's cancer.[citation needed] Fundraising for the hospital, including well-attended benefit festivals, started in 1998, with a target date for opening of December 2003.[1] It eventually opened in 2007.[2]", vision: "To be the unique worldwide icon of change towards a cancer‐ free childhood", founders: "Ola Ghabour, Sjerif Abouel Naga, Fakery Abdel Hamid, Somaya Abouelenein, Sohair Farghaly"), CharityOrg(Id: 1,name:"lkajdklasj", email: "org2@gmail.com", logo: UIImage(), image: UIImage(), title: "another org", location_lat: 30.022715, location_log: 31.237870, address: "Zeinhom, El-Sayeda Zainab, Cairp Governorate" , contactUs: "19057" , about: "kljsdkasjdlkajdjasl", vision: "To be the unique worldwide icon of change towards a cancer‐ free childhood", founders: "Ola Ghabour, Sjerif Abouel Naga, Fakery Abdel Hamid, Somaya Abouelenein, Sohair Farghaly") ]
+
+    func cellButtonActions(orgId: Int, btnTage: Int) {
+        
+        if btnTage == 0 {
+            for org in data {
+                if org.Id == orgId {
+                    let vc = DonationDetailsVC()
+                    vc.org = org
+                    vc.modalPresentationStyle = .fullScreen
+                    present(vc, animated: true, completion: nil)
+                    break
+                }
+            }
+        } else {
+            for org in data {
+                if org.Id == orgId {
+                    let vc = DonationDetailsVC()
+                    vc.org = org
+                    vc.modalPresentationStyle = .fullScreen
+                    present(vc, animated: true, completion: nil)
+                    break
+                }
+            }
+            
+        }
+    }
+    
+    
+    
         //MARK:- Properities
     var navBar: DNNavBar!
     var infoLabel: UILabel = {
@@ -101,11 +132,14 @@ extension DonationVC: UISearchBarDelegate {
 extension DonationVC: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return data.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "donationcellidentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "donationcellidentifier", for: indexPath) as? DonationCell else {return UITableViewCell()}
+        cell.donationDelegate = self
+        let org = data[indexPath.row]
+        cell.configureCell(id: org.Id, name: org.name!, email: org.email!, logo: UIImage())
         return cell
     }
     
