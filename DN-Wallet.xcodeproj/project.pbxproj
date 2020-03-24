@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,8 @@
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
 		047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* SignUpVC.swift */; };
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
+		048D56432429D895008A8925 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56422429D895008A8925 /* Auth.swift */; };
+		048D56452429E701008A8925 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56442429E701008A8925 /* User.swift */; };
 		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
 		0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */; };
 		0498940D241D7A9F00E32B34 /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498940C241D7A9F00E32B34 /* HCard.swift */; };
@@ -101,6 +103,8 @@
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		047FA8B4240E1E910097DD06 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
+		048D56422429D895008A8925 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		048D56442429E701008A8925 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpConfirmEmailVC.swift; sourceTree = "<group>"; };
 		0498940C241D7A9F00E32B34 /* HCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 				0465C6A524211D300032506D /* Currency.swift */,
 				04FD28C324256D6B00E41EAC /* CharityOrg.swift */,
 				04A8D6F824281AEC00628AA3 /* Service.swift */,
+				048D56442429E701008A8925 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 		048D563F2429D063008A8925 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				048D56422429D895008A8925 /* Auth.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -344,7 +350,6 @@
 				517E0ED55DC404ABB1BACDA5 /* Pods-DN-Wallet.debug.xcconfig */,
 				ED5019DA0B2992BB024B6C88 /* Pods-DN-Wallet.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -469,6 +474,7 @@
 			files = (
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				04B1C9132422EC620062D54F /* DNDetailsView.swift in Sources */,
+				048D56452429E701008A8925 /* User.swift in Sources */,
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
 				0491D856240E3A330014E34C /* extension.swift in Sources */,
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
@@ -480,6 +486,7 @@
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
 				040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */,
+				048D56432429D895008A8925 /* Auth.swift in Sources */,
 				0498940D241D7A9F00E32B34 /* HCard.swift in Sources */,
 				0465C6CE2421BD110032506D /* ExchangeCurrencyVC.swift in Sources */,
 				04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */,

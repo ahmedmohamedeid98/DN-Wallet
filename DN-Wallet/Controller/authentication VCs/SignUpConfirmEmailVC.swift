@@ -50,6 +50,7 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     //MARK:- IBActions
         
     @IBAction func signUpBtnPressed(_ sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: "haveAccount")
         signUpBtnOutlet.isEnabled = false
         if self.inputConfirmationCode == "2211" {
             let st = UIStoryboard(name: "Main", bundle: .main)

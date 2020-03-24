@@ -10,6 +10,8 @@ import UIKit
 
 class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol {
     
+    var user:User?
+    
     //MARK:- Outlets
     @IBOutlet weak var welcomeInfoMessage: UITextView!
     @IBOutlet weak var phoneNumberContainer: UIView!
@@ -55,10 +57,14 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
     }
     
     fileprivate func dropDownConfiguration() {
-    // The list of array to display. Can be changed dynamically
-    dropDownCountry.optionArray = ["Egypt", "Canada", "USA"]
-    //Its Id Values and its optional
-    dropDownCountry.optionIds = [1,23,54]
+        // The list of array to display. Can be changed dynamically
+        dropDownCountry.optionArray = ["Egypt", "Canada", "USA"]
+        //Its Id Values and its optional
+        dropDownCountry.optionIds = [1,23,54]
+        dropDownCountry.isSearchEnable = false
+        dropDownCountry.didSelect { (selectedText, index, id) in
+            print(selectedText)
+        }
     }
     
     func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {

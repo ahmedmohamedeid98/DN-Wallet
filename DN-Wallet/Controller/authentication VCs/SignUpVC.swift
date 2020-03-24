@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable class SignUpVC: UIViewController {
 
-    
+    var validInput: Bool = true
     @IBOutlet weak var usernameContainer: userInput!
     @IBOutlet weak var emailContainer: userInput!
     @IBOutlet weak var passwordContainer: userInput!
@@ -33,17 +33,81 @@ import UIKit
     }
     
 
-    
-
     @IBAction func backBtnPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func nextBtnPressed(_ sender: UIButton) {
-        let st = UIStoryboard(name: "Authentication", bundle: .main)
-        let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
         
-        vc?.modalPresentationStyle = .fullScreen
-        present(vc!, animated: true)
+        
+        if isValid() {
+            
+            let username = usernameContainer.textField.text!
+            let email = emailContainer.textField.text!
+            let password = passwordContainer.textField.text!
+        
+            let st = UIStoryboard(name: "Authentication", bundle: .main)
+            let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
+            vc?.user = User(email: email, password: password, username: username, phone: "")
+            vc?.modalPresentationStyle = .fullScreen
+            present(vc!, animated: true)
+        }
+    }
+    
+}
+
+extension SignUpVC {
+    
+    func isValid() -> Bool{
+        
+        var userValid: Bool = true
+        var emailValid:Bool = true
+        var pass1Valid:Bool = true
+        var pass2Valid:Bool = true
+        usernameContainer.textField.resignFirstResponder()
+        emailContainer.textField.resignFirstResponder()
+        passwordContainer.textField.resignFirstResponder()
+        confirmPasswordContainer.textField.resignFirstResponder()
+        
+        if usernameContainer.textField.text == "" {
+            usernameContainer.layer.borderColor = UIColor.red.cgColor
+            userValid = false
+        } else {
+            usernameContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        }
+        
+        if emailContainer.textField.text == "" || !isValidEmail(emailContainer.textField.text!) {
+            emailContainer.layer.borderColor = UIColor.red.cgColor
+            emailValid = false
+        }else {
+            emailContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        }
+        
+        if passwordContainer.textField.text == "" {
+            passwordContainer.layer.borderColor = UIColor.red.cgColor
+            pass1Valid = false
+        } else {
+            passwordContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        }
+        
+        if !pass1Valid || confirmPasswordContainer.textField.text == "" || !matchedPassword(passW1: passwordContainer.textField.text!, passW2: confirmPasswordContainer.textField.text!) {
+            confirmPasswordContainer.layer.borderColor = UIColor.red.cgColor
+            pass2Valid = false
+        }else {
+            confirmPasswordContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        }
+        
+        return userValid && emailValid && pass1Valid && pass2Valid
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    func matchedPassword(passW1: String, passW2: String) -> Bool {
+        return passW1 == passW2
     }
 }
