@@ -1,0 +1,6 @@
+framework module Pods_DN_Wallet {
+  umbrella header "Pods-DN-Wallet-umbrella.h"
+
+  export *
+  module * { export * }
+}
