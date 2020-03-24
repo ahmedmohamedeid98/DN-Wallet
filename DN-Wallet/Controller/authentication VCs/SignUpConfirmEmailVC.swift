@@ -23,7 +23,7 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     //MARK:- Outlets
     @IBOutlet weak var signUpBtnOutlet: UIButton!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
-    @IBOutlet weak var optContainerView: OTP!
+    @IBOutlet weak var optContainerView: OPT!
     
     
     

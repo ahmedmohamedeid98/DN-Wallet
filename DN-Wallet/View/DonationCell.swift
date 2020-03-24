@@ -40,11 +40,13 @@ class DonationCell: UITableViewCell {
     var donateButton : UIButton = {
         let btn = UIButton(type: .system)
         btn.tag = 0
-        btn.tintColor = .white
+        btn.tintColor = UIColor.DN.DarkBlue.color()
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 12)
-        btn.setTitle("Donate", for: .normal)
-        btn.backgroundColor = UIColor.DN.DarkBlue.color()
-        btn.layer.cornerRadius = 4
+        btn.setTitle("donate", for: .normal)
+        //btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = UIColor.DN.DarkBlue.color().cgColor
+        btn.layer.cornerRadius = 12.5
         return btn
     }()
     
@@ -52,7 +54,7 @@ class DonationCell: UITableViewCell {
         let btn = UIButton(type: .system)
         btn.tag = 1
         btn.tintColor = UIColor.DN.DarkBlue.color()
-        btn.setImage(UIImage(systemName: "exclamationmark.circle.fill"), for: .normal)
+        btn.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
         return btn
     }()
 
@@ -90,7 +92,7 @@ class DonationCell: UITableViewCell {
         orgImage.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 50, height: 50), centerV: true)
         Vstack.DNLayoutConstraint(topAnchor, left: orgImage.rightAnchor, right: donateButton.leftAnchor, bottom: bottomAnchor, margins: UIEdgeInsets(top: 12, left: 8, bottom: 12, right: 8))
         detailsButton.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 30, height: 25), centerV: true)
-        donateButton.DNLayoutConstraint(right: detailsButton.leftAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 2),size: CGSize(width: 50, height: 25), centerV: true)
+        donateButton.DNLayoutConstraint(right: detailsButton.leftAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 4),size: CGSize(width: 60, height: 25), centerV: true)
     }
     
 }

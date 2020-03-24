@@ -43,7 +43,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         return Msg
     }()
     
-    private var opt: OTP!
+    private var opt: OPT!
     
     private var EnterNewPassLabel: UILabel = {
         let lb = UILabel()
@@ -87,7 +87,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     
     fileprivate func commonInit(){
         view.backgroundColor = .white
-        opt = OTP()
+        opt = OPT()
         opt.delegate = self
         
         NewPassword = passwordContainer()

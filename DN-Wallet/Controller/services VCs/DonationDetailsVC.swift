@@ -93,8 +93,10 @@ class DonationDetailsVC: UIViewController {
     
     let scrollView : UIScrollView = {
         let scrollV = UIScrollView()
-        scrollV.alwaysBounceVertical = true
+        //scrollV.alwaysBounceVertical = true
+        //scrollV.hori
         //scrollV.bouncesZoom = false
+        //scrollV.isDirectionalLockEnabled = true
         let screanSize = UIScreen.main.bounds
         scrollV.contentSize = CGSize(width: screanSize.width - 16 , height: 750)
         //scrollV.backgroundColor = .cyan

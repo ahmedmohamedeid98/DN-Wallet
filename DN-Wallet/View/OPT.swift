@@ -8,10 +8,13 @@
 
 import UIKit
 
+protocol GetOPTValuesProtocol {
+    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) -> ()
+}
+
 class OPT: UIView {
 
     var delegate: GetOPTValuesProtocol!
-    
     
     var errorMsg: UILabel = {
         let label = UILabel()
@@ -22,7 +25,6 @@ class OPT: UIView {
         label.isHidden = true
         return label
     }()
-    
     
     var tf1 : UITextField = {
         let txtfeild = UITextField()

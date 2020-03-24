@@ -16,7 +16,7 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
     @IBOutlet weak var dropDownCountry: DropDown!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var confirmCodeInfoMessage: UITextView!
-    @IBOutlet weak var opt: OTP!
+    @IBOutlet weak var opt: OPT!
     @IBOutlet weak var sendConfirmatioCodeOutlet: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorContainer: UIView!
