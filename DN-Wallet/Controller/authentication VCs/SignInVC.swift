@@ -21,8 +21,16 @@ class SignInVC: UIViewController {
         signInOutlet.layer.cornerRadius = 20.0
         emailContainerView.configureInputField(imageName: "envelope", systemImage: true, placeholder: "Email", isSecure: false)
         passwordContainerView.configureInputField(imageName: "lock", systemImage: true, placeholder: "Password", isSecure: true)
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserDefaults.standard.bool(forKey: "haveAccount") {
+            Auth.shared.loginWithBiometric()
+        }
+        
+    }
 
     @IBAction func haveNoAccountPressed(_ sender: Any) {
         let st = UIStoryboard(name: "Authentication", bundle: .main)
