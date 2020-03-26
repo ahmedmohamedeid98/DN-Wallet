@@ -57,6 +57,7 @@
 		04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90E2422C7760062D54F /* DonationCell.swift */; };
 		04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */; };
 		04B1C9132422EC620062D54F /* DNDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9122422EC620062D54F /* DNDetailsView.swift */; };
+		04DB8842242C5BC6007BA6B0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* Data.swift */; };
 		04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */; };
 		04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD28C324256D6B00E41EAC /* CharityOrg.swift */; };
 		9EFE329628E366D3614791F8 /* Pods_DN_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B1CD7912152245F3C6C743 /* Pods_DN_Wallet.framework */; };
@@ -117,6 +118,7 @@
 		04B1C90E2422C7760062D54F /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsVC.swift; sourceTree = "<group>"; };
 		04B1C9122422EC620062D54F /* DNDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNDetailsView.swift; sourceTree = "<group>"; };
+		04DB8841242C5BC6007BA6B0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoneVC.swift; sourceTree = "<group>"; };
 		04FD28C324256D6B00E41EAC /* CharityOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityOrg.swift; sourceTree = "<group>"; };
 		517E0ED55DC404ABB1BACDA5 /* Pods-DN-Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DN-Wallet.debug.xcconfig"; path = "Target Support Files/Pods-DN-Wallet/Pods-DN-Wallet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				048D56422429D895008A8925 /* Auth.swift */,
+				04DB8841242C5BC6007BA6B0 /* Data.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */,
 				04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
+				04DB8842242C5BC6007BA6B0 /* Data.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
 				04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */,
 				047040CA242050B800BBAAF5 /* PaymentCard.swift in Sources */,
