@@ -18,9 +18,9 @@ class startControllerForTest: UIViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Authentication", bundle: .main)
+        let storyboard = UIStoryboard(name: "Services", bundle: .main)
         //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
-        let vc = storyboard.instantiateViewController(identifier: "signInVCID") as? SignInVC
+        let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
         //let vc = SignInVC()
         vc?.modalPresentationStyle = .fullScreen
         present(vc!, animated: true)

@@ -12,13 +12,22 @@ class HistoryDetailsVC: UIViewController {
     
     
     
-    func configureController(title: String, segItems: [String] = [], firstData: [HCard] = [], secondData:[HCard] = [], infoLabel info: String, withSeg: Bool = true) {
+    func configureController(title: String, segItems: [String] = [], data:[HistoryCategory], infoLabel info: String, withSeg: Bool = true) {
         navBarTitle = title
         segmentItems = segItems
-        firstSemgentData = firstData
-        secondSegmentData = secondData
+        tableViewData = data
         infoLabel.text = info
         withSegmentController = withSeg
+    }
+    
+    func seperateData(_ data: [HistoryCategory]) {
+        for item in data {
+            if item.innerCategory == 0 {
+                firstSemgentData.append(item)
+            }else{
+                secondSegmentData.append(item)
+            }
+        }
     }
     
     // customization properities
@@ -42,9 +51,9 @@ class HistoryDetailsVC: UIViewController {
     var tableView:UITableView!
     
     // data section, HCard: history card contains 'Email', 'Amount', 'Date' and 'Currancy' for any transaction
-    var firstSemgentData = [HCard]()
-    var secondSegmentData = [HCard]()
-    var tableViewData = [HCard]()
+    var firstSemgentData = [HistoryCategory]()
+    var secondSegmentData = [HistoryCategory]()
+    var tableViewData = [HistoryCategory]()
     
     
     
@@ -55,6 +64,7 @@ class HistoryDetailsVC: UIViewController {
         setupNavBar()
         if withSegmentController {
             setupSegmentController()
+            seperateData(tableViewData)
         }
         setupTableView()
         setupLayout()
@@ -156,7 +166,7 @@ extension HistoryDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "historydetailscellidentifier", for: indexPath) as? HistoryDetailsCell else { return UITableViewCell() }
         let currentData = tableViewData[indexPath.row]
-        cell.configureCell(email: currentData.email, amount: currentData.amount, date: "\(currentData.date)")
+        cell.configureCell(email: currentData.email , amount: "\(currentData.amount) \(currentData.currency)" , date: "\(currentData.date)")
         return cell
     }
     
