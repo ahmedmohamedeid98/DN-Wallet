@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class DonationCell: UITableViewCell {
 
-    var donationDelegate : DonationVC?
+    weak var donationDelegate : DonationVC?
     
     var orgImage: UIImageView = {
         let imageView = UIImageView()
@@ -20,7 +21,7 @@ class DonationCell: UITableViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
-    var orgId: Int = 0
+    var orgId: String = ""
     var orgName: UILabel = {
         let lb = UILabel()
         lb.text = "Organization Name"
@@ -58,7 +59,7 @@ class DonationCell: UITableViewCell {
         return btn
     }()
 
-    func configureCell(id: Int, name: String, email: String, logo: UIImage){
+    func configureCell(id: String, name: String, email: String, logo: UIImage){
         self.orgId = id
         self.orgName.text = name
         self.orgEmail.text = email
@@ -77,7 +78,7 @@ class DonationCell: UITableViewCell {
     }
     
     @objc func cellButtonActions(_ sender: UIButton) {
-        donationDelegate?.cellButtonActions(orgId: self.orgId, btnTage: sender.tag)
+        donationDelegate?.cellButtonActions(orgId: self.orgId, tag: sender.tag)
     }
     
     func setupLayout() {

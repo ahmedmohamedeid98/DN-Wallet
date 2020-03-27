@@ -6,20 +6,35 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
-struct CharityOrg {
+struct CharityOrg: Codable {
+    let id:String
+    let title: String
+    let email:String
+    let logoLink : String
+    let imageLink: String
+    let location: Location
+    let concats: String
+    let address: String
+    let founders: String
+    let vision: String
+    let about: String
     
-    var Id: Int
-    var name: String?
-    var email: String?
-    var logo: UIImage
-    var image: UIImage
-    var title: String?
-    var location_lat: Double?
-    var location_log: Double?
-    var address: String?
-    var contactUs: String?
-    var about: String?
-    var vision: String?
-    var founders: String?
-    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case email
+        case logoLink = "org_logo"
+        case imageLink = "org_image"
+        case location
+        case concats
+        case address
+        case founders
+        case vision
+        case about
+    }
+}
+
+struct Location: Codable {
+    let lat: Double
+    let log: Double
 }

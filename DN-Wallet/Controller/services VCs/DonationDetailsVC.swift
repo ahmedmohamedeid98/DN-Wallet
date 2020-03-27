@@ -114,12 +114,12 @@ class DonationDetailsVC: UIViewController {
         
         
         // just for test
-        orgTitle.text = org.title!
-        mobile.detailsView.text = org.contactUs!
-        address.detailsView.text = org.address!
-        about.detailsView.text = org.about!
-        vision.detailsView.text = org.vision!
-        founder.detailsView.text = org.founders!
+        orgTitle.text = org.title
+        mobile.detailsView.text = org.concats
+        address.detailsView.text = org.address
+        about.detailsView.text = org.about
+        vision.detailsView.text = org.vision
+        founder.detailsView.text = org.founders
         
         dismissButton.addTarget(self, action: #selector(backBtnWasPressedb), for: .touchUpInside)
         
@@ -140,13 +140,13 @@ class DonationDetailsVC: UIViewController {
     func setupMapView() {
         orgMapView = MKMapView()
         // specify organization's location
-        orgLocation = CLLocationCoordinate2D(latitude: org.location_lat!, longitude: org.location_log!)
+        orgLocation = CLLocationCoordinate2D(latitude: org.location.lat , longitude: org.location.log)
         let regoin = MKCoordinateRegion(center: orgLocation, latitudinalMeters: 10000, longitudinalMeters: 1000)
         orgMapView.setRegion(regoin, animated: true)
         
         // add Annotation
         orgMapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        let organizationAnnotation = DNAnnotation(coordinate: orgLocation, title: org.title!, subtitle: org.about!)
+        let organizationAnnotation = DNAnnotation(coordinate: orgLocation, title: org.title, subtitle: org.about)
         orgMapView.addAnnotation(organizationAnnotation)
     }
     

@@ -38,6 +38,10 @@ class HistoryVC: UIViewController {
         parseData(HData.result)
     }
     
+    deinit {
+        print("HistoryVC deallocated")
+    }
+    
     // convert the status bar color from black to white
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

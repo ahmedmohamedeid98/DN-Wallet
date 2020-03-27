@@ -41,14 +41,13 @@ import UIKit
         
         
         if isValid() {
-            
             let username = usernameContainer.textField.text!
             let email = emailContainer.textField.text!
             let password = passwordContainer.textField.text!
         
             let st = UIStoryboard(name: "Authentication", bundle: .main)
             let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
-            vc?.user = User(email: email, password: password, username: username, phone: "")
+            vc?.user = User(username: username, email: email, password: password, phone: "", country: "")
             vc?.modalPresentationStyle = .fullScreen
             present(vc!, animated: true)
         }

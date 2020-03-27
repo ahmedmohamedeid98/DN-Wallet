@@ -11,8 +11,10 @@ import LocalAuthentication
 
 struct keys {
     static let keyPrefix = "dnwallet_"
+    static let id = "user_id"
     static let password = "password"
     static let email = "email"
+    static let token = "user_token"
 }
 
 /// Login, SignUp and get user's information from keychain
@@ -29,18 +31,25 @@ class Auth {
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics , error: &error) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
                 if success {
-                    let password = self?.keychain.get(keys.password)
-                    let email = self?.keychain.get(keys.email)
-                    self?.authUserCredential(password, email: email)
+                    guard let password = self?.keychain.get(keys.password) else { return }
+                    guard let email = self?.keychain.get(keys.email) else { return }
+                    self?.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+                        if success {
+                            // enter view controller
+                        }else {
+                            // faild to login
+                        }
+                    }
+                    
                 } else {
-                    // some thing wrong
+                    // faild to identify user
                 }
             }
         } else {
+            // can not evaluate policy
             enableBiometricAuthAlert()
         }
     }
-    
     
     /// Login with email and password
     /// - Parameters:
@@ -48,35 +57,35 @@ class Auth {
     ///   - email: user id, it must be unique and also confirmed by API
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
-    func authUserCredential(_ password: String?, email: String?) -> Bool {
-        
-        if let password = password, let email = email {
-            print("password: \(password)\nemail: \(email)")
-            // Login with API
-            return true
-        
-        } else {
-            // some thing wrong
-            print("no user name or password")
-            return false
+    func authWithUserCredential(credintial: Login, completion: @escaping (Bool, Error?)->Void) {
+        Data.login(credintial: credintial) { [weak self] (response, error) in
+            guard let self = self else { return }
+            if let response = response {
+                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+                completion(true, nil)
+            }else {
+                completion(false, error)
+            }
         }
     }
     
     /// create new acount with user info
     /// - Parameters:
-    ///   - user: user is a structure with (email - password - username - phone).
-    /// - Returns:
-    ///   - Bool : return true of the process success, false otherwise.
-    func signUp(user: User) -> Bool {
-        // add user info to database (API)
-        
-        // if success add the sensitive data to keychain
-        keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
-        keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
-        return true
-        
-        // else faild to create account return false, try again
-        
+    ///   - user: user is a structure with (email - password - username - phone - ...).
+    func createAccount(user: User, completion: @escaping(Bool, Error?)-> Void) {
+        let data = Register(email: user.email, password: user.password, username: user.username, phone: user.phone)
+        Data.register(with: data) { [weak self] (response, error) in
+            guard let self = self else { return }
+            if let response = response {
+                self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+                completion(true, nil)
+            }else {
+                completion(false, error)
+            }
+        }
     }
     
     /// update the user password from setting
