@@ -25,6 +25,9 @@
 		046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046732B924198F3300DD436D /* FPResetPasswordVC.swift */; };
 		0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467D75A2425673200C67D7C /* DNAnnotation.swift */; };
 		04688E3A2427F02A00183DF5 /* OPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04688E392427F02A00183DF5 /* OPT.swift */; };
+		046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D4C5724313924001D1463 /* ContainerViewController.swift */; };
+		046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D4C5924313A3F001D1463 /* PageViewController.swift */; };
+		046D4C5C24313A7B001D1463 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D4C5B24313A7B001D1463 /* DataViewController.swift */; };
 		047040C224202BDF00BBAAF5 /* HDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C124202BDF00BBAAF5 /* HDetails.swift */; };
 		047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C524202F5A00BBAAF5 /* HistoryDetailsVC.swift */; };
 		047040C82420488D00BBAAF5 /* AddNewCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C72420488D00BBAAF5 /* AddNewCardVC.swift */; };
@@ -86,6 +89,9 @@
 		046732B924198F3300DD436D /* FPResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPResetPasswordVC.swift; sourceTree = "<group>"; };
 		0467D75A2425673200C67D7C /* DNAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAnnotation.swift; sourceTree = "<group>"; };
 		04688E392427F02A00183DF5 /* OPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPT.swift; sourceTree = "<group>"; };
+		046D4C5724313924001D1463 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		046D4C5924313A3F001D1463 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		046D4C5B24313A7B001D1463 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		047040C124202BDF00BBAAF5 /* HDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDetails.swift; sourceTree = "<group>"; };
 		047040C524202F5A00BBAAF5 /* HistoryDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsVC.swift; sourceTree = "<group>"; };
 		047040C72420488D00BBAAF5 /* AddNewCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardVC.swift; sourceTree = "<group>"; };
@@ -197,6 +203,16 @@
 			path = "forgetPassword VCs";
 			sourceTree = "<group>";
 		};
+		046D4C52242F8FC8001D1463 /* lunchGuideVCs */ = {
+			isa = PBXGroup;
+			children = (
+				046D4C5724313924001D1463 /* ContainerViewController.swift */,
+				046D4C5B24313A7B001D1463 /* DataViewController.swift */,
+				046D4C5924313A3F001D1463 /* PageViewController.swift */,
+			);
+			path = lunchGuideVCs;
+			sourceTree = "<group>";
+		};
 		04792AC62409FE8F00F781D8 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +250,7 @@
 		04792AE82409FF2200F781D8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				046D4C52242F8FC8001D1463 /* lunchGuideVCs */,
 				045A2FAF241BE84F00A0C643 /* tabController VCs */,
 				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
 				045A2FAE241BE7E200A0C643 /* authentication VCs */,
@@ -519,6 +536,7 @@
 				04A8D6F924281AEC00628AA3 /* Service.swift in Sources */,
 				049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */,
 				04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */,
+				046D4C5C24313A7B001D1463 /* DataViewController.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
 				04DB8842242C5BC6007BA6B0 /* Data.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
@@ -533,6 +551,8 @@
 				04161477242E3FBF00782332 /* User.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
+				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
+				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
 				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,

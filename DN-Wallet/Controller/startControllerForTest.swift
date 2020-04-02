@@ -13,17 +13,17 @@ class startControllerForTest: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .orange
         // Do any additional setup after loading the view.
     }
 
     @IBAction func login(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Services", bundle: .main)
+        //let storyboard = UIStoryboard(name: "Services", bundle: .main)
         //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
-        let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
-        //let vc = SignInVC()
-        vc?.modalPresentationStyle = .fullScreen
-        present(vc!, animated: true)
+        //let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
+        let vc = ContainerViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @IBAction func signup(_ sender: Any) {
