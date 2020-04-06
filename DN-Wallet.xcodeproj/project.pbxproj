@@ -53,6 +53,8 @@
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
 		047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* SignUpVC.swift */; };
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
+		048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F11243B512100BE464D /* EditProfileVC.swift */; };
+		048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F13243B525D00BE464D /* EditProfileSection.swift */; };
 		048D56432429D895008A8925 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56422429D895008A8925 /* Auth.swift */; };
 		048D56452429E701008A8925 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56442429E701008A8925 /* Register.swift */; };
 		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
@@ -125,6 +127,8 @@
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		047FA8B4240E1E910097DD06 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
+		048D2F11243B512100BE464D /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		048D2F13243B525D00BE464D /* EditProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSection.swift; sourceTree = "<group>"; };
 		048D56422429D895008A8925 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		048D56442429E701008A8925 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
+				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				047A49F9243AECBF0077A954 /* SettingSection.swift */,
+				048D2F13243B525D00BE464D /* EditProfileSection.swift */,
 			);
 			path = SettingModels;
 			sourceTree = "<group>";
@@ -550,6 +556,7 @@
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
 				04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
+				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
@@ -589,6 +596,7 @@
 				04161477242E3FBF00782332 /* User.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
+				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,

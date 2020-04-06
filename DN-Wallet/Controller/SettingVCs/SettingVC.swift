@@ -55,11 +55,14 @@ class SettingVC: UIViewController {
     }
 
     func setupLayout() {
-        //view.addSubview(userQuikDetails)
         view.addSubview(settingTable)
-        
-//        userQuikDetails.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 80))
         settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
+    }
+    
+    func presentViewController(_ vc: UIViewController, title: String, styleFull: Bool){
+        if styleFull { vc.modalPresentationStyle = .fullScreen }
+        vc.title = title
+        self.navigationController?.pushViewController(vc, animated: true)
     }
   
 }
@@ -72,7 +75,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = SettingSection(rawValue: section) else {return 0}
         switch section {
-        case .General : return General.allCases.count
+        case .General : return GeneralOptions.allCases.count
         case .Security: return SecurityOptions.allCases.count
         }
     }
@@ -81,7 +84,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = settingTable.dequeueReusableCell(withIdentifier: "settingcellid", for: indexPath) as? SettingCell else {return UITableViewCell()}
         guard let section = SettingSection(rawValue: indexPath.section) else {return UITableViewCell()}
         switch section {
-        case .General : cell.sectionType = General(rawValue: indexPath.row)
+        case .General : cell.sectionType = GeneralOptions(rawValue: indexPath.row)
         case .Security: cell.sectionType = SecurityOptions(rawValue: indexPath.row)
         }
         
@@ -110,12 +113,41 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         return view
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let title = tableView.cellForRow(at: indexPath)?.textLabel?.text else {return}
+        if indexPath.section == 0 {
+            if title == GeneralOptions.editProfile.description {
+                let vc = EditProfileVC()
+                presentViewController(vc, title: title, styleFull: true)
+            }
+            if title ==  GeneralOptions.privacy.description {
+                
+            }
+            if title == GeneralOptions.language.description {
+                
+            }
+        } else {
+            if title == SecurityOptions.password.description {
+                
+            }
+            if title == SecurityOptions.safeModeTime.description {
+                
+            }
+            if title == SecurityOptions.hair.description {
+                
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 120
         }
         return 40
     }
+    
+    
     
 }
 extension UINavigationController {

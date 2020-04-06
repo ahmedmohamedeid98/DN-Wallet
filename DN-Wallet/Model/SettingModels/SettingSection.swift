@@ -23,7 +23,7 @@ enum SettingSection: Int, CaseIterable, CustomStringConvertible {
     }
 }
 
-enum General: Int, CaseIterable, SectionType {
+enum GeneralOptions: Int, CaseIterable, SectionType {
     case editProfile
     case privacy
     case language
