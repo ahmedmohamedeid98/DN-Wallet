@@ -59,7 +59,7 @@ class SettingVC: UIViewController {
         settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
     }
     
-    func presentViewController(_ vc: UIViewController, title: String, styleFull: Bool){
+    func pushViewController(_ vc: UIViewController, title: String, styleFull: Bool){
         if styleFull { vc.modalPresentationStyle = .fullScreen }
         vc.title = title
         self.navigationController?.pushViewController(vc, animated: true)
@@ -119,10 +119,11 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             if title == GeneralOptions.editProfile.description {
                 let vc = EditProfileVC()
-                presentViewController(vc, title: title, styleFull: true)
+                pushViewController(vc, title: title, styleFull: true)
             }
             if title ==  GeneralOptions.privacy.description {
-                
+                let vc = PrivacyVC()
+                pushViewController(vc, title: title, styleFull: true)
             }
             if title == GeneralOptions.language.description {
                 

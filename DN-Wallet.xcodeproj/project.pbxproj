@@ -55,6 +55,9 @@
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
 		048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F11243B512100BE464D /* EditProfileVC.swift */; };
 		048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F13243B525D00BE464D /* EditProfileSection.swift */; };
+		048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F15243B5ED600BE464D /* PrivacyVC.swift */; };
+		048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F17243B5F8B00BE464D /* PrivacySection.swift */; };
+		048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F19243B6F9D00BE464D /* PrivacyCell.swift */; };
 		048D56432429D895008A8925 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56422429D895008A8925 /* Auth.swift */; };
 		048D56452429E701008A8925 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56442429E701008A8925 /* Register.swift */; };
 		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
@@ -129,6 +132,9 @@
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
 		048D2F11243B512100BE464D /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		048D2F13243B525D00BE464D /* EditProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSection.swift; sourceTree = "<group>"; };
+		048D2F15243B5ED600BE464D /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
+		048D2F17243B5F8B00BE464D /* PrivacySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySection.swift; sourceTree = "<group>"; };
+		048D2F19243B6F9D00BE464D /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
 		048D56422429D895008A8925 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		048D56442429E701008A8925 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
@@ -329,6 +335,7 @@
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
 				048D2F11243B512100BE464D /* EditProfileVC.swift */,
+				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -338,6 +345,7 @@
 			children = (
 				047A49F9243AECBF0077A954 /* SettingSection.swift */,
 				048D2F13243B525D00BE464D /* EditProfileSection.swift */,
+				048D2F17243B5F8B00BE464D /* PrivacySection.swift */,
 			);
 			path = SettingModels;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 			children = (
 				047A49F5243AE0F20077A954 /* UserQuikDetails.swift */,
 				047A49F7243AEC3A0077A954 /* SettingCell.swift */,
+				048D2F19243B6F9D00BE464D /* PrivacyCell.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -555,6 +564,8 @@
 				0491D856240E3A330014E34C /* extension.swift in Sources */,
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
 				04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */,
+				048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */,
+				048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
@@ -594,6 +605,7 @@
 				046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */,
 				040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */,
 				04161477242E3FBF00782332 /* User.swift in Sources */,
+				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
