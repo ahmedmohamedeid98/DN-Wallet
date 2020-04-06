@@ -12,15 +12,15 @@ class DataViewController: UIViewController {
 
     let imageView: UIImageView = {
         let img = UIImageView()
-        img.backgroundColor = .yellow
+        img.backgroundColor = .lightGray
         return img
     }()
     
     var text: String?
     
-    let label: UILabel = {
-        let lb = UILabel()
-        lb.text = "lllllhhhhjjjj"
+    let textView: UITextView = {
+        let lb = UITextView()
+        lb.isEditable = false
         lb.textAlignment = .center
         lb.font = UIFont.DN.Regular.font(size: 25)
         lb.textColor = UIColor.DN.DarkBlue.color()
@@ -31,14 +31,13 @@ class DataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
-        label.text = text
+        view.backgroundColor = .white
+        textView.text = text
         setupView()
-       
     }
     
     func setupView() {
-        let stackView = UIStackView(arrangedSubviews: [imageView, label])
+        let stackView = UIStackView(arrangedSubviews: [imageView, textView])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .fill

@@ -37,18 +37,24 @@ class ContainerViewController: UIViewController {
         return btn
     }()
     
-    let dataSource = ["first", "second", "third"]
-    var currentViewControllerIndex = 0
+    let dataSource = ["Welcome To the Fast, easy and the most secrue Payment App. Every Financial Procee become more easy",
+                      "Send and Recive Money in Seconds, send Money Request, Exchange Currency and donate to the charities all of this and more in this App",
+                      "First step you must create acount then you can enjoy with our services."]
+    var currentViewControllerIndex: Int = 0
+    var nextViewControllerIndex: Int = 1
+    
+    var pageViewController: PageViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configurePageControllerView()
         setupView()
+       
     }
     
     func configurePageControllerView() {
-        let pageViewController = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageViewController = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
@@ -72,7 +78,7 @@ class ContainerViewController: UIViewController {
     }
     
     func detailViewControllerAt(index: Int) -> DataViewController? {
-        print("detail index : \(index)")
+       // print("detail index : \(index)")
         if index >= dataSource.count || dataSource.count == 0 {
             return nil
         }
@@ -90,14 +96,12 @@ class ContainerViewController: UIViewController {
         Hstack.axis = .horizontal
         Hstack.distribution = .fillEqually
         Hstack.alignment = .fill
-        Hstack.spacing = 8
-        Hstack.backgroundColor = .red
+        Hstack.spacing = 20
         
         Vstack.axis = .vertical
         Vstack.distribution = .fill
         Vstack.alignment = .fill
-        Vstack.spacing = 8
-        Vstack.backgroundColor = .yellow
+        Vstack.spacing = 0
         
         view.addSubview(Vstack)
         Hstack.DNLayoutConstraint(size: CGSize(width: 0, height: 50))
@@ -105,13 +109,26 @@ class ContainerViewController: UIViewController {
     }
     
     @objc func skipButtonWasPressed() {
-        print("skip")
+        presentLoginVC()
     }
     
     @objc func nextButtonWasPressed() {
-        print("next")
+        
+        if currentViewControllerIndex < 2 {
+            currentViewControllerIndex += 1
+            guard let viewController = detailViewControllerAt(index: currentViewControllerIndex) else { return }
+            pageViewController.setViewControllers([viewController], direction: .forward, animated: true)
+        } else {
+            presentLoginVC()
+        }
     }
     
+    func presentLoginVC() {
+        let storyboard = UIStoryboard(name: "Authentication", bundle: .main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "signInVCID") as? SignInVC
+        vc?.modalPresentationStyle = .fullScreen
+        self.present(vc!, animated: true, completion: nil)
+    }
 
 }
 
@@ -126,29 +143,22 @@ extension ContainerViewController: UIPageViewControllerDelegate, UIPageViewContr
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let datavc = viewController as? DataViewController
         guard var currentIndex = datavc?.index else { return nil }
-        
         currentViewControllerIndex = currentIndex
-        
         if currentIndex == 0 {
             return nil
         }
-        
         currentIndex -= 1
-        
         return detailViewControllerAt(index: currentIndex)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let datavc = viewController as? DataViewController
         guard var currentIndex = datavc?.index else { return nil }
-    
         if currentIndex == dataSource.count {
             return nil
         }
-        
-        currentIndex += 1
         currentViewControllerIndex = currentIndex
-        
+        currentIndex += 1
         return detailViewControllerAt(index: currentIndex)
     }
     
