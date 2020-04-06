@@ -44,6 +44,10 @@
 		04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF2240B1EE300F781D8 /* PayVC.swift */; };
 		04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF4240B1F0100F781D8 /* ChargeVC.swift */; };
 		04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */; };
+		047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F1243ADFCE0077A954 /* SettingVC.swift */; };
+		047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F5243AE0F20077A954 /* UserQuikDetails.swift */; };
+		047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F7243AEC3A0077A954 /* SettingCell.swift */; };
+		047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F9243AECBF0077A954 /* SettingSection.swift */; };
 		047E11D2242E888700E1295B /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E11D1242E888700E1295B /* AccountInfo.swift */; };
 		047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */; };
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
@@ -112,6 +116,10 @@
 		04792AF2240B1EE300F781D8 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
 		04792AF4240B1F0100F781D8 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
+		047A49F1243ADFCE0077A954 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		047A49F5243AE0F20077A954 /* UserQuikDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQuikDetails.swift; sourceTree = "<group>"; };
+		047A49F7243AEC3A0077A954 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		047A49F9243AECBF0077A954 /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		047E11D1242E888700E1295B /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startControllerForTest.swift; sourceTree = "<group>"; };
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -250,6 +258,7 @@
 		04792AE82409FF2200F781D8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				047A49F0243ADC680077A954 /* SettingVCs */,
 				046D4C52242F8FC8001D1463 /* lunchGuideVCs */,
 				045A2FAF241BE84F00A0C643 /* tabController VCs */,
 				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
@@ -263,6 +272,7 @@
 		04792AE92409FF3500F781D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				047A49F4243AE02B0077A954 /* SettingViews */,
 				047FA8B9240E36440097DD06 /* userInput.swift */,
 				049D1DFA241A7C02003DF669 /* passwordContainer.swift */,
 				045A2FB7241C089200A0C643 /* DNNavBar.swift */,
@@ -280,6 +290,7 @@
 		04792AEA2409FF3F00F781D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				047A49F3243ADFFC0077A954 /* SettingModels */,
 				048D563F2429D063008A8925 /* Network */,
 				0498940C241D7A9F00E32B34 /* History.swift */,
 				047040C124202BDF00BBAAF5 /* HDetails.swift */,
@@ -307,6 +318,31 @@
 				04792AEC2409FF8E00F781D8 /* DN-Wallet-Bridging-Header.h */,
 			);
 			path = "Support files";
+			sourceTree = "<group>";
+		};
+		047A49F0243ADC680077A954 /* SettingVCs */ = {
+			isa = PBXGroup;
+			children = (
+				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
+			);
+			path = SettingVCs;
+			sourceTree = "<group>";
+		};
+		047A49F3243ADFFC0077A954 /* SettingModels */ = {
+			isa = PBXGroup;
+			children = (
+				047A49F9243AECBF0077A954 /* SettingSection.swift */,
+			);
+			path = SettingModels;
+			sourceTree = "<group>";
+		};
+		047A49F4243AE02B0077A954 /* SettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				047A49F5243AE0F20077A954 /* UserQuikDetails.swift */,
+				047A49F7243AEC3A0077A954 /* SettingCell.swift */,
+			);
+			path = SettingViews;
 			sourceTree = "<group>";
 		};
 		047FA8B6240E1EB30097DD06 /* Storyboard */ = {
@@ -505,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B10255242E763F00E17792 /* Contact.swift in Sources */,
+				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				04B1C9132422EC620062D54F /* DNDetailsView.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
@@ -517,6 +554,7 @@
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
+				047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
 				040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */,
 				048D56432429D895008A8925 /* Auth.swift in Sources */,
@@ -550,9 +588,11 @@
 				040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */,
 				04161477242E3FBF00782332 /* User.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
+				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
+				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
 				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,

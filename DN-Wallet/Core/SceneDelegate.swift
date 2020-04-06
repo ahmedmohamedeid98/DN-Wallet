@@ -15,17 +15,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+       
+       // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
+        
         if !UserDefaults.standard.bool(forKey: "firstLaunch") {
             // don't show guide screens again
             UserDefaults.standard.set(true, forKey: "firstLaunch")
-            // get a window
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            let _window = UIWindow(windowScene: windowScene)
+             window = UIWindow(windowScene: windowScene)
             // assign viewController
             let guideVC = ContainerViewController()
-            _window.rootViewController = guideVC
+            window?.rootViewController = guideVC
             // make it the first viewController appear in the window
-            self.window = _window
             self.window?.makeKeyAndVisible()
         }
         

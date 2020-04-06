@@ -16,12 +16,20 @@ class startControllerForTest: UIViewController {
         view.backgroundColor = .orange
         // Do any additional setup after loading the view.
     }
-
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//         // if traitCollection.userInterfaceStyle == .light {
+//           //   return .darkContent
+//          //} else {
+//              return .lightContent
+//          //}
+//    }
     @IBAction func login(_ sender: Any) {
         //let storyboard = UIStoryboard(name: "Services", bundle: .main)
         //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
         //let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
-        let vc = ContainerViewController()
+        let settingvc = SettingVC()
+        let vc = UINavigationController(rootViewController: settingvc)
+        vc.modalPresentationCapturesStatusBarAppearance = true
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
