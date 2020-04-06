@@ -17,17 +17,22 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        if UserDefaults.standard.bool(forKey: "haveAccount") {
+            Auth.shared.loginWithBiometric(viewController: self)
+        }
+        signInButtonIsEnabled(false)
         signInOutlet.layer.cornerRadius = 20.0
         emailContainerView.configureInputField(imageName: "envelope", systemImage: true, placeholder: "Email", isSecure: false)
         passwordContainerView.configureInputField(imageName: "lock", systemImage: true, placeholder: "Password", isSecure: true)
+        passwordContainerView.textField.delegate = self
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        emailContainerView.textField.text = Auth.shared.getUserEmail()
         if UserDefaults.standard.bool(forKey: "haveAccount") {
-            Auth.shared.loginWithBiometric()
+            Auth.shared.loginWithBiometric(viewController: self)
         }
         
     }
@@ -45,7 +50,32 @@ class SignInVC: UIViewController {
         self.present(forgetPassVC, animated: true, completion: nil)
     }
     @IBAction func signInBtnPressed(_ sender: Any) {
-        
+    
+        if emailContainerView.textField.text != "" && passwordContainerView.textField.text != "" {
+            let email = emailContainerView.textField.text!
+            let password = passwordContainerView.textField.text!
+            Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+                if success {
+                    Auth.shared.pushHomeViewController(vc: self)
+                } else {
+                    Auth.shared.faildLoginAlert(viewController: self)
+                }
+            }
+        }
+
     }
     
+    func signInButtonIsEnabled(_ enable: Bool) {
+        signInOutlet.isHighlighted = !enable
+        signInOutlet.isEnabled = enable
+    }
+    
+}
+
+extension SignInVC : UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if let len = textField.text?.count, len >= 8 {
+            signInButtonIsEnabled(true)
+        }
+    }
 }

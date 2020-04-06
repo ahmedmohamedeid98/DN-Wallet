@@ -63,10 +63,6 @@ extension SignUpVC {
         var emailValid:Bool = true
         var pass1Valid:Bool = true
         var pass2Valid:Bool = true
-        usernameContainer.textField.resignFirstResponder()
-        emailContainer.textField.resignFirstResponder()
-        passwordContainer.textField.resignFirstResponder()
-        confirmPasswordContainer.textField.resignFirstResponder()
         
         if usernameContainer.textField.text == "" {
             usernameContainer.layer.borderColor = UIColor.red.cgColor

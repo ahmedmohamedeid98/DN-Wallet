@@ -14,7 +14,6 @@ class PayVC: UIViewController {
     //MARK:- Outlets
     @IBOutlet weak var dropDown: DropDown!
     @IBOutlet weak var conditionLabel: UILabel!
-    @IBOutlet weak var limitMoneyLabel: UILabel!
     @IBOutlet weak var calculatedFeesLabel: UILabel!
     @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var scanBtnLabel: UIButton!

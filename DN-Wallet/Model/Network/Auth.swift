@@ -24,18 +24,21 @@ class Auth {
     let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     
     /// Login with Face ID or Touch ID
-    func loginWithBiometric() {
+    func loginWithBiometric(viewController: UIViewController) {
         let context:LAContext = LAContext()
         var error: NSError?
         let reason = "Identify yourself"
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics , error: &error) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
                 if success {
-                    guard let password = self?.keychain.get(keys.password) else { return }
-                    guard let email = self?.keychain.get(keys.email) else { return }
-                    self?.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
-                        if success {
-                            // enter view controller
+                    //guard let password = self?.keychain.get(keys.password) else { return }
+                    //guard let email = self?.keychain.get(keys.email) else { return }
+                    self?.authWithUserCredential(credintial: Login(email: "kkkk", password: "kkkkm")) { (success, error) in
+                        if true {
+                            DispatchQueue.main.async {
+                                self?.pushHomeViewController(vc: viewController)
+                            }
+                            
                         }else {
                             // faild to login
                         }
@@ -47,7 +50,7 @@ class Auth {
             }
         } else {
             // can not evaluate policy
-            enableBiometricAuthAlert()
+            enableBiometricAuthAlert(viewController: viewController)
         }
     }
     
@@ -58,15 +61,16 @@ class Auth {
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
     func authWithUserCredential(credintial: Login, completion: @escaping (Bool, Error?)->Void) {
-        Data.login(credintial: credintial) { [weak self] (response, error) in
-            guard let self = self else { return }
-            if let response = response {
-                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
-                completion(true, nil)
-            }else {
-                completion(false, error)
-            }
-        }
+//        Data.login(credintial: credintial) { [weak self] (response, error) in
+//            guard let self = self else { return }
+//            if let response = response {
+//                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+//                completion(true, nil)
+//            }else {
+//                completion(false, error)
+//            }
+//        }
+        completion(true, nil)
     }
     
     /// create new acount with user info
@@ -159,31 +163,35 @@ class Auth {
     }
     
     /// Alert pop up when the user do not enable his biometric authentication
-    func enableBiometricAuthAlert() {
-        let alert = UIAlertController(title: "Enable Biometric Auth", message: "Please enable your Face ID or Touch ID on your device", preferredStyle: .alert)
+    func enableBiometricAuthAlert(viewController: UIViewController) {
+        let title = "Enable Biometric Auth"
+        let message = "Please enable your Face/Touch ID on your device"
+        buildAndPresentAlertWith(title, message: message, viewController: viewController)
+    }
+    
+    func getUserEmail() -> String? {
+        return keychain.get(keys.email)
+    }
+    
+    
+    func faildLoginAlert(viewController: UIViewController) {
+        let title = "Faild Login"
+        let message = "Email/Password is Invalid."
+        buildAndPresentAlertWith(title, message: message, viewController: viewController)
+    }
+    
+    func buildAndPresentAlertWith(_ title: String, message: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
-        if let topVC = UIApplication.getTopMostViewController() {
-            topVC.present(alert, animated: true, completion: nil)
-        }
+        viewController.present(alert, animated: true, completion: nil)
     }
     
-}
-
-extension UIApplication {
-    
-    class func getTopMostViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return getTopMostViewController(base: nav.visibleViewController)
-        }
-        if let tab = base as? UITabBarController {
-            if let selected = tab.selectedViewController {
-                return getTopMostViewController(base: selected)
-            }
-        }
-        if let presented = base?.presentedViewController {
-            return getTopMostViewController(base: presented)
-        }
-        return base
+    func pushHomeViewController(vc: UIViewController) {
+        let st = UIStoryboard(name: "Main", bundle: .main)
+        let HomeVC = st.instantiateViewController(identifier: "startScreanID") as? SWRevealViewController
+        HomeVC?.modalPresentationStyle = .fullScreen
+        vc.present(HomeVC!, animated: true, completion: nil)
     }
+    
 }

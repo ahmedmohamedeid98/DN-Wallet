@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol GetOPTValuesProtocol {
+protocol GetOPTValuesProtocol: class {
     func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) -> ()
 }
 
 class OPT: UIView {
 
-    var delegate: GetOPTValuesProtocol!
+    weak var delegate: GetOPTValuesProtocol!
     
     var errorMsg: UILabel = {
         let label = UILabel()
@@ -63,31 +63,7 @@ class OPT: UIView {
         errorMsg.DNLayoutConstraint(stk.bottomAnchor, left: leftAnchor, right: rightAnchor, bottom: bottomAnchor, margins: .zero, size: .zero)
     }
     
-    func reset() {
-        tf1.text = ""
-        tf2.text = ""
-        tf3.text = ""
-        tf4.text = ""
-        tf1.becomeFirstResponder()
-    }
     
-    func sendOptValues() {
-        let tf1_val = Int(tf1.text ?? "11")!
-        let tf2_val = Int(tf2.text ?? "11")!
-        let tf3_val = Int(tf3.text ?? "11")!
-        let tf4_val = Int(tf4.text ?? "11")!
-        delegate.getOptValues(tf1: tf1_val, tf2: tf2_val, tf3: tf3_val, tf4: tf4_val)
-    }
-    
-    fileprivate func commonInit() {
-        setupStackView()
-        tf1.delegate = self
-        tf2.delegate = self
-        tf3.delegate = self
-        tf4.delegate = self
-        //tf1.becomeFirstResponder()
-        //tf1.layer.borderColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
-    }
     
     
     // Init for UIView Design Programatically
@@ -101,6 +77,40 @@ class OPT: UIView {
     required init(coder: NSCoder) {
         super.init(coder: coder)!
         commonInit()
+    }
+    
+    func reset() {
+        tf1.text = ""
+        tf2.text = ""
+        tf3.text = ""
+        tf4.text = ""
+        tf1.becomeFirstResponder()
+    }
+    
+    func sendOptValues() {
+        let tf1_val = Int(tf1.text ?? "9") ?? 11
+        let tf2_val = Int(tf2.text ?? "9") ?? 11
+        let tf3_val = Int(tf3.text ?? "9") ?? 11
+        let tf4_val = Int(tf4.text ?? "9") ?? 11
+        delegate.getOptValues(tf1: tf1_val, tf2: tf2_val, tf3: tf3_val, tf4: tf4_val)
+    }
+    
+    func showErrorMessgae() {
+        self.errorMsg.isHidden = false
+    }
+    
+    func hideErrorMessgae() {
+        self.errorMsg.isHidden = true
+    }
+    
+    fileprivate func commonInit() {
+        setupStackView()
+        tf1.delegate = self
+        tf2.delegate = self
+        tf3.delegate = self
+        tf4.delegate = self
+        //tf1.becomeFirstResponder()
+        //tf1.layer.borderColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
     }
 }
 
