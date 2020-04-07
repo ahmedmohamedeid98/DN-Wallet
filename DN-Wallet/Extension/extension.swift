@@ -102,8 +102,6 @@ extension UIView {
     
 }
 
-
-
 //MARK:- AppColor
 extension UIColor {
     
@@ -169,5 +167,14 @@ extension UITextField {
         self.smartInsertDeleteType = .no
         self.smartQuotesType = .no
         self.spellCheckingType = .no
+    }
+}
+
+extension UIStackView {
+    func configureStack(axis: NSLayoutConstraint.Axis , distribution: UIStackView.Distribution, alignment: UIStackView.Alignment, space: CGFloat) {
+        self.axis = axis
+        self.distribution = distribution
+        self.alignment = alignment
+        self.spacing = space
     }
 }

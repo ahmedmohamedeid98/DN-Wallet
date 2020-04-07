@@ -23,7 +23,7 @@ class passwordContainer: UIView {
     
     private var toggleShow: Bool = true
     
-    private var password : UITextField = {
+    var textField : UITextField = {
         let txt = UITextField()
         txt.placeholder = "New Password"
         txt.textColor = UIColor.DN.DarkGray.color()
@@ -34,13 +34,13 @@ class passwordContainer: UIView {
     }()
     
     fileprivate func setupLayout() {
-        addSubview(password)
+        addSubview(textField)
         addSubview(showPasswordBtn)
         addSubview(eyeImage)
         
         eyeImage.DNLayoutConstraint(topAnchor, left: nil, right: rightAnchor, bottom: bottomAnchor, margins: .zero, size: CGSize(width: 30, height: 0))
         showPasswordBtn.DNLayoutConstraint(eyeImage.topAnchor, left: eyeImage.leftAnchor, right: eyeImage.rightAnchor, bottom: eyeImage.bottomAnchor)
-        password.DNLayoutConstraint(topAnchor, left: leftAnchor, right: showPasswordBtn.leftAnchor, bottom: bottomAnchor, margins: .zero, size: .zero)
+        textField.DNLayoutConstraint(topAnchor, left: leftAnchor, right: showPasswordBtn.leftAnchor, bottom: bottomAnchor, margins: .zero, size: .zero)
     }
     
     fileprivate func commonInit() {
@@ -52,18 +52,18 @@ class passwordContainer: UIView {
         
         if toggleShow {
             eyeImage.image = UIImage(systemName: "eye.slash")
-            password.isSecureTextEntry = false
+            textField.isSecureTextEntry = false
             toggleShow = false
         }else {
             eyeImage.image = UIImage(systemName: "eye")
-            password.isSecureTextEntry = true
+            textField.isSecureTextEntry = true
             toggleShow = true
             print("it is secure password")
         }
     }
     
     func configureTxtFeild(placeholder: String){
-        password.placeholder = placeholder
+        textField.placeholder = placeholder
     }
     
     override init(frame: CGRect) {

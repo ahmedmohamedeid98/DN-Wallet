@@ -98,25 +98,20 @@ class Auth {
     ///   - newPassword: new password.
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
-    func updateCurrentPassword(_ currentPassword: String, newPassword: String) -> Bool {
-        guard let password = keychain.get(keys.password) else { return false }
-        if currentPassword ==  password{
-            
-            // first update the password in database (API)
-            
-            // if success then update password in keychain
-            keychain.set(newPassword, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
-            
-            // else faild to update password in the database, try again
-            
-        } else {
-            // entered password not correct or faild to get the password from keychain
-            return false
+    func updateCurrentPassword(newPassword: String, compiletion: @escaping (Bool, Error?) -> () ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            compiletion(false, nil)
         }
-        
-        return true
     }
     
+    func validateCurrentPassword(currentPassword: String) -> Bool {
+        guard let password = keychain.get(keys.password) else { return false }
+        if currentPassword ==  password{
+            return true
+        } else {
+            return false
+        }
+    }
     
     /// update the user password when he forget it.
     /// - Parameters:

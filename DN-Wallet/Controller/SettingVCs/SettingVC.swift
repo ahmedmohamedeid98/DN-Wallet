@@ -129,7 +129,8 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if title == SecurityOptions.password.description {
-                
+                let vc = ChangePasswordVC()
+                pushViewController(vc, title: "Change Password", styleFull: true)
             }
             if title == SecurityOptions.safeModeTime.description {
                 

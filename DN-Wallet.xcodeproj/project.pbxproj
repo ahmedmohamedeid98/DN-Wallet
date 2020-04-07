@@ -20,6 +20,7 @@
 		04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */; };
 		04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */; };
 		04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B03243CFB3200E4BFA2 /* Defaults.swift */; };
+		04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */; };
 		0465C6A624211D300032506D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6A524211D300032506D /* Currency.swift */; };
 		0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6C92421A0F10032506D /* MyContactsVC.swift */; };
 		0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6CB2421A70D0032506D /* MyContactCell.swift */; };
@@ -96,6 +97,7 @@
 		04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSection.swift; sourceTree = "<group>"; };
 		04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+LanguageActionSheet.swift"; sourceTree = "<group>"; };
 		04659B03243CFB3200E4BFA2 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		0465C6A524211D300032506D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		0465C6C92421A0F10032506D /* MyContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsVC.swift; sourceTree = "<group>"; };
 		0465C6CB2421A70D0032506D /* MyContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactCell.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */,
 				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
+				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
 				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
+				04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */,
 				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
