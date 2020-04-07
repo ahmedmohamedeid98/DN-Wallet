@@ -2,7 +2,7 @@
 //  SettingVC.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 4/5/20.
+//  Created by Ahmed Eid on 4/5/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
@@ -21,13 +21,11 @@ class SettingVC: UIViewController {
         setupUserQuikDetailsView()
         setupTableView()
         setupLayout()
+        
     }
     
-//    // convert the status bar color from black to white
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        setNeedsStatusBarAppearanceUpdate()
-//    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -56,7 +54,7 @@ class SettingVC: UIViewController {
 
     func setupLayout() {
         view.addSubview(settingTable)
-        settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
+        settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
     }
     
     func pushViewController(_ vc: UIViewController, title: String, styleFull: Bool){
@@ -97,7 +95,6 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = UIColor.DN.DarkBlue.color()
         title.font = UIFont.DN.Regular.font(size: 16)
         title.textColor = .white
-        //title.backgroundColor = UIColor.DN.DarkBlue.color()
         title.text = SettingSection(rawValue: section)?.description
         view.addSubview(title)
         if section == 0 {
@@ -126,7 +123,9 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 pushViewController(vc, title: title, styleFull: true)
             }
             if title == GeneralOptions.language.description {
-                
+                //let vc = LanguageVC()
+                //pushViewController(vc, title: "Language", styleFull: false)
+                showLanguageActionSheet()
             }
         } else {
             if title == SecurityOptions.password.description {

@@ -2,7 +2,7 @@
 //  HistoryVC.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 3/13/20.
+//  Created by Ahmed Eid on 3/13/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 

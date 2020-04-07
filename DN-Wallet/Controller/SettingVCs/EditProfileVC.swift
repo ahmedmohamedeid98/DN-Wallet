@@ -2,7 +2,7 @@
 //  EditProfileVC.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 4/6/20.
+//  Created by Ahmed Eid on 4/6/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
