@@ -10,6 +10,7 @@ enum Defaults : String {
     case Language
     case FirstLaunch
     case LoginWithBiometric
+    case EnableSafeMode
     
     var key: String {
         return self.rawValue

@@ -26,6 +26,7 @@ class SettingVC: UIViewController {
     
     
     
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -80,6 +81,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = settingTable.dequeueReusableCell(withIdentifier: "settingcellid", for: indexPath) as? SettingCell else {return UITableViewCell()}
+        cell.safeModeAlertDelegate = self
         guard let section = SettingSection(rawValue: indexPath.section) else {return UITableViewCell()}
         switch section {
         case .General : cell.sectionType = GeneralOptions(rawValue: indexPath.row)

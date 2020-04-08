@@ -9,7 +9,12 @@
 import UIKit
 
 class SettingCell: UITableViewCell {
-
+    
+    // MARK:- Safe Mode Delegates
+    weak var safeModeAlertDelegate: SafeModeAlert!
+    weak var safeModeDelegate: SafeModeProtocol!
+    
+    // MARK:- Setting Cell's Datasource
     var sectionType : SectionType? {
         didSet{
             guard let sectionType = sectionType else {return}
@@ -21,7 +26,7 @@ class SettingCell: UITableViewCell {
                     setLanguage()
                 }
             } else {
-                addSwitchToThisCell()
+                addSwitchToThisCellWith(tag: sectionType.id)
             }
         }
     }
@@ -44,7 +49,6 @@ class SettingCell: UITableViewCell {
     
     var Switch: UISwitch = {
         let sw = UISwitch()
-        sw.isOn = false
         sw.onTintColor = UIColor.DN.DarkBlue.color()
         return sw
     }()
@@ -56,8 +60,15 @@ class SettingCell: UITableViewCell {
         
     }
     
-    func addSwitchToThisCell() {
+    func addSwitchToThisCellWith(tag: Int) {
         addSubview(Switch)
+        Switch.tag = tag
+        if tag == SecurityOptions.safeMode.id {
+            Switch.isOn = UserDefaults.standard.bool(forKey: Defaults.EnableSafeMode.key)
+        }
+        if tag == SecurityOptions.enableLoginWithFaceID.id {
+            Switch.isOn = UserDefaults.standard.bool(forKey: Defaults.LoginWithBiometric.key)
+        }
         Switch.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20), centerV: true)
         Switch.addTarget(self, action: #selector(toggleSwitch(_:)), for: .valueChanged)
         self.selectionStyle = .none
@@ -69,10 +80,21 @@ class SettingCell: UITableViewCell {
     }
     
     @objc func toggleSwitch(_ sender: UISwitch) {
-        if sender.isOn {
-            print("switch on")
-        } else {
-            print("switch off")
+        if sender.tag == SecurityOptions.safeMode.id {
+            if sender.isOn {
+                safeModeAlertDelegate.showSafeModeAlert { (accept) in
+                    if accept {
+                        self.safeModeDelegate.activeSafeMode()
+                    }else {
+                        sender.isOn = false
+                    }
+                }
+            } else {
+                safeModeDelegate.disableSafeMode()
+            }
+        }
+        if sender.tag == SecurityOptions.enableLoginWithFaceID.id {
+            UserDefaults.standard.set(sender.isOn, forKey: Defaults.LoginWithBiometric.key)
         }
     }
     

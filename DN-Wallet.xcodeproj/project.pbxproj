@@ -11,6 +11,7 @@
 		040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C3241500C30056567A /* SteppedProgressBar.swift */; };
 		040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C4241500C30056567A /* CGPoint+JK.swift */; };
 		040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C5241500C30056567A /* UIImage+UIColor.swift */; };
+		041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */; };
 		04161475242E348800782332 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161474242E348800782332 /* Login.swift */; };
 		04161477242E3FBF00782332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161476242E3FBF00782332 /* User.swift */; };
 		045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */; };
@@ -90,6 +91,7 @@
 		040B03C3241500C30056567A /* SteppedProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppedProgressBar.swift; sourceTree = "<group>"; };
 		040B03C4241500C30056567A /* CGPoint+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+JK.swift"; sourceTree = "<group>"; };
 		040B03C5241500C30056567A /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
+		041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+EnableSafeModeAlert.swift"; sourceTree = "<group>"; };
 		04161474242E348800782332 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		04161476242E3FBF00782332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
 				04659B09243D376C00E4BFA2 /* AddHeirVC.swift */,
+				041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
+				041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
 				047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */,

@@ -8,6 +8,7 @@
 
 protocol SectionType: CustomStringConvertible {
     var containsSwitch: Bool { get }
+    var id: Int { get }
 }
 
 enum SettingSection: Int, CaseIterable, CustomStringConvertible {
@@ -36,6 +37,9 @@ enum GeneralOptions: Int, CaseIterable, SectionType {
         case .privacy: return "Privacy"
         case .language: return "Language"
         }
+    }
+    var id: Int {
+        return self.rawValue
     }
 }
 
@@ -66,5 +70,9 @@ enum SecurityOptions: Int, CaseIterable, SectionType {
         case .hair: return "Add hier"
         case .safeModeTime: return "Set safe mode time"
         }
+    }
+    
+    var id: Int {
+        return self.rawValue
     }
 }

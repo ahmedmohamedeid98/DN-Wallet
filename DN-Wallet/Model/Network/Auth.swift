@@ -9,6 +9,21 @@
 import KeychainSwift
 import LocalAuthentication
 
+// MARK:- Safe Mode Protocols
+
+
+protocol SafeModeAlert: class {
+    func showSafeModeAlert(completion: @escaping (Bool) -> ())
+}
+
+/// SafeModeProtocol is a protocol that responsible about disable specific service and re-activate it.
+protocol SafeModeProtocol: class {
+    func activeSafeMode()
+    func disableSafeMode()
+}
+
+// MARK:- Setup Keychain keys
+
 struct keys {
     static let keyPrefix = "dnwallet_"
     static let id = "user_id"
@@ -16,6 +31,8 @@ struct keys {
     static let email = "email"
     static let token = "user_token"
 }
+
+// MARK:- Setup Authentication calss
 
 /// Login, SignUp and get user's information from keychain
 class Auth {
