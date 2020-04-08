@@ -98,6 +98,21 @@ extension UIView {
         
     }
     
+    func addShadow(color: CGColor = UIColor.black.cgColor , opacity: Float = 1, offset: CGSize = CGSize(width: 1, height: 1), redius: CGFloat = 0) {
+        self.layer.shadowColor = color
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowOffset = offset
+        self.layer.shadowRadius = redius
+    }
+    
+    func addBorder(color: CGColor = UIColor.lightGray.cgColor, width: CGFloat = 0.5, withCornerRaduis: Bool = false, reduis: CGFloat = 0) {
+        self.layer.borderColor = color
+        self.layer.borderWidth = width
+        if withCornerRaduis {
+            self.layer.cornerRadius = reduis
+        }
+    }
+    
     
     
 }

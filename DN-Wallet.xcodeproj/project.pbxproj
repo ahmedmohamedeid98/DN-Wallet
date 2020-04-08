@@ -21,6 +21,8 @@
 		04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */; };
 		04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B03243CFB3200E4BFA2 /* Defaults.swift */; };
 		04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */; };
+		04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B09243D376C00E4BFA2 /* AddHeirVC.swift */; };
+		04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B0D243D717D00E4BFA2 /* Heirs.swift */; };
 		0465C6A624211D300032506D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6A524211D300032506D /* Currency.swift */; };
 		0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6C92421A0F10032506D /* MyContactsVC.swift */; };
 		0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0465C6CB2421A70D0032506D /* MyContactCell.swift */; };
@@ -98,6 +100,8 @@
 		04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+LanguageActionSheet.swift"; sourceTree = "<group>"; };
 		04659B03243CFB3200E4BFA2 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		04659B09243D376C00E4BFA2 /* AddHeirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHeirVC.swift; sourceTree = "<group>"; };
+		04659B0D243D717D00E4BFA2 /* Heirs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heirs.swift; sourceTree = "<group>"; };
 		0465C6A524211D300032506D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		0465C6C92421A0F10032506D /* MyContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsVC.swift; sourceTree = "<group>"; };
 		0465C6CB2421A70D0032506D /* MyContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactCell.swift; sourceTree = "<group>"; };
@@ -322,6 +326,7 @@
 				04B10254242E763F00E17792 /* Contact.swift */,
 				047E11D1242E888700E1295B /* AccountInfo.swift */,
 				04659B03243CFB3200E4BFA2 /* Defaults.swift */,
+				04659B0D243D717D00E4BFA2 /* Heirs.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
+				04659B09243D376C00E4BFA2 /* AddHeirVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -582,6 +588,7 @@
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
+				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
@@ -631,6 +638,7 @@
 				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
+				04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
 				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,
 				04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */,

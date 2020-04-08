@@ -17,23 +17,18 @@ class Data {
         case history
         case concats
         case charity
+        case heirs
         case account_info
         
         var stringValue: String{
             switch self {
-            case .login:
-                return Data.base + "/auth"
-            case .register:
-                return Data.base + "/users"
-            case .history:
-                return Data.base + "/history"
-            case .concats:
-                return Data.base + "/concats"
-            case .account_info:
-                return Data.base + "/account_info"
-            case .charity:
-                return Data.base + "/charity"
-
+            case .login: return Data.base + "/auth"
+            case .register: return Data.base + "/users"
+            case .history: return Data.base + "/history"
+            case .concats: return Data.base + "/concats"
+            case .account_info: return Data.base + "/account_info"
+            case .charity: return Data.base + "/charity"
+            case .heirs: return Data.base + "/heirs"
             }
         }
         
@@ -85,6 +80,18 @@ class Data {
         
     }
     
+    /// ask API to return list contain from at most two items which is user's heirs
+    class func getUserHeirs(completion: @escaping([Heirs], Error?) -> Void) {
+        taskForGETRequest(url: Endpoint.heirs.url, response: [Heirs].self) { (response, error) in
+            if let response = response {
+                completion(response, nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
+    
+    /// login method, ask API to return a token
     class func login(credintial: Login, comlpetion: @escaping(LoginResponse?, Error?)-> Void) {
         taskForPOSTRequest(url: Endpoint.login.url, response: LoginResponse.self, body: credintial) { (response, error) in
             if let response = response {
@@ -95,6 +102,7 @@ class Data {
         }
     }
     
+    /// ask API to create account, and return a user token
     class func register(with data: Register, completion: @escaping(RegisterResponder?, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoint.register.url, response: RegisterResponder.self, body: data) { (response, error) in
             if let response = response {

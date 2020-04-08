@@ -136,7 +136,8 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 
             }
             if title == SecurityOptions.hair.description {
-                
+                let vc = AddHeirVC()
+                pushViewController(vc, title: "Add Heir", styleFull: true)
             }
         }
     }
