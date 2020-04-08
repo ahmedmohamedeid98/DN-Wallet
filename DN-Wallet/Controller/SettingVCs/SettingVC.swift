@@ -125,8 +125,6 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 pushViewController(vc, title: title, styleFull: true)
             }
             if title == GeneralOptions.language.description {
-                //let vc = LanguageVC()
-                //pushViewController(vc, title: "Language", styleFull: false)
                 showLanguageActionSheet()
             }
         } else {
@@ -135,13 +133,14 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
                 pushViewController(vc, title: "Change Password", styleFull: true)
             }
             if title == SecurityOptions.safeModeTime.description {
-                
+                setSafeModeTimeAlert()
             }
             if title == SecurityOptions.hair.description {
                 let vc = AddHeirVC()
                 pushViewController(vc, title: "Add Heir", styleFull: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

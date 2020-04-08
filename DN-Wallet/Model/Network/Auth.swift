@@ -30,6 +30,7 @@ struct keys {
     static let password = "password"
     static let email = "email"
     static let token = "user_token"
+    static let safeModeTime = "safe_mode_time"
 }
 
 // MARK:- Setup Authentication calss
@@ -183,6 +184,21 @@ class Auth {
     
     func getUserEmail() -> String? {
         return keychain.get(keys.email)
+    }
+    
+    func getSafeModeTime() -> Int {
+        return Int(keychain.get(keys.safeModeTime) ?? "12") ?? 12
+    }
+    
+    func setSafeModeTime(hours: String) {
+        let hours = Int(hours) ?? 12
+        if hours == 0 {
+            keychain.set("\(12)", forKey: keys.safeModeTime)
+        }else if hours >= 100 {
+            keychain.set("\(100)", forKey: keys.safeModeTime)
+        }else {
+            keychain.set("\(hours)", forKey: keys.safeModeTime)
+        }
     }
     
     

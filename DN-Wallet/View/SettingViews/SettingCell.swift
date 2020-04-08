@@ -21,14 +21,22 @@ class SettingCell: UITableViewCell {
             textLabel?.text = sectionType.description
             if !sectionType.containsSwitch {
                 self.accessoryType = .disclosureIndicator
-                if sectionType.description == "Language" {
+                if sectionType.description == GeneralOptions.language.description  {
                     addDescriptionLabel()
                     setLanguage()
+                }
+                if sectionType.description == SecurityOptions.safeModeTime.description {
+                    addDescriptionLabel()
+                    setTime()
                 }
             } else {
                 addSwitchToThisCellWith(tag: sectionType.id)
             }
         }
+    }
+    
+    func setTime() {
+        descriptionLabel.text = "\(Auth.shared.getSafeModeTime()) hour"
     }
     
     func setLanguage() {
@@ -43,7 +51,8 @@ class SettingCell: UITableViewCell {
     var descriptionLabel : UILabel = {
         let lb = UILabel()
         lb.font = UIFont.DN.Light.font(size: 14)
-        lb.textColor = .lightGray
+        lb.textColor = .gray
+        lb.textAlignment = .right
         return lb
     }()
     
@@ -76,7 +85,7 @@ class SettingCell: UITableViewCell {
     
     func addDescriptionLabel() {
         addSubview(descriptionLabel)
-        descriptionLabel.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 25),size: CGSize(width: 60, height: 0), centerV: true)
+        descriptionLabel.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 35),size: CGSize(width: 60, height: 0), centerV: true)
     }
     
     @objc func toggleSwitch(_ sender: UISwitch) {

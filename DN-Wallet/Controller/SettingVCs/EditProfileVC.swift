@@ -11,12 +11,10 @@ import UIKit
 class EditProfileVC: UIViewController {
 
     var userProfileTable: UITableView!
-    var vcTitle: String = "Default"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        navigationController?.navigationBar.prefersLargeTitles = false
         setupTableView()
         setupLayout()
     }

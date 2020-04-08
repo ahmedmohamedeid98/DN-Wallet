@@ -41,6 +41,10 @@ enum GeneralOptions: Int, CaseIterable, SectionType {
     var id: Int {
         return self.rawValue
     }
+    
+    var indexPath: IndexPath {
+        return IndexPath(row: self.rawValue, section: SettingSection.General.rawValue)
+    }
 }
 
 enum SecurityOptions: Int, CaseIterable, SectionType {
@@ -74,5 +78,9 @@ enum SecurityOptions: Int, CaseIterable, SectionType {
     
     var id: Int {
         return self.rawValue
+    }
+    
+    var indexPath: IndexPath {
+        return IndexPath(row: self.rawValue, section: SettingSection.Security.rawValue)
     }
 }

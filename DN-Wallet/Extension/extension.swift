@@ -193,3 +193,11 @@ extension UIStackView {
         self.spacing = space
     }
 }
+
+extension UITableView {
+    func updateRowWith(indexPaths: [IndexPath], animate: UITableView.RowAnimation) {
+            self.beginUpdates()
+            self.reloadRows(at: indexPaths, with: animate)
+            self.endUpdates()
+    }
+}

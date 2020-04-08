@@ -12,6 +12,7 @@
 		040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C4241500C30056567A /* CGPoint+JK.swift */; };
 		040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C5241500C30056567A /* UIImage+UIColor.swift */; };
 		041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */; };
+		041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */; };
 		04161475242E348800782332 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161474242E348800782332 /* Login.swift */; };
 		04161477242E3FBF00782332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161476242E3FBF00782332 /* User.swift */; };
 		045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */; };
@@ -92,6 +93,7 @@
 		040B03C4241500C30056567A /* CGPoint+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+JK.swift"; sourceTree = "<group>"; };
 		040B03C5241500C30056567A /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
 		041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+EnableSafeModeAlert.swift"; sourceTree = "<group>"; };
+		041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+SetSafeModeTime.swift"; sourceTree = "<group>"; };
 		04161474242E348800782332 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		04161476242E3FBF00782332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -195,6 +197,37 @@
 			path = ProgressBar;
 			sourceTree = "<group>";
 		};
+		041046C0243E55B60043CA77 /* ServiceViews */ = {
+			isa = PBXGroup;
+			children = (
+				04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */,
+				0465C6CB2421A70D0032506D /* MyContactCell.swift */,
+				04B1C90E2422C7760062D54F /* DonationCell.swift */,
+				045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */,
+				0467D75A2425673200C67D7C /* DNAnnotation.swift */,
+				04B1C9122422EC620062D54F /* DNDetailsView.swift */,
+			);
+			path = ServiceViews;
+			sourceTree = "<group>";
+		};
+		041046C1243E56040043CA77 /* authViews */ = {
+			isa = PBXGroup;
+			children = (
+				04688E392427F02A00183DF5 /* OPT.swift */,
+				047FA8B9240E36440097DD06 /* userInput.swift */,
+				049D1DFA241A7C02003DF669 /* passwordContainer.swift */,
+			);
+			path = authViews;
+			sourceTree = "<group>";
+		};
+		041046C2243E565D0043CA77 /* generalViews */ = {
+			isa = PBXGroup;
+			children = (
+				045A2FB7241C089200A0C643 /* DNNavBar.swift */,
+			);
+			path = generalViews;
+			sourceTree = "<group>";
+		};
 		045A2FAE241BE7E200A0C643 /* authentication VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,17 +329,10 @@
 		04792AE92409FF3500F781D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				041046C2243E565D0043CA77 /* generalViews */,
 				047A49F4243AE02B0077A954 /* SettingViews */,
-				047FA8B9240E36440097DD06 /* userInput.swift */,
-				049D1DFA241A7C02003DF669 /* passwordContainer.swift */,
-				045A2FB7241C089200A0C643 /* DNNavBar.swift */,
-				045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */,
-				0465C6CB2421A70D0032506D /* MyContactCell.swift */,
-				04B1C90E2422C7760062D54F /* DonationCell.swift */,
-				04B1C9122422EC620062D54F /* DNDetailsView.swift */,
-				0467D75A2425673200C67D7C /* DNAnnotation.swift */,
-				04688E392427F02A00183DF5 /* OPT.swift */,
-				04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */,
+				041046C1243E56040043CA77 /* authViews */,
+				041046C0243E55B60043CA77 /* ServiceViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,11 +377,12 @@
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
 				04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */,
+				041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */,
+				041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */,
 				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
 				04659B09243D376C00E4BFA2 /* AddHeirVC.swift */,
-				041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -579,6 +606,7 @@
 				04B10255242E763F00E17792 /* Contact.swift in Sources */,
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
+				041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				04B1C9132422EC620062D54F /* DNDetailsView.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
