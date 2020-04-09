@@ -216,10 +216,10 @@ class Auth {
     }
     
     func pushHomeViewController(vc: UIViewController) {
-        let st = UIStoryboard(name: "Main", bundle: .main)
-        let HomeVC = st.instantiateViewController(identifier: "startScreanID") as? SWRevealViewController
-        HomeVC?.modalPresentationStyle = .fullScreen
-        vc.present(HomeVC!, animated: true, completion: nil)
+//        let st = UIStoryboard(name: "Main", bundle: .main)
+//        let HomeVC = st.instantiateViewController(identifier: "startScreanID") as? SWRevealViewController
+//        HomeVC?.modalPresentationStyle = .fullScreen
+//        vc.present(HomeVC!, animated: true, completion: nil)
     }
     
 }

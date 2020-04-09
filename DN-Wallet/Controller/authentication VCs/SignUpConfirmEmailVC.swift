@@ -53,10 +53,10 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
         UserDefaults.standard.set(true, forKey: "haveAccount")
         signUpBtnOutlet.isEnabled = false
         if self.inputConfirmationCode == "2211" {
-            let st = UIStoryboard(name: "Main", bundle: .main)
-            let vc = st.instantiateViewController(identifier: "startScreanID") as? SWRevealViewController
-            vc?.modalPresentationStyle = .fullScreen
-            present(vc!, animated: true)
+//            let st = UIStoryboard(name: "Main", bundle: .main)
+//            let vc = st.instantiateViewController(identifier: "startScreanID") as? SWRevealViewController
+//            vc?.modalPresentationStyle = .fullScreen
+//            present(vc!, animated: true)
         } else {
             optContainerView.reset()
             optContainerView.errorMsg.isHidden = false

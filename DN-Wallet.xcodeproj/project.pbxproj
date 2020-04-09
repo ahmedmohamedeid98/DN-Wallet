@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C2241500C30056567A /* NSAttributedString+JK.swift */; };
-		040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C3241500C30056567A /* SteppedProgressBar.swift */; };
-		040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C4241500C30056567A /* CGPoint+JK.swift */; };
-		040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B03C5241500C30056567A /* UIImage+UIColor.swift */; };
 		041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */; };
 		041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */; };
+		041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C4243E65CD0043CA77 /* ContainerVC.swift */; };
+		041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C6243E65DE0043CA77 /* HomeVC.swift */; };
+		041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C8243E661F0043CA77 /* SideMenuVC.swift */; };
 		04161475242E348800782332 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161474242E348800782332 /* Login.swift */; };
 		04161477242E3FBF00782332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161476242E3FBF00782332 /* User.swift */; };
 		045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */; };
@@ -42,13 +41,10 @@
 		047040CA242050B800BBAAF5 /* PaymentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047040C9242050B800BBAAF5 /* PaymentCard.swift */; };
 		04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD22409FE8F00F781D8 /* AppDelegate.swift */; };
 		04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD42409FE8F00F781D8 /* SceneDelegate.swift */; };
-		04792AD72409FE8F00F781D8 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD62409FE8F00F781D8 /* HomeVC.swift */; };
 		04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AD82409FE8F00F781D8 /* SaleVC.swift */; };
 		04792ADC2409FE9000F781D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04792ADA2409FE9000F781D8 /* Main.storyboard */; };
 		04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04792ADD2409FEA900F781D8 /* Assets.xcassets */; };
 		04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04792ADF2409FEA900F781D8 /* LaunchScreen.storyboard */; };
-		04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04792AEE2409FF8F00F781D8 /* SWRevealViewController.m */; };
-		04792AF1240A03CC00F781D8 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF0240A03CC00F781D8 /* SideMenuVC.swift */; };
 		04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF2240B1EE300F781D8 /* PayVC.swift */; };
 		04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF4240B1F0100F781D8 /* ChargeVC.swift */; };
 		04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */; };
@@ -72,6 +68,10 @@
 		0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */; };
 		0498940D241D7A9F00E32B34 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498940C241D7A9F00E32B34 /* History.swift */; };
 		049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D1DFA241A7C02003DF669 /* passwordContainer.swift */; };
+		04A5A52A243F5F1A000340FB /* CGPoint+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A526243F5F19000340FB /* CGPoint+JK.swift */; };
+		04A5A52B243F5F1A000340FB /* NSAttributedString+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A527243F5F19000340FB /* NSAttributedString+JK.swift */; };
+		04A5A52C243F5F1A000340FB /* SteppedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A528243F5F1A000340FB /* SteppedProgressBar.swift */; };
+		04A5A52D243F5F1A000340FB /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */; };
 		04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */; };
 		04A8D6F924281AEC00628AA3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8D6F824281AEC00628AA3 /* Service.swift */; };
 		04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70224282E7100628AA3 /* Authentication.storyboard */; };
@@ -88,12 +88,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040B03C2241500C30056567A /* NSAttributedString+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+JK.swift"; sourceTree = "<group>"; };
-		040B03C3241500C30056567A /* SteppedProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppedProgressBar.swift; sourceTree = "<group>"; };
-		040B03C4241500C30056567A /* CGPoint+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+JK.swift"; sourceTree = "<group>"; };
-		040B03C5241500C30056567A /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
 		041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+EnableSafeModeAlert.swift"; sourceTree = "<group>"; };
 		041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+SetSafeModeTime.swift"; sourceTree = "<group>"; };
+		041046C4243E65CD0043CA77 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
+		041046C6243E65DE0043CA77 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		041046C8243E661F0043CA77 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		04161474242E348800782332 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		04161476242E3FBF00782332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -124,16 +123,11 @@
 		04792ACF2409FE8F00F781D8 /* DN-Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DN-Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04792AD22409FE8F00F781D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04792AD42409FE8F00F781D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		04792AD62409FE8F00F781D8 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		04792AD82409FE8F00F781D8 /* SaleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleVC.swift; sourceTree = "<group>"; };
 		04792ADB2409FE9000F781D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04792ADD2409FEA900F781D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04792AE02409FEA900F781D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04792AE22409FEA900F781D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04792AEC2409FF8E00F781D8 /* DN-Wallet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DN-Wallet-Bridging-Header.h"; sourceTree = "<group>"; };
-		04792AED2409FF8F00F781D8 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		04792AEE2409FF8F00F781D8 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		04792AF0240A03CC00F781D8 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		04792AF2240B1EE300F781D8 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
 		04792AF4240B1F0100F781D8 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
@@ -157,6 +151,11 @@
 		0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpConfirmEmailVC.swift; sourceTree = "<group>"; };
 		0498940C241D7A9F00E32B34 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		049D1DFA241A7C02003DF669 /* passwordContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwordContainer.swift; sourceTree = "<group>"; };
+		04A5A4F3243F548C000340FB /* DN-Wallet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DN-Wallet-Bridging-Header.h"; sourceTree = "<group>"; };
+		04A5A526243F5F19000340FB /* CGPoint+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+JK.swift"; sourceTree = "<group>"; };
+		04A5A527243F5F19000340FB /* NSAttributedString+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+JK.swift"; sourceTree = "<group>"; };
+		04A5A528243F5F1A000340FB /* SteppedProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppedProgressBar.swift; sourceTree = "<group>"; };
+		04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
 		04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		04A8D6F824281AEC00628AA3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		04A8D70324282E8100628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
@@ -186,17 +185,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		040B03C1241500A60056567A /* ProgressBar */ = {
-			isa = PBXGroup;
-			children = (
-				040B03C4241500C30056567A /* CGPoint+JK.swift */,
-				040B03C2241500C30056567A /* NSAttributedString+JK.swift */,
-				040B03C3241500C30056567A /* SteppedProgressBar.swift */,
-				040B03C5241500C30056567A /* UIImage+UIColor.swift */,
-			);
-			path = ProgressBar;
-			sourceTree = "<group>";
-		};
 		041046C0243E55B60043CA77 /* ServiceViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +216,19 @@
 			path = generalViews;
 			sourceTree = "<group>";
 		};
+		041046C3243E655C0043CA77 /* SideMenu+TabViewController */ = {
+			isa = PBXGroup;
+			children = (
+				041046C4243E65CD0043CA77 /* ContainerVC.swift */,
+				041046C6243E65DE0043CA77 /* HomeVC.swift */,
+				041046C8243E661F0043CA77 /* SideMenuVC.swift */,
+				04792AD82409FE8F00F781D8 /* SaleVC.swift */,
+				04792AF2240B1EE300F781D8 /* PayVC.swift */,
+				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
+			);
+			path = "SideMenu+TabViewController";
+			sourceTree = "<group>";
+		};
 		045A2FAE241BE7E200A0C643 /* authentication VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,18 +238,6 @@
 				0495D1CD2414511600796499 /* SignUpConfirmEmailVC.swift */,
 			);
 			path = "authentication VCs";
-			sourceTree = "<group>";
-		};
-		045A2FAF241BE84F00A0C643 /* tabController VCs */ = {
-			isa = PBXGroup;
-			children = (
-				04792AD62409FE8F00F781D8 /* HomeVC.swift */,
-				04792AD82409FE8F00F781D8 /* SaleVC.swift */,
-				04792AF2240B1EE300F781D8 /* PayVC.swift */,
-				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
-				04792AF0240A03CC00F781D8 /* SideMenuVC.swift */,
-			);
-			path = "tabController VCs";
 			sourceTree = "<group>";
 		};
 		045A2FB4241C05EE00A0C643 /* uitilized */ = {
@@ -315,9 +304,9 @@
 		04792AE82409FF2200F781D8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				041046C3243E655C0043CA77 /* SideMenu+TabViewController */,
 				047A49F0243ADC680077A954 /* SettingVCs */,
 				046D4C52242F8FC8001D1463 /* lunchGuideVCs */,
-				045A2FAF241BE84F00A0C643 /* tabController VCs */,
 				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
 				045A2FAE241BE7E200A0C643 /* authentication VCs */,
 				046732B624198EA600DD436D /* forgetPassword VCs */,
@@ -362,12 +351,10 @@
 		04792AEB2409FF4700F781D8 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
+				04A5A525243F5EFE000340FB /* ProgressBar */,
 				04792ADD2409FEA900F781D8 /* Assets.xcassets */,
-				040B03C1241500A60056567A /* ProgressBar */,
 				04792AF6240B2E0D00F781D8 /* iOSDropDown.swift */,
-				04792AED2409FF8F00F781D8 /* SWRevealViewController.h */,
-				04792AEE2409FF8F00F781D8 /* SWRevealViewController.m */,
-				04792AEC2409FF8E00F781D8 /* DN-Wallet-Bridging-Header.h */,
+				04A5A4F3243F548C000340FB /* DN-Wallet-Bridging-Header.h */,
 			);
 			path = "Support files";
 			sourceTree = "<group>";
@@ -451,6 +438,17 @@
 				0491D855240E3A330014E34C /* extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		04A5A525243F5EFE000340FB /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				04A5A526243F5F19000340FB /* CGPoint+JK.swift */,
+				04A5A527243F5F19000340FB /* NSAttributedString+JK.swift */,
+				04A5A528243F5F1A000340FB /* SteppedProgressBar.swift */,
+				04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */,
+			);
+			path = ProgressBar;
 			sourceTree = "<group>";
 		};
 		04B1C90B2422C5840062D54F /* services VCs */ = {
@@ -604,10 +602,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B10255242E763F00E17792 /* Contact.swift in Sources */,
+				04A5A52A243F5F1A000340FB /* CGPoint+JK.swift in Sources */,
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
 				041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
+				041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */,
 				04B1C9132422EC620062D54F /* DNDetailsView.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
@@ -620,31 +620,30 @@
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
+				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
+				04A5A52D243F5F1A000340FB /* UIImage+UIColor.swift in Sources */,
 				047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
-				040B03C9241500C40056567A /* UIImage+UIColor.swift in Sources */,
 				048D56432429D895008A8925 /* Auth.swift in Sources */,
 				0498940D241D7A9F00E32B34 /* History.swift in Sources */,
 				0465C6CE2421BD110032506D /* ExchangeCurrencyVC.swift in Sources */,
 				04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */,
 				047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */,
 				045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */,
-				04792AD72409FE8F00F781D8 /* HomeVC.swift in Sources */,
 				04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */,
 				04161475242E348800782332 /* Login.swift in Sources */,
 				0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */,
-				04792AF1240A03CC00F781D8 /* SideMenuVC.swift in Sources */,
 				047040C82420488D00BBAAF5 /* AddNewCardVC.swift in Sources */,
-				040B03C8241500C40056567A /* CGPoint+JK.swift in Sources */,
 				045A2FB8241C089200A0C643 /* DNNavBar.swift in Sources */,
 				045A2FB6241C061300A0C643 /* constant.swift in Sources */,
 				04A8D6F924281AEC00628AA3 /* Service.swift in Sources */,
 				049D1DFB241A7C02003DF669 /* passwordContainer.swift in Sources */,
 				04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */,
+				04A5A52C243F5F1A000340FB /* SteppedProgressBar.swift in Sources */,
 				046D4C5C24313A7B001D1463 /* DataViewController.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
 				04DB8842242C5BC6007BA6B0 /* Data.swift in Sources */,
@@ -656,10 +655,9 @@
 				0465C6A624211D300032506D /* Currency.swift in Sources */,
 				047E11D2242E888700E1295B /* AccountInfo.swift in Sources */,
 				046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */,
-				040B03C7241500C40056567A /* SteppedProgressBar.swift in Sources */,
 				04161477242E3FBF00782332 /* User.swift in Sources */,
+				04A5A52B243F5F1A000340FB /* NSAttributedString+JK.swift in Sources */,
 				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
-				04792AEF2409FF9000F781D8 /* SWRevealViewController.m in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */,
 				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
@@ -667,7 +665,6 @@
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
 				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
-				040B03C6241500C40056567A /* NSAttributedString+JK.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
 				04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */,
@@ -675,6 +672,7 @@
 				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,
 				04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */,
 				045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */,
+				041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +848,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ahmed.eid.DN-Wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DN-Wallet/Support files/DN-Wallet-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -875,6 +874,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ahmed.eid.DN-Wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "DN-Wallet/Support files/DN-Wallet-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

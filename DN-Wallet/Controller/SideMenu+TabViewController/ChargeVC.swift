@@ -27,9 +27,18 @@ class ChargeVC: UIViewController {
     //MARK:- Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        handleNavigationBar()
     }
+    
+    func handleNavigationBar() {
+            let titleColor = UIColor.white
+            let backgroundColor = UIColor.DN.DarkBlue.color()
+            self.configureNavigationBar(largeTitleColor: titleColor, backgoundColor: backgroundColor, tintColor: titleColor, title: "Charge - Withdrew", preferredLargeTitle: false)
+    //        leftBarButton = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(sideMenuButtonPressed))
+    //        navigationItem.leftBarButtonItem = leftBarButton
+            
+        }
+    
     
     
     //MARK:- Actions

@@ -28,8 +28,17 @@ class PayVC: UIViewController {
         super.viewDidLoad()
         dropDownConfiguration()
         scanBtnLabel.layer.cornerRadius = 8.0
+        handleNavigationBar()
     }
     
+    func handleNavigationBar() {
+            let titleColor = UIColor.white
+            let backgroundColor = UIColor.DN.DarkBlue.color()
+            self.configureNavigationBar(largeTitleColor: titleColor, backgoundColor: backgroundColor, tintColor: titleColor, title: "Pay", preferredLargeTitle: false)
+    //        leftBarButton = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(sideMenuButtonPressed))
+    //        navigationItem.leftBarButtonItem = leftBarButton
+            
+        }
     
     fileprivate func dropDownConfiguration() {
         // The list of array to display. Can be changed dynamically
