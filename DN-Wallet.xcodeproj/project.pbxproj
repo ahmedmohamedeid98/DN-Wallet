@@ -72,6 +72,7 @@
 		04A5A52B243F5F1A000340FB /* NSAttributedString+JK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A527243F5F19000340FB /* NSAttributedString+JK.swift */; };
 		04A5A52C243F5F1A000340FB /* SteppedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A528243F5F1A000340FB /* SteppedProgressBar.swift */; };
 		04A5A52D243F5F1A000340FB /* UIImage+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */; };
+		04A5A530243FA87B000340FB /* ServiceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A52F243FA87B000340FB /* ServiceSection.swift */; };
 		04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */; };
 		04A8D6F924281AEC00628AA3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8D6F824281AEC00628AA3 /* Service.swift */; };
 		04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70224282E7100628AA3 /* Authentication.storyboard */; };
@@ -156,6 +157,7 @@
 		04A5A527243F5F19000340FB /* NSAttributedString+JK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+JK.swift"; sourceTree = "<group>"; };
 		04A5A528243F5F1A000340FB /* SteppedProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppedProgressBar.swift; sourceTree = "<group>"; };
 		04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+UIColor.swift"; sourceTree = "<group>"; };
+		04A5A52F243FA87B000340FB /* ServiceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSection.swift; sourceTree = "<group>"; };
 		04A8D6F6242815BC00628AA3 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		04A8D6F824281AEC00628AA3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		04A8D70324282E8100628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		04792AEA2409FF3F00F781D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04A5A52E243FA835000340FB /* ServiceModels */,
 				047A49F3243ADFFC0077A954 /* SettingModels */,
 				048D563F2429D063008A8925 /* Network */,
 				0498940C241D7A9F00E32B34 /* History.swift */,
@@ -449,6 +452,14 @@
 				04A5A529243F5F1A000340FB /* UIImage+UIColor.swift */,
 			);
 			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		04A5A52E243FA835000340FB /* ServiceModels */ = {
+			isa = PBXGroup;
+			children = (
+				04A5A52F243FA87B000340FB /* ServiceSection.swift */,
+			);
+			path = ServiceModels;
 			sourceTree = "<group>";
 		};
 		04B1C90B2422C5840062D54F /* services VCs */ = {
@@ -664,6 +675,7 @@
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
+				04A5A530243FA87B000340FB /* ServiceSection.swift in Sources */,
 				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,

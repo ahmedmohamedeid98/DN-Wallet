@@ -16,6 +16,8 @@ class SideMenuCell: UITableViewCell {
     var serviceIcon : UIImageView = {
         let img = UIImageView()
         img.tintColor = UIColor.DN.DarkBlue.color()
+        img.clipsToBounds = true
+        img.contentMode = .scaleAspectFit
         return img
     }()
     var serviceTitle: UILabel = {
@@ -36,13 +38,14 @@ class SideMenuCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
         self.safeIcon.isHidden = !isSafe
+    
     }
     
     func setupLayout() {
         addSubview(serviceIcon)
         addSubview(serviceTitle)
         addSubview(safeIcon)
-        serviceIcon.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 30, height: 30), centerV: true)
+        serviceIcon.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 20, height: 20), centerV: true)
         serviceTitle.DNLayoutConstraint(left: serviceIcon.rightAnchor, right: safeIcon.leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), centerV: true)
         safeIcon.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8), size: CGSize(width: 20, height: 20), centerV: true)
     }

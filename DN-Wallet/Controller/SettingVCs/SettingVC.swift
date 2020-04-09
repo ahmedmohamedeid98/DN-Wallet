@@ -13,6 +13,7 @@ class SettingVC: UIViewController {
     var settingTable: UITableView!
     var userQuikDetails: UserQuikDetails!
     var navBar: DNNavBar!
+    var leftBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class SettingVC: UIViewController {
         let titleColor = UIColor.white
         let backgroundColor = UIColor.DN.DarkBlue.color()
         self.configureNavigationBar(largeTitleColor: titleColor, backgoundColor: backgroundColor, tintColor: titleColor, title: "Setting", preferredLargeTitle: true)
+        leftBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(closeButtonPressed))
+        self.navigationItem.leftBarButtonItem = leftBarButton
     }
     
     func setupUserQuikDetailsView() {
@@ -64,6 +67,10 @@ class SettingVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
   
+    @objc func closeButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
