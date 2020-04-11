@@ -20,7 +20,7 @@ class DonationVC: UIViewController {
                     let vc = DonationDetailsVC()
                     vc.org = org
                     vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true, completion: nil)
+                    navigationController?.pushViewController(vc, animated: true)
                     break
                 }
             }
@@ -30,7 +30,7 @@ class DonationVC: UIViewController {
                     let vc = DonationDetailsVC()
                     vc.org = org
                     vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true, completion: nil)
+                    navigationController?.pushViewController(vc, animated: true)
                     break
                 }
             }
@@ -40,8 +40,7 @@ class DonationVC: UIViewController {
     
     
     
-        //MARK:- Properities
-    var navBar: DNNavBar!
+    //MARK:- Properities
     var infoLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Find contact"
@@ -60,11 +59,6 @@ class DonationVC: UIViewController {
         setupLayout()
     }
     
-    // convert the status bar color from black to white
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -72,10 +66,12 @@ class DonationVC: UIViewController {
     //MARK:- setup views
     
     func setupNavBar() {
-        navBar = DNNavBar()
-        navBar.title.text = "Donation"
-        navBar.addLeftItem(imageName: "arrow.left", systemImage: true)
-        navBar.leftBtn.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
+        navigationItem.title = "Donation"
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
+        navigationItem.leftBarButtonItem?.tintColor = .white
     }
     
     @objc func backBtnAction() {
@@ -99,14 +95,10 @@ class DonationVC: UIViewController {
     }
     
     func setupLayout() {
-        view.addSubview(navBar)
-    //     view.addSubview(infoLabel)
         view.addSubview(searchBar)
         view.addSubview(tableView)
         
-    navBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 100))
-        
-        searchBar.DNLayoutConstraint(navBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20,left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 50))
+        searchBar.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20,left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 50))
         tableView.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 30, left: 20, bottom: 20, right: 20))
     }
 

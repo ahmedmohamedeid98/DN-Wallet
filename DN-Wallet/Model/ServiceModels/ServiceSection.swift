@@ -59,35 +59,34 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
         switch self {
         case .history:
             let st = UIStoryboard(name: "Services", bundle: .main)
-            let historyVC = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC
-            guard let vc = historyVC else { return }
-            vc.modalPresentationStyle = .fullScreen
-            viewController.present(vc, animated: true, completion: nil)
+            guard let vc = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC else { return }
+            self.present(viewController: vc, from: viewController)
         case .sendMoney:
             print("send money")
         case .sendRequest:
             print("send request")
         case .exchangeCurrency:
             let vc = ExchangeCurrencyVC()
-            vc.modalPresentationStyle = .fullScreen
-            viewController.present(vc, animated: true, completion: nil)
-        //case .withdrawMoney:  print("withdraw")
+            self.present(viewController: vc, from: viewController)
         case .myConcats:
             let vc = MyContactsVC()
-            vc.modalPresentationStyle = .fullScreen
-            viewController.present(vc, animated: true, completion: nil)
+            self.present(viewController: vc, from: viewController)
         case .addNewPaymentCard:
             let vc = AddNewCardVC()
-            vc.modalPresentationStyle = .fullScreen
-            viewController.present(vc, animated: true, completion: nil)
+            self.present(viewController: vc, from: viewController)
         case .donation:
             let vc = DonationVC()
-            vc.modalPresentationStyle = .fullScreen
-            viewController.present(vc, animated: true, completion: nil)
+            self.present(viewController: vc, from: viewController)
         }
     }
     
     var id: Int {
         return self.rawValue
+    }
+    
+    func present(viewController: UIViewController, from: UIViewController) {
+        let navigation = UINavigationController(rootViewController: viewController)
+        navigation.modalPresentationStyle = .fullScreen
+        from.present(navigation, animated: true, completion: nil)
     }
 }

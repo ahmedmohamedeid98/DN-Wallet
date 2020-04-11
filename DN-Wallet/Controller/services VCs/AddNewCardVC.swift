@@ -13,11 +13,6 @@ let textColor = UIColor.DN.Black.color()
 
 
 class AddNewCardVC: UIViewController {
-
-    
-    
-    
-    var navBar: DNNavBar!
     
     var cardName: DropDown!
     var cardNameContainer: UIView = {
@@ -64,9 +59,6 @@ class AddNewCardVC: UIViewController {
         return tf
     }()
     
-    
-    
-    
     var previousTextFieldContent: String = ""
     var nextTextFieldContent:String = ""
     var previousLocation: Int!
@@ -84,11 +76,6 @@ class AddNewCardVC: UIViewController {
         expireDate.addTarget(self, action: #selector(expireDateFormate), for: .editingChanged)
     }
     
-    // convert the status bar color from black to white
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -112,12 +99,16 @@ class AddNewCardVC: UIViewController {
     }
     
     func setupNavBar() {
-        navBar = DNNavBar()
-        navBar.title.text = "Add Payment Card"
-        navBar.addLeftItem(imageName: "arrow.left")
-        navBar.addRightItem(imageName: "plus")
-        navBar.leftBtn.addTarget(self, action: #selector(dismissBtnWasPressed), for: .touchUpInside)
-        navBar.rightBtn.addTarget(self, action: #selector(addPaymentCardBtnPressed), for: .touchUpInside)
+        
+        navigationItem.title = "Add New Payment Card"
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add , target: self, action: #selector(addPaymentCardBtnPressed))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        
     }
     
     @objc func dismissBtnWasPressed() {
@@ -155,11 +146,8 @@ class AddNewCardVC: UIViewController {
             address
         ])
         Hstack.configureHstack()
-        
-        view.addSubview(navBar)
         view.addSubview(Hstack)
-        navBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 100))
-        Hstack.DNLayoutConstraint(navBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 30, bottom: 0, right: 30), size: CGSize(width: 0, height: 310))
+        Hstack.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 30, bottom: 0, right: 30), size: CGSize(width: 0, height: 310))
         cardNameContainer.translatesAutoresizingMaskIntoConstraints = false
         cardNameContainer.heightAnchor.constraint(equalToConstant: 45).isActive = true
         

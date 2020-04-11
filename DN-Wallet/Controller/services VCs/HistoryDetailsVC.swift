@@ -46,7 +46,7 @@ class HistoryDetailsVC: UIViewController {
     
     //MARK:- Properities
     // create a instance from custom navigation controller
-    var navBar:DNNavBar!
+    //var navBar:DNNavBar!
     var segmentController:UISegmentedControl!
     var tableView:UITableView!
     
@@ -61,7 +61,7 @@ class HistoryDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupNavBar()
+        setupNavigationBar() 
         if withSegmentController {
             setupSegmentController()
             seperateData(tableViewData)
@@ -75,25 +75,9 @@ class HistoryDetailsVC: UIViewController {
     deinit {
         print("HistoryDetails deallocated")
     }
-    
-    // convert the status bar color from black to white
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-    
-    
-    /// Initialize navigation bar
-    func setupNavBar() {
-        navBar = DNNavBar()
-        navBar.title.text = navBarTitle
-        navBar.addLeftItem(imageName: "arrow.left", systemImage: true)
-        navBar.leftBtn.addTarget(self, action: #selector(leftBtnWasPressed), for: .touchUpInside)
-    }
-    
     
     /// selector action: left nav bar item dismiss view controller when it pressed
     @objc func leftBtnWasPressed() {
@@ -123,6 +107,13 @@ class HistoryDetailsVC: UIViewController {
         }
     }
     
+    func setupNavigationBar() {
+        navigationItem.title = navBarTitle
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+    
     /// initialize table view
     func setupTableView() {
         tableView = UITableView()
@@ -137,12 +128,9 @@ class HistoryDetailsVC: UIViewController {
     
     /// add views and constraints to the controller's view
     func setupLayout() {
-        view.addSubview(navBar)
         view.addSubview(infoLabel)
         
-        navBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: nil, margins: .zero, size: CGSize(width: 0, height: 100))
-        
-        infoLabel.DNLayoutConstraint(navBar.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), centerH: true)
+        infoLabel.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), centerH: true)
         
         var tableTopAnchor: NSLayoutYAxisAnchor = infoLabel.bottomAnchor
         

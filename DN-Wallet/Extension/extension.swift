@@ -20,7 +20,7 @@ func configureNavigationBar(largeTitleColor: UIColor, backgoundColor: UIColor, t
         navBarAppearance.backgroundColor = backgoundColor
         navBarAppearance.shadowColor = nil
 
-
+        print("this***********")
         /*
          navBarAppearance.configureWithOpaqueBackground()
          navBarAppearance.backgroundColor = UIColor."YourColor"
@@ -42,6 +42,7 @@ func configureNavigationBar(largeTitleColor: UIColor, backgoundColor: UIColor, t
         navigationController?.navigationBar.tintColor = tintColor
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = title
+        print("and you***********")
     }
 }}
 //MARK:- UIView - layoutConstraint

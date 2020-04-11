@@ -29,8 +29,8 @@ class HistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+        setupNavigationBar()
         HData = History(consumption: 250, recive: 350, donation: 400, result: hh)
         self.consumptionsAmount.text = "\(HData.consumption) $"
         self.receivedAmount.text =  "\(HData.recive) $"
@@ -42,15 +42,17 @@ class HistoryVC: UIViewController {
         print("HistoryVC deallocated")
     }
     
-    // convert the status bar color from black to white
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
     
+    fileprivate func setupNavigationBar() {
+        navigationItem.title = "History"
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnWasPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+    }
     
     func parseData(_ HistoryData: [HistoryCategory]) {
         for item in HistoryData {
@@ -70,25 +72,22 @@ class HistoryVC: UIViewController {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
             vc.configureController(title: "Consumption" , segItems: HDetails.consumption.segItems() ,data: consumData, infoLabel: HDetails.consumption.infoLabel())
-            self.present(vc, animated: true, completion: nil)
+            navigationController?.pushViewController(vc, animated: true)
         }else if sender.tag == 1 {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
             vc.configureController(title: HDetails.received.title(), segItems: HDetails.received.segItems(),data: reciveData , infoLabel: HDetails.received.infoLabel())
-            self.present(vc, animated: true, completion: nil)
+            navigationController?.pushViewController(vc, animated: true)
         }else {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
             vc.configureController(title: HDetails.donations.title(), segItems: HDetails.donations.segItems(), data: donationData, infoLabel: HDetails.donations.infoLabel(), withSeg: false)
-            self.present(vc, animated: true, completion: nil)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    @IBAction func backBtnWasPressed(_ sender: UIButton) {
+   
+    @objc func backBtnWasPressed() {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
 
 }

@@ -14,9 +14,6 @@ class ExchangeCurrencyVC: UIViewController {
 
 
     //MARK:- Properities
-    // 1 - top nav bar, note number(1 - 5) the arrangment the subviews vertically
-    var navBar: DNNavBar!
-    // 2 - information label below nav bar
     var infoLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Calculate or Exchange Currency"
@@ -107,12 +104,6 @@ class ExchangeCurrencyVC: UIViewController {
         calculateButton.addTarget(self, action: #selector(currencyCalculator), for: .touchUpInside)
         exchangeButton.addTarget(self, action: #selector(exchangeCurrencyAction), for: .touchUpInside)
     }
-    
-    // convert the status bar color from black to white
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -146,10 +137,12 @@ class ExchangeCurrencyVC: UIViewController {
     }
     /// inital navigation bar with custom nav bar `DNNavBar`
     func setupNavBar() {
-        navBar = DNNavBar()
-        navBar.title.text = "Exchange Currency"
-        navBar.addLeftItem(imageName: "arrow.left", systemImage: true)
-        navBar.leftBtn.addTarget(self, action: #selector(backBtnAction), for: .touchUpInside)
+        navigationItem.title = "Exchange Currency"
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
+        navigationItem.leftBarButtonItem?.tintColor = .white
     }
 
     // left item buttom of nav bar, dismiss view controller
@@ -174,27 +167,17 @@ class ExchangeCurrencyVC: UIViewController {
         btnStack.alignment = .fill
         btnStack.spacing = 20
         
-        view.addSubview(navBar)
         view.addSubview(infoLabel)
         view.addSubview(Vstack)
         view.addSubview(btnStack)
         view.addSubview(resultLabel)
         fromDropDownContainer.addSubview(fromDropDown)
         toDropDownContainer.addSubview(toDropDown)
-        
-        navBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 100))
-        
-        infoLabel.DNLayoutConstraint(navBar.bottomAnchor,margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) , centerH: true)
-        
+        infoLabel.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor,margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) , centerH: true)
         Vstack.DNLayoutConstraint(infoLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 120))
-        
         fromDropDown.DNLayoutConstraint(fromDropDownContainer.topAnchor, left: fromDropDownContainer.leftAnchor, right: fromDropDownContainer.rightAnchor, bottom: fromDropDownContainer.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 20))
         toDropDown.DNLayoutConstraint(toDropDownContainer.topAnchor, left: toDropDownContainer.leftAnchor, right: toDropDownContainer.rightAnchor, bottom: toDropDownContainer.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 20))
-        
         btnStack.DNLayoutConstraint(Vstack.bottomAnchor, margins: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 300, height: 40), centerH: true)
-        
         resultLabel.DNLayoutConstraint(btnStack.bottomAnchor, margins: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0), centerH: true)
-        
     }
-    
 }
