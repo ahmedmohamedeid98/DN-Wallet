@@ -113,6 +113,10 @@ class Data {
         }
     }
     
+    func addNewContact(data: Contact, compiletion: @escaping(Bool, Error?) -> Void) {
+        
+    }
+    
     /// Generic func preform get (fetch) request
     /// - Parameters:
     ///   - url: url which you ask server to fetch data from it.

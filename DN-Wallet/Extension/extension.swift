@@ -114,6 +114,10 @@ extension UIView {
         }
     }
     
+    func globalPoint() -> CGPoint? {
+        return self.superview?.convert(self.frame.origin, to: nil)
+    }
+    
     
     
 }
@@ -176,6 +180,7 @@ extension UIFont {
 }
 
 extension UITextField {
+    
     func stopSmartActions(){
         self.autocorrectionType = .no
         self.autocapitalizationType = .none
@@ -183,6 +188,52 @@ extension UITextField {
         self.smartInsertDeleteType = .no
         self.smartQuotesType = .no
         self.spellCheckingType = .no
+    }
+    func basicConfigure(fontSize: CGFloat = 16) {
+        self.font = UIFont.DN.Regular.font(size: fontSize)
+        self.textColor = UIColor.DN.DarkBlue.color()
+    }
+    
+    func leftPadding(text: String? = nil, textColor: UIColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), width: CGFloat = 5) {
+        if let txt = text {
+            let paddingView = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+            paddingView.text = txt
+            paddingView.textColor = textColor
+            paddingView.font = UIFont.DN.Regular.font(size: 12)
+            self.leftView = paddingView
+        } else {
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+            self.leftView = paddingView
+        }
+        self.leftViewMode = .always
+    }
+    
+    func rightPadding(text:String? = nil, width: CGFloat = 0) {
+        if let txt = text {
+            let paddingView = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+            paddingView.text = txt
+            paddingView.textColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+            paddingView.font = UIFont.DN.Regular.font(size: 12)
+            self.rightView = paddingView
+        } else {
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+            self.rightView = paddingView
+        }
+        self.rightViewMode = .always
+    }
+    
+    func setBottomBorder(color: CGColor = UIColor.DN.DarkBlue.color().cgColor, offset: CGSize = CGSize(width: 0, height: 0.5)) {
+        self.backgroundColor = .white
+        self.layer.shadowColor = color
+        self.layer.shadowOffset = offset
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
+}
+extension UILabel {
+    func basicConfigure(fontSize: CGFloat = 16) {
+        self.font = UIFont.DN.Regular.font(size: fontSize)
+        self.textColor = UIColor.DN.DarkBlue.color()
     }
 }
 
@@ -200,5 +251,17 @@ extension UITableView {
             self.beginUpdates()
             self.reloadRows(at: indexPaths, with: animate)
             self.endUpdates()
+    }
+}
+
+
+extension UIButton {
+    func enable() {
+        self.isHighlighted = true
+        self.isEnabled = true
+    }
+    func disable() {
+        self.isHighlighted = false
+        self.isEnabled = false
     }
 }

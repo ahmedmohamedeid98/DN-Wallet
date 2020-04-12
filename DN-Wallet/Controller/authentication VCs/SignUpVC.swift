@@ -71,7 +71,7 @@ extension SignUpVC {
             usernameContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
         }
         
-        if emailContainer.textField.text == "" || !isValidEmail(emailContainer.textField.text!) {
+        if emailContainer.textField.text == "" || !Auth.shared.isValidEmail(emailContainer.textField.text!) {
             emailContainer.layer.borderColor = UIColor.red.cgColor
             emailValid = false
         }else {
@@ -93,13 +93,6 @@ extension SignUpVC {
         }
         
         return userValid && emailValid && pass1Valid && pass2Valid
-    }
-    
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
     }
     
     func matchedPassword(passW1: String, passW2: String) -> Bool {

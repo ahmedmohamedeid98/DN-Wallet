@@ -77,6 +77,7 @@
 		04A8D6F924281AEC00628AA3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8D6F824281AEC00628AA3 /* Service.swift */; };
 		04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70224282E7100628AA3 /* Authentication.storyboard */; };
 		04A8D70624282F9700628AA3 /* Services.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70824282F9700628AA3 /* Services.storyboard */; };
+		04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3A2F244279E40011E4E0 /* SendAndRequesMoneyVC.swift */; };
 		04B10255242E763F00E17792 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B10254242E763F00E17792 /* Contact.swift */; };
 		04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90C2422C64B0062D54F /* DonationVC.swift */; };
 		04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90E2422C7760062D54F /* DonationCell.swift */; };
@@ -162,6 +163,7 @@
 		04A8D6F824281AEC00628AA3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		04A8D70324282E8100628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		04A8D70724282F9700628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Services.storyboard; sourceTree = "<group>"; };
+		04AA3A2F244279E40011E4E0 /* SendAndRequesMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAndRequesMoneyVC.swift; sourceTree = "<group>"; };
 		04B10254242E763F00E17792 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		04B1C90C2422C64B0062D54F /* DonationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationVC.swift; sourceTree = "<group>"; };
 		04B1C90E2422C7760062D54F /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				0465C6CD2421BD110032506D /* ExchangeCurrencyVC.swift */,
 				04B1C90C2422C64B0062D54F /* DonationVC.swift */,
 				04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */,
+				04AA3A2F244279E40011E4E0 /* SendAndRequesMoneyVC.swift */,
 			);
 			path = "services VCs";
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */,
 				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
+				04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,

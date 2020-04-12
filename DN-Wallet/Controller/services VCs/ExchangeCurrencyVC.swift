@@ -50,7 +50,7 @@ class ExchangeCurrencyVC: UIViewController {
     var amountValue: UITextField = {
         let tf = UITextField()
         tf.placeholder = "eg: 195.65"
-        tf.setPadding()
+        tf.leftPadding()
         tf.keyboardType = .decimalPad
         tf.stopSmartActions()
         tf.layer.borderWidth = 0.5
