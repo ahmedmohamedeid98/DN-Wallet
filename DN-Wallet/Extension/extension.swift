@@ -257,11 +257,11 @@ extension UITableView {
 
 extension UIButton {
     func enable() {
-        self.isHighlighted = true
+        self.isHighlighted = false
         self.isEnabled = true
     }
     func disable() {
-        self.isHighlighted = false
+        self.isHighlighted = true
         self.isEnabled = false
     }
 }
