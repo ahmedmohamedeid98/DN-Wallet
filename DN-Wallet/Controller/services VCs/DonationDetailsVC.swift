@@ -93,11 +93,9 @@ class DonationDetailsVC: UIViewController {
     //MARK:- setup subviews
     
     func setupNavBar() {
-        //navigationController?.navigationBar.barTintColor = UIColor.lightGray
-        navigationController?.navigationBar.backgroundColor = UIColor(displayP3Red: 154/255, green: 124/255, blue: 124/255, alpha: 0.4)
+        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem?.tintColor = .white
-        navigationItem.backBarButtonItem?.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
     }
     
     func setupMapView() {

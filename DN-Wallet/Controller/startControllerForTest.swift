@@ -28,17 +28,19 @@ class startControllerForTest: UIViewController {
         //let vc = storyboard.instantiateViewController(withIdentifier: "donationVCID") as? TestDonationsVC
         //let vc = storyboard.instantiateViewController(identifier: "historyVCID") as? HistoryVC
         /// present SettingVC
-        let settingvc = SendAndRequestMoney()
+        /*
+        let settingvc = DonationVC()//SendAndRequestMoney()
         let vc = UINavigationController(rootViewController: settingvc)
         //vc.modalPresentationCapturesStatusBarAppearance = true
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
         /// present NewSideMenu
-        /*
+ */
+        
         let newSideMenu = ContainerVC()
         newSideMenu.modalPresentationStyle = .fullScreen
         present(newSideMenu, animated: true, completion: nil)
-        */
+        
     }
     
     @IBAction func signup(_ sender: Any) {

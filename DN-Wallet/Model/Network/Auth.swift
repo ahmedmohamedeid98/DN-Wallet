@@ -31,6 +31,7 @@ struct keys {
     static let email = "email"
     static let token = "user_token"
     static let safeModeTime = "safe_mode_time"
+    static let qrCodeFileName = "DN-QRCode-Image.png"
 }
 
 // MARK:- Setup Authentication calss
@@ -184,6 +185,11 @@ class Auth {
     
     func getUserEmail() -> String? {
         return keychain.get(keys.email)
+    }
+    
+    func getNeededDataToQRCode() -> String {
+        guard let data = keychain.get(keys.email) else {return "unknown user"}
+        return data
     }
     
     func isValidEmail(_ email: String) -> Bool {
