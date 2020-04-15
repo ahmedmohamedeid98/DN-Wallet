@@ -22,7 +22,7 @@ class ContainerVC: UIViewController {
         super.viewDidLoad()
         handleHomeViewController()
         // load user data
-        Data.getUserAccountInfo { (userInfo, error) in
+        DNData.getUserAccountInfo { (userInfo, error) in
             if error == nil {
                 self.userInformation = userInfo
             }

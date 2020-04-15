@@ -97,7 +97,7 @@ class Auth {
     ///   - user: user is a structure with (email - password - username - phone - ...).
     func createAccount(user: User, completion: @escaping(Bool, Error?)-> Void) {
         let data = Register(email: user.email, password: user.password, username: user.username, phone: user.phone)
-        Data.register(with: data) { [weak self] (response, error) in
+        DNData.register(with: data) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)

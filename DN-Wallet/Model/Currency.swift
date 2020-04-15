@@ -7,7 +7,7 @@
 //
 
 /// Enum contain the supported currency in the the app
-enum Currency {
+enum Currency: String, CaseIterable {
 
     case EGP // Egyptian Pound
     case EUR // Euro
@@ -32,11 +32,10 @@ enum Currency {
     case YER // Yemeni Rial
     
     /// return the symbole of specific currency based on the code of currency
-    func symbole() -> String? {
+    var symbole: String {
         let code = "\(self)"
         let locale = NSLocale(localeIdentifier: code)
-        return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: code)
+        return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: code) ?? "\(self)"
     }
-    
     
 }

@@ -87,7 +87,7 @@ class AddHeirVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        Data.getUserHeirs { (heirs, error) in
+        DNData.getUserHeirs { (heirs, error) in
             if error != nil {
                 print("Error: \(String(describing: error))")
             } else {

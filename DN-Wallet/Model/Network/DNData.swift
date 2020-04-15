@@ -7,7 +7,7 @@
 //
 
 
-class Data {
+class DNData {
     
     static let base = "https://hidden-sea-27440.herokuapp.com/"
     
@@ -22,13 +22,13 @@ class Data {
         
         var stringValue: String{
             switch self {
-            case .login: return Data.base + "/auth"
-            case .register: return Data.base + "/users"
-            case .history: return Data.base + "/history"
-            case .concats: return Data.base + "/concats"
-            case .account_info: return Data.base + "/account_info"
-            case .charity: return Data.base + "/charity"
-            case .heirs: return Data.base + "/heirs"
+            case .login: return DNData.base + "/auth"
+            case .register: return DNData.base + "/users"
+            case .history: return DNData.base + "/history"
+            case .concats: return DNData.base + "/concats"
+            case .account_info: return DNData.base + "/account_info"
+            case .charity: return DNData.base + "/charity"
+            case .heirs: return DNData.base + "/heirs"
             }
         }
         
@@ -116,7 +116,15 @@ class Data {
     func addNewContact(data: Contact, compiletion: @escaping(Bool, Error?) -> Void) {
         
     }
-    
+    /// convert currency_code to symbole if it founded
+    class func symboleFromString(str: String) -> String {
+        for currency in Currency.allCases {
+            if currency.rawValue == str {
+                return currency.symbole
+            }
+        }
+        return "unknown"
+    }
     /// Generic func preform get (fetch) request
     /// - Parameters:
     ///   - url: url which you ask server to fetch data from it.
