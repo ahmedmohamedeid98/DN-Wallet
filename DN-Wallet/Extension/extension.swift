@@ -152,6 +152,13 @@ extension UIColor {
         }
         
     }
+    
+    static var DnDarkBlue: UIColor {
+        return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+    }
+    static var DnBackgroundColor: UIColor {
+        return .systemGray5
+    }
 }
 
 //MARK:- AppFont
@@ -234,7 +241,7 @@ extension UITextField {
 extension UILabel {
     func basicConfigure(fontSize: CGFloat = 16) {
         self.font = UIFont.DN.Regular.font(size: fontSize)
-        self.textColor = UIColor.DN.DarkBlue.color()
+        self.textColor = .DnDarkBlue
     }
 }
 

@@ -30,13 +30,23 @@ struct AccountInfo: Codable {
     }
 }
 
-struct Balance: Codable {
+struct Balance: Codable, Hashable {
     let amount: Double
     let currency: String
+    let identifier: UUID = UUID()
     
     enum CodingKeys: String, CodingKey {
         case amount
         case currency = "currency_code"
+    }
+    
+    //confiram hashable protocol
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(identifier)
+    }
+    
+    static func == (lhs: Balance, rhs: Balance) -> Bool{
+        return lhs.identifier == rhs.identifier
     }
 }
 
