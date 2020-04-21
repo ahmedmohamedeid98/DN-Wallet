@@ -9,22 +9,78 @@
 import UIKit
 
 class QRScannerVC: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    // get this data from payVC
+    var amount: Double = 0.00
+    var currency: Currency = UserPreference.defaultCurrency
+    var currendDate: String = ""
+    
+    var scannerView: QRScannerView!
+    var qrData: String? = nil {
+        didSet {
+            guard let email = qrData else {return}
+            // 2. show alert to infor user that he will transfer amount to this email.
+            let msg = "transfer amount: \(amount) \(currency) to \nthe following email\n\(email)"
+            transactionAmountAndShowAlert(amount: amount, email: email, title: nil, msg: msg)
+            }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
-    */
-
+    
+    func setupScannerView(){
+        scannerView = QRScannerView()
+        view.addSubview(scannerView)
+        scannerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scannerView.delegate = self
+    }
+    
+    func transactionAmountAndShowAlert(amount: Double, email: String, title: String?, msg: String?) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let accept = UIAlertAction(title: "Accept", style: .default) { (action) in
+            // try to send money to the user email
+            DNData.transactionAmount(amount, to: email) { (success, error) in
+                if success {
+                    Alert.asyncSuccessfullWith("Successful transaction process", dismissAfter: 1.0, viewController: self)
+                    let detail = HistoryCategory(email: email,
+                                                 amount: amount,
+                                                 currency: self.currency.str,
+                                                 date: Utile.currentDate,
+                                                 category: Category.send.identifier,
+                                                 innerCategory: InnerCategory.other.identitfer)
+                    DNData.addTransactionToHistoryWith(details: detail) { (success, error) in
+                        if success {
+                            // do nothing
+                        }else {
+                            Alert.asyncActionOkWith("Error", msg: "faild to add this transaction to the histoy.", viewController: self)
+                        }
+                    }
+                }else {
+                    Alert.asyncActionOkWith("Error", msg: "faild transaction process.", viewController: self)
+                }
+            }
+            
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        alert.addAction(accept)
+        present(alert, animated: true, completion: nil)
+    }
+}
+extension QRScannerVC: QRScannerViewDelegate {
+    
+    func qrScanningDidFail() {
+        Auth.shared.buildAndPresentAlertWith("Error", message: "Scanning Failed. Please try again", viewController: self)
+    }
+    
+    func qrScanningSucceededWithCode(_ str: String?) {
+        self.qrData = str
+    }
+    
+    func qrScanningDidStop() {
+        //code 
+    }
+    
+    
 }
