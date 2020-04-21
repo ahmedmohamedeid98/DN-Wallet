@@ -14,4 +14,5 @@ class UserPreference {
         return .EGP
     }
     
+    
 }
