@@ -50,10 +50,6 @@ class ContainerVC: UIViewController {
         configureTabBarItems(vc: payVC, title: "Pay", image: "qrcode.viewfinder")
         NavPayViewController = UINavigationController(rootViewController: payVC)
         let saleVC = st.instantiateViewController(withIdentifier: "SaleVC") as! SaleVC
-        if true {//let info = userInformation {
-            saleVC.u_name = "ahmed eid"//info.username
-            saleVC.u_phone = "01095412484"//info.phone
-        }
         configureTabBarItems(vc: saleVC, title: "Sale", image: "qrcode")
         NavSaleViewController = UINavigationController(rootViewController: saleVC)
         let chargeVC = st.instantiateViewController(withIdentifier: "ChargeVC") as! ChargeVC

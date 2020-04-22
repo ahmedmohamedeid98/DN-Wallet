@@ -5,6 +5,9 @@
 //  Created by Ahmed Eid on 4/8/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
+protocol sideMenuTimerDelegate {
+    func stopTimer()
+}
 
 class SideMenuVC: UIViewController {
 
@@ -55,6 +58,7 @@ class SideMenuVC: UIViewController {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(systemName: "dd"), for: .normal)
         btn.setTitle("Logout", for: .normal)
+        btn.addTarget(self, action: #selector(logoutBtnWasPressed), for: .touchUpInside)
         return btn
     }()
     let settingButton: UIButton = {
@@ -127,6 +131,10 @@ class SideMenuVC: UIViewController {
         let vc = UINavigationController(rootViewController: settingvc)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    @objc func logoutBtnWasPressed() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     

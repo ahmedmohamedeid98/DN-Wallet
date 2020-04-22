@@ -38,4 +38,8 @@ enum Currency: String, CaseIterable {
         return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: code) ?? "\(self)"
     }
     
+    var str: String {
+        return self.rawValue
+    }
+    
 }

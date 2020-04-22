@@ -31,7 +31,7 @@ class SignInVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailContainerView.textField.text = Auth.shared.getUserEmail()
-        if UserDefaults.standard.bool(forKey: "haveAccount") {
+        if UserDefaults.standard.bool(forKey: Defaults.LoginWithBiometric.key) {
             Auth.shared.loginWithBiometric(viewController: self)
         }
         

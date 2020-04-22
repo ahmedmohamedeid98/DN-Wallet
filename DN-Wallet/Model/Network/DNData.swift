@@ -68,6 +68,26 @@ class DNData {
         }
         
     }
+    
+    class func addTransactionToHistoryWith(details: HistoryCategory, completion: @escaping (Bool, Error?) -> Void) {
+//        taskForPOSTRequest(url: Endpoint.login.url, response: LoginResponse.self, body: details) { (success, error) in
+//            if let success {
+//                comlpetion(true, nil)
+//            }else {
+//                comlpetion(false, error)
+//            }
+//        }
+    }
+    
+    class func getCharityOrganizationInitialData() {
+        
+    }
+    
+    //MARK:- Transaction
+    class func transactionAmount(_ amount: Double, to email: String, completion: @escaping(Bool, Error?)->Void) {
+        // code ...
+    }
+    
     /// ask server to get the static information about charity organization
     class func getCharityOrganizationDetails(completion: @escaping([CharityOrg], Error?)-> Void) {
         taskForGETRequest(url: Endpoint.charity.url, response: [CharityOrg].self) { (response, error) in

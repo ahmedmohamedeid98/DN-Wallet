@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
        // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
         
-        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
+        if !UserDefaults.standard.bool(forKey: Defaults.FirstLaunch.key) {
             // don't show guide screens again
-            UserDefaults.standard.set(true, forKey: "firstLaunch")
+            UserDefaults.standard.set(true, forKey: Defaults.FirstLaunch.key)
              window = UIWindow(windowScene: windowScene)
             // assign viewController
             let guideVC = ContainerViewController()

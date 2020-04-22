@@ -14,14 +14,17 @@ class HistoryVC: UIViewController {
     @IBOutlet weak var consumptionsAmount: UILabel!
     @IBOutlet weak var receivedAmount: UILabel!
     @IBOutlet weak var donationsAmount: UILabel!
-    var hh: [HistoryCategory] = [HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 0, innerCategory: 0),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 0, innerCategory: 0),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 1, innerCategory: 1),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "XCN", date: "25/7/23 8:06", category: 0, innerCategory: 1),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "USD", date: "25/7/23 8:06", category: 1, innerCategory: 1),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 2, innerCategory: 0),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 2, innerCategory: 0),
-    HistoryCategory(id: "s4d5", email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25/7/23 8:06", category: 2, innerCategory: 0)]
+    var hh: [HistoryCategory] =
+    [
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 0, innerCategory: 0),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 0, innerCategory: 0),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 1, innerCategory: 1),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "XCN", date: "25-7-23 8:06", category: 0, innerCategory: 1),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "USD", date: "25-7-23 8:06", category: 1, innerCategory: 1),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0),
+    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0)
+    ]
     var HData : History!
     var consumData = [HistoryCategory]()
     var reciveData = [HistoryCategory]()
@@ -31,9 +34,9 @@ class HistoryVC: UIViewController {
         super.viewDidLoad()
     
         setupNavigationBar()
-        HData = History(consumption: 250, recive: 350, donation: 400, result: hh)
+        HData = History(consumption: 250, receive: 350, donation: 400, result: hh)
         self.consumptionsAmount.text = "\(HData.consumption) $"
-        self.receivedAmount.text =  "\(HData.recive) $"
+        self.receivedAmount.text =  "\(HData.receive) $"
         self.donationsAmount.text = "\(HData.donation) $"
         parseData(HData.result)
     }

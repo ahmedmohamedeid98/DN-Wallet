@@ -26,15 +26,14 @@ class PayVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnBackgroundColor
         dropDownConfiguration()
         scanBtnLabel.layer.cornerRadius = 8.0
         handleNavigationBar()
     }
     
     func handleNavigationBar() {
-            let titleColor = UIColor.white
-            let backgroundColor = UIColor.DN.DarkBlue.color()
-            self.configureNavigationBar(largeTitleColor: titleColor, backgoundColor: backgroundColor, tintColor: titleColor, title: "Pay", preferredLargeTitle: false)
+        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: .DnDarkBlue, tintColor: .white, title: "Pay", preferredLargeTitle: false)
     //        leftBarButton = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(sideMenuButtonPressed))
     //        navigationItem.leftBarButtonItem = leftBarButton
             

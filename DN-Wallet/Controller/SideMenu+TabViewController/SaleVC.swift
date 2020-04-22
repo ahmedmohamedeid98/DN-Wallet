@@ -10,14 +10,7 @@ import UIKit
 
 class SaleVC: UIViewController {
 
-    
-    //MARK:- Outlets
-    var u_name: String?
-    var u_phone: String?
-    
-    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var email: UILabel!
-    @IBOutlet weak var phone: UILabel!
     
     @IBOutlet weak var qrCodeImage: UIImageView!
 
@@ -28,19 +21,19 @@ class SaleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnBackgroundColor
         initViewController()
         
     }
     
     fileprivate func initViewController() {
         handleNavigationBar()
-        username.text = u_name ?? "username"
-        phone.text = u_phone ?? "phone"
         email.text = Auth.shared.getUserEmail() ?? "ahmedmohamedeid98@gmail.com"
         
         if let filePath = exist(fileName: keys.qrCodeFileName) {
             // load image from filePath and show it to ui
             qrCodeImage.image = UIImage(contentsOfFile: filePath)
+            //print(": :: \(filePath)")
         }else {
             // generate image and save it to user document
             generateQRCodeImage()
@@ -54,18 +47,15 @@ class SaleVC: UIViewController {
     
     func handleNavigationBar() {
         navigationItem.title = "Sale"
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.barTintColor = .DnDarkBlue
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down.fill"), style: .plain, target: self, action: #selector(downlaodQRCodeBtn(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
     func generateQRCodeImage() {
-        let username = u_name ?? "username"
         let email = self.email.text ?? "ahmedmohamedeid98@gmail.com"
-        let phone = u_phone ?? "phome number"
-        let u_data = "\(username);\(email);\(phone)"
-        let data = u_data.data(using: .isoLatin1, allowLossyConversion: false)
+        let data = email.data(using: .isoLatin1, allowLossyConversion: false)
         
         let filter: CIFilter? = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
