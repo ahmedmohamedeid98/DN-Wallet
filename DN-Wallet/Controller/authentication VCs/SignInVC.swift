@@ -17,9 +17,6 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.bool(forKey: "haveAccount") {
-            Auth.shared.loginWithBiometric(viewController: self)
-        }
         signInButtonIsEnabled(false)
         signInOutlet.layer.cornerRadius = 20.0
         emailContainerView.configureInputField(imageName: "envelope", systemImage: true, placeholder: "Email", isSecure: false)
@@ -33,6 +30,7 @@ class SignInVC: UIViewController {
         emailContainerView.textField.text = Auth.shared.getUserEmail()
         if UserDefaults.standard.bool(forKey: Defaults.LoginWithBiometric.key) {
             Auth.shared.loginWithBiometric(viewController: self)
+            print("ffffffffffff")
         }
         
     }

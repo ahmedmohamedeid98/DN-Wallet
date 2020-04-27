@@ -46,12 +46,6 @@ class SendAndRequestMoney: UIViewController {
     var startCheckForAnyChange: Bool = false
     
     //MARK:- Setup Labels
-    var infoMessage: UILabel = {
-        let lb = UILabel()
-        lb.basicConfigure()
-        lb.text = "Send or Request Money"
-        return lb
-    }()
     var requestOrSentLabel: UILabel = {
         let lb = UILabel()
         lb.basicConfigure()
@@ -80,8 +74,8 @@ class SendAndRequestMoney: UIViewController {
     var email: UITextField = {
         let txt = UITextField()
         txt.placeholder = "user@example.com"
-        txt.textColor = .gray
-        txt.font = UIFont.DN.Regular.font(size: 14)
+        txt.textColor = .DnTextColor
+        txt.font = UIFont.DN.Regular.font(size: 16)
         txt.stopSmartActions()
         txt.setBottomBorder(color: UIColor.lightGray.cgColor)
         return txt
@@ -89,8 +83,8 @@ class SendAndRequestMoney: UIViewController {
     var amount: UITextField = {
         let txt = UITextField()
         txt.placeholder = "195.4"
-        txt.textColor = .gray
-        txt.font = UIFont.DN.Regular.font(size: 14)
+        txt.textColor = .DnTextColor
+        txt.font = UIFont.DN.Regular.font(size: 16)
         txt.keyboardType = .decimalPad
         txt.setBottomBorder(color: UIColor.lightGray.cgColor)
         return txt
@@ -99,7 +93,7 @@ class SendAndRequestMoney: UIViewController {
         let txt = UITextView()
         txt.text = "(Optional) short message ..."
         txt.textColor = .gray
-        txt.font = UIFont.DN.Regular.font(size: 14)
+        txt.font = UIFont.DN.Regular.font(size: 16)
         txt.addBorder(color: UIColor.lightGray.cgColor, width: 0.5)
         return txt
     }()
@@ -164,7 +158,7 @@ class SendAndRequestMoney: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done , target: self, action: #selector(sendMonyOrRequest))
         navigationItem.rightBarButtonItem?.tintColor = .white
-        if !presentFromDonationVC {
+        if !presentFromDonationVC && !presentedFromMyContact {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
             navigationItem.leftBarButtonItem?.tintColor = .white
         }
@@ -200,7 +194,6 @@ class SendAndRequestMoney: UIViewController {
     }
    
     func setupLayout() {
-        view.addSubview(infoMessage)
         view.addSubview(segmentController)
         view.addSubview(addContactButton)
         let labelStack = UIStackView(arrangedSubviews: [requestOrSentLabel, amountLabel, currencyLabel])
@@ -213,10 +206,9 @@ class SendAndRequestMoney: UIViewController {
         view.addSubview(Vstack)
         view.addSubview(messageLabel)
         view.addSubview(messageTextView)
-        infoMessage.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), centerH: true)
-        segmentController.DNLayoutConstraint(infoMessage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 30))
+        segmentController.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 40))
         addContactButton.DNLayoutConstraint(segmentController.bottomAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 16), size: CGSize(width: 30, height: 30))
-        Vstack.DNLayoutConstraint(segmentController.bottomAnchor, left: view.leftAnchor, right: addContactButton.leftAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 106))
+        Vstack.DNLayoutConstraint(segmentController.bottomAnchor, left: view.leftAnchor, right: addContactButton.leftAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 150))
         messageLabel.DNLayoutConstraint(Vstack.bottomAnchor, left: labelStack.leftAnchor, right: labelStack.rightAnchor, margins: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 30))
         messageTextView.DNLayoutConstraint(messageLabel.topAnchor, left: txtStack.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 16), size: CGSize(width: 0, height: 60))
     }
@@ -333,6 +325,7 @@ extension SendAndRequestMoney: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if messageTextViewFirstEditing {
             textView.text = ""
+            textView.textColor = .DnTextColor
             messageTextViewFirstEditing = false
         }
         
