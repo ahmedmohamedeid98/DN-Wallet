@@ -14,21 +14,21 @@ class userInput: UIView {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
-        img.tintColor = UIColor.DN.DarkGray.color()
+        img.tintColor = .DnBorderColor
         return img
     }()
     
     let seperatorLine: UIView = {
         let sepLine = UIView()
-        sepLine.backgroundColor = UIColor.DN.DarkGray.color()
+        sepLine.backgroundColor = .DnBorderColor
         return sepLine
     }()
     
     let textField: UITextField = {
         let txtField = UITextField()
-        txtField.font = UIFont.DN.Light.font(size: 14)
+        txtField.font = UIFont.DN.Regular.font(size: 16)
         txtField.minimumFontSize = 9.0
-        txtField.textColor = UIColor.DN.DarkGray.color()
+        txtField.textColor = .DnTextColor
         txtField.stopSmartActions()
         return txtField
     }()
@@ -51,7 +51,7 @@ class userInput: UIView {
     required init?(coder aDecoder: NSCoder) {
        super.init(coder: aDecoder)
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        self.layer.borderColor = UIColor.DnBorderColor.cgColor
         self.layer.cornerRadius = 4
         setupViewConstraints()
     }

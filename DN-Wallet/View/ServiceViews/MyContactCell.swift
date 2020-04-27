@@ -10,48 +10,49 @@ import UIKit
 
 class MyContactCell: UITableViewCell {
 
-    var contactImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.tintColor = UIColor.DN.DarkBlue.color()
-        imageView.image = UIImage(systemName: "person.crop.circle.fill")
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        return imageView
+    static var reuseIdentifier = "my-contact-cell-identifier"
+    
+    
+    var data: Contact? {
+        didSet {
+            guard let data = data else {return}
+            let first_char = data.username.first ?? "a"
+            avatarImage.text = first_char.uppercased()
+            avatarImage.backgroundColor = .randomColor(forChar: first_char)
+            contactUsername.text = data.username
+            contactEmail.text = data.email
+        }
+    }
+    
+    var avatarImage: UILabel = {
+        let avatarLabel = UILabel()
+        avatarLabel.textAlignment = .center
+        avatarLabel.textColor = .white
+        avatarLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        avatarLabel.layer.cornerRadius = 25
+        avatarLabel.clipsToBounds = true
+        return avatarLabel
     }()
     
     var contactUsername: UILabel = {
         let lb = UILabel()
         lb.text = "Contact 1"
-        lb.textColor = UIColor.DN.DarkBlue.color()
-        lb.font = UIFont.DN.Regular.font(size: 16)
+        lb.textColor = .DnDarkBlue
+        lb.font = UIFont.DN.Regular.font(size: 18)
         return lb
     }()
     
     var contactEmail: UILabel = {
         let lb = UILabel()
         lb.text = "Contact1@gmail.com"
-        lb.textColor = UIColor.DN.DarkBlue.color()
-        lb.font = UIFont.DN.Regular.font(size: 14)
+        lb.textColor = .DnDarkBlue
+        lb.font = UIFont.DN.Regular.font(size: 16)
         return lb
     }()
     
-    var editContact : UIButton = {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        btn.tintColor = UIColor.DN.DarkBlue.color()
-        btn.setImage(UIImage(systemName: "pencil"), for: .normal)
-        return btn
-    }()
-    
-    var deleteContact : UIButton = {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        btn.tintColor = UIColor.DN.DarkBlue.color()
-        btn.setImage(UIImage(systemName: "trash"), for: .normal)
-        return btn
-    }()
-
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.accessoryType = .disclosureIndicator
         setupLayout()
     }
     
@@ -61,17 +62,14 @@ class MyContactCell: UITableViewCell {
     
     func setupLayout() {
         let Vstack = UIStackView(arrangedSubviews: [contactUsername, contactEmail])
-        let Hstack = UIStackView(arrangedSubviews: [editContact, deleteContact])
-        Vstack.configureHstack()
-        Hstack.configureVstack()
+        Vstack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 8)
         
-        addSubview(contactImage)
+        addSubview(avatarImage)
         addSubview(Vstack)
-        addSubview(Hstack)
         
-        contactImage.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 50, height: 50), centerV: true)
-        Vstack.DNLayoutConstraint(topAnchor, left: contactImage.rightAnchor, right: Hstack.leftAnchor, bottom: bottomAnchor, margins: UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8))
-        Hstack.DNLayoutConstraint(right: rightAnchor ,size: CGSize(width: 70, height: 30), centerV: true)
+        avatarImage.DNLayoutConstraint(left: contentView.leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 50, height: 50))
+        avatarImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        Vstack.DNLayoutConstraint(contentView.topAnchor, left: avatarImage.rightAnchor, right: contentView.rightAnchor, bottom: contentView.bottomAnchor, margins: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
     }
     
 }

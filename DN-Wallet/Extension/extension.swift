@@ -152,17 +152,23 @@ extension UIColor {
         }
         
     }
-    
+    static var DnTextColor: UIColor {
+        return #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    }
     static var DnDarkBlue: UIColor {
-        return  UIColor(red:102/255, green:204/255, blue:255/255, alpha:1.0)//#colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        return  #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
     }
     static var DnBackgroundColor: UIColor {
         return .white//#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
     }
+    static var DnBorderColor: UIColor {
+        return #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+    }
+    
     static var Mercury: UIColor {
         return UIColor(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
     }
-    class func cantaloupe() -> UIColor {
+    class var cantaloupe : UIColor {
             return UIColor(red:255/255, green:204/255, blue:102/255, alpha:1.0)
     }
     class func honeydew() -> UIColor {
@@ -204,7 +210,7 @@ extension UIColor {
     class func bubblegum() -> UIColor {
         return UIColor(red:255/255, green:102/255, blue:255/255, alpha:1.0)
     }
-    class func lead() -> UIColor {
+    class var lead: UIColor {
         return UIColor(red:25/255, green:25/255, blue:25/255, alpha:1.0)
     }
     class func mercury() -> UIColor {
@@ -240,72 +246,106 @@ extension UIColor {
     class func lemon() -> UIColor {
         return UIColor(red:255/255, green:255/255, blue:0/255, alpha:1.0)
     }
-    class func spring() -> UIColor {
+    class var spring: UIColor {
         return UIColor(red:0/255, green:255/255, blue:0/255, alpha:1.0)
     }
     class func turquoise() -> UIColor {
         return UIColor(red:0/255, green:255/255, blue:255/255, alpha:1.0)
     }
-    class func blueberry() -> UIColor {
+    class var blueberry: UIColor {
         return UIColor(red:0/255, green:0/255, blue:255/255, alpha:1.0)
     }
-    class func magenta() -> UIColor {
+    class var magenta: UIColor {
         return UIColor(red:255/255, green:0/255, blue:255/255, alpha:1.0)
     }
-    class func iron() -> UIColor {
+    class var iron: UIColor {
         return UIColor(red:76/255, green:76/255, blue:76/255, alpha:1.0)
     }
-    class func magnesium() -> UIColor {
+    class var magnesium: UIColor {
         return UIColor(red:179/255, green:179/255, blue:179/255, alpha:1.0)
     }
-    class func mocha() -> UIColor {
+    class var mocha: UIColor {
         return UIColor(red:128/255, green:64/255, blue:0/255, alpha:1.0)
     }
-    class func fern() -> UIColor {
+    class var fern: UIColor {
         return UIColor(red:64/255, green:128/255, blue:0/255, alpha:1.0)
     }
-    class func moss() -> UIColor {
+    class var moss: UIColor {
         return UIColor(red:0/255, green:128/255, blue:64/255, alpha:1.0)
     }
-    class func ocean() -> UIColor {
+    class var ocean: UIColor {
         return UIColor(red:0/255, green:64/255, blue:128/255, alpha:1.0)
     }
-    class func eggplant() -> UIColor {
+    class var eggplant: UIColor {
         return UIColor(red:64/255, green:0/255, blue:128/255, alpha:1.0)
     }
-    class func maroon() -> UIColor {
+    class var maroon: UIColor {
         return UIColor(red:128/255, green:0/255, blue:64/255, alpha:1.0)
     }
-    class func steel() -> UIColor {
+    class var steel: UIColor {
         return UIColor(red:102/255, green:102/255, blue:102/255, alpha:1.0)
     }
-    class func aluminium() -> UIColor {
+    class var aluminium: UIColor {
         return UIColor(red:153/255, green:153/255, blue:153/255, alpha:1.0)
     }
-    class func cayenne() -> UIColor {
+    class var cayenne: UIColor {
         return UIColor(red:128/255, green:0/255, blue:0/255, alpha:1.0)
     }
-    class func asparagus() -> UIColor {
+    class var asparagus : UIColor {
         return UIColor(red:128/255, green:120/255, blue:0/255, alpha:1.0)
     }
-    class func clover() -> UIColor {
+    class var clover: UIColor {
         return UIColor(red:0/255, green:128/255, blue:0/255, alpha:1.0)
     }
-    class func teal() -> UIColor {
+    class var teal: UIColor {
         return UIColor(red:0/255, green:128/255, blue:128/255, alpha:1.0)
     }
-    class func midnight() -> UIColor {
+    class var midnight : UIColor {
         return UIColor(red:0/255, green:0/255, blue:128/255, alpha:1.0)
     }
-    class func plum() -> UIColor {
+    class var plum: UIColor {
         return UIColor(red:128/255, green:0/255, blue:128/255, alpha:1.0)
     }
-    class func tin() -> UIColor {
+    class var tin: UIColor {
         return UIColor(red:127/255, green:127/255, blue:127/255, alpha:1.0)
     }
-    class func nickel() -> UIColor {
+    class var nickel : UIColor {
         return UIColor(red:128/255, green:128/255, blue:128/255, alpha:1.0)
     }
+    
+    class func randomColor(forChar char: Character) -> UIColor {
+        let u_char = char.lowercased()
+        switch u_char {
+        case "a": return [nickel, .green, tin, midnight].randomElement()!
+        case "b": return [cantaloupe, tin, plum, midnight].randomElement()!
+        case "c": return [iron, #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)].randomElement()!
+        case "d": return [lead, #colorLiteral(red: 0.5741485357, green: 0.5741624236, blue: 0.574154973, alpha: 1), #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1)].randomElement()!
+        case "e": return [tin, #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)].randomElement()!
+        case "f": return [midnight, #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)].randomElement()!
+        case "g": return [steel, #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)].randomElement()!
+        case "h": return [aluminium, #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)].randomElement()!
+        case "i": return [eggplant, #colorLiteral(red: 0.3084011078, green: 0.5618229508, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)].randomElement()!
+        case "j": return [spring, #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1), #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1), #colorLiteral(red: 0.5738074183, green: 0.5655357838, blue: 0, alpha: 1)].randomElement()!
+        case "k": return [mocha, #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)].randomElement()!
+        case "l": return [fern, #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1), #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1), #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)].randomElement()!
+        case "m": return [moss, #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1), #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)].randomElement()!
+        case "n": return [blueberry, #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)].randomElement()!
+        case "o": return [ocean, #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)].randomElement()!
+        case "p": return [magenta, #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)].randomElement()!
+        case "q": return [nickel, #colorLiteral(red: 1, green: 0.5409764051, blue: 0.8473142982, alpha: 1), #colorLiteral(red: 1, green: 0.5212053061, blue: 1, alpha: 1), #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1)].randomElement()!
+        case "r": return [nickel, #colorLiteral(red: 1, green: 0.1857388616, blue: 0.5733950138, alpha: 1), #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1), #colorLiteral(red: 0.5818830132, green: 0.2156915367, blue: 1, alpha: 1)].randomElement()!
+        case "s": return [nickel, #colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1), #colorLiteral(red: 0.3236978054, green: 0.1063579395, blue: 0.574860394, alpha: 1), #colorLiteral(red: 0.5810584426, green: 0.1285524964, blue: 0.5745313764, alpha: 1)].randomElement()!
+        case "t": return [nickel, #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1), #colorLiteral(red: 0.476841867, green: 0.5048075914, blue: 1, alpha: 1), #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)].randomElement()!
+        case "u": return [nickel, #colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1), #colorLiteral(red: 0.4508578777, green: 0.9882974029, blue: 0.8376303315, alpha: 1), #colorLiteral(red: 0.4500938654, green: 0.9813225865, blue: 0.4743030667, alpha: 1)].randomElement()!
+        case "v": return [nickel, #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1), #colorLiteral(red: 0, green: 0.9914394021, blue: 1, alpha: 1), #colorLiteral(red: 0, green: 0.9810667634, blue: 0.5736914277, alpha: 1)].randomElement()!
+        case "w": return [nickel, #colorLiteral(red: 0, green: 0.3285208941, blue: 0.5748849511, alpha: 1), #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1), #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)].randomElement()!
+        case "x": return [nickel, #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1), #colorLiteral(red: 0.8321695924, green: 0.985483706, blue: 0.4733308554, alpha: 1), #colorLiteral(red: 0.3236978054, green: 0.1063579395, blue: 0.574860394, alpha: 1)].randomElement()!
+        case "y": return [nickel, #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1), #colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.5603182912, blue: 0, alpha: 1)].randomElement()!
+        default:
+            return [clover, teal, asparagus, cayenne].randomElement()!
+        }
+    }
+    
 }
 
 
