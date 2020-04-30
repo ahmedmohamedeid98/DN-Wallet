@@ -39,7 +39,6 @@ enum Category: Int {
         case .send: return "Send"
         case .receive: return "Receive"
         case .donation: return "Donation"
-        @unknown default: return "unknown"
         }
     }
 }

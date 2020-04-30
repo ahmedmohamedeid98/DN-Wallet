@@ -6,8 +6,9 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
-struct CharityOrg: Codable {
-    let id:String
+struct CharityOrg: Codable, Hashable {
+    var identifier: UUID = UUID()
+    
     let title: String
     let email:String
     let logoLink : String
@@ -20,7 +21,6 @@ struct CharityOrg: Codable {
     let about: String
     
     enum CodingKeys: String, CodingKey {
-        case id
         case title
         case email
         case logoLink = "org_logo"
@@ -31,6 +31,13 @@ struct CharityOrg: Codable {
         case founders
         case vision
         case about
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(self.identifier)
+    }
+    static func == (lhs: CharityOrg, rhs: CharityOrg) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
 }
 

@@ -9,80 +9,45 @@
 import UIKit
 import MapKit
 
+enum DonationDetailsSectoin: Int, CaseIterable, CustomStringConvertible {
+    case Location
+    case Vision
+    case Address
+    case Founders
+    case Concat
+    case About
+    
+    var description: String {
+        switch self {
+        case .Location: return "Location"
+        case .Vision: return "Vision"
+        case .Address: return "Address"
+        case .Founders: return "Founders"
+        case .Concat: return "Concats"
+        case .About: return "About"
+        }
+    }
+    
+}
+struct charityLocation {
+    let location: Location
+    let title: String
+    let subtitle: String
+}
+
 class DonationDetailsVC: UIViewController {
 
     
-    var org : CharityOrg!
-    // organization location
-    var orgLocation: CLLocationCoordinate2D!
-    
-    // organization image
-    var orgBackgroundImage: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "test1")
-        return img
-    }()
-    
-    var orgMapView : MKMapView!
-    
-    var location : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "Location"
-        return view
-    }()
-    
-    
-    var vision : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "Our Vision"
-        return view
-    }()
-    
-    var address : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "Address"
-        return view
-    }()
-    var founder : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "Founders"
-        return view
-    }()
-    var mobile : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "Mobile"
-        return view
-    }()
-    var about : DNDetailsView = {
-        let view = DNDetailsView()
-        view.title.text = "About"
-        return view
-    }()
-    
-    let scrollView : UIScrollView = {
-        let scrollV = UIScrollView()
-        let screanSize = UIScreen.main.bounds
-        scrollV.contentSize = CGSize(width: screanSize.width - 16 , height: 750)
-        //scrollV.backgroundColor = .cyan
-        return scrollV
-    }()
+    var data : CharityOrg?
+    var charityTable: UITableView!
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-        
-        setupMapView()
-        orgMapView.delegate = self
+        view.backgroundColor = .DnBackgroundColor
+        setupNavBar()
+        setupTableView()
         setupLayout()
-        // just for test
-        navigationItem.title = org.title
-        mobile.detailsView.text = org.concats
-        address.detailsView.text = org.address
-        about.detailsView.text = org.about
-        vision.detailsView.text = org.vision
-        founder.detailsView.text = org.founders
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -91,61 +56,96 @@ class DonationDetailsVC: UIViewController {
     
     
     //MARK:- setup subviews
-    
     func setupNavBar() {
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationItem.title = data?.title
+        navigationController?.navigationBar.barTintColor = .DnDarkBlue
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barStyle = .black
+        let donateBarButton = UIBarButtonItem(title: "Donate", style: .plain, target: self, action: #selector(donateButtonPressed))
+        navigationItem.rightBarButtonItem = donateBarButton
+        navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
-    func setupMapView() {
-        orgMapView = MKMapView()
-        // specify organization's location
-        orgLocation = CLLocationCoordinate2D(latitude: org.location.lat , longitude: org.location.log)
-        let regoin = MKCoordinateRegion(center: orgLocation, latitudinalMeters: 10000, longitudinalMeters: 1000)
-        orgMapView.setRegion(regoin, animated: true)
-        
-        // add Annotation
-        orgMapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        let organizationAnnotation = DNAnnotation(coordinate: orgLocation, title: org.title, subtitle: org.about)
-        orgMapView.addAnnotation(organizationAnnotation)
+    @objc func donateButtonPressed() {
+        let vc = SendAndRequestMoney()
+        vc.presentFromDonationVC = true
+        vc.presentedEmail = data?.email ?? "Not valid email, Try Again"
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setupTableView() {
+        charityTable = UITableView()
+        charityTable.delegate = self
+        charityTable.dataSource = self
+        charityTable.register(DonationDetailsCell.self, forCellReuseIdentifier: DonationDetailsCell.reuseIdentifier)
+        charityTable.backgroundColor = .DnBackgroundColor
+        charityTable.allowsSelection = false
+        charityTable.indicatorStyle = .white
     }
     
     
     //MARK:- setup layout constraints
     func setupLayout() {
-        view.addSubview(orgBackgroundImage)
-        // setup organization background image constraint
-        orgBackgroundImage.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 200))
-        // setup details constraint
-        let Vstack = UIStackView(arrangedSubviews: [location, address,vision, founder, mobile, about])
-        Vstack.backgroundColor = .red
-        Vstack.axis = .vertical
-        Vstack.distribution = .fillProportionally
-        Vstack.alignment = .fill
-        Vstack.spacing = 8
-        view.addSubview(scrollView)
-        scrollView.addSubview(Vstack)
-        location.detailsView.addSubview(orgMapView)
-        orgMapView.DNLayoutConstraintFill()
-        location.DNLayoutConstraint(size: CGSize(width: 0, height: 200))
-        address.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
-        vision.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
-        founder.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
-        mobile.DNLayoutConstraint(size: CGSize(width: 0, height: 80))
-        scrollView.DNLayoutConstraint(orgBackgroundImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 16, left: 16, bottom: 20, right: 16))
-        Vstack.DNLayoutConstraint(size: CGSize(width: view.frame.width - 16, height: 750))
+        view.addSubview(charityTable)
+        charityTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16))
     }
 }
 
-extension DonationDetailsVC: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let orgAnnotation = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier) as? MKMarkerAnnotationView {
-            orgAnnotation.animatesWhenAdded = true
-            orgAnnotation.titleVisibility = .adaptive
-            orgAnnotation.subtitleVisibility = .adaptive
-            return orgAnnotation
+extension DonationDetailsVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return DonationDetailsSectoin.allCases.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = charityTable.dequeueReusableCell(withIdentifier: DonationDetailsCell.reuseIdentifier, for: indexPath) as? DonationDetailsCell else {return UITableViewCell()}
+        guard let section = DonationDetailsSectoin(rawValue: indexPath.section) else { return UITableViewCell() }
+        guard let detail = data else { return UITableViewCell() }
+        switch section {
+        case .Location: cell.locationAndDetails = charityLocation(location:detail.location, title: detail.title, subtitle: detail.about)
+        case .Vision:   cell.caseDescription = detail.vision
+        case .Address:  cell.caseDescription = detail.address
+        case .Founders: cell.caseDescription = detail.founders
+        case .Concat:   cell.caseDescription = detail.concats
+        case .About:    cell.caseDescription = detail.about
         }
-        return nil
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let vw = UIView()
+        let label = UILabel()
+        label.basicConfigure(fontSize: 18)
+        label.textAlignment = .center
+        let section = DonationDetailsSectoin(rawValue: section)
+        label.text = section?.description
+        vw.addSubview(label)
+        label.DNLayoutConstraint(vw.topAnchor, left: vw.leftAnchor, right: vw.rightAnchor, bottom: vw.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
+        return vw
+    }
+    
+    func getCellHeight(text: String?) -> CGFloat {
+        if let txt = text {
+            let height = txt.heightWithConstrainedWidth(width: self.charityTable.frame.size.width - 40, font: UIFont.DN.Regular.font(size: 18))
+            return height + 40
+        }else {
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let height: CGFloat = 170
+        guard let section = DonationDetailsSectoin(rawValue: indexPath.section) else { return height }
+        switch section {
+        case .Location: return height
+        case .Vision:   return getCellHeight(text: data?.vision)
+        case .Address:  return getCellHeight(text: data?.address)
+        case .Founders: return getCellHeight(text: data?.founders)
+        case .Concat:   return getCellHeight(text: data?.concats)
+        case .About:    return getCellHeight(text: data?.about)
+        }
     }
 }

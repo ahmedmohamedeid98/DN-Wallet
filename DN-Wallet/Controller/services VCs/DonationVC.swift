@@ -8,55 +8,37 @@
 
 import UIKit
 
+enum charitySection: CaseIterable {
+    case main
+}
 
 class DonationVC: UIViewController {
     
-    let data: [CharityOrg] = [CharityOrg(id: "ss", title: "dd", email: "dd", logoLink: "dd", imageLink: "aa", location: Location(lat: 20.05, log: 47.54), concats: "54ww", address: "45s", founders: "ss", vision: "ss", about: "ss")]
-    
-    func cellButtonActions(orgId: String, tag: Int) {
-        if tag == 0 { // tag 0 stand to detail Button, tag 1 stand to denote button
-            for org in data {
-                if org.id == orgId {
-                    let vc = DonationDetailsVC()
-                    vc.org = org
-                    vc.modalPresentationStyle = .fullScreen
-                    navigationController?.pushViewController(vc, animated: true)
-                    break
-                }
-            }
-        } else {
-            for org in data {
-                if org.id == orgId {
-                    let vc = DonationDetailsVC()
-                    vc.org = org
-                    vc.modalPresentationStyle = .fullScreen
-                    navigationController?.pushViewController(vc, animated: true)
-                    break
-                }
-            }
-            
-        }
-    }
-    
-    
+    let data: [CharityOrg] = [CharityOrg(title: "ElNasser Shcool", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd"),
+    CharityOrg(title: "Google", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd"),
+    CharityOrg(title: "Yahoo", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd")]
     
     //MARK:- Properities
-    var infoLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "Find contact"
-        return lb
-    }()
     var searchBar: UISearchBar!
     var tableView: UITableView!
+    var shouldRestoreCurrentDataSource: Bool = false
+    var searchBarButton: UIBarButtonItem!
+    var currentDataSource: [CharityOrg] = []
+    var originDataSource: [CharityOrg] = []
+    var charityTableDataSource: UITableViewDiffableDataSource<charitySection, CharityOrg>!
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavBar()
+        view.backgroundColor = .DnBackgroundColor
+        originDataSource = data
+        currentDataSource = originDataSource
         setupSearchBar()
+        setupNavBar()
         setupTableView()
         setupLayout()
+        configureDiffableDateSource()
+        tableView.dataSource = charityTableDataSource
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,10 +48,24 @@ class DonationVC: UIViewController {
     //MARK:- setup views
     
     func setupNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.barTintColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
+        navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "Donation"
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        searchBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
+        
+        navigationItem.rightBarButtonItem = searchBarButton
+        navigationItem.rightBarButtonItem?.tintColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
         navigationItem.leftBarButtonItem?.tintColor = .white
     }
@@ -83,23 +79,66 @@ class DonationVC: UIViewController {
         searchBar.searchTextField.stopSmartActions()
         searchBar.placeholder = "search about organization"
         searchBar.delegate = self
+        searchBar.searchTextField.backgroundColor = .white
+        
     }
     
     func setupTableView() {
         tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .DnBackgroundColor
         tableView.delegate = self
-        tableView.dataSource = self
         tableView.indicatorStyle = .white
-        tableView.register(DonationCell.self, forCellReuseIdentifier: "donationcellidentifier")
+        tableView.register(DonationCell.self, forCellReuseIdentifier: DonationCell.reuseIdentifier)
+        tableView.rowHeight = 70
     }
     
-    func setupLayout() {
-        view.addSubview(searchBar)
-        view.addSubview(tableView)
+    private func configureDiffableDateSource() {
+        charityTableDataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (table, indexPath, data) -> UITableViewCell? in
+            guard let cell = table.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier, for: indexPath) as? DonationCell else {fatalError("can not dequeue charity cell")}
+            cell.org_mail = data.email
+            cell.org_title = data.title
+            return cell
+        })
         
-        searchBar.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20,left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 50))
-        tableView.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 30, left: 20, bottom: 20, right: 20))
+        updateTableViewDataSource()
+    }
+    
+    private func updateTableViewDataSource() {
+        var snapShot = NSDiffableDataSourceSnapshot<charitySection, CharityOrg>()
+        snapShot.appendSections(charitySection.allCases)
+        for item in currentDataSource {
+            snapShot.appendItems([item])
+        }
+        charityTableDataSource.apply(snapShot)
+    }
+    
+    private func setupLayout() {
+        view.addSubview(tableView)
+        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+    }
+    
+    @objc func searchButtonPressed() {
+        navigationItem.titleView = searchBar
+        searchBar.showsCancelButton = true
+        navigationItem.rightBarButtonItem = nil
+    }
+    
+    // the main function that use to filter data during searching
+    private func filtercurrentDataSource(searchTerm: String) {
+        if !searchTerm.isEmpty {
+            shouldRestoreCurrentDataSource = true
+            currentDataSource = originDataSource
+            let filteredResult = currentDataSource.filter {
+                $0.title.replacingOccurrences(of: " ", with: "").lowercased().contains(searchTerm.replacingOccurrences(of: " ", with: "").lowercased())
+            }
+            currentDataSource = filteredResult
+            updateTableViewDataSource()
+        }
+    }
+    
+    private func restoreCurrentDataSource() {
+        currentDataSource = originDataSource
+        updateTableViewDataSource()
     }
 
 }
@@ -107,36 +146,35 @@ class DonationVC: UIViewController {
 extension DonationVC: UISearchBarDelegate {
         
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("a")
+        if let searchText = searchBar.text {
+            filtercurrentDataSource(searchTerm: searchText)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("b")
+        navigationItem.titleView = nil
+        searchBar.showsCancelButton = false
+        navigationItem.rightBarButtonItem = searchBarButton
+        if shouldRestoreCurrentDataSource { restoreCurrentDataSource() }
+        
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("c")
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtercurrentDataSource(searchTerm: searchText)
     }
 }
 
-extension DonationVC: UITableViewDelegate, UITableViewDataSource {
-        
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-        
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "donationcellidentifier", for: indexPath) as? DonationCell else {return UITableViewCell()}
-        cell.donationDelegate = self
-        let org = data[indexPath.row]
-        cell.configureCell(id: org.id, name: org.title, email: org.email, logo: UIImage())
-        return cell
-    }
+extension DonationVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DonationDetailsVC()
+        guard let currentOrg = charityTableDataSource.itemIdentifier(for: indexPath) else { return }
+        vc.data = currentOrg
+        print("currentOrg \(currentOrg)")
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    
         
 }
 
