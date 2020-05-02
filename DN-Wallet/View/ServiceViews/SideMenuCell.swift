@@ -11,25 +11,38 @@ import UIKit
 
 class SideMenuCell: UITableViewCell {
 
-    var serviceId : Int = 0
+    static let reuseIdentifier = "side-menu-cell-identrifer"
+    
+    var section: ServiceSection? {
+        didSet {
+            guard let data = section else {return}
+            self.serviceTitle.text = data.description
+            if data.sysImage {
+                self.serviceIcon.image = UIImage(systemName: data.image)
+            } else {
+                self.serviceIcon.image = UIImage(named: data.image)
+            }
+        }
+    }
+    
     var isSafe: Bool = false
     var serviceIcon : UIImageView = {
         let img = UIImageView()
-        img.tintColor = UIColor.DN.DarkBlue.color()
+        img.tintColor = .white//UIColor.DN.DarkBlue.color()
         img.clipsToBounds = true
         img.contentMode = .scaleAspectFit
         return img
     }()
     var serviceTitle: UILabel = {
         let title = UILabel()
-        title.textColor = UIColor.DN.DarkBlue.color()
+        title.textColor = .white//UIColor.DN.DarkBlue.color()
         title.font = UIFont.DN.Regular.font(size: 16)
         return title
     }()
     var safeIcon: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(systemName: "lock.circle")
-        img.tintColor = .green
+        img.tintColor = .white
         return img
     }()
     
@@ -38,28 +51,17 @@ class SideMenuCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
         self.safeIcon.isHidden = !isSafe
-    
+        backgroundColor = .clear
     }
     
     func setupLayout() {
         addSubview(serviceIcon)
         addSubview(serviceTitle)
         addSubview(safeIcon)
-        serviceIcon.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 20, height: 20), centerV: true)
-        serviceTitle.DNLayoutConstraint(left: serviceIcon.rightAnchor, right: safeIcon.leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), centerV: true)
+        serviceIcon.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 30, height: 30), centerV: true)
+        serviceTitle.DNLayoutConstraint(left: serviceIcon.rightAnchor, right: safeIcon.leftAnchor, margins: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 4), centerV: true)
         safeIcon.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8), size: CGSize(width: 20, height: 20), centerV: true)
     }
-    
-    func configure(id: Int, icon: String, title: String, sys: Bool = false) {
-        self.serviceId = id
-        self.serviceTitle.text = title
-        if sys {
-            self.serviceIcon.image = UIImage(systemName: icon)
-        } else {
-            self.serviceIcon.image = UIImage(named: icon)
-        }
-    }
-    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

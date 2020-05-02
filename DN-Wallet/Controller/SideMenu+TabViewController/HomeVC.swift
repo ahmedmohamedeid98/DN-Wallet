@@ -39,7 +39,7 @@ class HomeVC: UIViewController {
     let goRightButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1022848887)
-        btn.setImage(UIImage(systemName: "greaterthan.circle"), for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.compact.right"), for: .normal)
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(goRightAction), for: .touchUpInside)
         return btn
@@ -47,7 +47,7 @@ class HomeVC: UIViewController {
     let goLeftButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1022848887)
-        btn.setImage(UIImage(systemName: "lessthan.circle"), for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.compact.left"), for: .normal)
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(goLeftAction), for: .touchUpInside)
         return btn

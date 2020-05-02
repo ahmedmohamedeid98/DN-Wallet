@@ -12,6 +12,8 @@
 		041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C4243E65CD0043CA77 /* ContainerVC.swift */; };
 		041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C6243E65DE0043CA77 /* HomeVC.swift */; };
 		041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C8243E661F0043CA77 /* SideMenuVC.swift */; };
+		0411E582245B921A00EBBCF5 /* DonationDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */; };
+		0411E584245B959000EBBCF5 /* DNGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411E583245B959000EBBCF5 /* DNGradient.swift */; };
 		04161475242E348800782332 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161474242E348800782332 /* Login.swift */; };
 		04161477242E3FBF00782332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161476242E3FBF00782332 /* User.swift */; };
 		043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */; };
@@ -101,6 +103,8 @@
 		041046C4243E65CD0043CA77 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		041046C6243E65DE0043CA77 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		041046C8243E661F0043CA77 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsSection.swift; sourceTree = "<group>"; };
+		0411E583245B959000EBBCF5 /* DNGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNGradient.swift; sourceTree = "<group>"; };
 		04161474242E348800782332 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		04161476242E3FBF00782332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				047A49F4243AE02B0077A954 /* SettingViews */,
 				041046C1243E56040043CA77 /* authViews */,
 				041046C0243E55B60043CA77 /* ServiceViews */,
+				0411E583245B959000EBBCF5 /* DNGradient.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				04161476242E3FBF00782332 /* User.swift */,
 				04B10254242E763F00E17792 /* Contact.swift */,
 				047E11D1242E888700E1295B /* AccountInfo.swift */,
+				0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -678,6 +684,7 @@
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
 				041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */,
+				0411E584245B959000EBBCF5 /* DNGradient.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
@@ -689,6 +696,7 @@
 				048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */,
 				048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
+				0411E582245B921A00EBBCF5 /* DonationDetailsSection.swift in Sources */,
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,

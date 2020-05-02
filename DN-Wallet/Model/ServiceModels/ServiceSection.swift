@@ -11,7 +11,6 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
     case sendMoney
     case sendRequest
     case exchangeCurrency
-    //case withdrawMoney
     case myConcats
     case addNewPaymentCard
     case donation
@@ -22,23 +21,21 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
         case .sendMoney: return "Send Money"
         case .sendRequest: return "Send Request"
         case .exchangeCurrency: return "Exchange Currency"
-        //case .withdrawMoney: return "Withdraw Money"
         case .myConcats: return "My Contacts"
-        case .addNewPaymentCard: return "Add new Payment Card"
+        case .addNewPaymentCard: return "Add new creditcard"
         case .donation: return "Donation"
         }
     }
     
     var image: String {
         switch self {
-        case .history: return "history"
-        case .sendMoney: return "send"
-        case .sendRequest: return "send_request"
-        case .exchangeCurrency: return "exchange_currency"
-        //case .withdrawMoney: return "withdraw"
-        case .myConcats: return "My Contacts"
-        case .addNewPaymentCard: return "Add new Payment Card"
-        case .donation: return "Donation"
+        case .history: return "history_white_24"
+        case .sendMoney: return "send_white_24"
+        case .sendRequest: return "square.and.pencil"
+        case .exchangeCurrency: return "arrow.2.circlepath"
+        case .myConcats: return "person.2.fill"
+        case .addNewPaymentCard: return "creditcard.fill"
+        case .donation: return "heart.fill"
         }
     }
     
@@ -46,12 +43,11 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
         switch self {
         case .history: return false
         case .sendMoney: return false
-        case .sendRequest: return false
-        case .exchangeCurrency: return false
-        //case .withdrawMoney: return false
-        case .myConcats: return false
-        case .addNewPaymentCard: return false
-        case .donation: return false
+        case .sendRequest: return true
+        case .exchangeCurrency: return true
+        case .myConcats: return true
+        case .addNewPaymentCard: return true
+        case .donation: return true
         }
     }
     
@@ -62,9 +58,12 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
             guard let vc = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC else { return }
             self.present(viewController: vc, from: viewController)
         case .sendMoney:
-            print("send money")
+            let vc = SendAndRequestMoney()
+            self.present(viewController: vc, from: viewController)
         case .sendRequest:
-            print("send request")
+            let vc = SendAndRequestMoney()
+            vc.isRequest = true
+            self.present(viewController: vc, from: viewController)
         case .exchangeCurrency:
             let vc = ExchangeCurrencyVC()
             self.present(viewController: vc, from: viewController)
@@ -78,10 +77,6 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
             let vc = DonationVC()
             self.present(viewController: vc, from: viewController)
         }
-    }
-    
-    var id: Int {
-        return self.rawValue
     }
     
     func present(viewController: UIViewController, from: UIViewController) {
