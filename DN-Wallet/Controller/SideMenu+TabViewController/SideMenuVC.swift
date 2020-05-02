@@ -9,81 +9,104 @@ protocol sideMenuTimerDelegate {
     func stopTimer()
 }
 
+
 class SideMenuVC: UIViewController {
 
     //MARK:- Properities
-    let userImage: UIImageView = {
-        let uImage = UIImageView()
-        uImage.layer.cornerRadius = 20
-        uImage.image = UIImage(systemName: "person.circle")
-        uImage.backgroundColor = .orange
-        uImage.tintColor = .white
-        uImage.clipsToBounds = true
-        uImage.contentMode = .scaleAspectFit
-        return uImage
+    let bg: UIView = {
+        let vw = UIView()
+        vw.backgroundColor = .DnDarkBlue
+        return vw
+    }()
+    
+    let assistView: UIView = {
+       let vw = UIView()
+        vw.backgroundColor = .DnDarkBlue
+        return vw
     }()
     
     let userName: UILabel = {
         let lb = UILabel()
         lb.text = "username"
-        lb.textColor = UIColor.DN.Black.color()
-        lb.font = UIFont.DN.Bold.font(size: 16)
+        lb.textColor = .white//UIColor.DN.Black.color()
+        lb.font = UIFont.DN.Regular.font(size: 16)
+        return lb
+    }()
+    
+    let usernameIcon: UILabel = {
+        let lb = UILabel()
+        lb.text = "k"
+        lb.backgroundColor = .white
+        lb.textAlignment = .center
+        lb.textColor = .systemPink//UIColor.DN.Black.color()
+        lb.font = UIFont.DN.Regular.font(size: 16)
+        lb.clipsToBounds = true
+        lb.layer.cornerRadius = 10
         return lb
     }()
     
     let userEmail: UILabel = {
         let lb = UILabel()
-        lb.text = "user@example.com"
-        lb.textColor = .lightGray
-        lb.font = UIFont.DN.Regular.font(size: 14)
+        lb.text = "ahmedmohamedeid98@example.com"
+        lb.textColor = .white//.lightGray
+        lb.font = UIFont.DN.Regular.font(size: 16)
         return lb
+    }()
+    
+    let mailIcon: UIImageView = {
+        let icon = UIImageView()
+        icon.image = UIImage(systemName: "envelope")
+        icon.tintColor = .white
+        return icon
     }()
     
     var userAddress: UILabel = {
         let lb = UILabel()
         lb.text = "Cairo, ALd214"
-        lb.textColor = .lightGray
+        lb.textColor = .white//.lightGray
         lb.font = UIFont.DN.Regular.font(size: 14)
         return lb
     }()
     var userPhone: UILabel = {
         let lb = UILabel()
         lb.text = "01096584541"
-        lb.textColor = .lightGray
+        lb.textColor = .white//.lightGray
         lb.font = UIFont.DN.Regular.font(size: 14)
         return lb
     }()
     var serviceTable:UITableView!
     let logoutButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "dd"), for: .normal)
-        btn.setTitle("Logout", for: .normal)
+        btn.setImage(UIImage(systemName: "arrow.left.square"), for: .normal)
+        btn.setTitle(" Logout", for: .normal)
         btn.addTarget(self, action: #selector(logoutBtnWasPressed), for: .touchUpInside)
+        btn.tintColor = .white
         return btn
     }()
     let settingButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "phone.fill"), for: .normal)
-        btn.backgroundColor = .orange
-        btn.tintColor = UIColor.DN.DarkBlue.color()
+        btn.setImage(UIImage(named: "setting_white_24"), for: .normal)
+        btn.tintColor = .white//UIColor.DN.DarkBlue.color()
         btn.addTarget(self, action: #selector(settingBtnPressed), for: .touchUpInside)
         return btn
     }()
     let addressIcon: UIImageView = {
         let icon = UIImageView()
-        icon.image = UIImage(systemName: "ss")
+        icon.image = UIImage(named: "place_white_24")
+        //icon.tintColor = .white
         return icon
     }()
     let phoneIcon: UIImageView = {
         let icon = UIImageView()
         icon.image = UIImage(systemName: "phone.fill")
+        icon.tintColor = .white
         return icon
     }()
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         setupServiceTable()
         setupLayout()
     }
@@ -93,36 +116,44 @@ class SideMenuVC: UIViewController {
         serviceTable = UITableView()
         serviceTable.delegate = self
         serviceTable.dataSource = self
-        serviceTable.register(SideMenuCell.self, forCellReuseIdentifier: "servicecellid")
+        serviceTable.register(SideMenuCell.self, forCellReuseIdentifier: SideMenuCell.reuseIdentifier)
         serviceTable.rowHeight = 50
         serviceTable.separatorStyle = .none
+        serviceTable.backgroundColor = .clear
     }
     func setupLayout() {
-        view.addSubview(userImage)
-        view.addSubview(userName)
-        view.addSubview(userEmail)
-        view.addSubview(settingButton)
-        view.addSubview(serviceTable)
-        view.addSubview(logoutButton)
-        let addressStackView = UIStackView(arrangedSubviews: [addressIcon, userAddress])
-        addressStackView.configureStack(axis: .horizontal, distribution: .fill, alignment: .fill, space: 8)
-        addressIcon.DNLayoutConstraint(size: CGSize(width: 20, height: 0))
-        let phoneStackView = UIStackView(arrangedSubviews: [phoneIcon, userPhone])
-        phoneStackView.configureStack(axis: .horizontal, distribution: .fill, alignment: .fill, space: 8)
-        phoneIcon.DNLayoutConstraint(size: CGSize(width: 20, height: 0))
-        let Vstack = UIStackView(arrangedSubviews: [addressStackView, phoneStackView])
-        Vstack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 2)
-        view.addSubview(Vstack)
+        view.addSubview(assistView)
+        assistView.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,size: CGSize(width: 0, height: 90))
+        view.addSubview(bg)
+        bg.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 81))
+        //bg.addSubview(userImage)
+        bg.addSubview(usernameIcon)
+        bg.addSubview(userName)
+        bg.addSubview(mailIcon)
+        bg.addSubview(userEmail)
+        bg.addSubview(addressIcon)
+        bg.addSubview(userAddress)
+        bg.addSubview(phoneIcon)
+        bg.addSubview(userPhone)
+        bg.addSubview(settingButton)
+        bg.addSubview(serviceTable)
+        bg.addSubview(logoutButton)
+        let leftDistance = (view.frame.size.width - 81) / 2 - 15
+        settingButton.DNLayoutConstraint(bg.topAnchor, left: bg.leftAnchor, margins: UIEdgeInsets(top: 50, left: leftDistance, bottom: 0, right: 0), size: CGSize(width: 30, height: 30))
+        usernameIcon.DNLayoutConstraint(settingButton.bottomAnchor, left: bg.leftAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 0), size: CGSize(width: 20, height: 20))
+        userName.DNLayoutConstraint(usernameIcon.topAnchor, left: usernameIcon.rightAnchor, right: bg.rightAnchor, bottom: usernameIcon.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8))
         
-        userImage.DNLayoutConstraint(view.topAnchor, margins: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0), size: CGSize(width: 40, height: 40))
-        userImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -40).isActive = true
+        mailIcon.DNLayoutConstraint(usernameIcon.bottomAnchor, left: usernameIcon.leftAnchor, margins: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0), size: CGSize(width: 20, height: 20))
+        userEmail.DNLayoutConstraint(mailIcon.topAnchor, left: mailIcon.rightAnchor, right: bg.rightAnchor, bottom: mailIcon.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8))
         
-        settingButton.DNLayoutConstraint(userImage.topAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 100), size: CGSize(width: 30, height: 30))
-        userName.DNLayoutConstraint(userImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 0))
-        userEmail.DNLayoutConstraint(userName.bottomAnchor, left: userName.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 0))
-        Vstack.DNLayoutConstraint(userEmail.bottomAnchor, left: userName.leftAnchor, right: settingButton.rightAnchor, margins: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8), size: CGSize(width: 0, height: 42))
-        serviceTable.DNLayoutConstraint(Vstack.bottomAnchor, left: Vstack.leftAnchor, right: settingButton.rightAnchor, bottom: logoutButton.topAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
-        logoutButton.DNLayoutConstraint(left: view.leftAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 0), size: CGSize(width: 60, height: 30))
+        addressIcon.DNLayoutConstraint(mailIcon.bottomAnchor, left: mailIcon.leftAnchor, margins: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0), size: CGSize(width: 20, height: 20))
+        userAddress.DNLayoutConstraint(addressIcon.topAnchor, left: addressIcon.rightAnchor, right: bg.rightAnchor, bottom: addressIcon.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 16))
+        
+        phoneIcon.DNLayoutConstraint(addressIcon.bottomAnchor, left: addressIcon.leftAnchor, margins: UIEdgeInsets(top: 4, left: 0, bottom: 0, right: 0), size: CGSize(width: 20, height: 20))
+        userPhone.DNLayoutConstraint(phoneIcon.topAnchor, left: phoneIcon.rightAnchor, right: bg.rightAnchor, bottom: phoneIcon.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 16))
+
+        serviceTable.DNLayoutConstraint(phoneIcon.bottomAnchor, left: phoneIcon.leftAnchor, right: bg.rightAnchor, bottom: logoutButton.topAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 8, right: 4))
+        logoutButton.DNLayoutConstraint(left: bg.leftAnchor, bottom: bg.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 0), size: CGSize(width: 80, height: 30))
     }
     
     //MARK:- Handle Actions
@@ -148,10 +179,9 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = serviceTable.dequeueReusableCell(withIdentifier: "servicecellid", for: indexPath) as? SideMenuCell else {return UITableViewCell()}
+        guard let cell = serviceTable.dequeueReusableCell(withIdentifier: SideMenuCell.reuseIdentifier, for: indexPath) as? SideMenuCell else {return UITableViewCell()}
         guard let service = ServiceSection(rawValue: indexPath.row) else {return UITableViewCell()}
-        cell.configure(id: service.id, icon: service.image, title: service.description, sys: service.sysImage)
-        print("cell")
+        cell.section = service
         return cell
     }
     
@@ -166,7 +196,7 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor.DN.LightGray.color()
+        view.backgroundColor = .white
         return view
     }
     
