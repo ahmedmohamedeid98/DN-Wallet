@@ -153,7 +153,7 @@ extension UIColor {
         
     }
     static var DnTextColor: UIColor {
-        return #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        return #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     }
     static var DnDarkBlue: UIColor {
         return  #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
@@ -162,7 +162,7 @@ extension UIColor {
         return .white//#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
     }
     static var DnBorderColor: UIColor {
-        return #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
     }
     
     static var Mercury: UIColor {
