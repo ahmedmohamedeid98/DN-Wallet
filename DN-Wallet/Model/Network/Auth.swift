@@ -42,11 +42,28 @@ class Auth {
     static let shared = Auth()
     let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     
-    /// Login with Face ID or Touch ID
-    func loginWithBiometric(viewController: UIViewController) {
+    func canEvaluatePolicyWithFaceID() {
         let context:LAContext = LAContext()
         var error: NSError?
+        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics , error: &error) {
+            switch context.biometryType {
+            case .none:
+                break
+            case .touchID:
+                UserDefaults.standard.set(true, forKey: Defaults.BiometricTypeTouchID.key)
+            case .faceID:
+                UserDefaults.standard.set(true, forKey: Defaults.BiometricTypeFaceID.key)
+            @unknown default:
+                break
+            }
+        }
+    }
+    
+    /// Login with Face ID or Touch ID
+    func loginWithBiometric(viewController: UIViewController) {
         let reason = "Identify yourself"
+        let context:LAContext = LAContext()
+        var error: NSError?
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics , error: &error) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
                 if success {
@@ -57,19 +74,21 @@ class Auth {
                             DispatchQueue.main.async {
                                 self?.pushHomeViewController(vc: viewController)
                             }
-                            
+                        
                         }else {
-                            // faild to login
+                            Alert.syncActionOkWith("Faild Login", msg: "Please reset you password.", viewController: viewController)
                         }
                     }
-                    
                 } else {
-                    // faild to identify user
+                    // faild to identify user: automatically handled
                 }
             }
-        } else {
-            // can not evaluate policy
-            enableBiometricAuthAlert(viewController: viewController)
+            
+        }else {
+            // ask user to enrolled his local authentication (enroll faceid or touch id)
+           DispatchQueue.main.async {
+                Auth.shared.enableBiometricAuthAlert(viewController: viewController)
+            }
         }
     }
     

@@ -11,6 +11,8 @@ enum Defaults : String {
     case FirstLaunch
     case LoginWithBiometric
     case EnableSafeMode
+    case BiometricTypeFaceID
+    case BiometricTypeTouchID
     
     var key: String {
         return self.rawValue
