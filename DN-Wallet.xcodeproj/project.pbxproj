@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754B245E682000B66A02 /* PopUpMenu.swift */; };
+		040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754D245E6C5F00B66A02 /* PopMenuItem.swift */; };
+		040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */; };
 		041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */; };
 		041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */; };
 		041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C4243E65CD0043CA77 /* ContainerVC.swift */; };
@@ -98,6 +101,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040F754B245E682000B66A02 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
+		040F754D245E6C5F00B66A02 /* PopMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMenuItem.swift; sourceTree = "<group>"; };
+		040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenuCell.swift; sourceTree = "<group>"; };
 		041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+EnableSafeModeAlert.swift"; sourceTree = "<group>"; };
 		041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+SetSafeModeTime.swift"; sourceTree = "<group>"; };
 		041046C4243E65CD0043CA77 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
 				046732B624198EA600DD436D /* forgetPassword VCs */,
 				04B1C90B2422C5840062D54F /* services VCs */,
+				040F754B245E682000B66A02 /* PopUpMenu.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -362,6 +369,7 @@
 				041046C1243E56040043CA77 /* authViews */,
 				041046C0243E55B60043CA77 /* ServiceViews */,
 				0411E583245B959000EBBCF5 /* DNGradient.swift */,
+				040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -385,6 +393,7 @@
 				04B10254242E763F00E17792 /* Contact.swift */,
 				047E11D1242E888700E1295B /* AccountInfo.swift */,
 				0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */,
+				040F754D245E6C5F00B66A02 /* PopMenuItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -686,6 +695,7 @@
 				041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */,
 				0411E584245B959000EBBCF5 /* DNGradient.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
+				040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */,
 				041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
@@ -697,7 +707,9 @@
 				048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
 				0411E582245B921A00EBBCF5 /* DonationDetailsSection.swift in Sources */,
+				040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */,
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
+				040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */,
 				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
