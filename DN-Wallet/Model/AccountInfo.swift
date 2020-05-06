@@ -15,7 +15,7 @@ struct AccountInfo: Codable {
     let job: String
     let photo: String
     let balance : [Balance]
-    let paymentCards: [PaymentCards]
+    let paymentCards: [CardInfo]
     
     enum CodingKeys: String, CodingKey {
         case username
@@ -50,11 +50,17 @@ struct Balance: Codable, Hashable {
     }
 }
 
-struct PaymentCards: Codable {
+struct CardInfo: Codable, Hashable {
     let id : String
     let name: String
     let type: String
     let digits: String
+    
+    var identifier: UUID = UUID()
+    
+    static func == (lhs: CardInfo, rhs: CardInfo) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "card_id"

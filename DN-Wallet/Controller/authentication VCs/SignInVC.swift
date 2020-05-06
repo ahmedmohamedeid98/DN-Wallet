@@ -70,7 +70,8 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func signInBtnPressed(_ sender: Any) {
-    
+        Auth.shared.pushHomeViewController(vc: self)
+    /*
         if emailContainerView.textField.text != "" && passwordContainerView.textField.text != "" {
             let email = emailContainerView.textField.text!
             let password = passwordContainerView.textField.text!
@@ -87,6 +88,7 @@ class SignInVC: UIViewController {
             }
             
         }
+ */
 
     }
     

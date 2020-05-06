@@ -8,6 +8,7 @@
 
 enum Defaults : String {
     case Language
+    case Currency
     case FirstLaunch
     case LoginWithBiometric
     case EnableSafeMode

@@ -20,14 +20,19 @@ class PopUpMenu: UIViewController {
     private var shouldReloadTableView: Bool = false
     var originalDataSource : [PopMenuItem] = []
     private var currentDataSource : [PopMenuItem] = []
-    weak var PopUpMenuDelegate: PopUpMenuDelegate?
+    weak var menuDelegate: PopUpMenuDelegate?
+    var listDataSource : UITableViewDiffableDataSource<Section, PopMenuItem>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnBackgroundColor
         currentDataSource = originalDataSource
         setupSearchBar()
         setupListTable()
         setupLayout()
+        
+        configureDataSource()
+        List.dataSource = listDataSource
     
     }
     
@@ -35,87 +40,90 @@ class PopUpMenu: UIViewController {
         searchBar = UISearchBar()
         searchBar.searchTextField.placeholder = "search items"
         searchBar.delegate = self
-        searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.backgroundColor = .label
         searchBar.showsCancelButton = true
     }
     
     private func setupListTable() {
         List = UITableView()
-        List.backgroundColor = .white
-        List.delegate = self
-        List.dataSource = self
+        List.backgroundColor = .DnBackgroundColor
         List.register(PopUpMenuCell.self, forCellReuseIdentifier: PopUpMenuCell.reuseIdentifier)
-        List.rowHeight = 60
+        //List.rowHeight = 60
         List.indicatorStyle = .white
+        List.delegate = self
     }
     
     private func setupLayout() {
         view.addSubview(searchBar)
         view.addSubview(List)
         
-        searchBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, size: CGSize(width: 0, height: 50))
+        searchBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 50))
         List.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16))
     }
     
-
-}
-
-extension PopUpMenu: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentDataSource.count
+    private func configureDataSource() {
+        listDataSource = UITableViewDiffableDataSource(tableView: List, cellProvider: { (myTable, indexPath, data) -> UITableViewCell? in
+            guard let cell = myTable.dequeueReusableCell(withIdentifier: PopUpMenuCell.reuseIdentifier, for: indexPath) as? PopUpMenuCell else { return UITableViewCell() }
+            cell.data = data
+            return cell
+        })
+        applySnapshot()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = List.dequeueReusableCell(withIdentifier: PopUpMenuCell.reuseIdentifier, for: indexPath) as? PopUpMenuCell else { return UITableViewCell() }
-        cell.data = currentDataSource[indexPath.row]
-        return cell
+    private func applySnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, PopMenuItem>()
+        snapshot.appendSections(Section.allCases)
+        for item in currentDataSource {
+            snapshot.appendItems([item])
+        }
+        listDataSource.apply(snapshot)
     }
+    
+}
+
+extension PopUpMenu: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         List.deselectRow(at: indexPath, animated: true)
         guard let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell else { return }
-        PopUpMenuDelegate?.selectedItem(title: selectedCell.getTitle())
+        menuDelegate?.selectedItem(title: selectedCell.getTitle())
         dismiss(animated: true, completion: nil)
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
 
 extension PopUpMenu: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.searchTextField.text = ""
+        searchBar.searchTextField.endEditing(true)
+        if self.shouldReloadTableView { restorDataSource() }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             filterResult(searchTerm: text)
         }
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.searchTextField.text = ""
-        if self.shouldReloadTableView { restorDataSource() }
-    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText != "" {
-            filterResult(searchTerm: searchText)
-        }
+        filterResult(searchTerm: searchText)
     }
     
     private func filterResult(searchTerm: String) {
-        if searchTerm.count > 0 {
+        if !searchTerm.isEmpty {
             shouldReloadTableView = true
+            currentDataSource = originalDataSource
             let filterdResult = currentDataSource.filter {
                 $0.title.replacingOccurrences(of: " ", with: "").lowercased().contains(searchTerm.replacingOccurrences(of: " ", with: "").lowercased())
             }
             currentDataSource = filterdResult
-            reloadList()
+            applySnapshot()
         }
-    }
-    
-    private func reloadList() {
-        self.List.beginUpdates()
-        self.List.reloadData()
-        self.List.endUpdates()
     }
     
     private func restorDataSource() {
         currentDataSource = originalDataSource
-        reloadList()
+        applySnapshot()
     }
 }

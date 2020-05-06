@@ -305,7 +305,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5R-XJ-dig">
                                 <rect key="frame" x="40" y="233" width="334" height="40"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9s-r5-Zct" customClass="DropDown" customModule="DN_Wallet" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9s-r5-Zct">
                                         <rect key="frame" x="10" y="0.0" width="120" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="5St-5F-aph"/>
@@ -457,7 +457,7 @@
                         <outlet property="activityIndicator" destination="jyS-JW-FQG" id="9dc-Ip-uHb"/>
                         <outlet property="activityIndicatorContainer" destination="4RH-AH-lP8" id="JaY-rE-P38"/>
                         <outlet property="confirmCodeInfoMessage" destination="epE-Q5-chU" id="bhe-Al-Vfj"/>
-                        <outlet property="dropDownCountry" destination="c9s-r5-Zct" id="ZZL-5p-WI2"/>
+                        <outlet property="dropDownCountry" destination="c9s-r5-Zct" id="V6W-Rt-WVW"/>
                         <outlet property="opt" destination="hku-jE-Urb" id="57o-Qc-i6M"/>
                         <outlet property="phoneNumber" destination="LWs-Sk-TAI" id="8Cj-1I-1Za"/>
                         <outlet property="phoneNumberContainer" destination="O5R-XJ-dig" id="umu-sT-lCU"/>

@@ -156,13 +156,13 @@ extension UIColor {
         return #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     }
     static var DnDarkBlue: UIColor {
-        return  #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        return  #colorLiteral(red: 0.2039215686, green: 0.2862745098, blue: 0.368627451, alpha: 1)
     }
     static var DnBackgroundColor: UIColor {
-        return .white//#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        return .systemBackground//#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
     }
     static var DnBorderColor: UIColor {
-        return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        return #colorLiteral(red: 0.2039215686, green: 0.2862745098, blue: 0.368627451, alpha: 1)
     }
     
     static var Mercury: UIColor {
@@ -404,14 +404,28 @@ extension UITextField {
         self.leftViewMode = .always
     }
     
-    func rightPadding(text:String? = nil, width: CGFloat = 0) {
-        if let txt = text {
+    func rightPadding(image: UIImage? = nil, imgTintColor: UIColor? = nil, text:String? = nil, width: CGFloat = 0) {
+        if image != nil {
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            imageView.clipsToBounds = true
+            imageView.image = image
+            if let color = imgTintColor {
+                imageView.tintColor = color
+            } else {
+                imageView.tintColor = .black
+            }
+            paddingView.addSubview(imageView)
+            imageView.DNLayoutConstraint(paddingView.topAnchor, left: paddingView.rightAnchor, right: paddingView.rightAnchor, bottom: paddingView.bottomAnchor, margins: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2))
+            self.rightView = paddingView
+        } else if text != nil {
             let paddingView = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
-            paddingView.text = txt
+            paddingView.text = text
             paddingView.textColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
             paddingView.font = UIFont.DN.Regular.font(size: 12)
             self.rightView = paddingView
-        } else {
+        }else {
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
             self.rightView = paddingView
         }

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol {
+class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     
     var user:User?
     
     //MARK:- Outlets
     @IBOutlet weak var phoneNumberContainer: UIView!
-    @IBOutlet weak var dropDownCountry: DropDown!
+    @IBOutlet weak var dropDownCountry: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var confirmCodeInfoMessage: UITextView!
     @IBOutlet weak var opt: OPT!
@@ -37,7 +37,8 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
         phoneNumberContainer.layer.borderWidth = 1
         phoneNumberContainer.layer.cornerRadius = 4
         
-        dropDownConfiguration()
+        dropDownCountry.delegate = self
+       // dropDownConfiguration()
         
         // specify opt delegation to this vc and hide this part for latter
         opt.delegate = self
@@ -66,7 +67,7 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
     @objc func resetKeyboardState() {
         phoneNumber.resignFirstResponder()
     }
-    
+    /*
     fileprivate func dropDownConfiguration() {
         // The list of array to display. Can be changed dynamically
         dropDownCountry.optionArray = ["Egyption Pound", "Dollar", "Uouro"]
@@ -80,6 +81,7 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
             print("Selected String: \(selectedText) \n index: \(index)")
         }
     }
+ */
     /// this function called after user enter the opt code
     func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
         showIndicator(true)
@@ -119,4 +121,19 @@ class SignUpPhoneVC: UIViewController, UITextFieldDelegate, GetOPTValuesProtocol
         
     }
     
+}
+
+extension SignUpPhoneVC: UITextFieldDelegate, PopUpMenuDelegate {
+    
+    func selectedItem(title: String) {
+        print("selected Country : \(title)")
+        dropDownCountry.text = title
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let vc = PopUpMenu()
+        vc.menuDelegate = self
+        vc.originalDataSource = [PopMenuItem(image: nil, title: "Egypt"), PopMenuItem(image: nil, title: "Landon"), PopMenuItem(image: nil, title: "America")]
+        self.present(vc, animated: true, completion: nil)
+        textField.endEditing(true)
+    }
 }
