@@ -99,16 +99,9 @@ class AddNewCardVC: UIViewController {
     }
     
     func setupNavBar() {
-        
-        navigationItem.title = "Add New Payment Card"
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        self.configureNavigationBar(title: K.vc.addNewCardTitle)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add , target: self, action: #selector(addPaymentCardBtnPressed))
-        navigationItem.rightBarButtonItem?.tintColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
-        navigationItem.leftBarButtonItem?.tintColor = .white
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
     }
     
     @objc func dismissBtnWasPressed() {
@@ -118,8 +111,8 @@ class AddNewCardVC: UIViewController {
     @objc func addPaymentCardBtnPressed() {
         
         //navBar.rightBtn.isEnabled = false
-        let alert = UIAlertController(title: "Success", message: "Adding Payment Card done Successfully", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: K.alert.success, message: K.vc.addNewCardAlertMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: K.alert.ok, style: .default, handler: nil)
         alert.addAction(okAction)
         
         self.present(alert, animated: true, completion: nil)
@@ -154,13 +147,7 @@ class AddNewCardVC: UIViewController {
         cardNameContainer.addSubview(cardName)
         cardName.DNLayoutConstraint(cardNameContainer.topAnchor, left: cardNameContainer.leftAnchor, right: cardNameContainer.rightAnchor, bottom: cardNameContainer.bottomAnchor, margins: UIEdgeInsets(top: 2, left: 5, bottom: 2, right: 20))
     }
-    
-
-
 }
-
-
-
 
 extension UITextField {
     func configurePaymentTF() {

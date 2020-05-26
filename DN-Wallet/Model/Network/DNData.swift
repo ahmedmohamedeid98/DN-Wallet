@@ -19,6 +19,7 @@ class DNData {
         case charity
         case heirs
         case account_info
+        case UTCDateTime
         
         var stringValue: String{
             switch self {
@@ -29,6 +30,7 @@ class DNData {
             case .account_info: return DNData.base + "/account_info"
             case .charity: return DNData.base + "/charity"
             case .heirs: return DNData.base + "/heirs"
+            case .UTCDateTime: return "http://worldclockapi.com/api/json/utc/now"
             }
         }
         
@@ -136,6 +138,31 @@ class DNData {
     func addNewContact(data: Contact, compiletion: @escaping(Bool, Error?) -> Void) {
         
     }
+    /*
+    private class func DateAndTimePreprocessing(_ component: String) -> DateComponents? {
+        // this spliting and preprocessing based on world clock API returned json
+        let dateAndtime = component.split(separator: "T")
+        let date = dateAndtime[0].split(separator: "-")
+        let time = dateAndtime[1].split(separator: " ")[0].split(separator: ":")
+        let dateComponent = DateComponents(year: Int(date[0]), month: Int(date[1]), day: Int(date[2]), hour: Int(time[0]))
+        return dateComponent
+    }
+    
+    class func getCurrentDataComponents(completion: @escaping (DateComponents?) -> () ) {
+        taskForGETRequest(url: Endpoint.UTCDateTime.url, response: CurrentDateComponent.self) { (response, error) in
+            if error == nil {
+                guard let currentDate = response else {
+                    completion(nil)
+                    return
+                }
+                let component = self.DateAndTimePreprocessing(currentDate.currentDateTime)
+                completion(component)
+            }
+        }
+    }
+    */
+    
+    
     /// convert currency_code to symbole if it founded
     class func symboleFromString(str: String) -> String {
         for currency in Currency.allCases {

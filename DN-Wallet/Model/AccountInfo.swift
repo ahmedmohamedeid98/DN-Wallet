@@ -48,6 +48,10 @@ struct Balance: Codable, Hashable {
     static func == (lhs: Balance, rhs: Balance) -> Bool{
         return lhs.identifier == rhs.identifier
     }
+    
+    static func <= (lhs: Balance, rhs: Balance) -> Bool {
+        return lhs.amount <= rhs.amount
+    }
 }
 
 struct CardInfo: Codable, Hashable {

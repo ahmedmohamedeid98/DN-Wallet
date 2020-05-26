@@ -2,7 +2,7 @@
 //  PopUpMenu.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 5/2/20.
+//  Created by Ahmed Eid on 5/2/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
@@ -38,12 +38,11 @@ class PopUpMenu: UIViewController {
     
     private func setupSearchBar() {
         searchBar = UISearchBar()
-        searchBar.searchTextField.placeholder = "search items"
+        searchBar.searchTextField.placeholder = K.vc.popMenuSearchBarPlaceholder
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .label
         searchBar.showsCancelButton = true
     }
-    
     private func setupListTable() {
         List = UITableView()
         List.backgroundColor = .DnBackgroundColor

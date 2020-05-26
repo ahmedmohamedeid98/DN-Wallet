@@ -122,7 +122,7 @@ class HistoryDetailsVC: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         
-        tableView.register(HistoryDetailsCell.self, forCellReuseIdentifier: "historydetailscellidentifier")
+        tableView.register(HistoryDetailsCell.self, forCellReuseIdentifier: HistoryDetailsCell.reuseIdentifier)
     }
     
     
@@ -156,7 +156,7 @@ extension HistoryDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "historydetailscellidentifier", for: indexPath) as? HistoryDetailsCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailsCell.reuseIdentifier, for: indexPath) as? HistoryDetailsCell else { return UITableViewCell() }
         let currentData = tableViewData[indexPath.row]
         cell.configureCell(email: currentData.email , amount: "\(currentData.amount) \(currentData.currency)" , date: "\(currentData.date)")
         return cell

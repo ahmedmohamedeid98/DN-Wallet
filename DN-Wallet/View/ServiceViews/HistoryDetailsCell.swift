@@ -14,6 +14,8 @@ let valueColor = UIColor.DN.Black.color()
 class HistoryDetailsCell: UITableViewCell {
     
     
+    static let reuseIdentifier = "history-cell-identifier"
+    
     //MARK:- key label
     private let to = UILabel().DNLabel(text: "Email", color: keyColor)
     private let amount = UILabel().DNLabel(text: "Amount", color: keyColor)

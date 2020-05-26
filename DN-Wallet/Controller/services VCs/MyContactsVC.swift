@@ -23,6 +23,8 @@ class MyContactsVC: UIViewController {
 
     
     //MARK:- Properities
+    private var inSafeMode = Auth.shared.isAppInSafeMode
+    
     var searchBar: UISearchBar!
     var contactTable: UITableView!
     var contactTableDataSource: ContactDataSource!
@@ -64,26 +66,11 @@ class MyContactsVC: UIViewController {
     
     //MARK:- setup views
     func setupNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
-        navigationController?.navigationBar.tintColor = .white
-        navigationItem.title = "My Contacts"
-        
+        self.configureNavigationBar(title: K.vc.myContactTitle, preferredLargeTitle: true)
         searchBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
         addBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add , target: self, action: #selector(addBtnPressed))
         navigationItem.rightBarButtonItems = [addBarButton, searchBarButton]
-        navigationItem.rightBarButtonItem?.tintColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(backBtnAction))
     }
     
     func setupSearchBar() {
@@ -91,7 +78,7 @@ class MyContactsVC: UIViewController {
         searchBar.searchTextField.stopSmartActions()
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .white
-        searchBar.placeholder = "Contact Username ..."
+        searchBar.placeholder = K.vc.myContactSearchBarPlaceholder
         
     }
     
@@ -108,20 +95,21 @@ class MyContactsVC: UIViewController {
     
     func AddEditeAlert(actionName: String, msg: String, uname: String?, uemail: String?, completion: @escaping (UIAlertAction) -> () ) {
         alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: K.alert.cancel, style: .cancel, handler: nil)
         let alertAction = UIAlertAction(title: actionName, style: .default, handler: completion)
         alert.addTextField { (usernameText) in
             usernameText.font = UIFont.systemFont(ofSize: 14)
             usernameText.textColor = .DnDarkBlue
-            usernameText.placeholder = "username"
+            usernameText.placeholder = K.placeholder.username
             usernameText.text = uname
         }
         alert.addTextField { (emailText) in
             emailText.font = UIFont.systemFont(ofSize: 14)
             emailText.textColor = .DnDarkBlue
-            emailText.placeholder = "email"
+            emailText.placeholder = K.placeholder.email
             emailText.text = uemail
         }
+        
         alert.addAction(cancelAction)
         alert.addAction(alertAction)
         present(alert, animated: true, completion: nil)
@@ -129,13 +117,13 @@ class MyContactsVC: UIViewController {
     }
     
     @objc func addBtnPressed() {
-        AddEditeAlert(actionName: "Add", msg: "add new contact", uname: nil, uemail: nil) { (action) in
+        AddEditeAlert(actionName: K.alert.add, msg: K.vc.myContactEditMsg, uname: nil, uemail: nil) { (action) in
             if let username = self.alert.textFields![0].text, let email = self.alert.textFields![1].text {
                 if !username.isEmpty && !email.isEmpty && Auth.shared.isValidEmail(email) {
                     // check if email is already exist
                     if self.emailIsExist(email) {
                         self.alert.dismiss(animated: true, completion: nil)
-                            Alert.syncActionOkWith("Email Exist", msg: "this email is already exist in your contacts", viewController: self)
+                        Alert.syncActionOkWith(K.vc.myContactAlertEmailExist, msg: K.vc.myContactAlertEmailExistMsg, viewController: self)
                     } else {
                         // add it locally
                         let contact = Contact(username: username, email: email)
@@ -174,7 +162,6 @@ class MyContactsVC: UIViewController {
         contactTable = UITableView()
         contactTable.backgroundColor = .white
         contactTable.delegate = self
-        //contactTable.dataSource = self
         contactTable.register(MyContactCell.self, forCellReuseIdentifier: MyContactCell.reuseIdentifier)
         contactTable.rowHeight = 70
     }
@@ -254,10 +241,10 @@ extension MyContactsVC: UISearchBarDelegate {
 extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editeAction = UIContextualAction(style: .normal, title: "Edite") { (action, view, completion) in
+        let editeAction = UIContextualAction(style: .normal, title: K.alert.edit) { (action, view, completion) in
             var currentSnapshot = self.contactTableDataSource.snapshot()
             guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
-            self.AddEditeAlert(actionName: "edite", msg: "Edite Contact", uname: contact.username, uemail: contact.email) { (action) in
+            self.AddEditeAlert(actionName: K.alert.edit, msg: K.vc.myContactEditMsg, uname: contact.username, uemail: contact.email) { (action) in
                 if let username = self.alert.textFields![0].text, let email = self.alert.textFields![1].text {
                     if !username.isEmpty && !email.isEmpty && Auth.shared.isValidEmail(email) {
                         if username != contact.username || email != contact.email {
@@ -284,7 +271,7 @@ extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: K.alert.delete) { (action, view, completion) in
             var currentSnapshot = self.contactTableDataSource.snapshot()
             guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
             currentSnapshot.deleteItems([contact])
@@ -296,12 +283,14 @@ extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let item = contactTableDataSource.itemIdentifier(for: indexPath) {
-            let vc = SendAndRequestMoney()
-            vc.presentedFromMyContact = true
-            vc.presentedEmail = item.email
-            vc.modalPresentationStyle = .fullScreen
-            self.navigationController?.pushViewController(vc, animated: true)
+        if !inSafeMode {
+            if let item = contactTableDataSource.itemIdentifier(for: indexPath) {
+                let vc = SendAndRequestMoney()
+                vc.presentedFromMyContact = true
+                vc.presentedEmail = item.email
+                vc.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

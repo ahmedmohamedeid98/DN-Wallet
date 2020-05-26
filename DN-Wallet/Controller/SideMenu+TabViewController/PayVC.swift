@@ -2,7 +2,7 @@
 //  PayVC.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 2/29/20.
+//  Created by Ahmed Eid on 2/29/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
@@ -10,6 +10,12 @@ import UIKit
 
 class PayVC: UIViewController {
 
+    //MARK:- Properities
+    private var inSafeMode = Auth.shared.isAppInSafeMode
+    private var allowedAmount = Auth.shared.allowedAmountInSafeMode
+    private var actualBalance: Balance?
+    // this value come from ContainerVC
+    var userBalance: [Balance] = []
     
     //MARK:- Outlets
     @IBOutlet weak var dropDown: UITextField!
@@ -22,7 +28,6 @@ class PayVC: UIViewController {
     @IBOutlet weak var Step_ten: UIStepper!
     var amountValue: Double = 0.0 {
         didSet {
-            print("amountValue: \(self.amountValue)")
             if self.fromStepper {
             self.amountField.text = "\(self.amountValue)"
             }
@@ -55,6 +60,7 @@ class PayVC: UIViewController {
         oldValue_ten = Step_ten.value
         handleNavigationBar()
         handelPopUpTextField()
+        dropDown.text = Currency.EGP.description // set default currency
     }
     
     func handleNavigationBar() {
@@ -75,7 +81,50 @@ class PayVC: UIViewController {
     
     @objc func ScanButtonPressed() {
         view.endEditing(true)
-        print("scan Button Pressed")
+        if let amount = amountField.text, let currency = dropDown.text {
+            let enteredBalance = Balance(amount: Double(amount) ?? 0.0, currency: currency)
+            if self.isValidAmount(balance: enteredBalance, isInSafeMode: inSafeMode) {
+                // if the app in safe mode the update allowed amount
+                if inSafeMode {
+                    let newAmount = Int(allowedAmount - enteredBalance.amount)
+                    allowedAmount = Double(newAmount)
+                    Auth.shared.updateAllowedAmoundInSafeMode(with: newAmount)
+                }
+                preformScanOperation(with: enteredBalance)
+            } else {
+                let message: String
+                if inSafeMode {
+                    message = "Entered amount (\(amount)) greater than remaining allowed amount in safeMode (\(allowedAmount))"
+                } else {
+                    if let balance = actualBalance {
+                        message = "Entered amount (\(amount)) greater than your balace amount (\(balance.amount) \(Currency(rawValue: balance.currency)?.symbole ?? "")"
+                    } else {
+                        message = "something was wrong please try again"
+                    }
+                }
+                // alert
+                Alert.syncActionOkWith(K.alert.faild, msg: message, viewController: self)
+            }
+            amountField.text = ""
+        }
+    }
+    
+    private func isValidAmount(balance: Balance, isInSafeMode: Bool = false) -> Bool {
+        
+        if isInSafeMode {
+            return balance.amount <= allowedAmount
+        } else {
+            let actualBalances = userBalance.filter { $0.currency == balance.currency }
+            actualBalance = actualBalances.first
+            if let safeActualBalance = actualBalance {
+                return balance <= safeActualBalance
+            }
+            return false
+        }
+    }
+    
+    private func preformScanOperation(with balance: Balance) {
+        print("preform scan operation")
     }
     
     private func handelPopUpTextField() {

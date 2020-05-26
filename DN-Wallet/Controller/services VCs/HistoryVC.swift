@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryVC: UIViewController {
+final class HistoryVC: UIViewController {
 
     
     @IBOutlet weak var consumptionsAmount: UILabel!
@@ -32,7 +32,6 @@ class HistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         setupNavigationBar()
         HData = History(consumption: 250, receive: 350, donation: 400, result: hh)
         self.consumptionsAmount.text = "\(HData.consumption) $"
@@ -50,11 +49,8 @@ class HistoryVC: UIViewController {
     }
     
     fileprivate func setupNavigationBar() {
-        navigationItem.title = "History"
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnWasPressed))
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        self.configureNavigationBar(title: K.vc.historyTitle)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(backBtnWasPressed))
     }
     
     func parseData(_ HistoryData: [HistoryCategory]) {
@@ -74,21 +70,21 @@ class HistoryVC: UIViewController {
         if sender.tag == 0 {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
-            vc.configureController(title: "Consumption" , segItems: HDetails.consumption.segItems() ,data: consumData, infoLabel: HDetails.consumption.infoLabel())
+            vc.configureController(title: K.vc.consumptionTitle , segItems: HDetails.consumption.segItems() ,data: consumData, infoLabel: HDetails.consumption.infoLabel())
             navigationController?.pushViewController(vc, animated: true)
         }else if sender.tag == 1 {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
-            vc.configureController(title: HDetails.received.title(), segItems: HDetails.received.segItems(),data: reciveData , infoLabel: HDetails.received.infoLabel())
+            vc.configureController(title: K.vc.receivedTitle , segItems: HDetails.received.segItems(),data: reciveData , infoLabel: HDetails.received.infoLabel())
             navigationController?.pushViewController(vc, animated: true)
         }else {
             let vc = HistoryDetailsVC()
             vc.modalPresentationStyle = .fullScreen
-            vc.configureController(title: HDetails.donations.title(), segItems: HDetails.donations.segItems(), data: donationData, infoLabel: HDetails.donations.infoLabel(), withSeg: false)
+            vc.configureController(title: K.vc.donationTitle , segItems: HDetails.donations.segItems(), data: donationData, infoLabel: HDetails.donations.infoLabel(), withSeg: false)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-   
+    
     @objc func backBtnWasPressed() {
         dismiss(animated: true, completion: nil)
     }

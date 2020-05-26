@@ -34,9 +34,7 @@ class SettingVC: UIViewController {
    
     
     func setupNavBar() {
-        let titleColor = UIColor.white
-        let backgroundColor = UIColor.DN.DarkBlue.color()
-        self.configureNavigationBar(largeTitleColor: titleColor, backgoundColor: backgroundColor, tintColor: titleColor, title: "Setting", preferredLargeTitle: true)
+        self.configureNavigationBar(title: "Setting", preferredLargeTitle: true)
         leftBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(closeButtonPressed))
         self.navigationItem.leftBarButtonItem = leftBarButton
     }

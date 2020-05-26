@@ -51,37 +51,50 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
         }
     }
     
-    func presentViewController(from viewController: UIViewController) {
+    var isSafe: Bool {
+        switch self {
+            case .history: return false
+            case .sendMoney: return true
+            case .sendRequest: return true
+            case .exchangeCurrency: return false
+            case .myConcats: return false
+            case .addNewPaymentCard: return false
+            case .donation: return true
+        }
+    }
+    
+    func pushVC(from rootVC: UIViewController) {
+        
         switch self {
         case .history:
             let st = UIStoryboard(name: "Services", bundle: .main)
             guard let vc = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC else { return }
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .sendMoney:
             let vc = SendAndRequestMoney()
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .sendRequest:
             let vc = SendAndRequestMoney()
             vc.isRequest = true
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .exchangeCurrency:
             let vc = ExchangeCurrencyVC()
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .myConcats:
             let vc = MyContactsVC()
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .addNewPaymentCard:
             let vc = AddNewCardVC()
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         case .donation:
             let vc = DonationVC()
-            self.present(viewController: vc, from: viewController)
+            present(vc, from: rootVC)
         }
     }
     
-    func present(viewController: UIViewController, from: UIViewController) {
-        let navigation = UINavigationController(rootViewController: viewController)
-        navigation.modalPresentationStyle = .fullScreen
-        from.present(navigation, animated: true, completion: nil)
+    private func present(_ vc: UIViewController, from rootVC: UIViewController) {
+        let navController = UINavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .fullScreen
+        rootVC.present(navController, animated: true, completion: nil)
     }
 }

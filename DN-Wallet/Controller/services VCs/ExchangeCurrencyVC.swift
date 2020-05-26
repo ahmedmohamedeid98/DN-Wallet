@@ -14,18 +14,11 @@ class ExchangeCurrencyVC: UIViewController {
 
 
     //MARK:- Properities
-    var infoLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "Calculate or Exchange Currency"
-        lb.textColor = UIColor.DN.DarkBlue.color()
-        lb.font = UIFont.DN.Regular.font(size: 18)
-        return lb
-    }()
-    
+
     // static three label from - to - amount
-    let fromLable = UILabel().DNLabel(text: "From", fontSize: 18, color: keyColor)
-    let ToLabel = UILabel().DNLabel(text: "To", fontSize: 18, color: keyColor)
-    let amountLabel = UILabel().DNLabel(text: "Amount", fontSize: 18, color: keyColor)
+    let fromLable = UILabel().DNLabel(text: K.from, fontSize: 18, color: keyColor)
+    let ToLabel = UILabel().DNLabel(text: K.to, fontSize: 18, color: keyColor)
+    let amountLabel = UILabel().DNLabel(text: K.amount, fontSize: 18, color: keyColor)
 
     // drop down menu to choose the currency which needed to exchange
     var fromDropDown: DropDown!
@@ -74,7 +67,7 @@ class ExchangeCurrencyVC: UIViewController {
     // first button which calculate the amount that will be the exchange process's result
     var calculateButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Caculate", for: .normal)
+        btn.setTitle(K.vc.exchangeCurrCalculateBtnTitle, for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.DN.DarkBlue.color()
         btn.layer.cornerRadius = 20
@@ -84,14 +77,12 @@ class ExchangeCurrencyVC: UIViewController {
     // second button which do the main job 'exchanges'
     var exchangeButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Exchange", for: .normal)
+        btn.setTitle(K.vc.exchangeCurrExchangeBtnTitle, for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.DN.DarkBlue.color()
         btn.layer.cornerRadius = 20
         return btn
     }()
-    
-    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,13 +128,10 @@ class ExchangeCurrencyVC: UIViewController {
     }
     /// inital navigation bar with custom nav bar `DNNavBar`
     func setupNavBar() {
-        navigationItem.title = "Exchange Currency"
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem?.tintColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        self.configureNavigationBar(title: K.vc.exchangeCurrTitle)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(backBtnAction))
     }
+    
 
     // left item buttom of nav bar, dismiss view controller
     @objc func backBtnAction() {
@@ -167,14 +155,13 @@ class ExchangeCurrencyVC: UIViewController {
         btnStack.alignment = .fill
         btnStack.spacing = 20
         
-        view.addSubview(infoLabel)
         view.addSubview(Vstack)
         view.addSubview(btnStack)
         view.addSubview(resultLabel)
         fromDropDownContainer.addSubview(fromDropDown)
         toDropDownContainer.addSubview(toDropDown)
-        infoLabel.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor,margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) , centerH: true)
-        Vstack.DNLayoutConstraint(infoLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 120))
+       
+        Vstack.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 120))
         fromDropDown.DNLayoutConstraint(fromDropDownContainer.topAnchor, left: fromDropDownContainer.leftAnchor, right: fromDropDownContainer.rightAnchor, bottom: fromDropDownContainer.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 20))
         toDropDown.DNLayoutConstraint(toDropDownContainer.topAnchor, left: toDropDownContainer.leftAnchor, right: toDropDownContainer.rightAnchor, bottom: toDropDownContainer.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 20))
         btnStack.DNLayoutConstraint(Vstack.bottomAnchor, margins: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 300, height: 40), centerH: true)

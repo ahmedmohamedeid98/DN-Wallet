@@ -9,7 +9,7 @@
 class ContainerVC: UIViewController {
     
     //MARK:- Properities
-    var sideMenuController: SideMenuVC!
+    var sideMenuController: UIViewController!
     var centerTabBarController: UITabBarController!
     var isExpand: Bool = false
     var NavHomeViewController: UINavigationController!

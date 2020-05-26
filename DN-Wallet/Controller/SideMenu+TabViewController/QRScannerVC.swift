@@ -45,7 +45,7 @@ class QRScannerVC: UIViewController {
                     Alert.asyncSuccessfullWith("Successful transaction process", dismissAfter: 1.0, viewController: self)
                     let detail = HistoryCategory(email: email,
                                                  amount: amount,
-                                                 currency: self.currency.str,
+                                                 currency: self.currency.Code,
                                                  date: Utile.currentDate,
                                                  category: Category.send.identifier,
                                                  innerCategory: InnerCategory.other.identitfer)

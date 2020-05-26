@@ -12,7 +12,7 @@ import UIKit
 class SideMenuCell: UITableViewCell {
 
     static let reuseIdentifier = "side-menu-cell-identrifer"
-    
+    var inSafeMode: Bool = false
     var section: ServiceSection? {
         didSet {
             guard let data = section else {return}
@@ -22,10 +22,14 @@ class SideMenuCell: UITableViewCell {
             } else {
                 self.serviceIcon.image = UIImage(named: data.image)
             }
+            if inSafeMode {
+                self.safeIcon.isHidden = !data.isSafe
+            } else {
+                self.safeIcon.isHidden = true
+            }
         }
     }
     
-    var isSafe: Bool = false
     var serviceIcon : UIImageView = {
         let img = UIImageView()
         img.tintColor = .white//UIColor.DN.DarkBlue.color()
@@ -42,6 +46,8 @@ class SideMenuCell: UITableViewCell {
     var safeIcon: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(systemName: "lock.circle")
+        img.contentMode = .scaleAspectFit
+        img.clipsToBounds = true
         img.tintColor = .white
         return img
     }()
@@ -50,7 +56,6 @@ class SideMenuCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
-        self.safeIcon.isHidden = !isSafe
         backgroundColor = .clear
     }
     

@@ -27,7 +27,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     
     private var checkYourInbox: UILabel = {
            let lb = UILabel()
-           lb.text = "Check Your Inbox"
+        lb.text = K.vc.fbCheckInbox
            lb.textAlignment = .center
            lb.textColor = UIColor.DN.DarkBlue.color()
            lb.font = UIFont.DN.SemiBlod.font(size: 18)
@@ -36,7 +36,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     private var InfoMsg: UITextView = {
         let Msg = UITextView()
         Msg.textAlignment = .center
-        Msg.text = "A 4-digits has been sent to your emailaddress"
+        Msg.text = K.vc.fbInfoMsg
         Msg.isEditable = false
         Msg.textColor = UIColor.DN.DarkBlue.color()
         Msg.font = UIFont.DN.Regular.font(size: 16)
@@ -47,20 +47,19 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     
     private var EnterNewPassLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "Enter New Password"
+        lb.text = K.vc.fbEnterNewP
         lb.textAlignment = .center
         lb.textColor = UIColor.DN.DarkBlue.color()
         lb.font = UIFont.DN.SemiBlod.font(size: 18)
         return lb
     }()
-    
     private var NewPassword : passwordContainer!
     private var confirmNewPassword : passwordContainer!
     
     
     private var doneBtn: UIButton = {
         let Btn = UIButton(type: .system)
-        Btn.setTitle("Done", for: .normal)
+        Btn.setTitle(K.alert.done, for: .normal)
         Btn.setTitleColor(.white, for: .normal)
         Btn.backgroundColor = UIColor.DN.DarkBlue.color()
         Btn.layer.cornerRadius = 20
@@ -91,9 +90,9 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         opt.delegate = self
         
         NewPassword = passwordContainer()
-        NewPassword.configureTxtFeild(placeholder: "new password")
+        NewPassword.configureTxtFeild(placeholder: K.vc.fbNewPPlaceh)
         confirmNewPassword = passwordContainer()
-        confirmNewPassword.configureTxtFeild(placeholder: "confirm password")
+        confirmNewPassword.configureTxtFeild(placeholder: K.vc.fbConfirmP)
         doneBtn.addTarget(self, action: #selector(doneBtnAction), for: .touchUpInside)
         EnterNewPassLabel.isHidden = true
         NewPassword.isHidden = true
@@ -108,8 +107,6 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     }
     
     @objc func doneBtnAction() {
-        //let st = UIStoryboard(name: "Authentication", bundle: .main)
-        //let vc = st.instantiateViewController(identifier: "signInVCID") as? SignInVC
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     

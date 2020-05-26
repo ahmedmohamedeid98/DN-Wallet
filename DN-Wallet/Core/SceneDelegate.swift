@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    //var remainingTime: Int64 = 0
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -30,9 +30,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // make it the first viewController appear in the window
             self.window?.makeKeyAndVisible()
         }
+/*        // app in the safe mode
+        if Auth.shared.isAppInSafeMode {
+
+            if shouldTryAgain() { // TimeInterval(integerLiteral: remainingTime)
+                Timer.scheduledTimer(withTimeInterval:  , repeats: false) { (timer) in
+                   // _ = self.shouldTryAgain()
+                }
+                
+            }
+        }
         
     }
 
+
+    func shouldTryAgain() -> Bool {
+        
+        Auth.shared.checkIfAppOutTheSafeMode { (time, error) in
+            if let e = error {
+                print(e.localizedDescription)
+            } else {
+                self.remainingTime = time
+                if self.remainingTime <= 0 {
+                    // deactive the safeMode
+                    Auth.shared.deactiveSafeMode()
+                    return true
+                } else if (self.remainingTime / 60 / 60) <= 3{
+                    return false
+                } else {
+                    
+                }
+            }
+        }*/
+    }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0401BBD3247C7493000C597A /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401BBD2247C7493000C597A /* NotificationVC.swift */; };
+		0401BBD7247C8143000C597A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401BBD6247C8143000C597A /* Message.swift */; };
 		040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754B245E682000B66A02 /* PopUpMenu.swift */; };
 		040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754D245E6C5F00B66A02 /* PopMenuItem.swift */; };
 		040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */; };
@@ -21,6 +23,7 @@
 		04161477242E3FBF00782332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04161476242E3FBF00782332 /* User.swift */; };
 		043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */; };
 		043B7ED024623AE400F2D037 /* ChargeCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */; };
+		0456C357246398930018BE66 /* CurrentDateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C356246398920018BE66 /* CurrentDateComponent.swift */; };
 		045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */; };
 		045A2FB6241C061300A0C643 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB5241C061300A0C643 /* Utilities.swift */; };
 		045A2FB8241C089200A0C643 /* DNNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB7241C089200A0C643 /* DNNavBar.swift */; };
@@ -61,11 +64,12 @@
 		047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F7243AEC3A0077A954 /* SettingCell.swift */; };
 		047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F9243AECBF0077A954 /* SettingSection.swift */; };
 		047E11D2242E888700E1295B /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E11D1242E888700E1295B /* AccountInfo.swift */; };
-		047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */; };
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
 		047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* SignUpVC.swift */; };
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
 		0481B7362458C55900643CD4 /* DonationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481B7352458C55900643CD4 /* DonationDetailsCell.swift */; };
+		0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487D2EC247D58850020F1EB /* NotificationCell.swift */; };
+		0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0487D2ED247D58850020F1EB /* NotificationCell.xib */; };
 		048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F11243B512100BE464D /* EditProfileVC.swift */; };
 		048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F13243B525D00BE464D /* EditProfileSection.swift */; };
 		048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F15243B5ED600BE464D /* PrivacyVC.swift */; };
@@ -93,7 +97,9 @@
 		04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90E2422C7760062D54F /* DonationCell.swift */; };
 		04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */; };
 		04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE67324467014003BCAC9 /* CurrencyCell.swift */; };
+		04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */; };
 		04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* DNData.swift */; };
+		04E6307E247148330026589E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6307D247148300026589E /* Constants.swift */; };
 		04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */; };
 		04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD28C324256D6B00E41EAC /* CharityOrg.swift */; };
 		04FED9D62447289C00EDD0EF /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */; };
@@ -102,6 +108,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0401BBD2247C7493000C597A /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		0401BBD6247C8143000C597A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		040F754B245E682000B66A02 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
 		040F754D245E6C5F00B66A02 /* PopMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMenuItem.swift; sourceTree = "<group>"; };
 		040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenuCell.swift; sourceTree = "<group>"; };
@@ -116,6 +124,7 @@
 		04161476242E3FBF00782332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
 		043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeCreditCell.swift; sourceTree = "<group>"; };
+		0456C356246398920018BE66 /* CurrentDateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateComponent.swift; sourceTree = "<group>"; };
 		045A2FB0241BFAFF00A0C643 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		045A2FB5241C061300A0C643 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		045A2FB7241C089200A0C643 /* DNNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNavBar.swift; sourceTree = "<group>"; };
@@ -158,11 +167,12 @@
 		047A49F7243AEC3A0077A954 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		047A49F9243AECBF0077A954 /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		047E11D1242E888700E1295B /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
-		047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startControllerForTest.swift; sourceTree = "<group>"; };
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		047FA8B4240E1E910097DD06 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
 		0481B7352458C55900643CD4 /* DonationDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsCell.swift; sourceTree = "<group>"; };
+		0487D2EC247D58850020F1EB /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		0487D2ED247D58850020F1EB /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		048D2F11243B512100BE464D /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		048D2F13243B525D00BE464D /* EditProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSection.swift; sourceTree = "<group>"; };
 		048D2F15243B5ED600BE464D /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
@@ -191,7 +201,9 @@
 		04B1C90E2422C7760062D54F /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsVC.swift; sourceTree = "<group>"; };
 		04BDE67324467014003BCAC9 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		04DB8841242C5BC6007BA6B0 /* DNData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNData.swift; sourceTree = "<group>"; };
+		04E6307D247148300026589E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoneVC.swift; sourceTree = "<group>"; };
 		04FD28C324256D6B00E41EAC /* CharityOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityOrg.swift; sourceTree = "<group>"; };
 		04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
@@ -333,6 +345,7 @@
 		04792AD12409FE8F00F781D8 /* DN-Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				04CC0E81247B1E1900357193 /* fonts */,
 				048D56402429D077008A8925 /* Core */,
 				045A2FB4241C05EE00A0C643 /* uitilized */,
 				0491D854240E3A050014E34C /* Extension */,
@@ -353,10 +366,10 @@
 				041046C3243E655C0043CA77 /* SideMenu+TabViewController */,
 				047A49F0243ADC680077A954 /* SettingVCs */,
 				046D4C52242F8FC8001D1463 /* lunchGuideVCs */,
-				047FA8B0240E1CF90097DD06 /* startControllerForTest.swift */,
 				046732B624198EA600DD436D /* forgetPassword VCs */,
 				04B1C90B2422C5840062D54F /* services VCs */,
 				040F754B245E682000B66A02 /* PopUpMenu.swift */,
+				0401BBD2247C7493000C597A /* NotificationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -379,23 +392,17 @@
 		04792AEA2409FF3F00F781D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0487D2F0247DAF830020F1EB /* auth */,
 				0493A844244F75D400F4B659 /* Preferences */,
 				048DFBF9244DE35A001DF711 /* tabModels */,
 				04A5A52E243FA835000340FB /* ServiceModels */,
 				047A49F3243ADFFC0077A954 /* SettingModels */,
 				048D563F2429D063008A8925 /* Network */,
-				0498940C241D7A9F00E32B34 /* History.swift */,
-				047040C124202BDF00BBAAF5 /* HDetails.swift */,
-				047040C9242050B800BBAAF5 /* PaymentCard.swift */,
 				0465C6A524211D300032506D /* Currency.swift */,
-				04FD28C324256D6B00E41EAC /* CharityOrg.swift */,
-				048D56442429E701008A8925 /* Register.swift */,
-				04161474242E348800782332 /* Login.swift */,
 				04161476242E3FBF00782332 /* User.swift */,
-				04B10254242E763F00E17792 /* Contact.swift */,
 				047E11D1242E888700E1295B /* AccountInfo.swift */,
-				0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */,
 				040F754D245E6C5F00B66A02 /* PopMenuItem.swift */,
+				0456C356246398920018BE66 /* CurrentDateComponent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -459,6 +466,15 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		0487D2F0247DAF830020F1EB /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				048D56442429E701008A8925 /* Register.swift */,
+				04161474242E348800782332 /* Login.swift */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
 		048D563F2429D063008A8925 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				04792AE22409FEA900F781D8 /* Info.plist */,
+				04E6307D247148300026589E /* Constants.swift */,
 			);
 			path = Configure;
 			sourceTree = "<group>";
@@ -488,6 +505,7 @@
 		048DFBF9244DE35A001DF711 /* tabModels */ = {
 			isa = PBXGroup;
 			children = (
+				0401BBD6247C8143000C597A /* Message.swift */,
 			);
 			path = tabModels;
 			sourceTree = "<group>";
@@ -523,7 +541,13 @@
 		04A5A52E243FA835000340FB /* ServiceModels */ = {
 			isa = PBXGroup;
 			children = (
+				0498940C241D7A9F00E32B34 /* History.swift */,
 				04A5A52F243FA87B000340FB /* ServiceSection.swift */,
+				047040C124202BDF00BBAAF5 /* HDetails.swift */,
+				047040C9242050B800BBAAF5 /* PaymentCard.swift */,
+				04FD28C324256D6B00E41EAC /* CharityOrg.swift */,
+				0411E581245B921A00EBBCF5 /* DonationDetailsSection.swift */,
+				04B10254242E763F00E17792 /* Contact.swift */,
 			);
 			path = ServiceModels;
 			sourceTree = "<group>";
@@ -551,8 +575,18 @@
 				04FED9D9244757CE00EDD0EF /* SliderCell.swift */,
 				048DFBFA244E6591001DF711 /* QRScannerView.swift */,
 				043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */,
+				0487D2EC247D58850020F1EB /* NotificationCell.swift */,
+				0487D2ED247D58850020F1EB /* NotificationCell.xib */,
 			);
 			path = tabViews;
+			sourceTree = "<group>";
+		};
+		04CC0E81247B1E1900357193 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		367A6082E09A231FA70083AA /* Frameworks */ = {
@@ -637,6 +671,8 @@
 				04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */,
 				04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */,
 				04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */,
+				04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */,
+				0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */,
 				04792ADC2409FE9000F781D8 /* Main.storyboard in Resources */,
 				04A8D70624282F9700628AA3 /* Services.storyboard in Resources */,
 			);
@@ -703,6 +739,7 @@
 				048D56452429E701008A8925 /* Register.swift in Sources */,
 				04792AF7240B2E0D00F781D8 /* iOSDropDown.swift in Sources */,
 				0491D856240E3A330014E34C /* extension.swift in Sources */,
+				0456C357246398930018BE66 /* CurrentDateComponent.swift in Sources */,
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
 				04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */,
 				0493A843244F6BCD00F4B659 /* UserPreference.swift in Sources */,
@@ -713,7 +750,7 @@
 				040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */,
 				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */,
-				047FA8B1240E1CF90097DD06 /* startControllerForTest.swift in Sources */,
+				04E6307E247148330026589E /* Constants.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
 				04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */,
@@ -745,6 +782,7 @@
 				04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */,
 				04A5A52C243F5F1A000340FB /* SteppedProgressBar.swift in Sources */,
 				046D4C5C24313A7B001D1463 /* DataViewController.swift in Sources */,
+				0401BBD7247C8143000C597A /* Message.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
 				04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
@@ -757,6 +795,7 @@
 				046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */,
 				04161477242E3FBF00782332 /* User.swift in Sources */,
 				04A5A52B243F5F1A000340FB /* NSAttributedString+JK.swift in Sources */,
+				0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */,
 				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
 				045EC5E6244F96780030FAE9 /* Alert.swift in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
@@ -777,6 +816,7 @@
 				04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */,
 				045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */,
 				041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */,
+				0401BBD3247C7493000C597A /* NotificationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

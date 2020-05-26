@@ -27,18 +27,18 @@ class SettingCell: UITableViewCell {
                 }
                 if sectionType.description == SecurityOptions.safeModeTime.description {
                     addDescriptionLabel()
-                    setTime()
+                    //setTime()
                 }
             } else {
                 addSwitchToThisCellWith(tag: sectionType.id)
             }
         }
     }
-    
+    /*
     func setTime() {
         descriptionLabel.text = "\(Auth.shared.getSafeModeTime()) hour"
     }
-    
+    */
     func setLanguage() {
         let languageID =  UserDefaults.standard.integer(forKey: Defaults.Language.key)
         for lang in LanguageSection.allCases {

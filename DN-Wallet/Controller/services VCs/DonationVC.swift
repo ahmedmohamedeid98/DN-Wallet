@@ -48,26 +48,10 @@ class DonationVC: UIViewController {
     //MARK:- setup views
     
     func setupNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1.0)
-        navigationController?.navigationBar.tintColor = .white
-        navigationItem.title = "Donation"
-        
+        self.configureNavigationBar(title: K.vc.donationvcTitle, preferredLargeTitle: true)
         searchBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
-        
         navigationItem.rightBarButtonItem = searchBarButton
-        navigationItem.rightBarButtonItem?.tintColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnAction))
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(backBtnAction))
     }
     
     @objc func backBtnAction() {
@@ -77,10 +61,9 @@ class DonationVC: UIViewController {
     func setupSearchBar() {
         searchBar = UISearchBar()
         searchBar.searchTextField.stopSmartActions()
-        searchBar.placeholder = "search about organization"
+        searchBar.placeholder = K.vc.donationSearchBarPlaceholder
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .white
-        
     }
     
     func setupTableView() {
@@ -170,7 +153,6 @@ extension DonationVC: UITableViewDelegate {
         let vc = DonationDetailsVC()
         guard let currentOrg = charityTableDataSource.itemIdentifier(for: indexPath) else { return }
         vc.data = currentOrg
-        print("currentOrg \(currentOrg)")
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)

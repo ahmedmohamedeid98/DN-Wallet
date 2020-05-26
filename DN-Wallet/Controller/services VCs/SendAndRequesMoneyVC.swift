@@ -13,7 +13,7 @@ import UIKit
 // 3- donation viewController when user want to donate to a charity
 // 4- MyContacts viewController
 class SendAndRequestMoney: UIViewController {
-
+    
     //MARK:- Setup Properities
     //segment 0 stand for "send", segment 1 stand for "request"
     var currentSegment: Int = 1
@@ -73,7 +73,7 @@ class SendAndRequestMoney: UIViewController {
     //MARK:- Setup Text Feilds
     var email: UITextField = {
         let txt = UITextField()
-        txt.placeholder = "user@example.com"
+        txt.placeholder = K.placeholder.email
         txt.textColor = .DnTextColor
         txt.font = UIFont.DN.Regular.font(size: 16)
         txt.stopSmartActions()
@@ -91,13 +91,12 @@ class SendAndRequestMoney: UIViewController {
     }()
     var messageTextView: UITextView = {
         let txt = UITextView()
-        txt.text = "(Optional) short message ..."
+        txt.text = K.vc.sORrPlaceholderTextView
         txt.textColor = .gray
         txt.font = UIFont.DN.Regular.font(size: 16)
         txt.addBorder(color: UIColor.lightGray.cgColor, width: 0.5)
         return txt
     }()
-    
     //MARK:- Buttons
     let addContactButton: UIButton = {
         // this button will enable in the following case
@@ -146,27 +145,23 @@ class SendAndRequestMoney: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     // make status bar component white on dark background
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     func setupNavBar() {
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        self.configureNavigationBar(title: K.vc.sORrTitle)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done , target: self, action: #selector(sendMonyOrRequest))
-        navigationItem.rightBarButtonItem?.tintColor = .white
         if !presentFromDonationVC && !presentedFromMyContact {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
-            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.sysImage.leftArrow), style: .plain, target: self, action: #selector(dismissBtnWasPressed))
         }
         
     }
     
     func setupSegmentController() {
-        segmentController = UISegmentedControl(items: ["Send", "Request"])
+        segmentController = UISegmentedControl(items: [K.vc.sORrSegSend, K.vc.sORrSegRequest])
         isRequest ? (segmentController.selectedSegmentIndex = 1) : (segmentController.selectedSegmentIndex = 0)
         segmentController.setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
         segmentController.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -183,16 +178,15 @@ class SendAndRequestMoney: UIViewController {
             print("item: \(item), index: \(index), id: \(id)")
         }
     }
-    
     func toggleRequestSend(isRequest: Bool) {
         if isRequest {
-            navigationItem.title = "Request Money"
+            navigationItem.title = K.vc.sORrRequestMoneyTitle
         } else {
-            presentFromDonationVC ? (navigationItem.title = "Donate") : (navigationItem.title = "Send Money")
+            presentFromDonationVC ? (navigationItem.title = K.vc.donateDetailtsTitle) : (navigationItem.title = K.vc.sORrSendMoneyTitle)
         }
         self.isRequest = isRequest
     }
-   
+    
     func setupLayout() {
         view.addSubview(segmentController)
         view.addSubview(addContactButton)
@@ -215,32 +209,32 @@ class SendAndRequestMoney: UIViewController {
     //MARK:- Objc function
     
     /// selector action: this method called when selected segment being changed
-       @objc func valueWasChanged() {
-           switch segmentController.selectedSegmentIndex {
-           case 0: toggleRequestSend(isRequest: false)
-           case 1: toggleRequestSend(isRequest: true)
-           default: break
-           }
-       }
-       
+    @objc func valueWasChanged() {
+        switch segmentController.selectedSegmentIndex {
+        case 0: toggleRequestSend(isRequest: false)
+        case 1: toggleRequestSend(isRequest: true)
+        default: break
+        }
+    }
+    
     // notification center function called when the keyboard pop up
     @objc func keyboardWillShow(notification: NSNotification) {
-            if flage {
-                guard let size = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue  else { return }
-                keyboardSize = size
-                distanceFromBottom = view.frame.height - (messageTextView.frame.origin.y + messageTextView.frame.height)
-                messageTextViewOriginY = messageTextView.frame.origin.y
-                messageTextViewNewY = keyboardSize.height - distanceFromBottom
-                flage = false
+        if flage {
+            guard let size = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue  else { return }
+            keyboardSize = size
+            distanceFromBottom = view.frame.height - (messageTextView.frame.origin.y + messageTextView.frame.height)
+            messageTextViewOriginY = messageTextView.frame.origin.y
+            messageTextViewNewY = keyboardSize.height - distanceFromBottom
+            flage = false
+        }
+        if keyboardSize.height > distanceFromBottom {
+            if self.messageTextView.frame.origin.y == messageTextViewOriginY {
+                UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
+                    self.messageTextView.frame.origin.y -= self.messageTextViewNewY
+                }, completion: nil)
+                
             }
-            if keyboardSize.height > distanceFromBottom {
-                if self.messageTextView.frame.origin.y == messageTextViewOriginY {
-                    UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
-                        self.messageTextView.frame.origin.y -= self.messageTextViewNewY
-                    }, completion: nil)
-                   
-                }
-            }
+        }
     }
     // notification center function called when the keyboard hide
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -255,7 +249,7 @@ class SendAndRequestMoney: UIViewController {
     @objc func dismissBtnWasPressed() {
         dismiss(animated: true, completion: nil)
     }
-
+    
     // the important function which responsible to deal with the api
     @objc private func sendMonyOrRequest() {
         if isRequest {
@@ -275,19 +269,18 @@ class SendAndRequestMoney: UIViewController {
         if email.text != "" && Auth.shared.isValidEmail(email.text!) {
             // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
             if ["ahmed@gmail.com"].contains(email.text!) {
-                Auth.shared.buildAndPresentAlertWith("Email Exist", message: "this email is already exist in your contacts", viewController: self)
+                Auth.shared.buildAndPresentAlertWith(K.vc.myContactAlertEmailExist, message: K.vc.myContactAlertEmailExistMsg, viewController: self)
                 self.toggleAddContactButton(toDone: true)
-                
             }
-            // if the email don't exist then add it and toggle addButton to done
+                // if the email don't exist then add it and toggle addButton to done
             else {
-                let alert = UIAlertController(title: "Add Username", message: "write a username for this email", preferredStyle: .alert)
-                let add = UIAlertAction(title: "Add", style: .default) { (action) in
+                let alert = UIAlertController(title: K.vc.sORrAlertAddUsTitle, message: K.vc.sORrAlertAddUsMsg, preferredStyle: .alert)
+                let add = UIAlertAction(title: K.alert.add, style: .default) { (action) in
                     // >>>>>>>>> Call Api to add >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
                     self.toggleAddContactButton(toDone: true)
                     
                 }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let cancel = UIAlertAction(title: K.alert.cancel, style: .cancel, handler: nil)
                 alert.addTextField { (txt) in
                     txt.placeholder = "\(self.email.text!.split(separator: "@")[0])"
                     txt.basicConfigure()
@@ -300,10 +293,9 @@ class SendAndRequestMoney: UIViewController {
             
             email.endEditing(true)
         } else {
-            Auth.shared.buildAndPresentAlertWith("Invalid Email", message: "this email is invalid, Try Again.", viewController: self)
+            Auth.shared.buildAndPresentAlertWith(K.vc.sORrAlertInvalidEmail, message: K.vc.sORrAlertInvalidEmailMsg, viewController: self)
         }
     }
-    
     /// change button image from addPerson to rightCheckMark and disable/enable it.
     func toggleAddContactButton(toDone: Bool) {
         if toDone {

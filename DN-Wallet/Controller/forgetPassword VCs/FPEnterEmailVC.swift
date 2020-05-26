@@ -12,7 +12,7 @@ class FPEnterEmailVC: UIViewController {
     
     var forgetPasswordMsg: UILabel = {
         let lb = UILabel()
-        lb.text = "Forget Your Password ?"
+        lb.text = K.vc.fbMsg
         lb.textAlignment = .center
         lb.textColor = UIColor.DN.DarkBlue.color()
         lb.font = UIFont.DN.Bold.font()
@@ -21,7 +21,7 @@ class FPEnterEmailVC: UIViewController {
     var EnterEmailMsg: UITextView = {
         let Msg = UITextView()
         Msg.textAlignment = .center
-        Msg.text = "Enter your email below and we will send you reset code"
+        Msg.text = K.vc.fbEnterMailMsg
         Msg.isEditable = false
         Msg.textColor = UIColor.DN.DarkBlue.color()
         Msg.font = UIFont.DN.Regular.font(size: 16)
@@ -29,14 +29,13 @@ class FPEnterEmailVC: UIViewController {
     }()
     var emailField : UITextField = {
         let txt = UITextField()
-        txt.placeholder = "enter your email"
+        txt.placeholder = K.vc.fbEnterMailPlaceh
         txt.stopSmartActions()
         txt.keyboardType = .emailAddress
         txt.textColor = UIColor.DN.DarkGray.color()
         txt.font = UIFont.DN.Regular.font(size: 14)
         return txt
     }()
-    
     var emailContainerView: UIView = {
         let vw = UIView()
         vw.layer.borderColor = UIColor.DN.LightGray.color().cgColor
@@ -46,7 +45,7 @@ class FPEnterEmailVC: UIViewController {
     
     var sendResetCodeBtn: UIButton = {
         let Btn = UIButton(type: .system)
-        Btn.setTitle("send reset code", for: .normal)
+        Btn.setTitle(K.vc.fbResetCodeBtn, for: .normal)
         Btn.setTitleColor(.white, for: .normal)
         Btn.titleLabel?.font = UIFont.DN.SemiBlod.font(size: 18)
         Btn.backgroundColor = UIColor.DN.DarkBlue.color()

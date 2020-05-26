@@ -38,8 +38,34 @@ enum Currency: String, CaseIterable {
         return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: code) ?? "\(self)"
     }
     
-    var str: String {
+    var Code: String {
         return self.rawValue
+    }
+    
+    var description: String {
+        switch self {
+            case .EGP: return "Egyptian Pound"
+            case .EUR: return "Euro"
+            case .USD: return "US Dollar"
+            case .HKD: return "Hong Kong Dollar"
+            case .INR: return "Indian Rupee"
+            case .IDR: return "Rupiah"
+            case .ISK: return "Iceland Krona"
+            case .IQD: return "Iraqi Dinar"
+            case .JPY: return "Yen"
+            case .KWD: return "Kuwaiti Dinar"
+            case .KRW: return "Won"
+            case .AUD: return "Australian Dollar"
+            case .LYD: return "Libyan Dinar"
+            case .OMR: return "Rial Omani"
+            case .PKR: return "Pakistan Rupee"
+            case .QAR: return "Qatari Rial"
+            case .RUB: return "Russian Ruble"
+            case .SAR: return "Saudi Riyal"
+            case .TRY: return "Turkish Lira"
+            case .TND: return "Tunisian Dinar"
+            case .YER: return "Yemeni Rial"
+        }
     }
     
 }

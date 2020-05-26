@@ -16,7 +16,7 @@ enum Section: CaseIterable {
 }
 
 class HomeVC: UIViewController {
-
+    
     // Data
     var balance: [Balance] = [Balance(amount: 245552.54, currency: "USD"), Balance(amount: 24, currency: "EGP"), Balance(amount: 200, currency: "EUR"), Balance(amount: 245.0, currency: "KWD")]
     var imagesNames = ["test_image1", "test_image2", "test_image3", "test_image4"]
@@ -28,6 +28,9 @@ class HomeVC: UIViewController {
     var isExpand: Bool = false
     var leftBarButton: UIBarButtonItem!
     weak var delegate:HomeViewControllerDelegate?
+    
+    //MARK:- Data Will send to another vc
+    var notificationMessages: [Message] = []
     
     //MARK:- CollectionView Properities
     var balanceCollectioView: UICollectionView!
@@ -77,7 +80,7 @@ class HomeVC: UIViewController {
     func stopTimer() {
         self.timer.invalidate()
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -101,8 +104,10 @@ class HomeVC: UIViewController {
         configureBalanceDataSource()
         balanceCollectioView.dataSource = balanceDataSource
         
-        
         addGestureRecognizer()
+        
+        // Fetch Notifications Messages
+        fetchNotificationMessages()
     }
     
     
@@ -123,15 +128,29 @@ class HomeVC: UIViewController {
         pageControl.currentPage = counter
     }
     
-    func handleNavigationBar() {
-        self.configureNavigationBar(largeTitleColor: .white, backgoundColor: .DnDarkBlue, tintColor: .white, title: "Home", preferredLargeTitle: false)
+    private func handleNavigationBar() {
+        self.configureNavigationBar(title: "Home", preferredLargeTitle: false)
         leftBarButton = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(sideMenuButtonPressed))
         navigationItem.leftBarButtonItem = leftBarButton
+        addRightBarButtonWithImage(name: "envelope")
         
     }
     
+    private func thereIsNewMessages() {
+        addRightBarButtonWithImage(name: "envelope.badge")
+    }
+    
+    private func addRightBarButtonWithImage(name: String) {
+        let rightBarButton = UIBarButtonItem(image: UIImage(systemName: name), style: .plain, target: self, action: #selector(notificationBtnPressed))
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
     
     
+    @objc func notificationBtnPressed() {
+        let vc = NotificationVC()
+        vc.originalData = notificationMessages
+        self.present(vc, animated: true, completion: nil)
+    }
     private func setupLayout() {
         view.addSubview(sliderCollectionView)
         view.addSubview(goRightButton)
@@ -222,7 +241,7 @@ extension HomeVC {
         //3
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
-    
+        
         // add header
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
         let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: HomeVC.sectionHeaderElementKind, alignment: .top)
@@ -253,7 +272,7 @@ extension HomeVC {
         imagesNames.forEach { snapShot.appendItems([$0], toSection: .main) }
         sliderDataSource.apply(snapShot, animatingDifferences: true)
     }
-
+    
     
 }
 
@@ -311,4 +330,14 @@ extension HomeVC {
         balanceDataSource.apply(snapShot, animatingDifferences: true)
     }
     
+}
+//MARK:- Networks (API)
+extension HomeVC {
+    private func fetchNotificationMessages() {
+        self.notificationMessages = Message.fetchMessages()
+        guard let topMessage = notificationMessages.first else {return}
+        if topMessage.isnew {
+            thereIsNewMessages()
+        }
+    }
 }

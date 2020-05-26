@@ -32,6 +32,7 @@ struct keys {
     static let token = "user_token"
     static let safeModeTime = "safe_mode_time"
     static let qrCodeFileName = "DN-QRCode-Image.png"
+    static let allowedAmount = "allowed-amount"
 }
 
 // MARK:- Setup Authentication calss
@@ -218,20 +219,6 @@ class Auth {
         return emailPred.evaluate(with: email)
     }
     
-    func getSafeModeTime() -> Int {
-        return Int(keychain.get(keys.safeModeTime) ?? "12") ?? 12
-    }
-    
-    func setSafeModeTime(hours: String) {
-        let hours = Int(hours) ?? 12
-        if hours == 0 {
-            keychain.set("\(12)", forKey: keys.safeModeTime)
-        }else if hours >= 100 {
-            keychain.set("\(100)", forKey: keys.safeModeTime)
-        }else {
-            keychain.set("\(hours)", forKey: keys.safeModeTime)
-        }
-    }
     
     
     func faildLoginAlert(viewController: UIViewController) {
@@ -251,6 +238,39 @@ class Auth {
         let containerVC = ContainerVC()
         containerVC.modalPresentationStyle = .fullScreen
         vc.present(containerVC, animated: true, completion: nil)
+    }
+    
+}
+ //MARK:- Safe Mode Methods
+extension Auth {
+    // check if the app in safe mode or not
+    var isAppInSafeMode: Bool {
+        get {
+            return keychain.getBool(Defaults.EnableSafeMode.key) ?? false
+        }
+    }
+    // active safe mode "we can do this in the app setting"
+    func activeSafeMode() {
+        keychain.set(true, forKey: Defaults.EnableSafeMode.key)
+    }
+    // deactive safe mode "this may during app Luanch"
+    // or if the remaining time less than 3 h try after that time
+    func deactiveSafeMode() {
+        keychain.set(false, forKey: Defaults.EnableSafeMode.key)
+    }
+    // this is properity which contain the limited amount that user can deal with it (Pay) during safe mode
+    var allowedAmountInSafeMode: Double {
+        get {
+            return Double(keychain.get(keys.allowedAmount) ?? "0") ?? 0.0
+        }
+    }
+    // decrease allowed amount when user pay something
+    func updateAllowedAmoundInSafeMode(with newAmount: Int) {
+        keychain.set("\(newAmount)", forKey: keys.allowedAmount)
+    }
+    
+    func checkIfAppOutTheSafeMode(compeletion: @escaping(Int64, Error?) -> Void) {
+        //DNData.taskForGETRequest(url: <#T##URL#>, response: <#T##Decodable.Protocol#>, completion: <#T##(Decodable?, Error?) -> Void#>)
     }
     
 }

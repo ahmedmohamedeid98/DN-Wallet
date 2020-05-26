@@ -32,14 +32,10 @@ class DonationDetailsVC: UIViewController {
     //MARK:- setup subviews
     func setupNavBar() {
         navigationItem.title = data?.title
-        navigationController?.navigationBar.barTintColor = .DnDarkBlue
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barStyle = .black
-        let donateBarButton = UIBarButtonItem(title: "Donate", style: .plain, target: self, action: #selector(donateButtonPressed))
+        let donateBarButton = UIBarButtonItem(title: K.vc.donateDetailtsTitle , style: .plain, target: self, action: #selector(donateButtonPressed))
         navigationItem.rightBarButtonItem = donateBarButton
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
-    
     @objc func donateButtonPressed() {
         let vc = SendAndRequestMoney()
         vc.presentFromDonationVC = true

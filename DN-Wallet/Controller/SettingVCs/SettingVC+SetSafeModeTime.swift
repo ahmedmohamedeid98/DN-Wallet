@@ -13,7 +13,7 @@ extension SettingVC {
         let setAction = UIAlertAction(title: "Set", style: .default) { (action) in
             if let hours = alert.textFields![0].text {
                 print("hours: \(hours) ")
-                Auth.shared.setSafeModeTime(hours: hours)
+               // Auth.shared.setSafeModeTime(hours: hours)
                 self.settingTable.updateRowWith(indexPaths: [SecurityOptions.safeModeTime.indexPath], animate: .fade)
             }
         }
