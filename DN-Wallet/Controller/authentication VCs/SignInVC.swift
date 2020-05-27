@@ -2,7 +2,7 @@
 //  SignInVC.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 3/2/20.
+//  Created by Ahmed Eid on 3/2/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
@@ -37,15 +37,12 @@ class SignInVC: UIViewController {
         if  LoginWithBiometric && FaceIdFounded {
             setupLoginWithFaceIDLayout()
             shouldEvaluate = false
-            print("x1")
         } else if LoginWithBiometric {
             Auth.shared.loginWithBiometric(viewController: self)
-            print("x3")
         }
         
         if LoginWithBiometric && shouldEvaluate && !UserDefaults.standard.bool(forKey: Defaults.BiometricTypeTouchID.key) {
             Auth.shared.canEvaluatePolicyWithFaceID()
-            print("x4")
         }
         
     }
@@ -70,26 +67,26 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func signInBtnPressed(_ sender: Any) {
-        Auth.shared.pushHomeViewController(vc: self)
-    /*
         if emailContainerView.textField.text != "" && passwordContainerView.textField.text != "" {
             let email = emailContainerView.textField.text!
             let password = passwordContainerView.textField.text!
-            if Auth.shared.isValidEmail(email) && password.count >= 8 {
-                Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
-                    if success {
-                        Auth.shared.pushHomeViewController(vc: self)
-                    } else {
-                        Alert.asyncActionOkWith("Faild Login", msg: "email or password are incorrect, Try Again.", viewController: self)
-                    }
-                }
-            } else {
-                Alert.asyncActionOkWith("Faild Login", msg: "email or password are incorrect, Try Again.", viewController: self)
+            if !Auth.shared.isValidEmail(email) {
+                Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
+                return
+            }
+            if password.count < 8 {
+                Alert.syncActionOkWith(nil, msg: K.auth.passwordNotValid, viewController: self)
+                return
             }
             
+            Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+                if success {
+                    Auth.shared.pushHomeViewController(vc: self)
+                } else {
+                    Alert.asyncActionOkWith(nil, msg: K.auth.invalidEmailOrPass, viewController: self)
+                }
+            }
         }
- */
-
     }
     
     func setupLoginWithFaceIDLayout() {
@@ -102,4 +99,3 @@ class SignInVC: UIViewController {
     }
     
 }
-

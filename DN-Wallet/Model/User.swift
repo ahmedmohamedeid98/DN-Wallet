@@ -15,7 +15,7 @@ struct User {
     private(set) var country: String
     private(set) var gender: String?
     private(set) var job: String?
-    private(set) var photoLink: String?
+    private(set) var photo: String?
     
     init(username: String, email: String, password: String, phone: String, country: String, gender: String? = nil, job: String? = nil, photoLink: String? = nil) {
         self.username = username
@@ -23,6 +23,7 @@ struct User {
         self.password = password
         self.phone = phone
         self.country = country
+        
         if let _gender = gender {
             self.gender = _gender
         }
@@ -30,7 +31,7 @@ struct User {
             self.job = _job
         }
         if let _photoLink = photoLink {
-            self.photoLink = _photoLink
+            self.photo = _photoLink
         }
     }
 }

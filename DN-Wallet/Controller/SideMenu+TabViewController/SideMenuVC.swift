@@ -115,6 +115,7 @@ class SideMenuVC: UIViewController {
     }
     
     @objc func logoutBtnWasPressed() {
+        Auth.shared.logout() // delete token before logout
         self.dismiss(animated: true, completion: nil)
     }
 }

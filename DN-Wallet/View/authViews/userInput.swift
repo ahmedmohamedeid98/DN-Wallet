@@ -32,7 +32,7 @@ class userInput: UIView {
         txtField.stopSmartActions()
         return txtField
     }()
-    
+
     func configureInputField(imageName: String, systemImage: Bool = false, placeholder: String, isSecure: Bool) {
         if systemImage {
             self.image.image = UIImage(systemName: imageName)
@@ -56,16 +56,24 @@ class userInput: UIView {
         setupViewConstraints()
     }
     
-    func setupViewConstraints() {
+    private func setupViewConstraints() {
         addSubview(image)
         addSubview(seperatorLine)
         addSubview(textField)
-        
-        image.DNLayoutConstraint(self.topAnchor , left: self.leftAnchor, right: nil, bottom: self.bottomAnchor, margins: UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 0), size: CGSize(width: 30.0, height: 30.0))
-        seperatorLine.DNLayoutConstraint(self.topAnchor, left: image.rightAnchor, right: nil, bottom: bottomAnchor, margins: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 0), size: CGSize(width: 0.5, height: 0))
-        textField.DNLayoutConstraint(self.topAnchor, left: seperatorLine.rightAnchor, right: self.rightAnchor, bottom: self.bottomAnchor, margins: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 4), size: .zero)
+        image.DNLayoutConstraint(left: leftAnchor,
+                                 margins: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0),
+                                 size: CGSize(width: 30.0, height: 30.0),
+                                 centerV: true)
+        seperatorLine.DNLayoutConstraint(left: image.rightAnchor,
+                                         margins: UIEdgeInsets(top: 0, left: 8, bottom: 4, right: 0),
+                                         size: CGSize(width: 0.5, height: 30),
+                                         centerV: true)
+        textField.DNLayoutConstraint(topAnchor,
+                                     left: seperatorLine.rightAnchor,
+                                     right: rightAnchor,
+                                     bottom: bottomAnchor,
+                                     margins: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 4),
+                                     size: .zero)
     }
-    
-    
     
 }

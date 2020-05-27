@@ -60,6 +60,13 @@ struct K {
         static let username = "username"
         static let email = "email"
     }
+    struct auth {
+        static let emailNotvalid = "email is not valid. Try again"
+        static let passwordNotValid = "password length must be at least 8 characters long"
+        static let invalidEmailOrPass = "Invalid email or password, Try agin"
+        static let nameIsNull = "username fiald is required"
+        static let passwordNotMatch = "password not matched"
+    }
     
     struct alert {
         static let success = "Success"

@@ -10,6 +10,8 @@ import UIKit
 
 class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     
+    
+    //MARK:- Properities
     var user:User?
     
     //MARK:- Outlets
@@ -23,12 +25,6 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     @IBOutlet weak var activityIndicatorContainer: UIView!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
     
-    
-    
-    //MARK:- Properities
-    
-    
-    
     //MARK:- Init
     fileprivate func commonInit() {
         
@@ -38,7 +34,6 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         phoneNumberContainer.layer.cornerRadius = 4
         
         dropDownCountry.delegate = self
-       // dropDownConfiguration()
         
         // specify opt delegation to this vc and hide this part for latter
         opt.delegate = self
@@ -58,30 +53,14 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     // MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         commonInit()
-        
-       
+
     }
     
     @objc func resetKeyboardState() {
         phoneNumber.resignFirstResponder()
     }
-    /*
-    fileprivate func dropDownConfiguration() {
-        // The list of array to display. Can be changed dynamically
-        dropDownCountry.optionArray = ["Egyption Pound", "Dollar", "Uouro"]
-        //Its Id Values and its optional
-        dropDownCountry.optionIds = [40,41,42,43]
-        dropDownCountry.checkMarkEnabled = true
-        dropDownCountry.isSearchEnable = false
-        //dropDown.searchText = "Egyption Pound"
-        // The the Closure returns Selected Index and String
-        dropDownCountry.didSelect{(selectedText , index ,id) in
-            print("Selected String: \(selectedText) \n index: \(index)")
-        }
-    }
- */
+    
     /// this function called after user enter the opt code
     func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
         showIndicator(true)

@@ -9,19 +9,24 @@
 import UIKit
 
 @IBDesignable class SignUpVC: UIViewController {
-
-    var validInput: Bool = true
+    
+     //MARK:- Outlets
     @IBOutlet weak var usernameContainer: userInput!
     @IBOutlet weak var emailContainer: userInput!
     @IBOutlet weak var passwordContainer: userInput!
     @IBOutlet weak var confirmPasswordContainer: userInput!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
-    
     @IBOutlet weak var nextBtnOutlet: UIButton!
     
+     //MARK:- Properities
+    private var name : UITextField!
+    private var email: UITextField!
+    private var pass1: UITextField!
+    private var pass2: UITextField!
+    
+     //MARK:- Init ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-
         usernameContainer.configureInputField(imageName: "person",systemImage: true, placeholder: "Username", isSecure: false)
         emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
         passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
@@ -30,6 +35,11 @@ import UIKit
         
         steppedProgressBar.titles = ["", "", ""]
         steppedProgressBar.currentTab = 1
+        
+        name = usernameContainer.textField
+        email = emailContainer.textField
+        pass1 = passwordContainer.textField
+        pass2 = confirmPasswordContainer.textField
     }
     
 
@@ -38,7 +48,6 @@ import UIKit
     }
     
     @IBAction func nextBtnPressed(_ sender: UIButton) {
-        
         
         if isValid() {
             let username = usernameContainer.textField.text!
@@ -52,50 +61,56 @@ import UIKit
             present(vc!, animated: true)
         }
     }
-    
 }
 
 extension SignUpVC {
     
     func isValid() -> Bool{
-        
+        // why not one flage not enough? beacause we not gaurenteed that user will
+        // enter the inputs in sorted way
         var userValid: Bool = true
         var emailValid:Bool = true
         var pass1Valid:Bool = true
         var pass2Valid:Bool = true
         
-        if usernameContainer.textField.text == "" {
-            usernameContainer.layer.borderColor = UIColor.red.cgColor
-            userValid = false
+        let wrongColor = UIColor.red.cgColor
+        let validColor = UIColor.DN.LightGray.color().cgColor
+        // check name validation (1 layer)
+        if name.text == "" {
+            usernameContainer.layer.borderColor = wrongColor
+            Alert.syncActionOkWith(nil, msg: K.auth.nameIsNull, viewController: self)
+            return false
         } else {
-            usernameContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            usernameContainer.layer.borderColor = validColor
         }
-        
-        if emailContainer.textField.text == "" || !Auth.shared.isValidEmail(emailContainer.textField.text!) {
-            emailContainer.layer.borderColor = UIColor.red.cgColor
-            emailValid = false
+        // check email validation (2 layer)
+        if email.text == "" || !Auth.shared.isValidEmail(email.text!) {
+            emailContainer.layer.borderColor = wrongColor
+            Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
+            return false
         }else {
-            emailContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            emailContainer.layer.borderColor = validColor
         }
-        
-        if passwordContainer.textField.text == "" {
-            passwordContainer.layer.borderColor = UIColor.red.cgColor
-            pass1Valid = false
+        // check password validation (3 layer)
+        if pass1.text == "" || pass1.text!.count < 8 {
+            passwordContainer.layer.borderColor = wrongColor
+            Alert.syncActionOkWith(nil, msg: K.auth.passwordNotValid, viewController: self)
+            return false
         } else {
-            passwordContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            passwordContainer.layer.borderColor = validColor
         }
-        
-        if !pass1Valid || confirmPasswordContainer.textField.text == "" || !matchedPassword(passW1: passwordContainer.textField.text!, passW2: confirmPasswordContainer.textField.text!) {
-            confirmPasswordContainer.layer.borderColor = UIColor.red.cgColor
-            pass2Valid = false
+        if !pass1Valid || pass2.text == "" || !matchedPassword(pass1.text!, pass2.text!) {
+            confirmPasswordContainer.layer.borderColor = wrongColor
+            Alert.syncActionOkWith(nil, msg: K.auth.passwordNotMatch, viewController: self)
+            return false
         }else {
-            confirmPasswordContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            confirmPasswordContainer.layer.borderColor = validColor
         }
         
-        return userValid && emailValid && pass1Valid && pass2Valid
+        return true//userValid && emailValid && pass1Valid && pass2Valid
     }
     
-    func matchedPassword(passW1: String, passW2: String) -> Bool {
+    func matchedPassword(_ passW1: String, _ passW2: String) -> Bool {
         return passW1 == passW2
     }
 }

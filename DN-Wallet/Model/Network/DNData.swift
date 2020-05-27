@@ -9,7 +9,7 @@
 
 class DNData {
     
-    static let base = "https://hidden-sea-27440.herokuapp.com/"
+    static let base = "https://hidden-sea-27440.herokuapp.com/api"
     
     enum Endpoint {
         case login
@@ -24,7 +24,7 @@ class DNData {
         var stringValue: String{
             switch self {
             case .login: return DNData.base + "/auth"
-            case .register: return DNData.base + "/users"
+            case .register: return DNData.base + "/users/register"
             case .history: return DNData.base + "/history"
             case .concats: return DNData.base + "/concats"
             case .account_info: return DNData.base + "/account_info"

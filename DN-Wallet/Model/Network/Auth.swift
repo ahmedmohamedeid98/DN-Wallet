@@ -61,23 +61,23 @@ class Auth {
     }
     
     /// Login with Face ID or Touch ID
-    func loginWithBiometric(viewController: UIViewController) {
+    func loginWithBiometric(viewController vc: UIViewController) {
         let reason = "Identify yourself"
         let context:LAContext = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics , error: &error) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
                 if success {
-                    //guard let password = self?.keychain.get(keys.password) else { return }
-                    //guard let email = self?.keychain.get(keys.email) else { return }
-                    self?.authWithUserCredential(credintial: Login(email: "kkkk", password: "kkkkm")) { (success, error) in
-                        if true {
+                    guard let password = self?.keychain.get(keys.password) else { return }
+                    guard let email = self?.keychain.get(keys.email) else { return }
+                    self?.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+                        if success {
                             DispatchQueue.main.async {
-                                self?.pushHomeViewController(vc: viewController)
+                                self?.pushHomeViewController(vc: vc)
                             }
                         
                         }else {
-                            Alert.syncActionOkWith("Faild Login", msg: "Please reset you password.", viewController: viewController)
+                            Alert.asyncActionOkWith("Faild Login", msg: "Something was wrong, try again.", viewController: vc)
                         }
                     }
                 } else {
@@ -88,7 +88,7 @@ class Auth {
         }else {
             // ask user to enrolled his local authentication (enroll faceid or touch id)
            DispatchQueue.main.async {
-                Auth.shared.enableBiometricAuthAlert(viewController: viewController)
+                Auth.shared.enableBiometricAuthAlert(viewController: vc)
             }
         }
     }
@@ -100,35 +100,48 @@ class Auth {
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
     func authWithUserCredential(credintial: Login, completion: @escaping (Bool, Error?)->Void) {
-//        Data.login(credintial: credintial) { [weak self] (response, error) in
-//            guard let self = self else { return }
-//            if let response = response {
-//                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
-//                completion(true, nil)
-//            }else {
-//                completion(false, error)
-//            }
-//        }
-        completion(true, nil)
+        let data = Login(email: credintial.email,
+                         password: credintial.password)
+        DNData.login(credintial: data) { (response, error) in
+            if let e = error {
+                completion(false, e)
+            } else {
+                if let safeResponse = response {
+                    self.keychain.set(data.email, forKey: keys.email)
+                    self.keychain.set(data.password, forKey: keys.password)
+                    self.keychain.set(safeResponse.token, forKey: keys.token)
+                    completion(true, nil)
+                }
+            }
+        }
     }
     
     /// create new acount with user info
     /// - Parameters:
     ///   - user: user is a structure with (email - password - username - phone - ...).
     func createAccount(user: User, completion: @escaping(Bool, Error?)-> Void) {
-        let data = Register(email: user.email, password: user.password, username: user.username, phone: user.phone)
+        let data = Register(name: user.username,
+                            email: user.email,
+                            password: user.password,
+                            confirm_password: user.password,
+                            phone: user.phone,
+                            country: user.country)
+        
         DNData.register(with: data) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
                 self.keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.user_Id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
                 completion(true, nil)
             }else {
                 completion(false, error)
             }
         }
+    }
+    func logout() {
+        // delete token
+        keychain.set("", forKey: keys.token)
     }
     
     /// update the user password from setting

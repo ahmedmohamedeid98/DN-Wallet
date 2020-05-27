@@ -29,23 +29,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zLU-p4-lxd">
-                                <rect key="frame" x="40" y="218" width="334" height="80"/>
+                                <rect key="frame" x="40" y="218" width="334" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-PT-EBd" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4m-vV-1i4" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44" width="334" height="36"/>
+                                        <rect key="frame" x="0.0" y="64" width="334" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="ReT-Fu-wf1"/>
+                                    <constraint firstAttribute="height" constant="120" id="ReT-Fu-wf1"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="D3x-uq-vnv">
-                                <rect key="frame" x="30" y="338" width="354" height="95"/>
+                                <rect key="frame" x="30" y="378" width="354" height="95"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9Q-8e-ibQ">
                                         <rect key="frame" x="77" y="0.0" width="200" height="40"/>
@@ -136,32 +136,32 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ifs-Or-MLB">
-                                <rect key="frame" x="40" y="233" width="334" height="168"/>
+                                <rect key="frame" x="40" y="233" width="334" height="248"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jQN-ar-hvx">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="168"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="248"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLg-h7-PvE" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="56"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNW-Kd-XLy" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44" width="334" height="36"/>
+                                                <rect key="frame" x="0.0" y="64" width="334" height="56"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwG-ch-6zq" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="88" width="334" height="36"/>
+                                                <rect key="frame" x="0.0" y="128" width="334" height="56"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbs-QG-n3B" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="132" width="334" height="36"/>
+                                                <rect key="frame" x="0.0" y="192" width="334" height="56"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="168" id="eko-Eb-EhM"/>
+                                    <constraint firstAttribute="height" constant="248" id="eko-Eb-EhM"/>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Welcome, Enter Your Basic Information" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jsq-Bf-b10">
@@ -194,7 +194,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-gd-ZCX">
-                                <rect key="frame" x="40" y="421" width="334" height="40"/>
+                                <rect key="frame" x="40" y="501" width="334" height="40"/>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kWN-j6-eL6"/>
