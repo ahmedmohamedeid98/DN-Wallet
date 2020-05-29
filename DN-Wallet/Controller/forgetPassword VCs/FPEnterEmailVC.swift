@@ -14,7 +14,7 @@ class FPEnterEmailVC: UIViewController {
         let lb = UILabel()
         lb.text = K.vc.fbMsg
         lb.textAlignment = .center
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.Bold.font()
         return lb
     }()
@@ -23,7 +23,7 @@ class FPEnterEmailVC: UIViewController {
         Msg.textAlignment = .center
         Msg.text = K.vc.fbEnterMailMsg
         Msg.isEditable = false
-        Msg.textColor = UIColor.DN.DarkBlue.color()
+        Msg.textColor = .DnColor
         Msg.font = UIFont.DN.Regular.font(size: 16)
         return Msg
     }()
@@ -32,13 +32,13 @@ class FPEnterEmailVC: UIViewController {
         txt.placeholder = K.vc.fbEnterMailPlaceh
         txt.stopSmartActions()
         txt.keyboardType = .emailAddress
-        txt.textColor = UIColor.DN.DarkGray.color()
+        txt.textColor = .DnColor
         txt.font = UIFont.DN.Regular.font(size: 14)
         return txt
     }()
     var emailContainerView: UIView = {
         let vw = UIView()
-        vw.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        vw.layer.borderColor = UIColor.DnColor.cgColor
         vw.layer.borderWidth = 1
         return vw
     }()
@@ -48,7 +48,7 @@ class FPEnterEmailVC: UIViewController {
         Btn.setTitle(K.vc.fbResetCodeBtn, for: .normal)
         Btn.setTitleColor(.white, for: .normal)
         Btn.titleLabel?.font = UIFont.DN.SemiBlod.font(size: 18)
-        Btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        Btn.backgroundColor = .DnColor
         Btn.layer.cornerRadius = 8
         return Btn
     }()
@@ -57,6 +57,7 @@ class FPEnterEmailVC: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         commonInit()
         setupLayout()
         

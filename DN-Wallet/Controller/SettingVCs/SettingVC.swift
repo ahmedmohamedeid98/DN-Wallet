@@ -17,7 +17,7 @@ class SettingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         setupNavBar()
         setupUserQuikDetailsView()
         setupTableView()
@@ -86,7 +86,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = settingTable.dequeueReusableCell(withIdentifier: "settingcellid", for: indexPath) as? SettingCell else {return UITableViewCell()}
-        cell.safeModeAlertDelegate = self
+
         guard let section = SettingSection(rawValue: indexPath.section) else {return UITableViewCell()}
         switch section {
         case .General : cell.sectionType = GeneralOptions(rawValue: indexPath.row)
@@ -99,7 +99,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         let title = UILabel()
-        view.backgroundColor = UIColor.DN.DarkBlue.color()
+        view.backgroundColor = .DnColor
         title.font = UIFont.DN.Regular.font(size: 16)
         title.textColor = .white
         title.text = SettingSection(rawValue: section)?.description
@@ -158,6 +158,63 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
+extension SettingVC {
+    
+    func showLanguageActionSheet() {
+        let alert = UIAlertController(title: "Choose Language", message: "select your prefere language", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let English = UIAlertAction(title: LanguageSection.English.description , style: .default) { (action) in
+            UserDefaults.standard.set(LanguageSection.English.id, forKey: Defaults.Language.key)
+            self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
+        }
+        let Arabic = UIAlertAction(title: LanguageSection.Arabic.description , style: .default) { (action) in
+            UserDefaults.standard.set(LanguageSection.Arabic.id, forKey: Defaults.Language.key)
+            self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
+        }
+        alert.addAction(English)
+        alert.addAction(Arabic)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func setSafeModeTimeAlert() {
+        let alert = UIAlertController(title: "Safe Mode Time", message: "Set safe mode time in (Hours) , we recommend you that time be at least 12 hours.", preferredStyle: .alert)
+        let setAction = UIAlertAction(title: "Set", style: .default) { (action) in
+            if let hours = alert.textFields![0].text {
+                print("hours: \(hours) ")
+               // Auth.shared.setSafeModeTime(hours: hours)
+                self.settingTable.updateRowWith(indexPaths: [SecurityOptions.safeModeTime.indexPath], animate: .fade)
+            }
+        }
+        let Cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addTextField { (txt) in
+            txt.font = UIFont.DN.Regular.font(size: 16)
+            txt.stopSmartActions()
+            txt.keyboardType = .numberPad
+            txt.placeholder = "e.g: 12"
+        }
+        
+        alert.addAction(Cancel)
+        alert.addAction(setAction)
+        present(alert, animated: true, completion: nil)
+    }
+    func showSafeModeAlert(completion: @escaping (Bool) -> ()) {
+            
+            let alert = UIAlertController(title: "By Activate \"Safe Mode\" You Accept to Stop Some Service For Specific Time.", message: "Send Money, Send Request, Withdraw Money will be Stopped. Pay From Purchases Will be Limited.", preferredStyle: .alert)
+            let Cancle = UIAlertAction(title: "Cancle", style: .cancel) { (action) in
+                completion(false)
+            }
+            let Continue = UIAlertAction(title: "Continue", style: .default) { (action) in
+                completion(true)
+            }
+            
+            alert.addAction(Cancle)
+            alert.addAction(Continue)
+            self.present(alert, animated: true, completion: nil)
+    }
+}
+
 extension UINavigationController {
 
    open override var preferredStatusBarStyle: UIStatusBarStyle {

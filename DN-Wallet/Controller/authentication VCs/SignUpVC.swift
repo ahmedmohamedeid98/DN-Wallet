@@ -27,6 +27,7 @@ import UIKit
      //MARK:- Init ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         usernameContainer.configureInputField(imageName: "person",systemImage: true, placeholder: "Username", isSecure: false)
         emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
         passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
@@ -35,7 +36,12 @@ import UIKit
         
         steppedProgressBar.titles = ["", "", ""]
         steppedProgressBar.currentTab = 1
-        
+        // TEST TEST TEST
+        usernameContainer.textField.text = "Khaled"
+        emailContainer.textField.text = "Khaled@gmail.com"
+        passwordContainer.textField.text = "12345678"
+        confirmPasswordContainer.textField.text = "12345678"
+        // === === === ===
         name = usernameContainer.textField
         email = emailContainer.textField
         pass1 = passwordContainer.textField
@@ -66,15 +72,9 @@ import UIKit
 extension SignUpVC {
     
     func isValid() -> Bool{
-        // why not one flage not enough? beacause we not gaurenteed that user will
-        // enter the inputs in sorted way
-        var userValid: Bool = true
-        var emailValid:Bool = true
-        var pass1Valid:Bool = true
-        var pass2Valid:Bool = true
-        
+
         let wrongColor = UIColor.red.cgColor
-        let validColor = UIColor.DN.LightGray.color().cgColor
+        let validColor = UIColor.DnGrayColor.cgColor
         // check name validation (1 layer)
         if name.text == "" {
             usernameContainer.layer.borderColor = wrongColor
@@ -99,7 +99,7 @@ extension SignUpVC {
         } else {
             passwordContainer.layer.borderColor = validColor
         }
-        if !pass1Valid || pass2.text == "" || !matchedPassword(pass1.text!, pass2.text!) {
+        if pass2.text == "" || !matchedPassword(pass1.text!, pass2.text!) {
             confirmPasswordContainer.layer.borderColor = wrongColor
             Alert.syncActionOkWith(nil, msg: K.auth.passwordNotMatch, viewController: self)
             return false

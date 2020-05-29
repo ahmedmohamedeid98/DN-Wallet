@@ -25,7 +25,7 @@ class NotificationVC: UIViewController {
     //MARK:- Init ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .DnVcBackgroundColor
         setupDismissButon()
         setupSearchBar()
         setupTableView()

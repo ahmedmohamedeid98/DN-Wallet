@@ -25,7 +25,7 @@ class PopUpMenu: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnBackgroundColor
+        view.backgroundColor = .DnVcBackgroundColor
         currentDataSource = originalDataSource
         setupSearchBar()
         setupListTable()

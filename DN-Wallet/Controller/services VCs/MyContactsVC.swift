@@ -39,7 +39,7 @@ class MyContactsVC: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         originDataSource = [Contact(username: "ahmed", email: "ahmed54@gmail.com"),
                             Contact(username: "zoro", email: "zoro54@gmail.com"),
                             Contact(username: "mohamed", email: "mohamed_eid54@gmail.com"),
@@ -285,7 +285,8 @@ extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !inSafeMode {
             if let item = contactTableDataSource.itemIdentifier(for: indexPath) {
-                let vc = SendAndRequestMoney()
+                let st = UIStoryboard(name: "Services", bundle: .main)
+                guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }
                 vc.presentedFromMyContact = true
                 vc.presentedEmail = item.email
                 vc.modalPresentationStyle = .fullScreen

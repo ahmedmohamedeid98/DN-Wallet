@@ -32,14 +32,14 @@ class AddHeirVC: UIViewController {
         txt.leftViewMode = .always
         txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
         txt.stopSmartActions()
-        txt.addBorder(color: UIColor.DN.DarkBlue.color().cgColor)
+        txt.addBorder(color: UIColor.DnColor.cgColor)
         return txt
     }()
     
     let firstPrecentage: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.text = "100 %"
         return lb
     }()
@@ -47,7 +47,7 @@ class AddHeirVC: UIViewController {
     let firstLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.text = "first"
         return lb
     }()
@@ -60,14 +60,14 @@ class AddHeirVC: UIViewController {
         txt.leftViewMode = .always
         txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
         txt.stopSmartActions()
-        txt.addBorder(color: UIColor.DN.Black.color().cgColor)
+        txt.addBorder(color: UIColor.DnColor.cgColor)
         return txt
     }()
     
     let secondPrecentage: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.DN.Regular.font(size: 16)
-        lb.textColor = UIColor.DN.Black.color()
+        lb.textColor = .DnDarkBlue
         lb.text = "0 %"
         return lb
     }()
@@ -75,7 +75,7 @@ class AddHeirVC: UIViewController {
     let secondLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = UIColor.DN.Black.color()
+        lb.textColor = .DnDarkBlue
         lb.text = "second"
         return lb
     }()
@@ -86,7 +86,7 @@ class AddHeirVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         DNData.getUserHeirs { (heirs, error) in
             if error != nil {
                 print("Error: \(String(describing: error))")
@@ -118,8 +118,8 @@ class AddHeirVC: UIViewController {
         slider.minimumValue = 0
         slider.maximumValue = 100
         slider.value = data.count > 0 ? data[0].precent : 100
-        slider.minimumTrackTintColor = UIColor.DN.DarkBlue.color()
-        slider.maximumTrackTintColor = UIColor.DN.Black.color()
+        slider.minimumTrackTintColor = .DnColor
+        slider.maximumTrackTintColor = .DnDarkBlue
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
     @objc func sliderValueChanged(_ sender: UISlider) {

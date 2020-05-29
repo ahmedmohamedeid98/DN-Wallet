@@ -133,6 +133,7 @@ class Auth {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
                 self.keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
                 self.keychain.set(response.user_Id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.Token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
                 completion(true, nil)
             }else {
                 completion(false, error)
@@ -143,7 +144,9 @@ class Auth {
         // delete token
         keychain.set("", forKey: keys.token)
     }
-    
+    func getUserToken() -> String? {
+        return keychain.get(keys.token)
+    }
     /// update the user password from setting
     /// - Parameters:
     ///   - currentPassword: the current password entered to confirm the user.

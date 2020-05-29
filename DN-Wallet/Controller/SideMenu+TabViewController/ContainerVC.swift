@@ -20,6 +20,7 @@ class ContainerVC: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         handleHomeViewController()
         // load user data
         DNData.getUserAccountInfo { (userInfo, error) in

@@ -6,31 +6,34 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
+extension String: Error {}
 
 class DNData {
     
     static let base = "https://hidden-sea-27440.herokuapp.com/api"
-    
+    static var imageCache = NSCache<AnyObject, UIImage>()
     enum Endpoint {
         case login
         case register
         case history
         case concats
         case charity
+        case charityDetails(String)
         case heirs
         case account_info
         case UTCDateTime
         
         var stringValue: String{
             switch self {
-            case .login: return DNData.base + "/auth"
-            case .register: return DNData.base + "/users/register"
-            case .history: return DNData.base + "/history"
-            case .concats: return DNData.base + "/concats"
-            case .account_info: return DNData.base + "/account_info"
-            case .charity: return DNData.base + "/charity"
-            case .heirs: return DNData.base + "/heirs"
-            case .UTCDateTime: return "http://worldclockapi.com/api/json/utc/now"
+                case .login: return DNData.base + "/auth"
+                case .register: return DNData.base + "/users/register"
+                case .history: return DNData.base + "/history"
+                case .concats: return DNData.base + "/concats"
+                case .account_info: return DNData.base + "/account_info"
+                case .charity: return DNData.base + "/charity"
+                case .charityDetails(let id): return DNData.base + "/charity/\(id)"
+                case .heirs: return DNData.base + "/heirs"
+                case .UTCDateTime: return "http://worldclockapi.com/api/json/utc/now"
             }
         }
         
@@ -81,8 +84,59 @@ class DNData {
 //        }
     }
     
-    class func getCharityOrganizationInitialData() {
-        
+    class func getCharityOrganizationInitialData(completion: @escaping([Charity], Error?)-> Void) {
+        //var request = URLRequest(url: Endpoint.charity.url)
+        //let token = Auth.shared.getUserToken()
+        //request.setValue(token, forHTTPHeaderField: "Authorization")
+        //request.addValue(token!, forHTTPHeaderField: "Authorization")
+        //request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: Endpoint.charity.url) { (data, response, error) in
+            if let e = error {
+                completion([], e)
+                return
+            }
+            if let safeData = data {
+                let decoder = JSONDecoder()
+                do {
+                    var chs: [Charity] = []
+                    let ch = try decoder.decode([CharityResponse].self, from: safeData)
+                    ch.forEach {
+                        chs.append(Charity(id: $0._id, name: $0.name, email: "test@gmail.com", link: $0.org_logo))
+                    }
+                    completion(chs, nil)
+                } catch {
+                    completion([], error)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    class func loadImageWithStrURL(str: String, completion: @escaping (UIImage?, Error?) -> () ) {
+        let url = URL(string: str)!
+        if let image = DNData.imageCache.object(forKey: str as AnyObject) {
+            completion(image, nil)
+            print("get image from cach")
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            if let safeData = data {
+                if let image = UIImage(data: safeData) {
+                    print("get image from server")
+                    DNData.imageCache.setObject(image, forKey: str as AnyObject)
+                    completion(image, nil)
+                } else {
+                    let error: Error = "faild unwrapping image"
+                    completion(nil,  error)
+                }
+            }
+        }
+        task.resume()
     }
     
     //MARK:- Transaction
@@ -91,12 +145,12 @@ class DNData {
     }
     
     /// ask server to get the static information about charity organization
-    class func getCharityOrganizationDetails(completion: @escaping([CharityOrg], Error?)-> Void) {
-        taskForGETRequest(url: Endpoint.charity.url, response: [CharityOrg].self) { (response, error) in
-            if let response = response {
-                completion(response, nil)
+    class func getCharityOrganizationDetails(withID id:String, completion: @escaping(CharityDetailsResponse?, Error?)-> Void) {
+        taskForGETRequest(url: Endpoint.charityDetails(id).url, response: CharityDetailsResponse.self) { (response, error) in
+            if let details = response {
+                completion(details, nil)
             }else {
-                completion([], error)
+                completion(nil, error)
             }
         }
         
@@ -127,6 +181,8 @@ class DNData {
     /// ask API to create account, and return a user token
     class func register(with data: Register, completion: @escaping(RegisterResponder?, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoint.register.url, response: RegisterResponder.self, body: data) { (response, error) in
+            print("##### reponse #### : \(String(describing: response))")
+            print("#### error #### : \(String(describing: error))")
             if let response = response {
                 completion(response, nil)
             }else {
@@ -138,30 +194,6 @@ class DNData {
     func addNewContact(data: Contact, compiletion: @escaping(Bool, Error?) -> Void) {
         
     }
-    /*
-    private class func DateAndTimePreprocessing(_ component: String) -> DateComponents? {
-        // this spliting and preprocessing based on world clock API returned json
-        let dateAndtime = component.split(separator: "T")
-        let date = dateAndtime[0].split(separator: "-")
-        let time = dateAndtime[1].split(separator: " ")[0].split(separator: ":")
-        let dateComponent = DateComponents(year: Int(date[0]), month: Int(date[1]), day: Int(date[2]), hour: Int(time[0]))
-        return dateComponent
-    }
-    
-    class func getCurrentDataComponents(completion: @escaping (DateComponents?) -> () ) {
-        taskForGETRequest(url: Endpoint.UTCDateTime.url, response: CurrentDateComponent.self) { (response, error) in
-            if error == nil {
-                guard let currentDate = response else {
-                    completion(nil)
-                    return
-                }
-                let component = self.DateAndTimePreprocessing(currentDate.currentDateTime)
-                completion(component)
-            }
-        }
-    }
-    */
-    
     
     /// convert currency_code to symbole if it founded
     class func symboleFromString(str: String) -> String {
@@ -186,9 +218,7 @@ class DNData {
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
+                completion(responseObject, nil)
             } catch {
                 completion(nil, error)
             }

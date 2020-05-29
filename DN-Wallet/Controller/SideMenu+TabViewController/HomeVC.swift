@@ -60,7 +60,7 @@ class HomeVC: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnBackgroundColor
+        view.backgroundColor = .DnVcBackgroundColor
         initViewController()
     }
     override func viewWillAppear(_ animated: Bool) {

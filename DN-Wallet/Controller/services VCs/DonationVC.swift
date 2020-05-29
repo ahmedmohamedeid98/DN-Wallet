@@ -14,31 +14,46 @@ enum charitySection: CaseIterable {
 
 class DonationVC: UIViewController {
     
-    let data: [CharityOrg] = [CharityOrg(title: "ElNasser Shcool", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd"),
-    CharityOrg(title: "Google", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd"),
-    CharityOrg(title: "Yahoo", email: "egd87@org.co.com", logoLink: "http://www.google.com", imageLink: "http://www.google.com", location: Location(lat: 20.05, log: 47.54), concats: "151451\n1451451", address: "dkjlskd skdlksdjs lsdlkdj slkjsdjs ljsdkjsd", founders: "sksldskds kljskdjsd lskjdksd lskdjslkd", vision: "ksdlkjdlkjlsk skldjksd lasdkj sdlk ds sldks jdlks sd kasldoidj sds lskd", about: "skdlsdksd dskdkls ds dskdsd sds ds; dsd;sldksdkod q sd ods dslds;dkpq dsa sldks dqpks dspdsod ksdpsd ds dsa;dkspd apsd sdkpsodkaod s dsodk spdsd s fjposfjsjd psod asdpao aodoqpos s dspodksdksok w wokposkdosd qkwqpqokowkd aspodks dpasod ksda spodkkw wodsjiw pskdosk wpskdpa apowkd aspoas pasodk asp asd")]
     
     //MARK:- Properities
     var searchBar: UISearchBar!
     var tableView: UITableView!
     var shouldRestoreCurrentDataSource: Bool = false
     var searchBarButton: UIBarButtonItem!
-    var currentDataSource: [CharityOrg] = []
-    var originDataSource: [CharityOrg] = []
-    var charityTableDataSource: UITableViewDiffableDataSource<charitySection, CharityOrg>!
+    var currentDataSource: [Charity] = []
+    var charityLogo: [UIImage?] = []
+    var originDataSource: [Charity] = []
+    var charityTableDataSource: UITableViewDiffableDataSource<charitySection, Charity>!
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnBackgroundColor
-        originDataSource = data
-        currentDataSource = originDataSource
+        view.backgroundColor = .DnVcBackgroundColor
+        loadData()
         setupSearchBar()
         setupNavBar()
         setupTableView()
         setupLayout()
         configureDiffableDateSource()
         tableView.dataSource = charityTableDataSource
+    }
+    
+    func loadData() {
+        DNData.getCharityOrganizationInitialData { (charityList, error) in
+            if error != nil {
+                Alert.asyncActionOkWith(nil, msg: "faild to load chirty data", viewController: self)
+            } else {
+                self.originDataSource = charityList
+                self.currentDataSource = self.originDataSource
+                self.updateTableInMainThread()
+            }
+        }
+    }
+    func updateTableInMainThread() {
+        DispatchQueue.main.async {
+            self.updateTableViewDataSource()
+        }
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -78,8 +93,7 @@ class DonationVC: UIViewController {
     private func configureDiffableDateSource() {
         charityTableDataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (table, indexPath, data) -> UITableViewCell? in
             guard let cell = table.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier, for: indexPath) as? DonationCell else {fatalError("can not dequeue charity cell")}
-            cell.org_mail = data.email
-            cell.org_title = data.title
+            cell.data = self.currentDataSource[indexPath.row]
             return cell
         })
         
@@ -87,7 +101,7 @@ class DonationVC: UIViewController {
     }
     
     private func updateTableViewDataSource() {
-        var snapShot = NSDiffableDataSourceSnapshot<charitySection, CharityOrg>()
+        var snapShot = NSDiffableDataSourceSnapshot<charitySection, Charity>()
         snapShot.appendSections(charitySection.allCases)
         for item in currentDataSource {
             snapShot.appendItems([item])
@@ -112,7 +126,7 @@ class DonationVC: UIViewController {
             shouldRestoreCurrentDataSource = true
             currentDataSource = originDataSource
             let filteredResult = currentDataSource.filter {
-                $0.title.replacingOccurrences(of: " ", with: "").lowercased().contains(searchTerm.replacingOccurrences(of: " ", with: "").lowercased())
+                $0.name.replacingOccurrences(of: " ", with: "").lowercased().contains(searchTerm.replacingOccurrences(of: " ", with: "").lowercased())
             }
             currentDataSource = filteredResult
             updateTableViewDataSource()
@@ -151,12 +165,12 @@ extension DonationVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DonationDetailsVC()
-        guard let currentOrg = charityTableDataSource.itemIdentifier(for: indexPath) else { return }
-        vc.data = currentOrg
+        guard let charity = charityTableDataSource.itemIdentifier(for: indexPath) else { return }
+        vc.charityID = charity.id
+        vc.title = charity.name
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
         
 }
-

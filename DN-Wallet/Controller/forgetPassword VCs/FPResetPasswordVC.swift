@@ -29,7 +29,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
            let lb = UILabel()
         lb.text = K.vc.fbCheckInbox
            lb.textAlignment = .center
-           lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
            lb.font = UIFont.DN.SemiBlod.font(size: 18)
            return lb
        }()
@@ -38,7 +38,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         Msg.textAlignment = .center
         Msg.text = K.vc.fbInfoMsg
         Msg.isEditable = false
-        Msg.textColor = UIColor.DN.DarkBlue.color()
+        Msg.textColor = .DnColor
         Msg.font = UIFont.DN.Regular.font(size: 16)
         return Msg
     }()
@@ -49,7 +49,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         let lb = UILabel()
         lb.text = K.vc.fbEnterNewP
         lb.textAlignment = .center
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.SemiBlod.font(size: 18)
         return lb
     }()
@@ -61,7 +61,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         let Btn = UIButton(type: .system)
         Btn.setTitle(K.alert.done, for: .normal)
         Btn.setTitleColor(.white, for: .normal)
-        Btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        Btn.backgroundColor = .DnColor
         Btn.layer.cornerRadius = 20
         return Btn
     }()
@@ -102,6 +102,7 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         commonInit()
         setupLayout()
     }

@@ -30,7 +30,7 @@ class ChargeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         handleNavigationBar()
-        view.backgroundColor = .DnBackgroundColor
+        view.backgroundColor = .DnVcBackgroundColor
         dropDown.delegate = self
         amountField.delegate = self
         creditTable.delegate = self
@@ -58,8 +58,6 @@ class ChargeVC: UIViewController {
         tableDataSource = UITableViewDiffableDataSource(tableView: creditTable, cellProvider: { (MyTable, indexPath, data) -> UITableViewCell? in
             guard let cell = MyTable.dequeueReusableCell(withIdentifier: ChargeCreditCell.reuseIdentifier, for: indexPath)  as? ChargeCreditCell else {return UITableViewCell()}
             cell.data = data
-            cell.currentIndexPath = indexPath
-            cell.cellDelegate = self
             return cell
         })
         
@@ -100,44 +98,24 @@ extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
     }
 }
 
-extension ChargeVC: UITableViewDelegate , SelectedCardDelegate{
+extension ChargeVC: UITableViewDelegate {
     
-    func freeLastSelectedIndexPath() {
-        lastSelectedIndexPath = nil
-    }
-    
-    func selectedCreditCard(id: String, currentIndex: IndexPath) {
-        self.selectedCardId = id
-        print("selected Id: \(id)")
-        toggleLastIndexPath(currentIndex)
-    }
-    // check if there is cell selected befor, if it is then deselect it.
-    private func toggleLastIndexPath(_ currentIndex: IndexPath) {
-        guard let currentCell = creditTable.cellForRow(at: currentIndex) as? ChargeCreditCell else {return}
-        if lastSelectedIndexPath != nil {
-            if lastSelectedIndexPath == currentIndex {
-                currentCell.checkBox.setImage(UIImage(systemName: "circle"), for: .normal)
-                currentCell.toggle = true
-            } else {
-                guard let lastCell = creditTable.cellForRow(at: lastSelectedIndexPath!) as? ChargeCreditCell else {return}
-                lastCell.checkBox.setImage(UIImage(systemName: "circle"), for: .normal)
-                lastCell.toggle = true
-                
-                currentCell.checkBox.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-                currentCell.toggle = false
-                lastSelectedIndexPath = currentIndex
-            }
-        } else {
-            lastSelectedIndexPath = currentIndex
-            currentCell.checkBox.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-            currentCell.toggle = false
+    func unCheckLastCell() {
+        if let cell = creditTable.cellForRow(at: lastSelectedIndexPath!) as? ChargeCreditCell {
+            cell.checkBoxToggle(check: false)
+            lastSelectedIndexPath = nil
         }
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        toggleLastIndexPath(indexPath)
-        guard let cell = tableView.cellForRow(at: indexPath) as? ChargeCreditCell else {return}
-        self.selectedCardId = cell.credit_Id
+        if let cell = tableView.cellForRow(at: indexPath) as? ChargeCreditCell {
+            if lastSelectedIndexPath == nil {
+                lastSelectedIndexPath = indexPath
+            } else {
+                unCheckLastCell()
+            }
+            cell.checkBoxToggle(check: true)
+            self.selectedCardId = cell.credit_Id
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

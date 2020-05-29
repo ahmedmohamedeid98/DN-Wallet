@@ -12,8 +12,6 @@
 		040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754B245E682000B66A02 /* PopUpMenu.swift */; };
 		040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754D245E6C5F00B66A02 /* PopMenuItem.swift */; };
 		040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */; };
-		041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */; };
-		041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */; };
 		041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C4243E65CD0043CA77 /* ContainerVC.swift */; };
 		041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C6243E65DE0043CA77 /* HomeVC.swift */; };
 		041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041046C8243E661F0043CA77 /* SideMenuVC.swift */; };
@@ -30,7 +28,6 @@
 		045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */; };
 		045EC5E6244F96780030FAE9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EC5E5244F96780030FAE9 /* Alert.swift */; };
 		04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */; };
-		04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */; };
 		04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B03243CFB3200E4BFA2 /* Defaults.swift */; };
 		04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */; };
 		04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B09243D376C00E4BFA2 /* AddHeirVC.swift */; };
@@ -67,7 +64,6 @@
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
 		047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* SignUpVC.swift */; };
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
-		0481B7362458C55900643CD4 /* DonationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481B7352458C55900643CD4 /* DonationDetailsCell.swift */; };
 		0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487D2EC247D58850020F1EB /* NotificationCell.swift */; };
 		0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0487D2ED247D58850020F1EB /* NotificationCell.xib */; };
 		048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F11243B512100BE464D /* EditProfileVC.swift */; };
@@ -100,6 +96,8 @@
 		04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */; };
 		04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* DNData.swift */; };
 		04E6307E247148330026589E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6307D247148300026589E /* Constants.swift */; };
+		04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */; };
+		04E8ED5024812AE800DE0E0F /* DonationDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */; };
 		04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */; };
 		04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD28C324256D6B00E41EAC /* CharityOrg.swift */; };
 		04FED9D62447289C00EDD0EF /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */; };
@@ -113,8 +111,6 @@
 		040F754B245E682000B66A02 /* PopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenu.swift; sourceTree = "<group>"; };
 		040F754D245E6C5F00B66A02 /* PopMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMenuItem.swift; sourceTree = "<group>"; };
 		040F754F245E6D6800B66A02 /* PopUpMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMenuCell.swift; sourceTree = "<group>"; };
-		041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+EnableSafeModeAlert.swift"; sourceTree = "<group>"; };
-		041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+SetSafeModeTime.swift"; sourceTree = "<group>"; };
 		041046C4243E65CD0043CA77 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		041046C6243E65DE0043CA77 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		041046C8243E661F0043CA77 /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
@@ -131,7 +127,6 @@
 		045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsCell.swift; sourceTree = "<group>"; };
 		045EC5E5244F96780030FAE9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSection.swift; sourceTree = "<group>"; };
-		04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingVC+LanguageActionSheet.swift"; sourceTree = "<group>"; };
 		04659B03243CFB3200E4BFA2 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		04659B09243D376C00E4BFA2 /* AddHeirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHeirVC.swift; sourceTree = "<group>"; };
@@ -170,7 +165,6 @@
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		047FA8B4240E1E910097DD06 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
-		0481B7352458C55900643CD4 /* DonationDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsCell.swift; sourceTree = "<group>"; };
 		0487D2EC247D58850020F1EB /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		0487D2ED247D58850020F1EB /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		048D2F11243B512100BE464D /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -204,6 +198,8 @@
 		04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		04DB8841242C5BC6007BA6B0 /* DNData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNData.swift; sourceTree = "<group>"; };
 		04E6307D247148300026589E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsCell.swift; sourceTree = "<group>"; };
+		04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonationDetailsCell.xib; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* SignUpPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhoneVC.swift; sourceTree = "<group>"; };
 		04FD28C324256D6B00E41EAC /* CharityOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityOrg.swift; sourceTree = "<group>"; };
 		04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
@@ -271,9 +267,10 @@
 		0411E580245B905500EBBCF5 /* DonationView */ = {
 			isa = PBXGroup;
 			children = (
-				0481B7352458C55900643CD4 /* DonationDetailsCell.swift */,
 				0467D75A2425673200C67D7C /* DNAnnotation.swift */,
 				04B1C90E2422C7760062D54F /* DonationCell.swift */,
+				04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */,
+				04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */,
 			);
 			path = DonationView;
 			sourceTree = "<group>";
@@ -422,9 +419,6 @@
 			isa = PBXGroup;
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
-				04659B01243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift */,
-				041046BC243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift */,
-				041046BE243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift */,
 				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
@@ -670,6 +664,7 @@
 			files = (
 				04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */,
 				04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */,
+				04E8ED5024812AE800DE0E0F /* DonationDetailsCell.xib in Resources */,
 				04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */,
 				04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */,
 				0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */,
@@ -731,7 +726,6 @@
 				04A5A52A243F5F1A000340FB /* CGPoint+JK.swift in Sources */,
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
-				041046BF243E3F1F0043CA77 /* SettingVC+SetSafeModeTime.swift in Sources */,
 				0411E584245B959000EBBCF5 /* DNGradient.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */,
@@ -756,7 +750,6 @@
 				04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */,
 				0495D1CE2414511600796499 /* SignUpConfirmEmailVC.swift in Sources */,
 				04FED9DA244757CE00EDD0EF /* SliderCell.swift in Sources */,
-				041046BD243E079B0043CA77 /* SettingVC+EnableSafeModeAlert.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
@@ -804,16 +797,15 @@
 				04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
+				04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
 				04A5A530243FA87B000340FB /* ServiceSection.swift in Sources */,
 				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
-				0481B7362458C55900643CD4 /* DonationDetailsCell.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
 				04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
 				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,
-				04659B02243CEEDF00E4BFA2 /* SettingVC+LanguageActionSheet.swift in Sources */,
 				045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */,
 				041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */,
 				0401BBD3247C7493000C597A /* NotificationVC.swift in Sources */,

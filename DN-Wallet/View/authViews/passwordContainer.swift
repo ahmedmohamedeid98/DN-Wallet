@@ -26,7 +26,7 @@ class passwordContainer: UIView {
     var textField : UITextField = {
         let txt = UITextField()
         txt.placeholder = "New Password"
-        txt.textColor = UIColor.DN.DarkGray.color()
+        txt.textColor = .DnColor
         txt.font = UIFont.DN.Regular.font(size: 14)
         txt.stopSmartActions()
         txt.isSecureTextEntry = true

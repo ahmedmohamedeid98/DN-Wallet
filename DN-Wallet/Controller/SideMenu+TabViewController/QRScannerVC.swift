@@ -26,7 +26,7 @@ class QRScannerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .DnVcBackgroundColor
     }
     
     func setupScannerView(){

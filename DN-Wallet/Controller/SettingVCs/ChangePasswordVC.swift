@@ -35,7 +35,7 @@ class ChangePasswordVC: UIViewController {
     
     var EnterBtn: UIButton = {
         let btn = UIButton(type: .system)
-        btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        btn.backgroundColor = .DnColor
         btn.tintColor = .white
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 14)
         btn.setTitle("Enter", for: .normal)
@@ -48,7 +48,7 @@ class ChangePasswordVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         confirmNewPassword.textField.delegate = self
         rightBarBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(DoneBtnPressed))
         rightBarBtn.isEnabled = false

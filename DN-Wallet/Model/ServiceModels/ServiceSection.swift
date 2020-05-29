@@ -64,17 +64,16 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
     }
     
     func pushVC(from rootVC: UIViewController) {
-        
+        let st = UIStoryboard(name: "Services", bundle: .main)
         switch self {
         case .history:
-            let st = UIStoryboard(name: "Services", bundle: .main)
             guard let vc = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC else { return }
             present(vc, from: rootVC)
         case .sendMoney:
-            let vc = SendAndRequestMoney()
+            guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }
             present(vc, from: rootVC)
         case .sendRequest:
-            let vc = SendAndRequestMoney()
+            guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }
             vc.isRequest = true
             present(vc, from: rootVC)
         case .exchangeCurrency:

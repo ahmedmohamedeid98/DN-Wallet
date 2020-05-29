@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     
+    
     func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
         self.inputConfirmationCode = "\(tf1)\(tf2)\(tf3)\(tf4)"
         self.signUpBtnOutlet.isEnabled = true
@@ -17,7 +18,7 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     
     //MARK:- Properities
     var inputConfirmationCode: String!
-    
+    var registerData: User?
     //MARK:- Outlets
     @IBOutlet weak var signUpBtnOutlet: UIButton!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
@@ -26,6 +27,7 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         optContainerView.delegate = self
         signUpBtnOutlet.layer.cornerRadius = 20.0
         signUpBtnOutlet.isEnabled = false
@@ -39,12 +41,30 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
         UserDefaults.standard.set(true, forKey: Defaults.FirstLaunch.key)
         signUpBtnOutlet.isEnabled = false
         if self.inputConfirmationCode == "2211" {
-            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            guard let data = registerData else {return}
+            print("data: \(data)")
+            Auth.shared.createAccount(user: data) { (success, error) in
+                if success {
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                        Auth.shared.pushHomeViewController(vc: self)
+                    })
+                } else {
+                    Alert.asyncActionOkWith(nil, msg: "faild register, \(error!)", viewController: self)
+                }
+            }
         } else {
             optContainerView.reset()
             optContainerView.errorMsg.isHidden = false
         }
         
     }
+    
+    @IBAction func termsAndServiceBtnPressed(_ sender: UIButton) {
+        // presend view controller
+    }
+    @IBAction func backBtnPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 }

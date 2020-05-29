@@ -24,7 +24,7 @@ class UserQuikDetails: UIView {
     let userName: UILabel = {
         let lb = UILabel()
         lb.text = "username"
-        lb.textColor = UIColor.DN.Black.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.Bold.font(size: 16)
         return lb
     }()

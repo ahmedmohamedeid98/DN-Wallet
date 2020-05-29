@@ -28,13 +28,13 @@ class ExchangeCurrencyVC: UIViewController {
     // supported views created for setup the border for the both drop down menu
     var fromDropDownContainer: UIView = {
         let vw = UIView()
-        vw.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        vw.layer.borderColor = UIColor.DnGrayColor.cgColor
         vw.layer.borderWidth = 0.5
         return vw
     }()
     var toDropDownContainer: UIView = {
         let vw = UIView()
-        vw.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        vw.layer.borderColor = UIColor.DnGrayColor.cgColor
         vw.layer.borderWidth = 0.5
         return vw
     }()
@@ -47,7 +47,7 @@ class ExchangeCurrencyVC: UIViewController {
         tf.keyboardType = .decimalPad
         tf.stopSmartActions()
         tf.layer.borderWidth = 0.5
-        tf.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        tf.layer.borderColor = UIColor.DnGrayColor.cgColor
         return tf
     }()
     
@@ -57,10 +57,10 @@ class ExchangeCurrencyVC: UIViewController {
         lb.isHidden = true
         lb.text = "result"
         lb.textAlignment = .center
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.Regular.font(size: 16)
         lb.layer.borderWidth = 0.5
-        lb.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        lb.layer.borderColor = UIColor.DnGrayColor.cgColor
         return lb
     }()
     
@@ -69,7 +69,7 @@ class ExchangeCurrencyVC: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle(K.vc.exchangeCurrCalculateBtnTitle, for: .normal)
         btn.tintColor = .white
-        btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        btn.backgroundColor = .DnColor
         btn.layer.cornerRadius = 20
         return btn
     }()
@@ -79,14 +79,14 @@ class ExchangeCurrencyVC: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle(K.vc.exchangeCurrExchangeBtnTitle, for: .normal)
         btn.tintColor = .white
-        btn.backgroundColor = UIColor.DN.DarkBlue.color()
+        btn.backgroundColor = .DnColor
         btn.layer.cornerRadius = 20
         return btn
     }()
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         setupNavBar() // setup navigation bar
         setupDropDownTf() // setup both drop down menu
         setupLayout() // setup layout constants of subviews

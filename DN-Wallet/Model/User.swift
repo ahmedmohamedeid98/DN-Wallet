@@ -8,14 +8,14 @@
 
 struct User {
     
-    private(set) var username: String
-    private(set) var email: String
-    private(set) var password: String
-    private(set) var phone: String
-    private(set) var country: String
-    private(set) var gender: String?
-    private(set) var job: String?
-    private(set) var photo: String?
+    var username: String
+    var email: String
+    var password: String
+    var phone: String
+    var country: String
+    var gender: String?
+    var job: String?
+    var photo: String?
     
     init(username: String, email: String, password: String, phone: String, country: String, gender: String? = nil, job: String? = nil, photoLink: String? = nil) {
         self.username = username

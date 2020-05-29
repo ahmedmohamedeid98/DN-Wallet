@@ -21,7 +21,7 @@ class ContainerViewController: UIViewController {
     let skipBtn : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("skip", for: .normal)
-        btn.tintColor = UIColor.DN.DarkBlue.color()
+        btn.tintColor = .DnColor
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 20)
         btn.titleLabel?.textAlignment = .left
         btn.addTarget(self, action: #selector(skipButtonWasPressed), for: .touchUpInside)
@@ -30,7 +30,7 @@ class ContainerViewController: UIViewController {
     let nextBtn : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("next", for: .normal)
-        btn.tintColor = UIColor.DN.DarkBlue.color()
+        btn.tintColor = .DnColor
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 20)
         btn.titleLabel?.textAlignment = .right
         btn.addTarget(self, action: #selector(nextButtonWasPressed), for: .touchUpInside)
@@ -47,7 +47,7 @@ class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         configurePageControllerView()
         setupView()
        

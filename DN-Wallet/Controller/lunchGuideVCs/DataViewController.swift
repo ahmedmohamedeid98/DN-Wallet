@@ -23,7 +23,7 @@ class DataViewController: UIViewController {
         lb.isEditable = false
         lb.textAlignment = .center
         lb.font = UIFont.DN.Regular.font(size: 25)
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         return lb
     }()
     
@@ -31,7 +31,7 @@ class DataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         textView.text = text
         setupView()
     }

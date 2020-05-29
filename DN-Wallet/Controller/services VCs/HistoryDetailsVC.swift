@@ -37,7 +37,7 @@ class HistoryDetailsVC: UIViewController {
         let info = UILabel()
         info.text = "TEST TEST TEST"
         info.textAlignment = .center
-        info.textColor = UIColor.DN.DarkBlue.color()
+        info.textColor = .DnColor
         info.font = UIFont.DN.Regular.font(size: 16)
         return info
     }()
@@ -60,7 +60,7 @@ class HistoryDetailsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         setupNavigationBar() 
         if withSegmentController {
             setupSegmentController()
@@ -89,7 +89,7 @@ class HistoryDetailsVC: UIViewController {
         segmentController = UISegmentedControl(items: segmentItems)
         segmentController.selectedSegmentIndex = 0
         segmentController.tintColor = .white
-        segmentController.selectedSegmentTintColor = UIColor.DN.DarkBlue.color()
+        segmentController.selectedSegmentTintColor = .DnColor
         segmentController.addTarget(self, action: #selector(valueWasChanged), for: .valueChanged)
     }
     
@@ -109,7 +109,7 @@ class HistoryDetailsVC: UIViewController {
     
     func setupNavigationBar() {
         navigationItem.title = navBarTitle
-        navigationController?.navigationBar.barTintColor = UIColor.DN.DarkBlue.color()
+        navigationController?.navigationBar.barTintColor = .DnColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem?.tintColor = .white
     }

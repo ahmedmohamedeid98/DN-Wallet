@@ -29,6 +29,7 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         LoginWithBiometric = UserDefaults.standard.bool(forKey: Defaults.LoginWithBiometric.key)
         FaceIdFounded = UserDefaults.standard.bool(forKey: Defaults.BiometricTypeFaceID.key)
         signInOutlet.layer.cornerRadius = 20.0

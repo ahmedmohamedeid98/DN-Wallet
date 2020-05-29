@@ -21,7 +21,9 @@ struct Register: Codable {
 
 struct RegisterResponder: Codable {
     let user_Id: String
+    let Token: String
     enum CodingKeys: String, CodingKey {
         case user_Id = "user._id"
+        case Token
     }
 }

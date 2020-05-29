@@ -53,7 +53,7 @@ class PayVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnBackgroundColor
+        view.backgroundColor = .DnVcBackgroundColor
         amountField.delegate = self
         oldValue_one = Step_one.value
         oldValue_five = Step_five.value

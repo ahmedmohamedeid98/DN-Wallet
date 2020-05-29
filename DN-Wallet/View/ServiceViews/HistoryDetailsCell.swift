@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
-let keyColor = UIColor.DN.DarkBlue.color()
-let valueColor = UIColor.DN.Black.color()
+//
+let keyColor = UIColor.DnColor
+let valueColor = UIColor.DnDarkBlue
 
 class HistoryDetailsCell: UITableViewCell {
     
@@ -106,7 +106,7 @@ extension UILabel {
         lb.font = UIFont.DN.Regular.font(size: fontSize)
         lb.textAlignment = align
         if withBorder {
-            lb.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+            lb.layer.borderColor = UIColor.DnGrayColor.cgColor
             lb.layer.borderWidth = 0.5
         }
         return lb

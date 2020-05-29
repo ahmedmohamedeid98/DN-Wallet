@@ -29,7 +29,7 @@ class CurrencyCell: UICollectionViewCell {
     
     let seperatorLine: UIView = {
         let vw = UIView()
-        vw.backgroundColor = UIColor.DN.LightBlue.color()
+        vw.backgroundColor = .DnGrayColor
         return vw
     }()
     

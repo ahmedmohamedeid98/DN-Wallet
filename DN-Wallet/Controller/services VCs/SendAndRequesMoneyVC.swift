@@ -17,9 +17,6 @@ class SendAndRequestMoney: UIViewController {
     //MARK:- Setup Properities
     //segment 0 stand for "send", segment 1 stand for "request"
     var currentSegment: Int = 1
-    var segmentController: UISegmentedControl!
-    // drop down menu to select specific currency
-    var currency: DropDown!
     // the original position to textView to return to it again after the keyboard popped down
     var messageTextViewOriginY: CGFloat = 0.0
     // cacluate "height" for the popped up keyboard
@@ -45,100 +42,44 @@ class SendAndRequestMoney: UIViewController {
     // and this delegate function call another function
     var startCheckForAnyChange: Bool = false
     
-    //MARK:- Setup Labels
-    var requestOrSentLabel: UILabel = {
-        let lb = UILabel()
-        lb.basicConfigure()
-        lb.text = "Email"
-        return lb
-    }()
-    var amountLabel: UILabel = {
-        let lb = UILabel()
-        lb.basicConfigure()
-        lb.text = "Amount"
-        return lb
-    }()
-    var currencyLabel: UILabel = {
-        let lb = UILabel()
-        lb.basicConfigure()
-        lb.text = "Currency"
-        return lb
-    }()
-    var messageLabel: UILabel = {
-        let lb = UILabel()
-        lb.basicConfigure()
-        lb.text = "Message"
-        return lb
-    }()
-    //MARK:- Setup Text Feilds
-    var email: UITextField = {
-        let txt = UITextField()
-        txt.placeholder = K.placeholder.email
-        txt.textColor = .DnTextColor
-        txt.font = UIFont.DN.Regular.font(size: 16)
-        txt.stopSmartActions()
-        txt.setBottomBorder(color: UIColor.lightGray.cgColor)
-        return txt
-    }()
-    var amount: UITextField = {
-        let txt = UITextField()
-        txt.placeholder = "195.4"
-        txt.textColor = .DnTextColor
-        txt.font = UIFont.DN.Regular.font(size: 16)
-        txt.keyboardType = .decimalPad
-        txt.setBottomBorder(color: UIColor.lightGray.cgColor)
-        return txt
-    }()
-    var messageTextView: UITextView = {
-        let txt = UITextView()
-        txt.text = K.vc.sORrPlaceholderTextView
-        txt.textColor = .gray
-        txt.font = UIFont.DN.Regular.font(size: 16)
-        txt.addBorder(color: UIColor.lightGray.cgColor, width: 0.5)
-        return txt
-    }()
-    //MARK:- Buttons
-    let addContactButton: UIButton = {
-        // this button will enable in the following case
-        // - this vc presented from service vc (send or request) when the user start typing email
-        // disable in the following case
-        // - it will be disabled by default.
-        // - this vc presented by Donation or MyContact VCs
-        let btn = UIButton(type: .system)
-        btn.disable()
-        btn.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
-        btn.tintColor = UIColor.DN.DarkBlue.color()
-        btn.addTarget(self, action: #selector(addEmailToMyContacts(_:)), for: .touchUpInside)
-        return btn
-    }()
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var segmentController: UISegmentedControl!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var amount: UITextField!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var addContactBtnOutlet: UIButton!
+    @IBOutlet weak var currency: DropDown!
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         //presentFromDonationVC = true
         initViewController()
     }
+    
     
     fileprivate func initViewController() {
         setupNavBar()
         // setup segment controller to determine which service should use send or request money
         setupSegmentController()
-        // setup drop down menu to select specific currency
-        setupDropDown()
-        setupLayout()
+        configureMessageTextView()
         // determine the title of viewController be a "send money" or being a "request money"
         toggleRequestSend(isRequest: isRequest)
         if presentFromDonationVC || presentedFromMyContact {
             if presentFromDonationVC { segmentController.setEnabled(false, forSegmentAt: 1) } // disable request segment
-            addContactButton.disable()
+            addContactBtnOutlet.isHidden = true
             email.text = presentedEmail
             email.isUserInteractionEnabled = false // don't allow to user to edit organization email
+        } else {
+            // use this delegate to determine if should enable addEmailToContact button or not
+            print("delegate done")
+            email.delegate = self
+            messageTextView.delegate = self
         }
         
-        // use this delegate to determine if should enable addEmailToContact button or not
-        email.delegate = self
-        messageTextView.delegate = self
+        
         // use gesture to hide keyboard when click anywhere in view
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         // setup notification to pop up any textView or textfield which may overlapped by keyboard
@@ -151,6 +92,14 @@ class SendAndRequestMoney: UIViewController {
         return .lightContent
     }
     
+    func configureMessageTextView() {
+        messageTextView.layer.borderColor = UIColor.lightGray.cgColor
+        messageTextView.layer.borderWidth = 1
+        messageTextView.layer.cornerRadius = 8.0
+        messageTextView.textColor = .lightGray
+        messageTextView.text = "Optional. write short message..."
+    }
+    
     func setupNavBar() {
         self.configureNavigationBar(title: K.vc.sORrTitle)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done , target: self, action: #selector(sendMonyOrRequest))
@@ -161,23 +110,13 @@ class SendAndRequestMoney: UIViewController {
     }
     
     func setupSegmentController() {
-        segmentController = UISegmentedControl(items: [K.vc.sORrSegSend, K.vc.sORrSegRequest])
         isRequest ? (segmentController.selectedSegmentIndex = 1) : (segmentController.selectedSegmentIndex = 0)
         segmentController.setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
         segmentController.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        segmentController.selectedSegmentTintColor = UIColor.DN.DarkBlue.color()
-        segmentController.addTarget(self, action: #selector(valueWasChanged), for: .valueChanged)
+        segmentController.selectedSegmentTintColor = .DnColor
     }
     
-    func setupDropDown() { // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
-        currency = DropDown()
-        currency.setBottomBorder(color: UIColor.lightGray.cgColor)
-        currency.optionArray = ["Egyption Pound", "USA", "Urss"]
-        currency.optionIds = [1,2,3]
-        currency.didSelect { (item, index, id) in
-            print("item: \(item), index: \(index), id: \(id)")
-        }
-    }
+    
     func toggleRequestSend(isRequest: Bool) {
         if isRequest {
             navigationItem.title = K.vc.sORrRequestMoneyTitle
@@ -187,33 +126,14 @@ class SendAndRequestMoney: UIViewController {
         self.isRequest = isRequest
     }
     
-    func setupLayout() {
-        view.addSubview(segmentController)
-        view.addSubview(addContactButton)
-        let labelStack = UIStackView(arrangedSubviews: [requestOrSentLabel, amountLabel, currencyLabel])
-        labelStack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 8)
-        labelStack.DNLayoutConstraint(size: CGSize(width: 85, height: 0))
-        let txtStack = UIStackView(arrangedSubviews: [email, amount, currency])
-        txtStack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 8)
-        let Vstack = UIStackView(arrangedSubviews: [labelStack, txtStack])
-        Vstack.configureStack(axis: .horizontal, distribution: .fill, alignment: .fill, space: 8)
-        view.addSubview(Vstack)
-        view.addSubview(messageLabel)
-        view.addSubview(messageTextView)
-        segmentController.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 40))
-        addContactButton.DNLayoutConstraint(segmentController.bottomAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 16), size: CGSize(width: 30, height: 30))
-        Vstack.DNLayoutConstraint(segmentController.bottomAnchor, left: view.leftAnchor, right: addContactButton.leftAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 150))
-        messageLabel.DNLayoutConstraint(Vstack.bottomAnchor, left: labelStack.leftAnchor, right: labelStack.rightAnchor, margins: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 30))
-        messageTextView.DNLayoutConstraint(messageLabel.topAnchor, left: txtStack.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 16), size: CGSize(width: 0, height: 60))
-    }
     //MARK:- Objc function
     
     /// selector action: this method called when selected segment being changed
-    @objc func valueWasChanged() {
-        switch segmentController.selectedSegmentIndex {
-        case 0: toggleRequestSend(isRequest: false)
-        case 1: toggleRequestSend(isRequest: true)
-        default: break
+    @IBAction func segmentControllerValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+            case 0: toggleRequestSend(isRequest: false)
+            case 1: toggleRequestSend(isRequest: true)
+            default: break
         }
     }
     
@@ -265,7 +185,7 @@ class SendAndRequestMoney: UIViewController {
     }
     
     // add email to my contacts (also deak with api)
-    @objc func addEmailToMyContacts(_ sender: UIButton) {
+    @IBAction func addEmailToMyContacts(_ sender: UIButton) {
         if email.text != "" && Auth.shared.isValidEmail(email.text!) {
             // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
             if ["ahmed@gmail.com"].contains(email.text!) {
@@ -299,13 +219,13 @@ class SendAndRequestMoney: UIViewController {
     /// change button image from addPerson to rightCheckMark and disable/enable it.
     func toggleAddContactButton(toDone: Bool) {
         if toDone {
-            self.addContactButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            self.addContactButton.isUserInteractionEnabled = false
+            self.addContactBtnOutlet.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            self.addContactBtnOutlet.isUserInteractionEnabled = false
             email.endEditing(true)
             startCheckForAnyChange = true
         }else {
-            self.addContactButton.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
-            self.addContactButton.isUserInteractionEnabled = true
+            self.addContactBtnOutlet.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
+            self.addContactBtnOutlet.isUserInteractionEnabled = true
             startCheckForAnyChange = false
         }
         
@@ -320,16 +240,27 @@ extension SendAndRequestMoney: UITextViewDelegate {
             textView.textColor = .DnTextColor
             messageTextViewFirstEditing = false
         }
-        
     }
 }
 extension SendAndRequestMoney: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        addContactButton.enable()
-        
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if startCheckForAnyChange { toggleAddContactButton(toDone: false) }
-        return true
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text != "" && Auth.shared.isValidEmail(textField.text!) {
+            UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
+                DispatchQueue.main.async {
+                    self.addContactBtnOutlet.isHidden = false
+                    // and if email not exist toggle to add image
+                }
+            })
+        }else {
+            if !self.addContactBtnOutlet.isHidden {
+                UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+                    DispatchQueue.main.async {
+                        self.addContactBtnOutlet.isHidden = true
+                    }
+                })
+            }
+            
+        }
     }
 }

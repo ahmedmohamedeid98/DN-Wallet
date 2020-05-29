@@ -12,26 +12,26 @@ import UIKit
 class DonationCell: UITableViewCell {
 
     static let reuseIdentifier: String = "donation-cell-identifier"
-    
-    
-    
-    var org_mail: String? {
+    var id: String = ""
+    var data: Charity? {
         didSet {
-            guard let email = org_mail else { return }
-            self.mail.text = email
+            guard let safeData = data else {return}
+            self.mail.text = safeData.email
+            self.title.text = safeData.name
+            self.id = safeData.id
+            DNData.loadImageWithStrURL(str: safeData.link) { (img, error) in
+                if error == nil {
+                    DispatchQueue.main.async {
+                        self.logo.image = img
+                    }
+                }
+            }
         }
     }
-    
-    var org_title: String? {
-        didSet {
-            guard let _title = org_title else { return }
-            self.title.text = _title
-        }
-    }
-    
+
     var logo: UIImageView = {
         let img = UIImageView()
-        img.tintColor = UIColor.DN.DarkBlue.color()
+        img.tintColor = .DnColor
         img.image = UIImage(systemName: "photo.fill")
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
@@ -40,7 +40,7 @@ class DonationCell: UITableViewCell {
     private var title: UILabel = {
         let lb = UILabel()
         lb.text = "Organization Name"
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.Regular.font(size: 16)
         return lb
     }()
@@ -48,7 +48,7 @@ class DonationCell: UITableViewCell {
     private var mail: UILabel = {
         let lb = UILabel()
         lb.text = "orgnaization@gmail.com"
-        lb.textColor = UIColor.DN.DarkBlue.color()
+        lb.textColor = .DnColor
         lb.font = UIFont.DN.Regular.font(size: 14)
         return lb
     }()

@@ -7,7 +7,6 @@
 //
 
 enum DonationDetailsSectoin: Int, CaseIterable, CustomStringConvertible {
-    case Location
     case Vision
     case Address
     case Founders
@@ -16,11 +15,10 @@ enum DonationDetailsSectoin: Int, CaseIterable, CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .Location: return "Location"
         case .Vision: return "Vision"
         case .Address: return "Address"
         case .Founders: return "Founders"
-        case .Concat: return "Concats"
+        case .Concat: return "Concat"
         case .About: return "About"
         }
     }

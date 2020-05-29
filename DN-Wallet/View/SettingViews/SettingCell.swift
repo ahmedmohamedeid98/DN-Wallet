@@ -58,7 +58,7 @@ class SettingCell: UITableViewCell {
     
     var Switch: UISwitch = {
         let sw = UISwitch()
-        sw.onTintColor = UIColor.DN.DarkBlue.color()
+        sw.onTintColor = .DnColor
         return sw
     }()
     

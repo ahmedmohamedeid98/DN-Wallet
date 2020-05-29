@@ -19,6 +19,6 @@ class Utile {
 
 //MARK:- Constant
 
-let navBARColor = UIColor.DN.DarkBlue.color()
+let navBARColor = UIColor.DnColor
 let navBARTitleFont = UIFont.DN.SemiBlod.font(size: 18)
-let navBARTitleColor = UIColor.DN.White.color()
+let navBARTitleColor = UIColor.DnWhiteColor

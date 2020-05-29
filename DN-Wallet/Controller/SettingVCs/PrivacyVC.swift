@@ -15,7 +15,7 @@ class PrivacyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         navigationController?.navigationBar.prefersLargeTitles = false
         setupTableView()
         setupLayout()
@@ -64,7 +64,7 @@ extension PrivacyVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
         let title = UILabel()
-        view.backgroundColor = UIColor.DN.DarkBlue.color()
+        view.backgroundColor = .DnColor
         title.font = UIFont.DN.Regular.font(size: 16)
         title.textColor = .white
         title.text = PrivacySection(rawValue: section)?.title

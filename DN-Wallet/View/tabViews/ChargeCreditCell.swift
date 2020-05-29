@@ -17,11 +17,11 @@ class ChargeCreditCell: UITableViewCell {
     @IBOutlet weak var creditLogo: UIImageView!
     @IBOutlet weak var creditName: UILabel!
     @IBOutlet weak var creditNumber: UILabel!
-    @IBOutlet weak var checkBox: UIButton!
+    @IBOutlet weak var checkBox: UIImageView!
     var credit_Id: String = ""
-    var cellDelegate: SelectedCardDelegate?
-    var currentIndexPath: IndexPath!
-    var toggle: Bool = true
+//    var cellDelegate: SelectedCardDelegate?
+//    var currentIndexPath: IndexPath!
+//    var toggle: Bool = true
     
     var data: CardInfo? {
         didSet {
@@ -38,20 +38,12 @@ class ChargeCreditCell: UITableViewCell {
         print("cell init coder")
     }
     
-    @IBAction func checkBoxBtnPressed(_ sender: UIButton) {
-        checkBoxToggle()
-    }
     
-    func checkBoxToggle() {
-        if toggle {
-           // checkBox.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-            //toggle = false
-            cellDelegate?.selectedCreditCard(id: credit_Id, currentIndex: currentIndexPath)
-            
+    func checkBoxToggle(check: Bool = true) {
+        if check {
+            checkBox.image = UIImage(systemName: "checkmark.fill.circle")
         } else {
-            checkBox.setImage(UIImage(systemName: "circle"), for: .normal)
-            toggle = true
-            cellDelegate?.freeLastSelectedIndexPath()
+            checkBox.image = UIImage(systemName: "checkmark.fill.circle")
         }
     }
 }

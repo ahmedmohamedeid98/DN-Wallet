@@ -12,9 +12,9 @@ class PageViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .DnVcBackgroundColor
         let pageControl = UIPageControl.appearance()
-        pageControl.currentPageIndicatorTintColor = UIColor.DN.LightBlue.color()
+        pageControl.currentPageIndicatorTintColor = .DnColor
         pageControl.pageIndicatorTintColor = .lightGray
     }
 

@@ -21,7 +21,7 @@ class SaleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnBackgroundColor
+        view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         
     }

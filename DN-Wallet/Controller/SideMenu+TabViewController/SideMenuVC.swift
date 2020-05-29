@@ -55,7 +55,7 @@ class SideMenuVC: UIViewController {
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .DnVcBackgroundColor
         // deactive setting button if the app in safeMode else otherwise.
         activeSettingButton(self.isInSafeMode)
         setupServiceTable()

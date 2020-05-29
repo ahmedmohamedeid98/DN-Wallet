@@ -8,8 +8,6 @@
 
 import UIKit
 
-let lbColor = UIColor.DN.LightBlue.color()
-let textColor = UIColor.DN.Black.color()
 
 
 class AddNewCardVC: UIViewController {
@@ -17,7 +15,7 @@ class AddNewCardVC: UIViewController {
     var cardName: DropDown!
     var cardNameContainer: UIView = {
         let vw = UIView()
-        vw.layer.borderColor = UIColor.DN.DarkBlue.color().cgColor
+        vw.layer.borderColor = UIColor.DnColor.cgColor
         vw.layer.borderWidth = 0.5
         return vw
     }()
@@ -66,7 +64,7 @@ class AddNewCardVC: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .DnVcBackgroundColor
         setupNavBar()
         setupDropDown()
         setupLayout()
@@ -121,7 +119,7 @@ class AddNewCardVC: UIViewController {
     /// setup drop down list which contain cards image
     func setupDropDown() {
         cardName = DropDown()
-        cardName.borderColor = UIColor.DN.DarkBlue.color()
+        cardName.borderColor = .DnColor
         cardName.optionArray = ["Visa", "Meza", "Master Card"]
         cardName.isSearchEnable = false
         cardName.optionIds = [1,23,54]
@@ -153,7 +151,7 @@ extension UITextField {
     func configurePaymentTF() {
         self.backgroundColor = .white
         self.font = UIFont.DN.Bold.font(size: 14)
-        self.textColor = UIColor.DN.Black.color()
+        self.textColor = .DnDarkBlue
         self.stopSmartActions()
         self.leftPadding()
         self.setBottomBorder()

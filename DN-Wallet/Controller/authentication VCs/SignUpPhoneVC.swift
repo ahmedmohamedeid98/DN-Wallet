@@ -25,11 +25,12 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     @IBOutlet weak var activityIndicatorContainer: UIView!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
     
-    //MARK:- Init
-    fileprivate func commonInit() {
-        
+    // MARK:- Init
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .DnVcBackgroundColor
         // configure the container layer which hold country dropDown and phone txtField
-        phoneNumberContainer.layer.borderColor = UIColor.DN.LightGray.color().cgColor
+        phoneNumberContainer.layer.borderColor = UIColor.DnGrayColor.cgColor
         phoneNumberContainer.layer.borderWidth = 1
         phoneNumberContainer.layer.cornerRadius = 4
         
@@ -49,11 +50,9 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         // setup stepProgressBar
         steppedProgressBar.titles = ["", "", ""]
         steppedProgressBar.currentTab = 2
-    }
-    // MARK:- Init
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        commonInit()
+        
+        dropDownCountry.text = "Egypt"
+        phoneNumber.text = "01035486578"
 
     }
     
@@ -71,6 +70,9 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
                 let st = UIStoryboard(name: "Authentication", bundle: .main)
                 let vc = st.instantiateViewController(identifier: "signUpConfirmEmailVCID") as? SignUpConfirmEmailVC
                 vc?.modalPresentationStyle = .fullScreen
+                self.user?.country = self.dropDownCountry.text!
+                self.user?.phone = self.phoneNumber.text!
+                vc?.registerData = self.user
                 self.present(vc!, animated: true)
             }else {
                 self.opt.reset()
@@ -80,10 +82,15 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
     }
     
     func showIndicator(_ hidden: Bool) {
-        activityIndicatorContainer.isHidden = !hidden
-        hidden ? activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-        self.opt.isHidden = hidden
-        self.confirmCodeInfoMessage.isHidden = hidden
+        if dropDownCountry.text != "" && phoneNumber.text != "" {
+            activityIndicatorContainer.isHidden = !hidden
+            hidden ? activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+            self.opt.isHidden = hidden
+            self.confirmCodeInfoMessage.isHidden = hidden
+        } else {
+            Alert.syncActionOkWith(nil, msg: "you must choose your country and enter your phone number", viewController: self)
+        }
+        
     }
 
     @IBAction func backBtnPressed(_ sender: UIButton) {

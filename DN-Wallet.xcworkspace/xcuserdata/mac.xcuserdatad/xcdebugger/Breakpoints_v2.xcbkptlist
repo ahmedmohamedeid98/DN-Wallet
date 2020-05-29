@@ -23,40 +23,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "71ACC58C-F9E8-4E4C-829A-E5F37F53194B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DN-Wallet/View/tabViews/ChargeCreditCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "checkBoxToggle()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "26C7B1A7-DA4B-44EC-80F1-7DCDFC50B174"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DN-Wallet/Controller/SideMenu+TabViewController/ChargeVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "toggleLastIndexPath(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3AFD3734-023E-4C6E-BC96-93D0BF4635F4"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DN-Wallet/Controller/SideMenu+TabViewController/HomeVC.swift"
@@ -87,32 +55,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0DC1FCED-0E13-4736-BDFE-EE4C99717DE3"
+            uuid = "1EF93D31-150D-443A-BB03-DD92AE3D247B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DN-Wallet/Controller/authentication VCs/SignUpVC.swift"
+            filePath = "DN-Wallet/Model/Network/DNData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "isValid()"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "loadImageWithStrURL(str:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1EF93D31-150D-443A-BB03-DD92AE3D247B - 13f6d6cc15ebb6c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static DN_Wallet.DNData.loadImageWithStrURL(str: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DN-Wallet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/Desktop/Graduation-Project/DN-Wallet/DN-Wallet/Model/Network/DNData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1125">
+               </Location>
+               <Location
+                  uuid = "1EF93D31-150D-443A-BB03-DD92AE3D247B - 12d521192f3d0a2e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static DN_Wallet.DNData.loadImageWithStrURL(str: Swift.String, completion: (Swift.Optional&lt;__C.UIImage&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DN-Wallet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/Desktop/Graduation-Project/DN-Wallet/DN-Wallet/Model/Network/DNData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "364">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7001346D-8417-425C-8C28-5DC4E92DAF43"
+            uuid = "631428E5-053E-422B-BC8F-C168961480D3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DN-Wallet/Controller/authentication VCs/SignUpVC.swift"
+            filePath = "DN-Wallet/Model/Network/DNData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "isValid()"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "getCharityOrganizationInitialData(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
