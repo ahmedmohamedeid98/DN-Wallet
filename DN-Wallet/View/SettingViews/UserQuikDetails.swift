@@ -10,16 +10,7 @@ import UIKit
 
 class UserQuikDetails: UIView {
     
-    let userImage: UIImageView = {
-        let uImage = UIImageView()
-        uImage.layer.cornerRadius = 20
-        uImage.image = UIImage(systemName: "person.circle")
-        uImage.backgroundColor = .orange
-        uImage.tintColor = .white
-        uImage.clipsToBounds = true
-        uImage.contentMode = .scaleAspectFit
-        return uImage
-    }()
+    let userImage = SAImageView(title: "person.circle", isSystemImage: true)
     
     let userName: UILabel = {
         let lb = UILabel()
@@ -40,8 +31,10 @@ class UserQuikDetails: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        
         addSubview(userImage)
         userImage.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), size: CGSize(width: 40, height: 40), centerV: true)
+        userImage.roundImageWithHeight = 40
         
         let stackView = UIStackView(arrangedSubviews: [userName, userEmail])
         stackView.configureHstack()

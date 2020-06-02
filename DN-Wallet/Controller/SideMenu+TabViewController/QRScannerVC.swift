@@ -11,7 +11,7 @@ import UIKit
 class QRScannerVC: UIViewController {
     // get this data from payVC
     var amount: Double = 0.00
-    var currency: Currency = UserPreference.defaultCurrency
+    var currency = "EGP"//: Currency = UserPreference.defaultCurrency
     var currendDate: String = ""
     
     var scannerView: QRScannerView!
@@ -45,7 +45,7 @@ class QRScannerVC: UIViewController {
                     Alert.asyncSuccessfullWith("Successful transaction process", dismissAfter: 1.0, viewController: self)
                     let detail = HistoryCategory(email: email,
                                                  amount: amount,
-                                                 currency: self.currency.Code,
+                                                 currency: "EGP",
                                                  date: Utile.currentDate,
                                                  category: Category.send.identifier,
                                                  innerCategory: InnerCategory.other.identitfer)

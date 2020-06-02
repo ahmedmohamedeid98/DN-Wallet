@@ -10,17 +10,11 @@ import UIKit
 
 class userInput: UIView {
 
-    let image: UIImageView = {
-        let img = UIImageView()
-        img.contentMode = .scaleAspectFit
-        img.clipsToBounds = true
-        img.tintColor = .DnBorderColor
-        return img
-    }()
+    let image = SAImageView(tintColor: .DnGrayColor)
     
     let seperatorLine: UIView = {
         let sepLine = UIView()
-        sepLine.backgroundColor = .DnBorderColor
+        sepLine.backgroundColor = .DnGrayColor
         return sepLine
     }()
     
@@ -34,11 +28,7 @@ class userInput: UIView {
     }()
 
     func configureInputField(imageName: String, systemImage: Bool = false, placeholder: String, isSecure: Bool) {
-        if systemImage {
-            self.image.image = UIImage(systemName: imageName)
-        }else {
-            self.image.image = UIImage(named: imageName)
-        }
+        systemImage ? (self.image.systemTitle = imageName) : (self.image.assetsTitle = imageName)
         self.textField.placeholder = placeholder
         self.textField.isSecureTextEntry = isSecure
     }
@@ -51,7 +41,7 @@ class userInput: UIView {
     required init?(coder aDecoder: NSCoder) {
        super.init(coder: aDecoder)
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.DnBorderColor.cgColor
+        self.layer.borderColor = UIColor.DnGrayColor.cgColor
         self.layer.cornerRadius = 4
         setupViewConstraints()
     }

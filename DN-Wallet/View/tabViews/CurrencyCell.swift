@@ -54,7 +54,7 @@ class CurrencyCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
         self.addShadow(color: UIColor.darkGray.cgColor, opacity: 0.6, offset: CGSize(width: 0.5, height: 1), redius: 0)
         
     }

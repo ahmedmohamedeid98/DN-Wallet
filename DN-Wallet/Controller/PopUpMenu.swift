@@ -13,7 +13,7 @@ protocol PopUpMenuDelegate: class {
 }
 
 
-class PopUpMenu: UIViewController {
+final class PopUpMenu: UIViewController {
 
     private var searchBar: UISearchBar!
     private var List: UITableView!
@@ -21,7 +21,8 @@ class PopUpMenu: UIViewController {
     var originalDataSource : [PopMenuItem] = []
     private var currentDataSource : [PopMenuItem] = []
     weak var menuDelegate: PopUpMenuDelegate?
-    var listDataSource : UITableViewDiffableDataSource<Section, PopMenuItem>!
+    private var listDataSource : UITableViewDiffableDataSource<Section, PopMenuItem>!
+    private var lastSelectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class PopUpMenu: UIViewController {
         searchBar = UISearchBar()
         searchBar.searchTextField.placeholder = K.vc.popMenuSearchBarPlaceholder
         searchBar.delegate = self
-        searchBar.searchTextField.backgroundColor = .label
+        searchBar.searchTextField.backgroundColor = .systemGroupedBackground
         searchBar.showsCancelButton = true
     }
     private func setupListTable() {
@@ -81,13 +82,32 @@ class PopUpMenu: UIViewController {
 }
 
 extension PopUpMenu: UITableViewDelegate {
-    
+    /*
+    func unCheckLastCell() {
+        if let cell = List.cellForRow(at: lastSelectedIndexPath!) as? PopUpMenuCell {
+            cell.checkBoxToggle(check: false)
+            lastSelectedIndexPath = nil
+        }
+    }
+     
+     if let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell {
+         if lastSelectedIndexPath == nil {
+             lastSelectedIndexPath = indexPath
+         } else {
+             unCheckLastCell()
+         }
+         selectedCell.checkBoxToggle(check: true)
+         menuDelegate?.selectedItem(title: selectedCell.getTitle())
+     }
+    */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        List.deselectRow(at: indexPath, animated: true)
-        guard let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell else { return }
-        menuDelegate?.selectedItem(title: selectedCell.getTitle())
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell {
+            menuDelegate?.selectedItem(title: selectedCell.getTitle())
+        }
         dismiss(animated: true, completion: nil)
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }

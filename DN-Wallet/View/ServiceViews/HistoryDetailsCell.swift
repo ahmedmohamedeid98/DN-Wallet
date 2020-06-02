@@ -59,11 +59,7 @@ class HistoryDetailsCell: UITableViewCell {
     /// Cell : setup the view and all the internal subviews for the tableView cell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //self.backgroundColor = .white
-        //self.layer.borderColor = UIColor.DN.DarkBlue.color().cgColor
-        //self.layer.borderWidth = 1
-        //self.layer.cornerRadius = 8
-        
+        self.backgroundColor = .clear
         setupStackView()
     }
     

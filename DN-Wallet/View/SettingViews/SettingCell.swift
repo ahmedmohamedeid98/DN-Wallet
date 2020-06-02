@@ -40,7 +40,7 @@ class SettingCell: UITableViewCell {
     }
     */
     func setLanguage() {
-        let languageID =  UserDefaults.standard.integer(forKey: Defaults.Language.key)
+        let languageID =  UserPreference.getIntValue(withKey: UserPreference.languageKay)
         for lang in LanguageSection.allCases {
             if lang.rawValue == languageID {
                 descriptionLabel.text = lang.description
@@ -73,10 +73,10 @@ class SettingCell: UITableViewCell {
         addSubview(Switch)
         Switch.tag = tag
         if tag == SecurityOptions.safeMode.id {
-            Switch.isOn = UserDefaults.standard.bool(forKey: Defaults.EnableSafeMode.key)
+            Switch.isOn = UserPreference.getBoolValue(withKey: UserPreference.enableSafeMode)
         }
         if tag == SecurityOptions.enableLoginWithFaceID.id {
-            Switch.isOn = UserDefaults.standard.bool(forKey: Defaults.LoginWithBiometric.key)
+            Switch.isOn = UserPreference.getBoolValue(withKey: UserPreference.loginWithBiometric)
         }
         Switch.DNLayoutConstraint(right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20), centerV: true)
         Switch.addTarget(self, action: #selector(toggleSwitch(_:)), for: .valueChanged)
@@ -103,7 +103,7 @@ class SettingCell: UITableViewCell {
             }
         }
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {
-            UserDefaults.standard.set(sender.isOn, forKey: Defaults.LoginWithBiometric.key)
+            UserPreference.setValue(sender.isOn, withKey: UserPreference.loginWithBiometric)
         }
     }
     

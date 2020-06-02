@@ -36,6 +36,15 @@ class ChargeVC: UIViewController {
         creditTable.delegate = self
         setupCreditTableDataSource()
         creditTable.dataSource = tableDataSource
+        
+        dropDown.text = "EGP"
+        //setUserPreference()
+    }
+    
+    private func setUserPreference() {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+            dropDown.text = currency
+        }
     }
     
     func handleNavigationBar() {
@@ -103,17 +112,15 @@ extension ChargeVC: UITableViewDelegate {
     func unCheckLastCell() {
         if let cell = creditTable.cellForRow(at: lastSelectedIndexPath!) as? ChargeCreditCell {
             cell.checkBoxToggle(check: false)
-            lastSelectedIndexPath = nil
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ChargeCreditCell {
-            if lastSelectedIndexPath == nil {
-                lastSelectedIndexPath = indexPath
-            } else {
+            if lastSelectedIndexPath != nil {
                 unCheckLastCell()
             }
             cell.checkBoxToggle(check: true)
+            lastSelectedIndexPath = indexPath
             self.selectedCardId = cell.credit_Id
         }
         tableView.deselectRow(at: indexPath, animated: true)

@@ -35,15 +35,16 @@ class ChargeCreditCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.backgroundColor = .clear
         print("cell init coder")
     }
     
     
     func checkBoxToggle(check: Bool = true) {
         if check {
-            checkBox.image = UIImage(systemName: "checkmark.fill.circle")
+            checkBox.image = UIImage(systemName: "checkmark.circle.fill")
         } else {
-            checkBox.image = UIImage(systemName: "checkmark.fill.circle")
+            checkBox.image = UIImage(systemName: "circle")
         }
     }
 }

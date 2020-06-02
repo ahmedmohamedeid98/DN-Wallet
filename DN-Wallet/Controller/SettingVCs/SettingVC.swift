@@ -12,7 +12,6 @@ class SettingVC: UIViewController {
 
     var settingTable: UITableView!
     var userQuikDetails: UserQuikDetails!
-    var navBar: DNNavBar!
     var leftBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -24,15 +23,10 @@ class SettingVC: UIViewController {
         setupLayout()
         
     }
-    
-    
-    
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
    
-    
     func setupNavBar() {
         self.configureNavigationBar(title: "Setting", preferredLargeTitle: true)
         leftBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(closeButtonPressed))
@@ -165,11 +159,13 @@ extension SettingVC {
         let alert = UIAlertController(title: "Choose Language", message: "select your prefere language", preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let English = UIAlertAction(title: LanguageSection.English.description , style: .default) { (action) in
-            UserDefaults.standard.set(LanguageSection.English.id, forKey: Defaults.Language.key)
+            //UserDefaults.standard.set(LanguageSection.English.id, forKey: Defaults.Language.key)
+            UserPreference.setValue(LanguageSection.English.id, withKey: UserPreference.languageKay)
             self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
         }
         let Arabic = UIAlertAction(title: LanguageSection.Arabic.description , style: .default) { (action) in
-            UserDefaults.standard.set(LanguageSection.Arabic.id, forKey: Defaults.Language.key)
+            //UserDefaults.standard.set(LanguageSection.Arabic.id, forKey: Defaults.Language.key)
+            UserPreference.setValue(LanguageSection.Arabic.id, withKey: UserPreference.languageKay)
             self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
         }
         alert.addAction(English)

@@ -42,14 +42,12 @@ class SendAndRequestMoney: UIViewController {
     // and this delegate function call another function
     var startCheckForAnyChange: Bool = false
     
-    
-    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var segmentController: UISegmentedControl!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var amount: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var addContactBtnOutlet: UIButton!
-    @IBOutlet weak var currency: DropDown!
+    @IBOutlet weak var dropDown: UITextField!
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -59,23 +57,29 @@ class SendAndRequestMoney: UIViewController {
         initViewController()
     }
     
+    private func setUserPreference() {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+            dropDown.text = currency
+        }
+    }
     
     fileprivate func initViewController() {
         setupNavBar()
         // setup segment controller to determine which service should use send or request money
         setupSegmentController()
         configureMessageTextView()
+        dropDown.delegate = self
         // determine the title of viewController be a "send money" or being a "request money"
         toggleRequestSend(isRequest: isRequest)
         if presentFromDonationVC || presentedFromMyContact {
             if presentFromDonationVC { segmentController.setEnabled(false, forSegmentAt: 1) } // disable request segment
             addContactBtnOutlet.isHidden = true
-            email.text = presentedEmail
-            email.isUserInteractionEnabled = false // don't allow to user to edit organization email
+            emailTextField.text = presentedEmail
+            emailTextField.isUserInteractionEnabled = false // don't allow to user to edit organization email
         } else {
             // use this delegate to determine if should enable addEmailToContact button or not
             print("delegate done")
-            email.delegate = self
+            emailTextField.delegate = self
             messageTextView.delegate = self
         }
         
@@ -172,13 +176,24 @@ class SendAndRequestMoney: UIViewController {
     
     // the important function which responsible to deal with the api
     @objc private func sendMonyOrRequest() {
-        if isRequest {
-            print("request sent successfully")
+        if  isValidInputs() {
+            // start indicator loading...
+            if isRequest {
+                // request money
+                // end indicator loading...
+            } else {
+                // send money
+                // end indicator loading...
+            }
         } else {
-            print("money send successfully")
+            Alert.asyncActionOkWith(nil, msg: "missing input, try again", viewController: self)
         }
-        
     }
+    // check if all the faild is filled and if the email is valid
+    private func isValidInputs() -> Bool {
+        return emailTextField.text != "" && Auth.shared.isValidEmail(emailTextField.text!) && amountTextField.text != "" && dropDown.text != ""
+    }
+    
     // pop down keyboard when tap anyplace in the view
     @objc func hideKeyboard() {
         messageTextView.resignFirstResponder()
@@ -186,9 +201,9 @@ class SendAndRequestMoney: UIViewController {
     
     // add email to my contacts (also deak with api)
     @IBAction func addEmailToMyContacts(_ sender: UIButton) {
-        if email.text != "" && Auth.shared.isValidEmail(email.text!) {
+        if emailTextField.text != "" && Auth.shared.isValidEmail(emailTextField.text!) {
             // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
-            if ["ahmed@gmail.com"].contains(email.text!) {
+            if ["ahmed@gmail.com"].contains(emailTextField.text!) {
                 Auth.shared.buildAndPresentAlertWith(K.vc.myContactAlertEmailExist, message: K.vc.myContactAlertEmailExistMsg, viewController: self)
                 self.toggleAddContactButton(toDone: true)
             }
@@ -202,7 +217,7 @@ class SendAndRequestMoney: UIViewController {
                 }
                 let cancel = UIAlertAction(title: K.alert.cancel, style: .cancel, handler: nil)
                 alert.addTextField { (txt) in
-                    txt.placeholder = "\(self.email.text!.split(separator: "@")[0])"
+                    txt.placeholder = "\(self.emailTextField.text!.split(separator: "@")[0])"
                     txt.basicConfigure()
                 }
                 alert.addAction(cancel)
@@ -211,7 +226,7 @@ class SendAndRequestMoney: UIViewController {
             }
             
             
-            email.endEditing(true)
+            emailTextField.endEditing(true)
         } else {
             Auth.shared.buildAndPresentAlertWith(K.vc.sORrAlertInvalidEmail, message: K.vc.sORrAlertInvalidEmailMsg, viewController: self)
         }
@@ -221,7 +236,7 @@ class SendAndRequestMoney: UIViewController {
         if toDone {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             self.addContactBtnOutlet.isUserInteractionEnabled = false
-            email.endEditing(true)
+            emailTextField.endEditing(true)
             startCheckForAnyChange = true
         }else {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
@@ -242,25 +257,39 @@ extension SendAndRequestMoney: UITextViewDelegate {
         }
     }
 }
-extension SendAndRequestMoney: UITextFieldDelegate {
+extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.text != "" && Auth.shared.isValidEmail(textField.text!) {
-            UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
-                DispatchQueue.main.async {
-                    self.addContactBtnOutlet.isHidden = false
-                    // and if email not exist toggle to add image
-                }
-            })
-        }else {
-            if !self.addContactBtnOutlet.isHidden {
-                UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+        if textField == emailTextField {
+            if textField.text != "" && Auth.shared.isValidEmail(textField.text!) {
+                UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
                     DispatchQueue.main.async {
-                        self.addContactBtnOutlet.isHidden = true
+                        self.addContactBtnOutlet.isHidden = false
+                        // and if email not exist toggle to add image
                     }
                 })
+            }else {
+                if !self.addContactBtnOutlet.isHidden {
+                    UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.7, options: .curveEaseIn, animations: {
+                        DispatchQueue.main.async {
+                            self.addContactBtnOutlet.isHidden = true
+                        }
+                    })
+                }
             }
-            
         }
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == dropDown {
+            let vc = PopUpMenu()
+            vc.menuDelegate = self
+            vc.originalDataSource = [PopMenuItem(image: nil, title: "Egypt"), PopMenuItem(image: nil, title: "Landon"), PopMenuItem(image: nil, title: "America")]
+            self.present(vc, animated: true, completion: nil)
+            textField.endEditing(true)
+        }
+        
+    }
+    func selectedItem(title: String) {
+        dropDown.text = title
     }
 }

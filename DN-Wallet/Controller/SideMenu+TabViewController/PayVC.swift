@@ -61,6 +61,13 @@ class PayVC: UIViewController {
         handleNavigationBar()
         handelPopUpTextField()
         dropDown.text = Currency.EGP.description // set default currency
+        //setUserPreference()
+    }
+    
+    private func setUserPreference() {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+            dropDown.text = currency
+        }
     }
     
     func handleNavigationBar() {
@@ -105,7 +112,9 @@ class PayVC: UIViewController {
                 // alert
                 Alert.syncActionOkWith(K.alert.faild, msg: message, viewController: self)
             }
+            amountValue = 0.0
             amountField.text = ""
+            
         }
     }
     

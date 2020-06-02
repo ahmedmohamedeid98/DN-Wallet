@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
        // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
         
-        if !UserDefaults.standard.bool(forKey: Defaults.FirstLaunch.key) {
+        if !UserPreference.getBoolValue(withKey: UserPreference.firstLanchKay) {
             // don't show guide screens again
-            UserDefaults.standard.set(true, forKey: Defaults.FirstLaunch.key)
+            UserPreference.setValue(true, withKey: UserPreference.firstLanchKay)
             Auth.shared.canEvaluatePolicyWithFaceID()
              window = UIWindow(windowScene: windowScene)
             // assign viewController

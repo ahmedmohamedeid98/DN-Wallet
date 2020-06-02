@@ -123,7 +123,7 @@ extension UIView {
 extension UIColor {
     
     static var DnGrayColor: UIColor {
-        return .systemGray4
+        return .systemGray2
     }
     static var DnWhiteColor: UIColor {
         return .white

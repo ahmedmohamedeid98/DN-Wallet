@@ -53,11 +53,21 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         
         dropDownCountry.text = "Egypt"
         phoneNumber.text = "01035486578"
+        //setUserPreferance()
 
     }
     
     @objc func resetKeyboardState() {
         phoneNumber.resignFirstResponder()
+    }
+    
+    private func setUserPreferance() {
+        if let country = UserPreference.getStringValue(withKey: UserPreference.country) {
+            dropDownCountry.text = country
+        }
+        if let phone = UserPreference.getStringValue(withKey: UserPreference.phone) {
+            phoneNumber.text = phone
+        }
     }
     
     /// this function called after user enter the opt code

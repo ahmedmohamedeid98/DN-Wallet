@@ -39,6 +39,7 @@ class NotificationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         newLabel.layer.cornerRadius = 11
         newLabel.clipsToBounds = true
         
