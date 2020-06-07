@@ -33,7 +33,7 @@ enum GeneralOptions: Int, CaseIterable, SectionType {
     
     var description: String {
         switch self {
-        case .editProfile: return "Eidt Profile"
+        case .editProfile: return "Edit Account"
         case .privacy: return "Privacy"
         case .language: return "Language"
         }

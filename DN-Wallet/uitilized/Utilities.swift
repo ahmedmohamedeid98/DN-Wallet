@@ -6,6 +6,17 @@
 
 import Foundation
 
+// static data
+let currencyData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egyption Pound", code: "EGP"),
+                                   PopMenuItem(image: nil, title: "American Dollar", code: "USD"),
+                                   PopMenuItem(image: nil, title: "Euro", code: "EUR"),
+                                   PopMenuItem(image: nil, title: "Saudi Riyal", code: "SAR")
+]
+let countryData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egyption", code: "+20"),
+                                  PopMenuItem(image: nil, title: "United State", code: "+43"),
+                                  PopMenuItem(image: nil, title: "Saudi Arab", code: "+86"),
+                                  PopMenuItem(image: nil, title: "Iraq", code: "+28")]
+
 class Utile {
     class var currentDate: String {
         let date = Date()

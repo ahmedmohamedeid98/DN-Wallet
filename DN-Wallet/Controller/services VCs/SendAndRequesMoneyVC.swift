@@ -58,7 +58,7 @@ class SendAndRequestMoney: UIViewController {
     }
     
     private func setUserPreference() {
-        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKey) {
             dropDown.text = currency
         }
     }
@@ -258,6 +258,10 @@ extension SendAndRequestMoney: UITextViewDelegate {
     }
 }
 extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
+    func selectedItem(title: String, code: String?) {
+        dropDown.text = title + "\t\t(\(code ?? " "))"
+    }
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextField {
@@ -283,13 +287,10 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
         if textField == dropDown {
             let vc = PopUpMenu()
             vc.menuDelegate = self
-            vc.originalDataSource = [PopMenuItem(image: nil, title: "Egypt"), PopMenuItem(image: nil, title: "Landon"), PopMenuItem(image: nil, title: "America")]
+            vc.dataSource = .currency
             self.present(vc, animated: true, completion: nil)
             textField.endEditing(true)
         }
         
-    }
-    func selectedItem(title: String) {
-        dropDown.text = title
     }
 }

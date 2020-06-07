@@ -10,6 +10,7 @@
 struct PopMenuItem: Hashable {
     let image: UIImage?
     let title: String
+    let code: String?
     
     let identifier: UUID = UUID()
     static func == (lhs: PopMenuItem, rhs: PopMenuItem) -> Bool {

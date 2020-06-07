@@ -28,12 +28,10 @@ class SAImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("override image")
         configure()
     }
     
     convenience init(title: String? = nil, tintColor: UIColor = .white, contentMode: UIView.ContentMode = .scaleAspectFit, isSystemImage: Bool = true) {
-        print("convenience init")
         self.init(frame: .zero)
         self.contentMode = contentMode
         self.tintColor = tintColor

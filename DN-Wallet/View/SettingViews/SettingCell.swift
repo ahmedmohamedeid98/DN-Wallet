@@ -10,10 +10,6 @@ import UIKit
 
 class SettingCell: UITableViewCell {
     
-    // MARK:- Safe Mode Delegates
-    weak var safeModeAlertDelegate: SafeModeAlert!
-    weak var safeModeDelegate: SafeModeProtocol!
-    
     // MARK:- Setting Cell's Datasource
     var sectionType : SectionType? {
         didSet{
@@ -40,7 +36,7 @@ class SettingCell: UITableViewCell {
     }
     */
     func setLanguage() {
-        let languageID =  UserPreference.getIntValue(withKey: UserPreference.languageKay)
+        let languageID =  UserPreference.getIntValue(withKey: UserPreference.languageKey)
         for lang in LanguageSection.allCases {
             if lang.rawValue == languageID {
                 descriptionLabel.text = lang.description
@@ -91,15 +87,9 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
-                safeModeAlertDelegate.showSafeModeAlert { (accept) in
-                    if accept {
-                        self.safeModeDelegate.activeSafeMode()
-                    }else {
-                        sender.isOn = false
-                    }
-                }
+                // active safe mode
             } else {
-                safeModeDelegate.disableSafeMode()
+                // disable safeMode
             }
         }
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {

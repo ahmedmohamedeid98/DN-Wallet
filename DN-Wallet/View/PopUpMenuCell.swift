@@ -10,7 +10,6 @@ class PopUpMenuCell: UITableViewCell {
     
     static let reuseIdentifier = "pop-up-cell-identifier"
     
-    
     var data: PopMenuItem? {
         didSet {
             guard let data = data else {return}
@@ -19,7 +18,7 @@ class PopUpMenuCell: UITableViewCell {
         }
     }
     
-    func getTitle() -> String {
+    var getTitle: String {
         return title.text ?? "Something Wrong"
     }
     

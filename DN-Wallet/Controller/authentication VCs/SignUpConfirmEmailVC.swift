@@ -8,13 +8,7 @@
 
 import UIKit
 
-class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
-    
-    
-    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
-        self.inputConfirmationCode = "\(tf1)\(tf2)\(tf3)\(tf4)"
-        self.signUpBtnOutlet.isEnabled = true
-    }
+class SignUpConfirmEmailVC: UIViewController {
     
     //MARK:- Properities
     var inputConfirmationCode: String!
@@ -38,16 +32,13 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     //MARK:- IBActions
         
     @IBAction func signUpBtnPressed(_ sender: UIButton) {
-        UserDefaults.standard.set(true, forKey: Defaults.FirstLaunch.key)
+        UserPreference.setValue(true, withKey: UserPreference.firstLaunchKey)
         signUpBtnOutlet.isEnabled = false
         if self.inputConfirmationCode == "2211" {
             guard let data = registerData else {return}
-            print("data: \(data)")
             Auth.shared.createAccount(user: data) { (success, error) in
                 if success {
-                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
-                        Auth.shared.pushHomeViewController(vc: self)
-                    })
+                    Auth.shared.pushHomeViewController(vc: self)
                 } else {
                     Alert.asyncActionOkWith(nil, msg: "faild register, \(error!)", viewController: self)
                 }
@@ -67,4 +58,11 @@ class SignUpConfirmEmailVC: UIViewController, GetOPTValuesProtocol {
     }
     
     
+}
+
+extension SignUpConfirmEmailVC: GetOPTValuesProtocol {
+    func getOpt(with value: String) {
+        self.inputConfirmationCode = value
+        self.signUpBtnOutlet.isEnabled = true
+    }
 }

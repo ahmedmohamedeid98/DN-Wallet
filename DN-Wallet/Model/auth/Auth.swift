@@ -9,21 +9,9 @@
 import KeychainSwift
 import LocalAuthentication
 
-// MARK:- Safe Mode Protocols
-
-
-protocol SafeModeAlert: class {
-    func showSafeModeAlert(completion: @escaping (Bool) -> ())
-}
-
-/// SafeModeProtocol is a protocol that responsible about disable specific service and re-activate it.
-protocol SafeModeProtocol: class {
-    func activeSafeMode()
-    func disableSafeMode()
-}
 
 // MARK:- Setup Keychain keys
-
+// keychain keys
 struct keys {
     static let keyPrefix = "dnwallet_"
     static let id = "user_id"
@@ -31,6 +19,7 @@ struct keys {
     static let email = "email"
     static let token = "user_token"
     static let safeModeTime = "safe_mode_time"
+    static let safeModeActive = "safe-mode-active"
     static let qrCodeFileName = "DN-QRCode-Image.png"
     static let allowedAmount = "allowed-amount"
 }
@@ -43,6 +32,7 @@ class Auth {
     static let shared = Auth()
     let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     
+    /// check iphone's boimetric typr
     func canEvaluatePolicyWithFaceID() {
         let context:LAContext = LAContext()
         var error: NSError?
@@ -51,9 +41,9 @@ class Auth {
             case .none:
                 break
             case .touchID:
-                UserDefaults.standard.set(true, forKey: Defaults.BiometricTypeTouchID.key)
+                UserPreference.setValue(true, withKey: UserPreference.biometricTypeTouchID)
             case .faceID:
-                UserDefaults.standard.set(true, forKey: Defaults.BiometricTypeFaceID.key)
+                UserPreference.setValue(true, withKey: UserPreference.biometricTypeFaceID)
             @unknown default:
                 break
             }
@@ -126,14 +116,13 @@ class Auth {
                             confirm_password: user.password,
                             phone: user.phone,
                             country: user.country)
-        
         DNData.register(with: data) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
                 self.keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.user_Id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.Token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
+                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
                 completion(true, nil)
             }else {
                 completion(false, error)
@@ -161,7 +150,7 @@ class Auth {
     
     func validateCurrentPassword(currentPassword: String) -> Bool {
         guard let password = keychain.get(keys.password) else { return false }
-        if currentPassword ==  password{
+        if currentPassword ==  password {
             return true
         } else {
             return false
@@ -262,17 +251,17 @@ extension Auth {
     // check if the app in safe mode or not
     var isAppInSafeMode: Bool {
         get {
-            return keychain.getBool(Defaults.EnableSafeMode.key) ?? false
+            return keychain.getBool(keys.safeModeActive) ?? false
         }
     }
     // active safe mode "we can do this in the app setting"
     func activeSafeMode() {
-        keychain.set(true, forKey: Defaults.EnableSafeMode.key)
+        keychain.set(true, forKey: keys.safeModeActive)
     }
     // deactive safe mode "this may during app Luanch"
     // or if the remaining time less than 3 h try after that time
     func deactiveSafeMode() {
-        keychain.set(false, forKey: Defaults.EnableSafeMode.key)
+        keychain.set(false, forKey: keys.safeModeActive)
     }
     // this is properity which contain the limited amount that user can deal with it (Pay) during safe mode
     var allowedAmountInSafeMode: Double {

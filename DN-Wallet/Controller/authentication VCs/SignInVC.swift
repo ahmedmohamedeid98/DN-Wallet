@@ -15,7 +15,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var signInOutlet: UIButton!
     var loginWithFaceIDButton = SAButton(backgroundColor: .DnColor, title: "   Login With FaceID", systemTitle: "faceid")
     var FaceIdFounded: Bool = false
-    var shouldEvaluate: Bool = true
+    var TouchIdFounded: Bool = false
     var LoginWithBiometric: Bool = false
     
     override func viewDidLoad() {
@@ -35,26 +35,39 @@ class SignInVC: UIViewController {
     }
 
     private func initAuth() {
-        // determine if should add loginWithFaceIDButton to view or not.
-        LoginWithBiometric = UserPreference.getBoolValue(withKey: UserPreference.loginWithBiometric)
-        FaceIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
-        if  LoginWithBiometric && FaceIdFounded {
-            setupLoginWithFaceIDLayout()
-            shouldEvaluate = false
-        } else if LoginWithBiometric {
-            Auth.shared.loginWithBiometric(viewController: self) // Login With TouchID
-        }
-        
-        if LoginWithBiometric && shouldEvaluate && !UserPreference.getBoolValue(withKey: UserPreference.biometricTypeTouchID) {
-            Auth.shared.canEvaluatePolicyWithFaceID()
-        }
-        // Button's Action
-        loginWithFaceIDButton.withTarget = { [weak self] () in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                Auth.shared.loginWithBiometric(viewController: self)
+    
+        if checkIphoneBiometricMethod() {
+            // login with faceid button's action
+            loginWithFaceIDButton.withTarget = { [weak self] () in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    Auth.shared.loginWithBiometric(viewController: self)
+                }
             }
         }
+    }
+    
+    private func checkIphoneBiometricMethod() -> Bool {
+        // if user accept login with Biometric
+        LoginWithBiometric = UserPreference.getBoolValue(withKey: UserPreference.loginWithBiometric)
+        if !LoginWithBiometric {
+            return false
+        }
+        // if iphone support FaceID, add it's button
+        FaceIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
+        if  FaceIdFounded {
+            setupLoginWithFaceIDLayout()
+            return true
+        }
+        // if no FaceID then try login with touchID
+        TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
+        if TouchIdFounded {
+            Auth.shared.loginWithBiometric(viewController: self)
+            return false
+        }
+        // go and evaluate if the app support FaceID or Touch ID
+        Auth.shared.canEvaluatePolicyWithFaceID()
+        return false
     }
     
     private func initView() {
@@ -79,6 +92,7 @@ class SignInVC: UIViewController {
     // if user enter his (email & password) and pressed signIn
     @IBAction func signInBtnPressed(_ sender: UIButton) {
         //TEST TRST
+        
         Auth.shared.pushHomeViewController(vc: self)
         return
         // End TEST

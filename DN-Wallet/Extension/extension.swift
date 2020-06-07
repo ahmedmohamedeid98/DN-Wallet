@@ -132,7 +132,7 @@ extension UIColor {
         return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
     }
     static var DnVcBackgroundColor: UIColor {
-        return .systemGray6
+        return .systemBackground
     }
     
     static var DnTextColor: UIColor {

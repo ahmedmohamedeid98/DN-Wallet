@@ -9,16 +9,33 @@
 import UIKit
 
 protocol PopUpMenuDelegate: class {
-    func selectedItem(title: String)
+    func selectedItem(title: String, code: String?)
 }
 
+enum PopUpMenuDataSource {
+    case currency
+    case country
+    
+    var data: [PopMenuItem] {
+        switch self {
+            case .currency: return currencyData // this is static data comes from utilities
+            case .country: return countryData
+        }
+    }
+}
 
 final class PopUpMenu: UIViewController {
 
     private var searchBar: UISearchBar!
     private var List: UITableView!
     private var shouldReloadTableView: Bool = false
-    var originalDataSource : [PopMenuItem] = []
+    var dataSource: PopUpMenuDataSource = .currency {
+        didSet {
+            print("enter data source:::::::")
+            originalDataSource = dataSource.data
+        }
+    }
+    private var originalDataSource : [PopMenuItem] = []
     private var currentDataSource : [PopMenuItem] = []
     weak var menuDelegate: PopUpMenuDelegate?
     private var listDataSource : UITableViewDiffableDataSource<Section, PopMenuItem>!
@@ -46,7 +63,7 @@ final class PopUpMenu: UIViewController {
     }
     private func setupListTable() {
         List = UITableView()
-        List.backgroundColor = .DnBackgroundColor
+        //List.backgroundColor = .DnBackgroundColor
         List.register(PopUpMenuCell.self, forCellReuseIdentifier: PopUpMenuCell.reuseIdentifier)
         //List.rowHeight = 60
         List.indicatorStyle = .white
@@ -103,7 +120,8 @@ extension PopUpMenu: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell {
-            menuDelegate?.selectedItem(title: selectedCell.getTitle())
+            let code_ = currentDataSource[indexPath.row].code
+            menuDelegate?.selectedItem(title: selectedCell.getTitle, code: code_)
         }
         dismiss(animated: true, completion: nil)
     }

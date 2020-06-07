@@ -85,12 +85,12 @@ class DNData {
     }
     
     class func getCharityOrganizationInitialData(completion: @escaping([Charity], Error?)-> Void) {
-        //var request = URLRequest(url: Endpoint.charity.url)
-        //let token = Auth.shared.getUserToken()
-        //request.setValue(token, forHTTPHeaderField: "Authorization")
+        var request = URLRequest(url: Endpoint.charity.url)
+        let token = Auth.shared.getUserToken()
+        request.setValue(token, forHTTPHeaderField: "x-auth-token")
         //request.addValue(token!, forHTTPHeaderField: "Authorization")
-        //request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: Endpoint.charity.url) { (data, response, error) in
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let e = error {
                 completion([], e)
                 return
@@ -181,8 +181,6 @@ class DNData {
     /// ask API to create account, and return a user token
     class func register(with data: Register, completion: @escaping(RegisterResponder?, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoint.register.url, response: RegisterResponder.self, body: data) { (response, error) in
-            print("##### reponse #### : \(String(describing: response))")
-            print("#### error #### : \(String(describing: error))")
             if let response = response {
                 completion(response, nil)
             }else {

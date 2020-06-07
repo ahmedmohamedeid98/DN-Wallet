@@ -28,7 +28,6 @@
 		045A2FBA241C15D000A0C643 /* HistoryDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */; };
 		045EC5E6244F96780030FAE9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EC5E5244F96780030FAE9 /* Alert.swift */; };
 		04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */; };
-		04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B03243CFB3200E4BFA2 /* Defaults.swift */; };
 		04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */; };
 		04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B09243D376C00E4BFA2 /* AddHeirVC.swift */; };
 		04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04659B0D243D717D00E4BFA2 /* Heirs.swift */; };
@@ -66,8 +65,6 @@
 		047FA8BA240E36440097DD06 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B9240E36440097DD06 /* userInput.swift */; };
 		0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487D2EC247D58850020F1EB /* NotificationCell.swift */; };
 		0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0487D2ED247D58850020F1EB /* NotificationCell.xib */; };
-		048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F11243B512100BE464D /* EditProfileVC.swift */; };
-		048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F13243B525D00BE464D /* EditProfileSection.swift */; };
 		048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F15243B5ED600BE464D /* PrivacyVC.swift */; };
 		048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F17243B5F8B00BE464D /* PrivacySection.swift */; };
 		048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F19243B6F9D00BE464D /* PrivacyCell.swift */; };
@@ -92,6 +89,7 @@
 		04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90C2422C64B0062D54F /* DonationVC.swift */; };
 		04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90E2422C7760062D54F /* DonationCell.swift */; };
 		04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */; };
+		04B7688E248963100094ECAE /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7688C248963100094ECAE /* EditAccountVC.swift */; };
 		04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE67324467014003BCAC9 /* CurrencyCell.swift */; };
 		04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */; };
 		04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* DNData.swift */; };
@@ -127,7 +125,6 @@
 		045A2FB9241C15D000A0C643 /* HistoryDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsCell.swift; sourceTree = "<group>"; };
 		045EC5E5244F96780030FAE9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSection.swift; sourceTree = "<group>"; };
-		04659B03243CFB3200E4BFA2 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		04659B09243D376C00E4BFA2 /* AddHeirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHeirVC.swift; sourceTree = "<group>"; };
 		04659B0D243D717D00E4BFA2 /* Heirs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heirs.swift; sourceTree = "<group>"; };
@@ -167,8 +164,6 @@
 		047FA8B9240E36440097DD06 /* userInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
 		0487D2EC247D58850020F1EB /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		0487D2ED247D58850020F1EB /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
-		048D2F11243B512100BE464D /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
-		048D2F13243B525D00BE464D /* EditProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSection.swift; sourceTree = "<group>"; };
 		048D2F15243B5ED600BE464D /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
 		048D2F17243B5F8B00BE464D /* PrivacySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySection.swift; sourceTree = "<group>"; };
 		048D2F19243B6F9D00BE464D /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
@@ -194,6 +189,7 @@
 		04B1C90C2422C64B0062D54F /* DonationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationVC.swift; sourceTree = "<group>"; };
 		04B1C90E2422C7760062D54F /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsVC.swift; sourceTree = "<group>"; };
+		04B7688C248963100094ECAE /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
 		04BDE67324467014003BCAC9 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		04DB8841242C5BC6007BA6B0 /* DNData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNData.swift; sourceTree = "<group>"; };
@@ -252,6 +248,7 @@
 				04792AF2240B1EE300F781D8 /* PayVC.swift */,
 				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
 				043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */,
+				0401BBD2247C7493000C597A /* NotificationVC.swift */,
 			);
 			path = "SideMenu+TabViewController";
 			sourceTree = "<group>";
@@ -367,7 +364,6 @@
 				046732B624198EA600DD436D /* forgetPassword VCs */,
 				04B1C90B2422C5840062D54F /* services VCs */,
 				040F754B245E682000B66A02 /* PopUpMenu.swift */,
-				0401BBD2247C7493000C597A /* NotificationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -419,10 +415,10 @@
 			isa = PBXGroup;
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
-				048D2F11243B512100BE464D /* EditProfileVC.swift */,
 				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
 				04659B09243D376C00E4BFA2 /* AddHeirVC.swift */,
+				04B7688C248963100094ECAE /* EditAccountVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -431,7 +427,6 @@
 			isa = PBXGroup;
 			children = (
 				047A49F9243AECBF0077A954 /* SettingSection.swift */,
-				048D2F13243B525D00BE464D /* EditProfileSection.swift */,
 				048D2F17243B5F8B00BE464D /* PrivacySection.swift */,
 				04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */,
 				04659B0D243D717D00E4BFA2 /* Heirs.swift */,
@@ -463,6 +458,7 @@
 		0487D2F0247DAF830020F1EB /* auth */ = {
 			isa = PBXGroup;
 			children = (
+				048D56422429D895008A8925 /* Auth.swift */,
 				048D56442429E701008A8925 /* Register.swift */,
 				04161474242E348800782332 /* Login.swift */,
 			);
@@ -472,7 +468,6 @@
 		048D563F2429D063008A8925 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				048D56422429D895008A8925 /* Auth.swift */,
 				04DB8841242C5BC6007BA6B0 /* DNData.swift */,
 			);
 			path = Network;
@@ -515,7 +510,6 @@
 		0493A844244F75D400F4B659 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				04659B03243CFB3200E4BFA2 /* Defaults.swift */,
 				0493A842244F6BCD00F4B659 /* UserPreference.swift */,
 			);
 			path = Preferences;
@@ -741,7 +735,6 @@
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
 				0411E582245B921A00EBBCF5 /* DonationDetailsSection.swift in Sources */,
 				040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */,
-				048D2F12243B512100BE464D /* EditProfileVC.swift in Sources */,
 				040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */,
 				04E6307E247148330026589E /* Constants.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
@@ -765,7 +758,6 @@
 				048DFBFB244E6591001DF711 /* QRScannerView.swift in Sources */,
 				047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */,
 				045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */,
-				04659B04243CFB3200E4BFA2 /* Defaults.swift in Sources */,
 				04161475242E348800782332 /* Login.swift in Sources */,
 				0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */,
 				047040C82420488D00BBAAF5 /* AddNewCardVC.swift in Sources */,
@@ -780,6 +772,7 @@
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
 				04E9448C2412D524000EA14B /* SignUpPhoneVC.swift in Sources */,
 				047040CA242050B800BBAAF5 /* PaymentCard.swift in Sources */,
+				04B7688E248963100094ECAE /* EditAccountVC.swift in Sources */,
 				047040C224202BDF00BBAAF5 /* HDetails.swift in Sources */,
 				04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */,
 				0465C6A624211D300032506D /* Currency.swift in Sources */,
@@ -792,7 +785,6 @@
 				045EC5E6244F96780030FAE9 /* Alert.swift in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */,
-				048D2F14243B525D00BE464D /* EditProfileSection.swift in Sources */,
 				04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,

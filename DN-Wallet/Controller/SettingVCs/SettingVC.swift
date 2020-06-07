@@ -116,8 +116,9 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
         guard let title = tableView.cellForRow(at: indexPath)?.textLabel?.text else {return}
         if indexPath.section == 0 {
             if title == GeneralOptions.editProfile.description {
-                let vc = EditProfileVC()
-                pushViewController(vc, title: title, styleFull: true)
+                let st = UIStoryboard(name: "Services", bundle: .main)
+                let vc = st.instantiateViewController(identifier: "editAccountVCID") as? EditAccountVC
+                pushViewController(vc!, title: title, styleFull: true)
             }
             if title ==  GeneralOptions.privacy.description {
                 let vc = PrivacyVC()
@@ -160,12 +161,12 @@ extension SettingVC {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let English = UIAlertAction(title: LanguageSection.English.description , style: .default) { (action) in
             //UserDefaults.standard.set(LanguageSection.English.id, forKey: Defaults.Language.key)
-            UserPreference.setValue(LanguageSection.English.id, withKey: UserPreference.languageKay)
+            UserPreference.setValue(LanguageSection.English.id, withKey: UserPreference.languageKey)
             self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
         }
         let Arabic = UIAlertAction(title: LanguageSection.Arabic.description , style: .default) { (action) in
             //UserDefaults.standard.set(LanguageSection.Arabic.id, forKey: Defaults.Language.key)
-            UserPreference.setValue(LanguageSection.Arabic.id, withKey: UserPreference.languageKay)
+            UserPreference.setValue(LanguageSection.Arabic.id, withKey: UserPreference.languageKey)
             self.settingTable.updateRowWith(indexPaths: [GeneralOptions.language.indexPath], animate: .fade)
         }
         alert.addAction(English)

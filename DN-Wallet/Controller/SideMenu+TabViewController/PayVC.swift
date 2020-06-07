@@ -65,7 +65,7 @@ class PayVC: UIViewController {
     }
     
     private func setUserPreference() {
-        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKey) {
             dropDown.text = currency
         }
     }
@@ -139,7 +139,7 @@ class PayVC: UIViewController {
     private func handelPopUpTextField() {
         dropDown.delegate = self
         dropDown.placeholder = "select currency"
-        dropDown.text = UserDefaults.standard.string(forKey: Defaults.Currency.key)
+        //dropDown.text = UserPreference.getStringValue(withKey: UserPreference.currencyKey)
     }
     
     @IBAction func Stepper_one(_ sender: UIStepper) {
@@ -175,15 +175,15 @@ class PayVC: UIViewController {
 }
 
 extension PayVC: UITextFieldDelegate, PopUpMenuDelegate {
-    func selectedItem(title: String) {
-        dropDown.text = title
+    func selectedItem(title: String, code: String?) {
+        dropDown.text = title + "\t\t(\(code ?? " "))"
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == dropDown {
             let vc = PopUpMenu()
             vc.menuDelegate = self
-            vc.originalDataSource = [PopMenuItem(image: nil, title: "Egyption Pound"), PopMenuItem(image: nil, title: "UDS")]
+            vc.dataSource = .currency
             self.present(vc, animated: true, completion: nil)
             textField.endEditing(true)
         }

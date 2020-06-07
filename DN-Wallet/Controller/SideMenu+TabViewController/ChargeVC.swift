@@ -42,7 +42,7 @@ class ChargeVC: UIViewController {
     }
     
     private func setUserPreference() {
-        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKay) {
+        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKey) {
             dropDown.text = currency
         }
     }
@@ -88,8 +88,8 @@ class ChargeVC: UIViewController {
 }
 
 extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
-    func selectedItem(title: String) {
-        dropDown.text = title
+    func selectedItem(title: String, code: String?) {
+        dropDown.text = title + "\t\t(\(code ?? " "))"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -98,7 +98,7 @@ extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
             amountField.endEditing(true)
             let vc = PopUpMenu()
             vc.menuDelegate = self
-            vc.originalDataSource = [PopMenuItem(image: nil, title: "Egyption Pound")]
+            vc.dataSource = .currency
             self.present(vc, animated: true, completion: nil)
         }
     }

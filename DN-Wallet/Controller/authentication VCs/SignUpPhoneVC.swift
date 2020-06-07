@@ -8,14 +8,20 @@
 
 import UIKit
 
-class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
-    
+protocol UpdatePhoneDelegate: class {
+    func newPhoneAndCountryInfo(phone: String, country: String)
+}
+
+
+class SignUpPhoneVC: UIViewController {
     
     //MARK:- Properities
     var user:User?
-    
+    var updateState: Bool = false
+    weak var updatePhoneDelegate : UpdatePhoneDelegate?
     //MARK:- Outlets
-    @IBOutlet weak var phoneNumberContainer: UIView!
+    
+    @IBOutlet weak var vcTitle: UILabel!
     @IBOutlet weak var dropDownCountry: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var confirmCodeInfoMessage: UITextView!
@@ -30,9 +36,6 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         // configure the container layer which hold country dropDown and phone txtField
-        phoneNumberContainer.layer.borderColor = UIColor.DnGrayColor.cgColor
-        phoneNumberContainer.layer.borderWidth = 1
-        phoneNumberContainer.layer.cornerRadius = 4
         
         dropDownCountry.delegate = self
         
@@ -48,12 +51,14 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         self.view.addGestureRecognizer(tapGesture)
         
         // setup stepProgressBar
-        steppedProgressBar.titles = ["", "", ""]
-        steppedProgressBar.currentTab = 2
-        
-        dropDownCountry.text = "Egypt"
-        phoneNumber.text = "01035486578"
-        //setUserPreferance()
+        if !updateState {
+            steppedProgressBar.titles = ["", "", ""]
+            steppedProgressBar.currentTab = 2
+        } else {
+            vcTitle.text = "Update Phone"
+            steppedProgressBar.isHidden = true
+        }
+        setUserPreferance()
 
     }
     
@@ -65,30 +70,29 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
         if let country = UserPreference.getStringValue(withKey: UserPreference.country) {
             dropDownCountry.text = country
         }
-        if let phone = UserPreference.getStringValue(withKey: UserPreference.phone) {
-            phoneNumber.text = phone
-        }
-    }
-    
-    /// this function called after user enter the opt code
-    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
-        showIndicator(true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.showIndicator(false)
-            if "\(tf1)\(tf2)\(tf3)\(tf4)" == "1122" {
-                self.opt.hideErrorMessgae()
-                let st = UIStoryboard(name: "Authentication", bundle: .main)
-                let vc = st.instantiateViewController(identifier: "signUpConfirmEmailVCID") as? SignUpConfirmEmailVC
-                vc?.modalPresentationStyle = .fullScreen
-                self.user?.country = self.dropDownCountry.text!
-                self.user?.phone = self.phoneNumber.text!
-                vc?.registerData = self.user
-                self.present(vc!, animated: true)
-            }else {
-                self.opt.reset()
-                self.opt.showErrorMessgae()
+        if !updateState {
+            if let phone = UserPreference.getStringValue(withKey: UserPreference.phone) {
+                phoneNumber.text = phone
             }
         }
+        
+    }
+    
+    private func presentSignUpConfirmEmailVC() {
+        let st = UIStoryboard(name: "Authentication", bundle: .main)
+        let vc = st.instantiateViewController(identifier: "signUpConfirmEmailVCID") as? SignUpConfirmEmailVC
+        vc?.modalPresentationStyle = .fullScreen
+        self.user?.country = self.dropDownCountry.text!
+        self.user?.phone = self.phoneNumber.text!
+        vc?.registerData = self.user
+        self.present(vc!, animated: true)
+    }
+    private func backToEditAccountVC(with phone: String, country: String) {
+        UserPreference.setValue(phone, withKey: UserPreference.phone)
+        UserPreference.setValue(country, withKey: UserPreference.country)
+        updatePhoneDelegate?.newPhoneAndCountryInfo(phone: phone, country: country)
+        dismiss(animated: true, completion: nil)
+        
     }
     
     func showIndicator(_ hidden: Bool) {
@@ -120,16 +124,36 @@ class SignUpPhoneVC: UIViewController, GetOPTValuesProtocol {
 }
 
 extension SignUpPhoneVC: UITextFieldDelegate, PopUpMenuDelegate {
-    
-    func selectedItem(title: String) {
-        print("selected Country : \(title)")
-        dropDownCountry.text = title
+    func selectedItem(title: String, code: String?) {
+        dropDownCountry.text = "(\(code ?? " "))\t" + title
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let vc = PopUpMenu()
         vc.menuDelegate = self
-        vc.originalDataSource = [PopMenuItem(image: nil, title: "Egypt"), PopMenuItem(image: nil, title: "Landon"), PopMenuItem(image: nil, title: "America")]
+        vc.dataSource = .country
         self.present(vc, animated: true, completion: nil)
         textField.endEditing(true)
+    }
+}
+
+extension SignUpPhoneVC: GetOPTValuesProtocol {
+    /// this function called after user enter the opt code
+    func getOpt(with value: String) {
+        showIndicator(true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showIndicator(false)
+            if value == "1122" {
+                self.opt.hideErrorMessgae()
+                if self.updateState {
+                    self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
+                } else {
+                    self.presentSignUpConfirmEmailVC()
+                }
+            }else {
+                self.opt.reset()
+                self.opt.showErrorMessgae()
+            }
+        }
     }
 }

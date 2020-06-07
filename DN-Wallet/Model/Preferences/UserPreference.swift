@@ -10,9 +10,9 @@ import Foundation
 
 class UserPreference {
     // keys
-    static let languageKay = "LanguageKey"
-    static let currencyKay = "currencyKey"
-    static let firstLanchKay = "firstLanchkey"
+    static let languageKey = "LanguageKey"
+    static let currencyKey = "currencyKey"
+    static let firstLaunchKey = "firstLanchkey"
     static let loginWithBiometric = "loginWithBiometric"
     static let enableSafeMode = "enableSafeMod"
     static let biometricTypeFaceID = "biometricTypeFaceID"

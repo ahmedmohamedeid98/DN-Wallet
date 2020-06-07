@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GetOPTValuesProtocol: class {
-    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) -> ()
+    func getOpt(with value: String)  -> ()
 }
 
 class OPT: UIView {
@@ -92,7 +92,7 @@ class OPT: UIView {
         let tf2_val = Int(tf2.text ?? "9") ?? 11
         let tf3_val = Int(tf3.text ?? "9") ?? 11
         let tf4_val = Int(tf4.text ?? "9") ?? 11
-        delegate.getOptValues(tf1: tf1_val, tf2: tf2_val, tf3: tf3_val, tf4: tf4_val)
+        delegate.getOpt(with: "\(tf1_val)\(tf2_val)\(tf3_val)\(tf4_val)")
     }
     
     func showErrorMessgae() {
@@ -120,7 +120,7 @@ extension UITextField {
         self.frame = CGRect(x: 0, y: 0, width: 40.0, height: 40.0)
         self.textAlignment = .center
         self.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        //self.backgroundColor = .red
+        self.backgroundColor = .white
         //self.font = UIFont(name: "Menlo Regular", size: 18)
         self.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         self.layer.cornerRadius = 8

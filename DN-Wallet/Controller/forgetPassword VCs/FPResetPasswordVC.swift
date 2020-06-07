@@ -8,22 +8,7 @@
 
 import UIKit
 
-class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
-    
-    // this function is executed when the last textfeild fill
-    func getOptValues(tf1: Int, tf2: Int, tf3: Int, tf4: Int) {
-        if "\(tf1)\(tf2)\(tf3)\(tf4)" == "1212" {
-            EnterNewPassLabel.isHidden = false
-            NewPassword.isHidden = false
-            confirmNewPassword.isHidden = false
-            doneBtn.isHidden = false
-            opt.errorMsg.isHidden = true
-        }else {
-            opt.reset()
-            opt.errorMsg.isHidden = false
-        }
-    }
-    
+class FPResetPasswordVC: UIViewController {
     
     private var checkYourInbox: UILabel = {
            let lb = UILabel()
@@ -111,4 +96,19 @@ class FPResetPasswordVC: UIViewController, GetOPTValuesProtocol {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+}
+extension FPResetPasswordVC: GetOPTValuesProtocol {
+    // this function is executed when the last textfeild fill
+    func getOpt(with value: String) {
+        if value == "1212" {
+            EnterNewPassLabel.isHidden = false
+            NewPassword.isHidden = false
+            confirmNewPassword.isHidden = false
+            doneBtn.isHidden = false
+            opt.errorMsg.isHidden = true
+        }else {
+            opt.reset()
+            opt.errorMsg.isHidden = false
+        }
+    }
 }
