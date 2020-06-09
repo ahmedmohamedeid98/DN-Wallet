@@ -8,8 +8,7 @@
 
 import KeychainSwift
 import LocalAuthentication
-
-
+import MBProgressHUD
 // MARK:- Setup Keychain keys
 // keychain keys
 struct keys {
@@ -51,7 +50,7 @@ class Auth {
     }
     
     /// Login with Face ID or Touch ID
-    func loginWithBiometric(viewController vc: UIViewController) {
+    func loginWithBiometric(viewController vc: UIViewController, view: UIView) {
         let reason = "Identify yourself"
         let context:LAContext = LAContext()
         var error: NSError?
@@ -60,18 +59,11 @@ class Auth {
                 if success {
                     guard let password = self?.keychain.get(keys.password) else { return }
                     guard let email = self?.keychain.get(keys.email) else { return }
-                    self?.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+                    self?.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
                         if success {
-                            DispatchQueue.main.async {
-                                self?.pushHomeViewController(vc: vc)
-                            }
-                        
-                        }else {
-                            Alert.asyncActionOkWith("Faild Login", msg: "Something was wrong, try again.", viewController: vc)
+                            self?.pushHomeViewController(vc: vc)
                         }
                     }
-                } else {
-                    // faild to identify user: automatically handled
                 }
             }
             
@@ -89,12 +81,13 @@ class Auth {
     ///   - email: user id, it must be unique and also confirmed by API
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
-    func authWithUserCredential(credintial: Login, completion: @escaping (Bool, Error?)->Void) {
+    func authWithUserCredential(credintial: Login,onView view: UIView, completion: @escaping (Bool, Error?)->Void) {
         let data = Login(email: credintial.email,
                          password: credintial.password)
-        DNData.login(credintial: data) { (response, error) in
+        DNData.login(credintial: data, onView: view) { (response, error) in
             if let e = error {
                 completion(false, e)
+                
             } else {
                 if let safeResponse = response {
                     self.keychain.set(data.email, forKey: keys.email)
@@ -109,14 +102,14 @@ class Auth {
     /// create new acount with user info
     /// - Parameters:
     ///   - user: user is a structure with (email - password - username - phone - ...).
-    func createAccount(user: User, completion: @escaping(Bool, Error?)-> Void) {
+    func createAccount(user: User, onView view: UIView, completion: @escaping(Bool, Error?)-> Void) {
         let data = Register(name: user.username,
                             email: user.email,
                             password: user.password,
                             confirm_password: user.password,
                             phone: user.phone,
                             country: user.country)
-        DNData.register(with: data) { [weak self] (response, error) in
+        DNData.register(with: data, onView: view) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
@@ -240,9 +233,11 @@ class Auth {
     }
     
     func pushHomeViewController(vc: UIViewController) {
-        let containerVC = ContainerVC()
-        containerVC.modalPresentationStyle = .fullScreen
-        vc.present(containerVC, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let containerVC = ContainerVC()
+            containerVC.modalPresentationStyle = .fullScreen
+            vc.present(containerVC, animated: true, completion: nil)
+        }
     }
     
 }
@@ -253,6 +248,16 @@ extension Auth {
         get {
             return keychain.getBool(keys.safeModeActive) ?? false
         }
+    }
+    func setSafeModeTime(hours: String = "12") {
+        keychain.set(hours, forKey: keys.safeModeTime)
+    }
+    
+    func getSafeModeTime() -> String {
+        if let safeData = keychain.get(keys.safeModeTime) {
+            return safeData
+        }
+        return "0"
     }
     // active safe mode "we can do this in the app setting"
     func activeSafeMode() {

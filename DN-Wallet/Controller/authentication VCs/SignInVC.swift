@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SignInVC: UIViewController {
 
@@ -20,7 +21,6 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
         // add both email & password textFiled
         initView()
         // add loginWithFaceIDButton & it's action
@@ -41,7 +41,7 @@ class SignInVC: UIViewController {
             loginWithFaceIDButton.withTarget = { [weak self] () in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
-                    Auth.shared.loginWithBiometric(viewController: self)
+                    Auth.shared.loginWithBiometric(viewController: self, view: self.view)
                 }
             }
         }
@@ -62,7 +62,7 @@ class SignInVC: UIViewController {
         // if no FaceID then try login with touchID
         TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
         if TouchIdFounded {
-            Auth.shared.loginWithBiometric(viewController: self)
+            Auth.shared.loginWithBiometric(viewController: self, view: view)
             return false
         }
         // go and evaluate if the app support FaceID or Touch ID
@@ -91,28 +91,26 @@ class SignInVC: UIViewController {
     }
     // if user enter his (email & password) and pressed signIn
     @IBAction func signInBtnPressed(_ sender: UIButton) {
-        //TEST TRST
-        
-        Auth.shared.pushHomeViewController(vc: self)
-        return
-        // End TEST
+//
+////        //TEST TRST
+////
+//        Auth.shared.pushHomeViewController(vc: self)
+//        return
+////        // End TEST
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!
             let password = passwordCV.textField.text!
             if !Auth.shared.isValidEmail(email) {
-                Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
+                Hud.InvalidEmailText(onView: view)
                 return
             }
             if password.count < 8 {
-                Alert.syncActionOkWith(nil, msg: K.auth.passwordNotValid, viewController: self)
+                Hud.InvalidPasswordText(onView: view)
                 return
             }
-            
-            Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { (success, error) in
+            Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
                 if success {
                     Auth.shared.pushHomeViewController(vc: self)
-                } else {
-                    Alert.asyncActionOkWith(nil, msg: K.auth.invalidEmailOrPass, viewController: self)
                 }
             }
         }

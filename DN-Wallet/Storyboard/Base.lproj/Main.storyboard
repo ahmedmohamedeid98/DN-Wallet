@@ -3,6 +3,7 @@
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -87,6 +88,7 @@
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="eg: 195.564" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gUQ-y4-b3C">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
+                                                <color key="backgroundColor" name="Dynamic-Cell"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="ZP7-kc-XbS"/>
                                                 </constraints>
@@ -119,9 +121,11 @@
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="select currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S2f-xR-ol2">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
+                                                <color key="backgroundColor" name="Dynamic-Cell"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="AOM-XU-5s2"/>
                                                 </constraints>
+                                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
@@ -175,7 +179,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="duF-cQ-Bfo" firstAttribute="centerY" secondItem="S2f-xR-ol2" secondAttribute="centerY" id="9Rc-TA-GeN"/>
                             <constraint firstItem="oGK-6r-WfI" firstAttribute="top" secondItem="eLP-xK-G5S" secondAttribute="top" constant="40" id="Fiq-ca-kmy"/>
@@ -222,7 +226,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Dynamic-Background"/>
                                 <constraints>
                                     <constraint firstItem="G9z-5J-2Vm" firstAttribute="centerX" secondItem="ucE-P6-8mW" secondAttribute="centerX" id="6iu-62-8Fl"/>
                                     <constraint firstItem="G9z-5J-2Vm" firstAttribute="centerY" secondItem="ucE-P6-8mW" secondAttribute="centerY" id="OP1-V0-g9H"/>
@@ -236,12 +240,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ssU-gm-igy"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="CR1-P1-Rbs" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="20" id="763-rH-NCQ"/>
                             <constraint firstItem="ucE-P6-8mW" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="BRr-Qy-Zzh"/>
@@ -270,8 +274,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3nc-iJ-CVl">
-                                <rect key="frame" x="16" y="407" width="382" height="250"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="16" y="415" width="382" height="250"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="z2g-Au-pw4"/>
                                 </constraints>
@@ -327,6 +331,7 @@
                                                 <constraint firstItem="YXu-jx-mLu" firstAttribute="centerY" secondItem="Udo-JX-Fpt" secondAttribute="centerY" id="zPZ-mW-SWR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
                                             <outlet property="checkBox" destination="YXu-jx-mLu" id="kOz-On-DKk"/>
                                             <outlet property="creditLogo" destination="JU8-iW-V6B" id="czD-M7-lhC"/>
@@ -343,7 +348,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zrf-8k-J99">
-                                <rect key="frame" x="16" y="146.33333333333337" width="382" height="220.66666666666663"/>
+                                <rect key="frame" x="16" y="146.33333333333337" width="382" height="228.66666666666663"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OiU-sP-fK1">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="41"/>
@@ -370,26 +375,28 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="eg: 195.564" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f2K-5Q-kgd">
-                                        <rect key="frame" x="0.0" y="104.33333333333331" width="382" height="40"/>
+                                        <rect key="frame" x="0.0" y="104.33333333333331" width="382" height="44"/>
+                                        <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="v0f-g0-ksN"/>
+                                            <constraint firstAttribute="height" constant="44" id="v0f-g0-ksN"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSO-Uo-QaS">
-                                        <rect key="frame" x="0.0" y="152.33333333333334" width="382" height="20.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="156.33333333333334" width="382" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="select currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDO-nx-305">
-                                        <rect key="frame" x="0.0" y="180.66666666666666" width="382" height="40"/>
+                                        <rect key="frame" x="0.0" y="184.66666666666666" width="382" height="44"/>
+                                        <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="5sB-Wk-fzy"/>
+                                            <constraint firstAttribute="height" constant="44" id="5sB-Wk-fzy"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -404,17 +411,17 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fta-7F-9yw">
-                                <rect key="frame" x="370" y="340.66666666666669" width="18" height="13.333333333333314"/>
-                                <color key="tintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="365" y="348.33333333333337" width="15" height="10.333333333333314"/>
+                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="18" id="Lxf-Li-FjI"/>
-                                    <constraint firstAttribute="height" constant="18" id="WPS-CW-PlT"/>
+                                    <constraint firstAttribute="width" constant="15" id="Lxf-Li-FjI"/>
+                                    <constraint firstAttribute="height" constant="15" id="WPS-CW-PlT"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
-                            <constraint firstItem="fta-7F-9yw" firstAttribute="trailing" secondItem="ZDO-nx-305" secondAttribute="trailing" constant="-10" id="BTu-YN-aDH"/>
+                            <constraint firstItem="fta-7F-9yw" firstAttribute="trailing" secondItem="ZDO-nx-305" secondAttribute="trailing" constant="-18" id="BTu-YN-aDH"/>
                             <constraint firstItem="fta-7F-9yw" firstAttribute="centerY" secondItem="ZDO-nx-305" secondAttribute="centerY" id="BfB-eo-0RU"/>
                             <constraint firstItem="3nc-iJ-CVl" firstAttribute="leading" secondItem="A2r-2d-uhj" secondAttribute="leading" constant="16" id="U1Y-4y-40N"/>
                             <constraint firstItem="3nc-iJ-CVl" firstAttribute="top" secondItem="Zrf-8k-J99" secondAttribute="bottom" constant="40" id="Wcp-SL-Gl4"/>
@@ -448,5 +455,11 @@
         <image name="creditcard.fill" catalog="system" width="64" height="44"/>
         <image name="qrcode" catalog="system" width="64" height="56"/>
         <image name="qrcode.viewfinder" catalog="system" width="64" height="56"/>
+        <namedColor name="Dynamic-Background">
+            <color red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Dynamic-Cell">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -43,14 +43,14 @@ class SettingVC: UIViewController {
         settingTable = UITableView()
         settingTable.delegate = self
         settingTable.dataSource = self
+        settingTable.backgroundColor = .clear
         settingTable.register(SettingCell.self, forCellReuseIdentifier: "settingcellid")
         settingTable.rowHeight = 60
-        settingTable.backgroundColor = .white
     }
 
     func setupLayout() {
         view.addSubview(settingTable)
-        settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0))
+        settingTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     }
     
     func pushViewController(_ vc: UIViewController, title: String, styleFull: Bool){
@@ -179,8 +179,7 @@ extension SettingVC {
         let alert = UIAlertController(title: "Safe Mode Time", message: "Set safe mode time in (Hours) , we recommend you that time be at least 12 hours.", preferredStyle: .alert)
         let setAction = UIAlertAction(title: "Set", style: .default) { (action) in
             if let hours = alert.textFields![0].text {
-                print("hours: \(hours) ")
-               // Auth.shared.setSafeModeTime(hours: hours)
+                Auth.shared.setSafeModeTime(hours: hours)
                 self.settingTable.updateRowWith(indexPaths: [SecurityOptions.safeModeTime.indexPath], animate: .fade)
             }
         }

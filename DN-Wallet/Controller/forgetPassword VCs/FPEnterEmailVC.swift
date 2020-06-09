@@ -14,6 +14,7 @@ class FPEnterEmailVC: UIViewController {
         let lb = UILabel()
         lb.text = K.vc.fbMsg
         lb.textAlignment = .center
+        lb.backgroundColor = .clear
         lb.textColor = .DnColor
         lb.font = UIFont.DN.Bold.font()
         return lb
@@ -22,6 +23,7 @@ class FPEnterEmailVC: UIViewController {
         let Msg = UITextView()
         Msg.textAlignment = .center
         Msg.text = K.vc.fbEnterMailMsg
+        Msg.backgroundColor = .clear
         Msg.isEditable = false
         Msg.textColor = .DnColor
         Msg.font = UIFont.DN.Regular.font(size: 16)
@@ -33,6 +35,7 @@ class FPEnterEmailVC: UIViewController {
         txt.stopSmartActions()
         txt.keyboardType = .emailAddress
         txt.textColor = .DnColor
+        txt.backgroundColor = .DnCellColor
         txt.font = UIFont.DN.Regular.font(size: 14)
         return txt
     }()
@@ -40,34 +43,23 @@ class FPEnterEmailVC: UIViewController {
         let vw = UIView()
         vw.layer.borderColor = UIColor.DnColor.cgColor
         vw.layer.borderWidth = 1
+        vw.backgroundColor = .DnCellColor
         return vw
     }()
     
-    var sendResetCodeBtn: UIButton = {
-        let Btn = UIButton(type: .system)
-        Btn.setTitle(K.vc.fbResetCodeBtn, for: .normal)
-        Btn.setTitleColor(.white, for: .normal)
-        Btn.titleLabel?.font = UIFont.DN.SemiBlod.font(size: 18)
-        Btn.backgroundColor = .DnColor
-        Btn.layer.cornerRadius = 8
-        return Btn
-    }()
-    
-   
+    var sendResetCodeBtn = SAButton(backgroundColor: .DnColor, title: "Send Reset Code")
    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        commonInit()
+        sendResetCodeBtn.withTarget = {
+            self.sendResetCodeBtnPressed()
+        }
         setupLayout()
         
     }
     
-    fileprivate func commonInit(){
-        view.backgroundColor = .white
-        sendResetCodeBtn.addTarget(self, action: #selector(sendResetCodeBtnPressed), for: .touchUpInside)
-    }
-    
+
     fileprivate func setupLayout() {
         
         view.addSubview(forgetPasswordMsg)
@@ -86,9 +78,8 @@ class FPEnterEmailVC: UIViewController {
         
        }
     
-    @objc func sendResetCodeBtnPressed() {
+    private func sendResetCodeBtnPressed() {
         let forgetPassVC = FPResetPasswordVC()
-        forgetPassVC.modalPresentationStyle = .fullScreen
         self.present(forgetPassVC, animated: true, completion: nil)
     }
     

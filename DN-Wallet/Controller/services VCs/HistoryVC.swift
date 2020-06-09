@@ -32,7 +32,7 @@ final class HistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
+        //view.backgroundColor = .DnVcBackgroundColor
         setupNavigationBar()
         HData = History(consumption: 250, receive: 350, donation: 400, result: hh)
         self.consumptionsAmount.text = "\(HData.consumption) $"

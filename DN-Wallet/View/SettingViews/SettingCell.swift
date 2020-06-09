@@ -23,18 +23,18 @@ class SettingCell: UITableViewCell {
                 }
                 if sectionType.description == SecurityOptions.safeModeTime.description {
                     addDescriptionLabel()
-                    //setTime()
+                    setTime()
                 }
             } else {
                 addSwitchToThisCellWith(tag: sectionType.id)
             }
         }
     }
-    /*
+    
     func setTime() {
         descriptionLabel.text = "\(Auth.shared.getSafeModeTime()) hour"
     }
-    */
+    
     func setLanguage() {
         let languageID =  UserPreference.getIntValue(withKey: UserPreference.languageKey)
         for lang in LanguageSection.allCases {
@@ -61,7 +61,7 @@ class SettingCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-            
+        backgroundColor = .DnCellColor
         
     }
     
@@ -87,9 +87,9 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
-                // active safe mode
+                Auth.shared.activeSafeMode()
             } else {
-                // disable safeMode
+                Auth.shared.deactiveSafeMode()
             }
         }
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {

@@ -17,7 +17,7 @@ class passwordContainer: UIView {
         img.image = UIImage(systemName: "eye")
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
-        img.tintColor = .black
+        img.tintColor = .gray
         return img
     }()
     
@@ -30,6 +30,7 @@ class passwordContainer: UIView {
         txt.font = UIFont.DN.Regular.font(size: 14)
         txt.stopSmartActions()
         txt.isSecureTextEntry = true
+        txt.backgroundColor = .DnCellColor
         return txt
     }()
     

@@ -22,12 +22,14 @@ class ContainerVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         handleHomeViewController()
+        /*
         // load user data
-        DNData.getUserAccountInfo { (userInfo, error) in
+        DNData.getUserAccountInfo(onView: NavHomeViewController.view) { (userInfo, error) in
             if error == nil {
                 self.userInformation = userInfo
             }
         }
+ */
     }
     
     //MARK:- Handlers

@@ -31,7 +31,7 @@ class DonationDetailsVC: UIViewController {
     
     func loadData() {
         if let id = charityID {
-            DNData.getCharityOrganizationDetails(withID: id) { (details, error) in
+            DNData.getCharityOrganizationDetails(withID: id, onView: view) { (details, error) in
                 if let e = error {
                     print(e.localizedDescription)
                     return
@@ -43,6 +43,7 @@ class DonationDetailsVC: UIViewController {
                         self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
                         self.mapView.setMapZoomAndBoundryRange(center: initialLocation, distance: 60000)
                         self.addMapViewAnnotaton(at: initialLocation, title: safeDetails.name, subtitle: safeDetails.phone)
+                        self.charityTable.alpha = 1.0
                         self.charityTable.reloadData()
                     }
                 }
@@ -58,6 +59,8 @@ class DonationDetailsVC: UIViewController {
     //MARK:- setup subviews
     func setupNavBar() {
         navigationItem.title = data?.name
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
         let donateBarButton = UIBarButtonItem(title: K.vc.donateDetailtsTitle , style: .plain, target: self, action: #selector(donateButtonPressed))
         navigationItem.rightBarButtonItem = donateBarButton
         navigationItem.rightBarButtonItem?.tintColor = .white
@@ -77,10 +80,11 @@ class DonationDetailsVC: UIViewController {
         charityTable.dataSource = self
         charityTable.register(UINib(nibName: "DonationDetailsCell", bundle: nil), forCellReuseIdentifier: DonationDetailsCell.reuseIdentifier)
         charityTable.estimatedRowHeight = UITableView.automaticDimension
-        charityTable.backgroundColor = .systemGroupedBackground
+        charityTable.backgroundColor = .clear
         charityTable.allowsSelection = false
         charityTable.separatorStyle = .none
         charityTable.showsVerticalScrollIndicator = false
+        charityTable.alpha = 0.0
     }
     
     

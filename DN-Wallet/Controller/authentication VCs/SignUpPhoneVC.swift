@@ -34,9 +34,6 @@ class SignUpPhoneVC: UIViewController {
     // MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
-        // configure the container layer which hold country dropDown and phone txtField
-        
         dropDownCountry.delegate = self
         
         // specify opt delegation to this vc and hide this part for latter
@@ -58,7 +55,7 @@ class SignUpPhoneVC: UIViewController {
             vcTitle.text = "Update Phone"
             steppedProgressBar.isHidden = true
         }
-        setUserPreferance()
+        //setUserPreferance()
 
     }
     

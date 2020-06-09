@@ -47,7 +47,7 @@ class SaleVC: UIViewController {
     
     func handleNavigationBar() {
         navigationItem.title = "Sale"
-        navigationController?.navigationBar.barTintColor = .DnDarkBlue
+        navigationController?.navigationBar.barTintColor = .DnColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down.fill"), style: .plain, target: self, action: #selector(downlaodQRCodeBtn(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .white

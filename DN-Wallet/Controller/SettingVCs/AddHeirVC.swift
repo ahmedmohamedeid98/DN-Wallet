@@ -27,8 +27,9 @@ class AddHeirVC: UIViewController {
     let firstHeir: UITextField = {
         let txt = UITextField()
         txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.textColor = UIColor.gray
+        txt.textColor = UIColor.systemBlue
         txt.placeholder = "Add first heir"
+        txt.backgroundColor = .DnCellColor
         txt.leftViewMode = .always
         txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
         txt.stopSmartActions()
@@ -55,8 +56,9 @@ class AddHeirVC: UIViewController {
     let secondHeir: UITextField = {
         let txt = UITextField()
         txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.textColor = UIColor.gray
+        txt.textColor = UIColor.systemBlue
         txt.placeholder = "Add second heir"
+        txt.backgroundColor = .DnCellColor
         txt.leftViewMode = .always
         txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
         txt.stopSmartActions()
@@ -87,7 +89,7 @@ class AddHeirVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        DNData.getUserHeirs { (heirs, error) in
+        DNData.getUserHeirs(onView: view) { (heirs, error) in
             if error != nil {
                 print("Error: \(String(describing: error))")
             } else {
@@ -145,4 +147,30 @@ class AddHeirVC: UIViewController {
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -19,14 +19,11 @@ class ChargeCreditCell: UITableViewCell {
     @IBOutlet weak var creditNumber: UILabel!
     @IBOutlet weak var checkBox: UIImageView!
     var credit_Id: String = ""
-//    var cellDelegate: SelectedCardDelegate?
-//    var currentIndexPath: IndexPath!
-//    var toggle: Bool = true
+
     
     var data: CardInfo? {
         didSet {
             guard let mydata = data else {return}
-            print("mydata: \(mydata)")
             self.creditName.text = mydata.name
             self.creditNumber.text = "\(mydata.type) ****\(mydata.digits)"
             self.credit_Id = mydata.id
@@ -36,7 +33,6 @@ class ChargeCreditCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.backgroundColor = .clear
-        print("cell init coder")
     }
     
     

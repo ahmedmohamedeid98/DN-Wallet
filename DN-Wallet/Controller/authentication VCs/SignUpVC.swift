@@ -27,7 +27,7 @@ import UIKit
      //MARK:- Init ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
+        //view.backgroundColor = .DnVcBackgroundColor
         usernameContainer.configureInputField(imageName: "person",systemImage: true, placeholder: "Username", isSecure: false)
         emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
         passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
@@ -36,12 +36,7 @@ import UIKit
         
         steppedProgressBar.titles = ["", "", ""]
         steppedProgressBar.currentTab = 1
-        // TEST TEST TEST
-        usernameContainer.textField.text = "Khaled"
-        emailContainer.textField.text = "Khaled@gmail.com"
-        passwordContainer.textField.text = "12345678"
-        confirmPasswordContainer.textField.text = "12345678"
-        // === === === ===
+    
         name = usernameContainer.textField
         email = emailContainer.textField
         pass1 = passwordContainer.textField

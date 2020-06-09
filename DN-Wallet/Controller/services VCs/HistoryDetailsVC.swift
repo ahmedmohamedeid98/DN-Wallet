@@ -119,10 +119,9 @@ class HistoryDetailsVC: UIViewController {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
-        
-        tableView.register(HistoryDetailsCell.self, forCellReuseIdentifier: HistoryDetailsCell.reuseIdentifier)
+        tableView.backgroundColor = .clear
+        tableView.register(UINib(nibName: "HistoryDetailsCell", bundle: nil), forCellReuseIdentifier: HistoryDetailsCell.reuseIdentifier)
     }
     
     

@@ -78,6 +78,7 @@ class MyContactsVC: UIViewController {
         searchBar.searchTextField.stopSmartActions()
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.textColor = .systemBlue
         searchBar.placeholder = K.vc.myContactSearchBarPlaceholder
         
     }
@@ -160,8 +161,8 @@ class MyContactsVC: UIViewController {
     // initial contact table view
     func setupTableView() {
         contactTable = UITableView()
-        contactTable.backgroundColor = .white
         contactTable.delegate = self
+        contactTable.backgroundColor = .clear
         contactTable.register(MyContactCell.self, forCellReuseIdentifier: MyContactCell.reuseIdentifier)
         contactTable.rowHeight = 70
     }

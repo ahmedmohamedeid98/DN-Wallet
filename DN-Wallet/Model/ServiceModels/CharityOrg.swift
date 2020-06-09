@@ -9,7 +9,7 @@
 struct CharityResponse: Codable {
     let _id : String
     let name: String
-    //let email: String
+    let email: String
     let org_logo: String
 }
 

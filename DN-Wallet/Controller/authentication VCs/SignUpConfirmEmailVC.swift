@@ -21,7 +21,7 @@ class SignUpConfirmEmailVC: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
+        //view.backgroundColor = .DnVcBackgroundColor
         optContainerView.delegate = self
         signUpBtnOutlet.layer.cornerRadius = 20.0
         signUpBtnOutlet.isEnabled = false
@@ -36,11 +36,9 @@ class SignUpConfirmEmailVC: UIViewController {
         signUpBtnOutlet.isEnabled = false
         if self.inputConfirmationCode == "2211" {
             guard let data = registerData else {return}
-            Auth.shared.createAccount(user: data) { (success, error) in
+            Auth.shared.createAccount(user: data, onView: view) { (success, error) in
                 if success {
                     Auth.shared.pushHomeViewController(vc: self)
-                } else {
-                    Alert.asyncActionOkWith(nil, msg: "faild register, \(error!)", viewController: self)
                 }
             }
         } else {

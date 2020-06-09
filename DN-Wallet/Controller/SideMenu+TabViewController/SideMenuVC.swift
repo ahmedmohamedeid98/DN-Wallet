@@ -13,11 +13,11 @@ protocol sideMenuTimerDelegate {
 class SideMenuVC: UIViewController {
 
     //MARK:- Properities
-    private var isInSafeMode: Bool = Auth.shared.isAppInSafeMode
+    private var isInSafeMode: Bool = false
     
     let bg: UIView = {
         let vw = UIView()
-        vw.backgroundColor = .DnDarkBlue
+        vw.backgroundColor = .DnColor
         return vw
     }()
     
@@ -56,10 +56,17 @@ class SideMenuVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        // deactive setting button if the app in safeMode else otherwise.
-        activeSettingButton(self.isInSafeMode)
         setupServiceTable()
         setupLayout()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Auth.shared.isAppInSafeMode {
+            isInSafeMode = true
+            activeSettingButton(true) // deactive setting button if the app in safeMode else otherwise.
+            serviceTable.reloadData()
+        }
         
     }
 

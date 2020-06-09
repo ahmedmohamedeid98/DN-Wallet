@@ -11,7 +11,7 @@ import UIKit
 // MARK:- UIViewController - NavBar Configuration
 extension UIViewController {
     
-    func configureNavigationBar(_ titleTintColor : UIColor = .white, backgoundColor: UIColor = #colorLiteral(red: 0.1725490196, green: 0.2431372549, blue: 0.3137254902, alpha: 1), tintColor: UIColor = .white, title: String, preferredLargeTitle: Bool = false) {
+    func configureNavigationBar(_ titleTintColor : UIColor = .white, backgoundColor: UIColor = .DnColor, tintColor: UIColor = .white, title: String, preferredLargeTitle: Bool = false) {
     if #available(iOS 13.0, *) {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -129,17 +129,20 @@ extension UIColor {
         return .white
     }
     static var DnColor: UIColor {
-        return #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        return #colorLiteral(red: 0.1782214642, green: 0.4982336164, blue: 0.757638514, alpha: 1)
     }
     static var DnVcBackgroundColor: UIColor {
-        return .systemBackground
+        return UIColor(named: "Dynamic-Background") ?? UIColor.gray
+    }
+    static var DnCellColor: UIColor {
+        return UIColor(named: "Dynamic-Cell") ?? UIColor.gray
     }
     
     static var DnTextColor: UIColor {
         return #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     }
     static var DnDarkBlue: UIColor {
-        return #colorLiteral(red: 0.2039215686, green: 0.2862745098, blue: 0.368627451, alpha: 1)
+        return #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     }
     static var DnBackgroundColor: UIColor {
         return .systemGroupedBackground

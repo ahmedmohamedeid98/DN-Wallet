@@ -65,6 +65,7 @@ class HomeVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .DnVcBackgroundColor
         startTimer()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +88,8 @@ class HomeVC: UIViewController {
     
     //MARK:- Handlers
     func initViewController() {
+        print("{\ntoken: \(Auth.shared.getUserToken())\n}")
+        Auth.shared.deactiveSafeMode()
         counter = 0
         pageControl = UIPageControl()
         imageCount = imagesNames.count
@@ -223,7 +226,7 @@ extension HomeVC {
     
     func setupSliderCollectionView() {
         sliderCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createSliderLayout())
-        sliderCollectionView.backgroundColor = .DnBackgroundColor
+        sliderCollectionView.backgroundColor = .clear
         sliderCollectionView.register(SliderCell.self, forCellWithReuseIdentifier: SliderCell.reuseIdentifier)
         sliderCollectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: HomeVC.sectionHeaderElementKind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier)
     }
@@ -263,7 +266,7 @@ extension HomeVC {
         sliderDataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier, for: indexPath) as? CollectionViewHeader else {fatalError("can not dequeue header for sliderCollection")}
             header.data = "Partners"
-            header.backgroundColor = .DnBackgroundColor
+            header.backgroundColor = .clear
             return header
         }
         // init cell
@@ -280,7 +283,7 @@ extension HomeVC {
 extension HomeVC {
     func setupBalanceCollectionView() {
         balanceCollectioView = UICollectionView(frame: .zero, collectionViewLayout: createBalanceLayout())
-        balanceCollectioView.backgroundColor = .DnBackgroundColor
+        balanceCollectioView.backgroundColor = .clear
         balanceCollectioView.register(CurrencyCell.self, forCellWithReuseIdentifier: CurrencyCell.reuseIdentifier)
         balanceCollectioView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: HomeVC.sectionHeaderElementKind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier)
     }
@@ -320,7 +323,7 @@ extension HomeVC {
             (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier, for: indexPath) as? CollectionViewHeader else {fatalError("can not dequeue balance header")}
             header.data = "Balance"
-            header.backgroundColor = .DnBackgroundColor
+            header.backgroundColor = .clear
             return header
         }
         // init cell

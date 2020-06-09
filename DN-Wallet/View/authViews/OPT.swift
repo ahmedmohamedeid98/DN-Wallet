@@ -119,7 +119,7 @@ extension UITextField {
     func configureTf() {
         self.frame = CGRect(x: 0, y: 0, width: 40.0, height: 40.0)
         self.textAlignment = .center
-        self.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        self.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         self.backgroundColor = .white
         //self.font = UIFont(name: "Menlo Regular", size: 18)
         self.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)

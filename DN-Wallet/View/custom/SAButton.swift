@@ -24,10 +24,12 @@ final class SAButton: UIButton {
         configure()
     }
     
-    convenience init(backgroundColor: UIColor, title: String, systemTitle: String? = nil, assetsTitle: String? = nil) {
+    convenience init(backgroundColor: UIColor, title: String? = nil, systemTitle: String? = nil, assetsTitle: String? = nil) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
-        self.setTitle(title, for: .normal)
+        if title != nil {
+            self.setTitle(title!, for: .normal)
+        }
         self.setSAImage(systemTitle: systemTitle, assestTitle: assetsTitle)
     }
     required init?(coder: NSCoder) {

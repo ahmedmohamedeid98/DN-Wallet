@@ -13,13 +13,13 @@ protocol PopUpMenuDelegate: class {
 }
 
 enum PopUpMenuDataSource {
-    case currency
-    case country
+    case currency, country, creditCard
     
     var data: [PopMenuItem] {
         switch self {
             case .currency: return currencyData // this is static data comes from utilities
             case .country: return countryData
+            case .creditCard: return creditCardData
         }
     }
 }
@@ -31,7 +31,6 @@ final class PopUpMenu: UIViewController {
     private var shouldReloadTableView: Bool = false
     var dataSource: PopUpMenuDataSource = .currency {
         didSet {
-            print("enter data source:::::::")
             originalDataSource = dataSource.data
         }
     }
@@ -57,6 +56,7 @@ final class PopUpMenu: UIViewController {
     private func setupSearchBar() {
         searchBar = UISearchBar()
         searchBar.searchTextField.placeholder = K.vc.popMenuSearchBarPlaceholder
+        searchBar.searchTextField.textColor = .systemBlue
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .systemGroupedBackground
         searchBar.showsCancelButton = true
@@ -75,7 +75,7 @@ final class PopUpMenu: UIViewController {
         view.addSubview(List)
         
         searchBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 50))
-        List.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16))
+        List.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
     }
     
     private func configureDataSource() {

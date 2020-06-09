@@ -74,7 +74,7 @@ class PayVC: UIViewController {
         navigationItem.title = "Pay"
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = .DnDarkBlue
+        appearance.backgroundColor = .DnColor
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance

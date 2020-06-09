@@ -39,10 +39,8 @@ class DonationVC: UIViewController {
     }
     
     func loadData() {
-        DNData.getCharityOrganizationInitialData { (charityList, error) in
-            if error != nil {
-                Alert.asyncActionOkWith(nil, msg: "faild to load chirty data", viewController: self)
-            } else {
+        DNData.getCharityOrganizationInitialData(onView: view) { (charityList, error) in
+            if error == nil {
                 self.originDataSource = charityList
                 self.currentDataSource = self.originDataSource
                 self.updateTableInMainThread()
@@ -51,6 +49,7 @@ class DonationVC: UIViewController {
     }
     func updateTableInMainThread() {
         DispatchQueue.main.async {
+            self.tableView.alpha = 1.0
             self.updateTableViewDataSource()
         }
         
@@ -76,6 +75,7 @@ class DonationVC: UIViewController {
     func setupSearchBar() {
         searchBar = UISearchBar()
         searchBar.searchTextField.stopSmartActions()
+        searchBar.searchTextField.textColor = .systemBlue
         searchBar.placeholder = K.vc.donationSearchBarPlaceholder
         searchBar.delegate = self
         searchBar.searchTextField.backgroundColor = .white
@@ -83,11 +83,12 @@ class DonationVC: UIViewController {
     
     func setupTableView() {
         tableView = UITableView()
-        tableView.backgroundColor = .DnBackgroundColor
         tableView.delegate = self
         tableView.indicatorStyle = .white
+        tableView.backgroundColor = .clear
         tableView.register(DonationCell.self, forCellReuseIdentifier: DonationCell.reuseIdentifier)
         tableView.rowHeight = 70
+        tableView.alpha = 0.0
     }
     
     private func configureDiffableDateSource() {
@@ -111,7 +112,7 @@ class DonationVC: UIViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
-        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
     }
     
     @objc func searchButtonPressed() {

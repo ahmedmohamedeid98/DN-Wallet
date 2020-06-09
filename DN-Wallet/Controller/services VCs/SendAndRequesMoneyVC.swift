@@ -52,7 +52,7 @@ class SendAndRequestMoney: UIViewController {
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
+        //view.backgroundColor = .DnVcBackgroundColor
         //presentFromDonationVC = true
         initViewController()
     }

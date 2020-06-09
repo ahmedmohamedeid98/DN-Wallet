@@ -7,5 +7,5 @@ target 'DN-Wallet' do
 
   # Pods for DN-Wallet
   pod 'KeychainSwift', '~> 19.0'
-
+  pod 'MBProgressHUD', '~> 1.2.0'
 end

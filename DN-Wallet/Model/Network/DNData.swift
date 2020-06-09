@@ -6,11 +6,13 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
+import MBProgressHUD
+
 extension String: Error {}
 
-class DNData {
+final class DNData {
     
-    static let base = "https://hidden-sea-27440.herokuapp.com/api"
+    static let base = "https://dn-wallet.herokuapp.com/api"
     static var imageCache = NSCache<AnyObject, UIImage>()
     enum Endpoint {
         case login
@@ -43,7 +45,7 @@ class DNData {
     }
     
     /// ask server to return the account information for the current user
-    class func getUserAccountInfo(completion: @escaping(AccountInfo?, Error?)-> Void) {
+    class func getUserAccountInfo(onView view: UIView, completion: @escaping(AccountInfo?, Error?)-> Void) {
         taskForGETRequest(url: Endpoint.account_info.url, response: AccountInfo.self) { (response, error) in
             if let response = response {
                 completion(response, nil)
@@ -53,7 +55,7 @@ class DNData {
         }
     }
     /// ask server to get the financial history (consumption, send and donation) for the current user
-    class func getUserHistory(completion: @escaping([History], Error?) -> Void) {
+    class func getUserHistory(onView view: UIView, completion: @escaping([History], Error?) -> Void) {
         taskForGETRequest(url: Endpoint.history.url, response: [History].self) { (response, error) in
             if let response = response {
                 completion(response, nil)
@@ -63,7 +65,8 @@ class DNData {
         }
     }
     /// ask server to get the concats which belong to the current user
-    class func getUserConcats(completion: @escaping([Contact], Error?)-> Void) {
+    class func getUserConcats(onView view: UIView, completion: @escaping([Contact], Error?)-> Void) {
+        Hud.showLoadingHud(onView: view)
         taskForGETRequest(url: Endpoint.concats.url, response: [Contact].self) { (response, error) in
             if let response = response {
                 completion(response, nil)
@@ -84,14 +87,15 @@ class DNData {
 //        }
     }
     
-    class func getCharityOrganizationInitialData(completion: @escaping([Charity], Error?)-> Void) {
+    class func getCharityOrganizationInitialData(onView view: UIView, completion: @escaping([Charity], Error?)-> Void) {
         var request = URLRequest(url: Endpoint.charity.url)
         let token = Auth.shared.getUserToken()
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
-        //request.addValue(token!, forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
+        Hud.showLoadingHud(onView: view)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let e = error {
+                Hud.networkErrorText(error: .networkMessage)
                 completion([], e)
                 return
             }
@@ -101,10 +105,12 @@ class DNData {
                     var chs: [Charity] = []
                     let ch = try decoder.decode([CharityResponse].self, from: safeData)
                     ch.forEach {
-                        chs.append(Charity(id: $0._id, name: $0.name, email: "test@gmail.com", link: $0.org_logo))
+                        chs.append(Charity(id: $0._id, name: $0.name, email: $0.email, link: $0.org_logo))
                     }
+                    Hud.hide(after: 0.5)
                     completion(chs, nil)
                 } catch {
+                    Hud.networkErrorText(error: .decodeMessage)
                     completion([], error)
                 }
             }
@@ -117,7 +123,6 @@ class DNData {
         let url = URL(string: str)!
         if let image = DNData.imageCache.object(forKey: str as AnyObject) {
             completion(image, nil)
-            print("get image from cach")
             return
         }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -127,7 +132,6 @@ class DNData {
             }
             if let safeData = data {
                 if let image = UIImage(data: safeData) {
-                    print("get image from server")
                     DNData.imageCache.setObject(image, forKey: str as AnyObject)
                     completion(image, nil)
                 } else {
@@ -145,7 +149,8 @@ class DNData {
     }
     
     /// ask server to get the static information about charity organization
-    class func getCharityOrganizationDetails(withID id:String, completion: @escaping(CharityDetailsResponse?, Error?)-> Void) {
+    class func getCharityOrganizationDetails(withID id:String, onView view: UIView, completion: @escaping(CharityDetailsResponse?, Error?)-> Void) {
+        Hud.showLoadingHud(onView: view)
         taskForGETRequest(url: Endpoint.charityDetails(id).url, response: CharityDetailsResponse.self) { (response, error) in
             if let details = response {
                 completion(details, nil)
@@ -157,7 +162,7 @@ class DNData {
     }
     
     /// ask API to return list contain from at most two items which is user's heirs
-    class func getUserHeirs(completion: @escaping([Heirs], Error?) -> Void) {
+    class func getUserHeirs(onView view: UIView, completion: @escaping([Heirs], Error?) -> Void) {
         taskForGETRequest(url: Endpoint.heirs.url, response: [Heirs].self) { (response, error) in
             if let response = response {
                 completion(response, nil)
@@ -168,7 +173,8 @@ class DNData {
     }
     
     /// login method, ask API to return a token
-    class func login(credintial: Login, comlpetion: @escaping(LoginResponse?, Error?)-> Void) {
+    class func login(credintial: Login, onView view: UIView, comlpetion: @escaping(LoginResponse?, Error?)-> Void) {
+        Hud.showLoadingHud(onView: view)
         taskForPOSTRequest(url: Endpoint.login.url, response: LoginResponse.self, body: credintial) { (response, error) in
             if let response = response {
                 comlpetion(response, nil)
@@ -179,7 +185,8 @@ class DNData {
     }
     
     /// ask API to create account, and return a user token
-    class func register(with data: Register, completion: @escaping(RegisterResponder?, Error?) -> Void) {
+    class func register(with data: Register, onView view: UIView, completion: @escaping(RegisterResponder?, Error?) -> Void) {
+        Hud.showLoadingHud(onView: view)
         taskForPOSTRequest(url: Endpoint.register.url, response: RegisterResponder.self, body: data) { (response, error) in
             if let response = response {
                 completion(response, nil)
@@ -210,14 +217,17 @@ class DNData {
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping(ResponseType?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
+                Hud.networkErrorText(error: .networkMessage)
                 completion(nil, error)
                 return
             }
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
+                Hud.hide(after: 0.5)
                 completion(responseObject, nil)
             } catch {
+                Hud.networkErrorText(error: .decodeMessage)
                 completion(nil, error)
             }
         }
@@ -236,16 +246,17 @@ class DNData {
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
+                Hud.networkErrorText(error: .networkMessage)
                 completion(nil, error)
                 return
             }
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
+                Hud.hide(after: 0.5)
+                completion(responseObject, nil)
             } catch {
+                Hud.networkErrorText(error: .decodeMessage)
                 completion(nil, error)
             }
         }

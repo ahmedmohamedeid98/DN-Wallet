@@ -77,20 +77,19 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
             vc.isRequest = true
             present(vc, from: rootVC)
         case .exchangeCurrency:
-            let vc = ExchangeCurrencyVC()
+            guard let vc = st.instantiateViewController(identifier: "exchangeCurrencyVCID") as? ExchangeCurrencyVC else { return }
             present(vc, from: rootVC)
         case .myConcats:
             let vc = MyContactsVC()
             present(vc, from: rootVC)
         case .addNewPaymentCard:
-            let vc = AddNewCardVC()
+            guard let vc = st.instantiateViewController(identifier: "addNewCardVCID") as? AddNewCardVC else { return }
             present(vc, from: rootVC)
         case .donation:
             let vc = DonationVC()
             present(vc, from: rootVC)
         }
     }
-    
     private func present(_ vc: UIViewController, from rootVC: UIViewController) {
         let navController = UINavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .fullScreen

@@ -17,6 +17,10 @@ let countryData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egyption", cod
                                   PopMenuItem(image: nil, title: "Saudi Arab", code: "+86"),
                                   PopMenuItem(image: nil, title: "Iraq", code: "+28")]
 
+let creditCardData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Maser Card", code: nil),
+                                     PopMenuItem(image: nil, title: "Vesa", code: nil),
+                                     PopMenuItem(image: nil, title: "Meza", code: nil)]
+
 class Utile {
     class var currentDate: String {
         let date = Date()

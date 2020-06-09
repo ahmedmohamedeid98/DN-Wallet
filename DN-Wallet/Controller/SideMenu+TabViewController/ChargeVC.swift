@@ -30,7 +30,7 @@ class ChargeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         handleNavigationBar()
-        view.backgroundColor = .DnVcBackgroundColor
+        //view.backgroundColor = .DnVcBackgroundColor
         dropDown.delegate = self
         amountField.delegate = self
         creditTable.delegate = self
@@ -51,7 +51,7 @@ class ChargeVC: UIViewController {
         navigationItem.title = "Charge - Withdraw"
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = .DnDarkBlue
+        appearance.backgroundColor = .DnColor
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
@@ -133,7 +133,8 @@ extension ChargeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
         header.text = "  Select Payment Card"
-        header.textColor = .label
+        header.textColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        
         return header
     }
     

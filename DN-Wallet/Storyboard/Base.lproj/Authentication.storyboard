@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,11 +34,11 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-PT-EBd" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="56"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4m-vV-1i4" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="64" width="334" height="56"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -49,7 +50,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9Q-8e-ibQ">
                                         <rect key="frame" x="77" y="0.0" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17822146420000001" green="0.49823361640000002" blue="0.75763851400000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="66i-FJ-KCH"/>
                                             <constraint firstAttribute="width" constant="200" id="elB-aE-e4i"/>
@@ -89,7 +90,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="D3x-uq-vnv" firstAttribute="top" secondItem="zLU-p4-lxd" secondAttribute="bottom" constant="40" id="0z3-jo-5Y0"/>
                             <constraint firstItem="zLU-p4-lxd" firstAttribute="top" secondItem="f2q-il-Zcl" secondAttribute="bottom" constant="30" id="4IX-Yb-XRK"/>
@@ -143,19 +144,19 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLg-h7-PvE" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="56"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNW-Kd-XLy" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="64" width="334" height="56"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwG-ch-6zq" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="128" width="334" height="56"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbs-QG-n3B" customClass="userInput" customModule="DN_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="192" width="334" height="56"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -194,7 +195,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-gd-ZCX">
                                 <rect key="frame" x="40" y="501" width="334" height="40"/>
-                                <color key="backgroundColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17822146420000001" green="0.49823361640000002" blue="0.75763851400000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kWN-j6-eL6"/>
                                 </constraints>
@@ -207,7 +208,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="aaz-gd-ZCX" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="40" id="628-Of-NqH"/>
                             <constraint firstItem="Jht-mC-q1R" firstAttribute="top" secondItem="JaD-uy-7Lz" secondAttribute="top" constant="30" id="6L6-jK-G69"/>
@@ -266,7 +267,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WI-xh-Qw2">
-                                <rect key="frame" x="122.5" y="353" width="169" height="40"/>
+                                <rect key="frame" x="122.5" y="361" width="169" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zap-Gr-Jbp"/>
                                 </constraints>
@@ -278,7 +279,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Confirmation Code was sent to your phone number please, enter it here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="epE-Q5-chU">
-                                <rect key="frame" x="62" y="503" width="290" height="70"/>
+                                <rect key="frame" x="62" y="511" width="290" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="8e9-ic-mPp"/>
                                     <constraint firstAttribute="width" constant="290" id="BUw-us-Xn8"/>
@@ -317,14 +318,14 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hku-jE-Urb" customClass="OPT" customModule="DN_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="97" y="413" width="220" height="60"/>
+                                <rect key="frame" x="97" y="421" width="220" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="H1n-st-4jR"/>
                                     <constraint firstAttribute="height" constant="60" id="d5a-iv-ypw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-AH-lP8">
-                                <rect key="frame" x="16" y="353" width="382" height="220"/>
+                                <rect key="frame" x="16" y="361" width="382" height="220"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jyS-JW-FQG">
                                         <rect key="frame" x="181" y="100" width="20" height="20"/>
@@ -337,13 +338,15 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-5t-fKU">
-                                <rect key="frame" x="20" y="233" width="374" height="90"/>
+                                <rect key="frame" x="20" y="233" width="374" height="98"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w80-GX-7E6">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                        <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="fcR-Q3-bg4"/>
+                                            <constraint firstAttribute="height" constant="44" id="fcR-Q3-bg4"/>
                                         </constraints>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -356,22 +359,24 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWs-Sk-TAI">
-                                        <rect key="frame" x="0.0" y="50" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="54" width="374" height="44"/>
+                                        <color key="backgroundColor" name="Dynamic-Cell"/>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LRI-YC-nnI">
-                                <rect key="frame" x="361" y="247.5" width="15" height="11"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wvX-1f-pAK">
+                                <rect key="frame" x="361" y="249.5" width="15" height="11"/>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="Y2I-DS-umO"/>
-                                    <constraint firstAttribute="width" constant="15" id="bGF-fP-35S"/>
+                                    <constraint firstAttribute="height" constant="15" id="7FE-Ca-TFE"/>
+                                    <constraint firstAttribute="width" constant="15" id="jON-8t-3Rm"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="top" secondItem="3WI-xh-Qw2" secondAttribute="top" id="0Xb-qi-npk"/>
                             <constraint firstItem="d3e-x6-vNt" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="40" id="4A1-co-h1x"/>
@@ -379,22 +384,22 @@
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="4RH-AH-lP8" secondAttribute="trailing" constant="16" id="CiP-7g-CPb"/>
                             <constraint firstItem="hku-jE-Urb" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="FNO-Bg-IqN"/>
                             <constraint firstItem="fJW-80-UBe" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="20" id="FNQ-cT-ZJq"/>
+                            <constraint firstItem="wvX-1f-pAK" firstAttribute="trailing" secondItem="w80-GX-7E6" secondAttribute="trailing" constant="-18" id="Jnb-VC-6i5"/>
                             <constraint firstItem="d3e-x6-vNt" firstAttribute="top" secondItem="vuM-el-KLs" secondAttribute="bottom" constant="20" id="Kbn-xH-IRW"/>
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="Ffd-3T-vFZ" secondAttribute="trailing" constant="40" id="LMG-TG-rmk"/>
                             <constraint firstItem="3WI-xh-Qw2" firstAttribute="centerX" secondItem="XwI-5p-vUa" secondAttribute="centerX" id="MXj-ul-LU5"/>
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="Ipr-5t-fKU" secondAttribute="trailing" constant="20" id="MgY-AG-qei"/>
                             <constraint firstItem="Ffd-3T-vFZ" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="40" id="O7b-Zf-jUU"/>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="16" id="QqR-rR-cpO"/>
-                            <constraint firstItem="LRI-YC-nnI" firstAttribute="centerY" secondItem="w80-GX-7E6" secondAttribute="centerY" id="Tyh-3Y-RTZ"/>
                             <constraint firstItem="epE-Q5-chU" firstAttribute="top" secondItem="hku-jE-Urb" secondAttribute="bottom" constant="30" id="cTt-Wm-WzN"/>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="bottom" secondItem="epE-Q5-chU" secondAttribute="bottom" id="fOk-ZB-DFg"/>
                             <constraint firstItem="Ffd-3T-vFZ" firstAttribute="top" secondItem="d3e-x6-vNt" secondAttribute="bottom" constant="5" id="jyT-ZF-V5p"/>
                             <constraint firstItem="epE-Q5-chU" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="lxG-Jw-pUs"/>
                             <constraint firstItem="hku-jE-Urb" firstAttribute="top" secondItem="3WI-xh-Qw2" secondAttribute="bottom" constant="20" id="m2T-UW-BET"/>
                             <constraint firstItem="Ipr-5t-fKU" firstAttribute="top" secondItem="Ffd-3T-vFZ" secondAttribute="bottom" constant="20" id="nBG-rO-Asf"/>
-                            <constraint firstItem="LRI-YC-nnI" firstAttribute="trailing" secondItem="w80-GX-7E6" secondAttribute="trailing" constant="-18" id="rHq-uH-O8l"/>
                             <constraint firstItem="Ipr-5t-fKU" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="20" id="roV-Pr-gCo"/>
                             <constraint firstItem="fJW-80-UBe" firstAttribute="centerY" secondItem="vuM-el-KLs" secondAttribute="centerY" id="sG8-n2-gap"/>
+                            <constraint firstItem="wvX-1f-pAK" firstAttribute="centerY" secondItem="w80-GX-7E6" secondAttribute="centerY" id="teS-lb-PKZ"/>
                             <constraint firstItem="vuM-el-KLs" firstAttribute="top" secondItem="eP7-ey-uPo" secondAttribute="top" constant="30" id="xge-he-V0Z"/>
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="d3e-x6-vNt" secondAttribute="trailing" constant="40" id="xnf-4v-ZP5"/>
                             <constraint firstItem="vuM-el-KLs" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="zFx-lk-P3b"/>
@@ -483,7 +488,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EI-e2-e20">
                                 <rect key="frame" x="40" y="427" width="334" height="40"/>
-                                <color key="backgroundColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17822146420000001" green="0.49823361640000002" blue="0.75763851400000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hCP-Z5-hdU"/>
                                 </constraints>
@@ -497,7 +502,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="990-BG-u92" customClass="OPT" customModule="DN_Wallet" customModuleProvider="target">
                                 <rect key="frame" x="97" y="243" width="220" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Iok-wR-yrU"/>
                                     <constraint firstAttribute="width" constant="220" id="YWY-pz-tA4"/>
@@ -561,7 +566,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="YnL-P4-EE4" firstAttribute="trailing" secondItem="OdO-yB-vso" secondAttribute="trailing" constant="40" id="4Ih-dw-9AR"/>
                             <constraint firstItem="tYc-R1-Tlc" firstAttribute="top" secondItem="YnL-P4-EE4" secondAttribute="top" constant="30" id="6DB-RW-rWg"/>
@@ -603,5 +608,11 @@
         <image name="Dynamic-Logo" width="119" height="119"/>
         <image name="arrow.left" catalog="system" width="64" height="48"/>
         <image name="arrowtriangle.down.fill" catalog="system" width="64" height="62"/>
+        <namedColor name="Dynamic-Background">
+            <color red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Dynamic-Cell">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

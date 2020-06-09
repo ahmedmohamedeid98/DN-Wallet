@@ -40,6 +40,7 @@ class userInput: UIView {
     
     required init?(coder aDecoder: NSCoder) {
        super.init(coder: aDecoder)
+        backgroundColor = .DnCellColor
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.DnGrayColor.cgColor
         self.layer.cornerRadius = 4
