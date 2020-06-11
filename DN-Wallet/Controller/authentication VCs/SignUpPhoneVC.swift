@@ -5,7 +5,7 @@
 //  Created by Mac OS on 3/6/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
-
+import MBProgressHUD
 import UIKit
 
 protocol UpdatePhoneDelegate: class {
@@ -19,6 +19,8 @@ class SignUpPhoneVC: UIViewController {
     var user:User?
     var updateState: Bool = false
     weak var updatePhoneDelegate : UpdatePhoneDelegate?
+    private var countryCode: String?
+    private var completePhoneNumber: String?
     //MARK:- Outlets
     
     @IBOutlet weak var vcTitle: UILabel!
@@ -30,6 +32,7 @@ class SignUpPhoneVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorContainer: UIView!
     @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
+    
     
     // MARK:- Init
     override func viewDidLoad() {
@@ -82,14 +85,18 @@ class SignUpPhoneVC: UIViewController {
         self.user?.country = self.dropDownCountry.text!
         self.user?.phone = self.phoneNumber.text!
         vc?.registerData = self.user
-        self.present(vc!, animated: true)
+        DispatchQueue.main.async {
+            self.present(vc!, animated: true)
+        }
+        
     }
     private func backToEditAccountVC(with phone: String, country: String) {
         UserPreference.setValue(phone, withKey: UserPreference.phone)
         UserPreference.setValue(country, withKey: UserPreference.country)
         updatePhoneDelegate?.newPhoneAndCountryInfo(phone: phone, country: country)
-        dismiss(animated: true, completion: nil)
-        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func showIndicator(_ hidden: Bool) {
@@ -99,7 +106,11 @@ class SignUpPhoneVC: UIViewController {
             self.opt.isHidden = hidden
             self.confirmCodeInfoMessage.isHidden = hidden
         } else {
-            Alert.syncActionOkWith(nil, msg: "you must choose your country and enter your phone number", viewController: self)
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.detailsLabel.text = "phone number or country is missing, try again"
+            hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
+            hud.hide(animated: true, afterDelay: 3)
         }
         
     }
@@ -109,13 +120,30 @@ class SignUpPhoneVC: UIViewController {
     }
     /// user ask api to send him confirmation code on his phone number
     @IBAction func sendConfirmationCodeBtnPressed(_ sender: UIButton) {
-        showIndicator(true)
-        sendConfirmatioCodeOutlet.setTitle("resend confirmation message", for: .normal)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.showIndicator(false)
+        if let code = countryCode {
+            showIndicator(true)
+            sendConfirmatioCodeOutlet.setTitle("resend confirmation message", for: .normal)
+            completePhoneNumber = code + phoneNumber.text!
+            DNData.verifyPhone(number: completePhoneNumber ?? "wrongNumber") { (isSuccess) in
+                self.showIndicator(false)
+                if isSuccess {
+                    self.showHud(withMessage: "code send successfully", imgName: "checkmark")
+                } else {
+                    self.showHud(withMessage: "something was wrong, ensure that your number is correct.", imgName: "xmark")
+                }
+            }
         }
-        
-        
+    }
+    
+    func showHud(withMessage msg: String, imgName: String) {
+        DispatchQueue.main.async {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .customView
+            let img = UIImageView(image: UIImage(systemName: imgName))
+            img.tintColor = .label
+            hud.customView = img
+            hud.hide(animated: true, afterDelay: 3)
+        }
     }
     
 }
@@ -123,6 +151,7 @@ class SignUpPhoneVC: UIViewController {
 extension SignUpPhoneVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
         dropDownCountry.text = "(\(code ?? " "))\t" + title
+        countryCode = code
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -138,18 +167,20 @@ extension SignUpPhoneVC: GetOPTValuesProtocol {
     /// this function called after user enter the opt code
     func getOpt(with value: String) {
         showIndicator(true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DNData.checkPhoneCode(number: completePhoneNumber ?? "wrongNumber" , code: value) { (isSuccess) in
             self.showIndicator(false)
-            if value == "1122" {
+            if isSuccess {
                 self.opt.hideErrorMessgae()
                 if self.updateState {
                     self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
                 } else {
                     self.presentSignUpConfirmEmailVC()
                 }
-            }else {
-                self.opt.reset()
-                self.opt.showErrorMessgae()
+            } else {
+                DispatchQueue.main.async {
+                    self.opt.reset()
+                    self.opt.showErrorMessgae()
+                }
             }
         }
     }

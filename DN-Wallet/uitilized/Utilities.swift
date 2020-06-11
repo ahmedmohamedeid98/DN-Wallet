@@ -12,7 +12,7 @@ let currencyData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egyption Poun
                                    PopMenuItem(image: nil, title: "Euro", code: "EUR"),
                                    PopMenuItem(image: nil, title: "Saudi Riyal", code: "SAR")
 ]
-let countryData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egyption", code: "+20"),
+let countryData: [PopMenuItem] = [PopMenuItem(image: nil, title: "Egypt", code: "+20"),
                                   PopMenuItem(image: nil, title: "United State", code: "+43"),
                                   PopMenuItem(image: nil, title: "Saudi Arab", code: "+86"),
                                   PopMenuItem(image: nil, title: "Iraq", code: "+28")]

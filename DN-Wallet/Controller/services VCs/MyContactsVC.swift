@@ -40,21 +40,13 @@ class MyContactsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        originDataSource = [Contact(username: "ahmed", email: "ahmed54@gmail.com"),
-                            Contact(username: "zoro", email: "zoro54@gmail.com"),
-                            Contact(username: "mohamed", email: "mohamed_eid54@gmail.com"),
-                            Contact(username: "eid", email: "eid87214@gmail.com")
-        ]
-        currentDataSource = originDataSource
         setupSearchBar()
         setupNavBar()
         setupTableView()
         setupLayout()
         configureContactTableDataSource()
         contactTable.dataSource = contactTableDataSource
-        //updateTableViewDataSource()
-        
-        // Do any additional setup after loading the view.
+        loadData()
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -62,6 +54,22 @@ class MyContactsVC: UIViewController {
     
     deinit {
         print("My Contact VC Free From MEMORY :: DN")
+    }
+    
+    private func loadData() {
+        DNData.getUserConcats(onView: view) { (contacts, error) in
+            if error != nil {
+                return
+            }
+            
+            self.originDataSource = contacts
+            self.currentDataSource = contacts
+            DispatchQueue.main.async {
+                self.contactTable.alpha = 1.0
+                self.updateTableViewDataSource()
+            }
+            
+        }
     }
     
     //MARK:- setup views
@@ -94,23 +102,17 @@ class MyContactsVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func AddEditeAlert(actionName: String, msg: String, uname: String?, uemail: String?, completion: @escaping (UIAlertAction) -> () ) {
+    func AddEditeAlert(actionName: String, msg: String, uemail: String?, completion: @escaping (UIAlertAction) -> () ) {
         alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: K.alert.cancel, style: .cancel, handler: nil)
         let alertAction = UIAlertAction(title: actionName, style: .default, handler: completion)
-        alert.addTextField { (usernameText) in
-            usernameText.font = UIFont.systemFont(ofSize: 14)
-            usernameText.textColor = .DnDarkBlue
-            usernameText.placeholder = K.placeholder.username
-            usernameText.text = uname
-        }
         alert.addTextField { (emailText) in
             emailText.font = UIFont.systemFont(ofSize: 14)
             emailText.textColor = .DnDarkBlue
             emailText.placeholder = K.placeholder.email
             emailText.text = uemail
         }
-        
+    
         alert.addAction(cancelAction)
         alert.addAction(alertAction)
         present(alert, animated: true, completion: nil)
@@ -118,22 +120,17 @@ class MyContactsVC: UIViewController {
     }
     
     @objc func addBtnPressed() {
-        AddEditeAlert(actionName: K.alert.add, msg: K.vc.myContactEditMsg, uname: nil, uemail: nil) { (action) in
-            if let username = self.alert.textFields![0].text, let email = self.alert.textFields![1].text {
-                if !username.isEmpty && !email.isEmpty && Auth.shared.isValidEmail(email) {
-                    // check if email is already exist
-                    if self.emailIsExist(email) {
-                        self.alert.dismiss(animated: true, completion: nil)
-                        Alert.syncActionOkWith(K.vc.myContactAlertEmailExist, msg: K.vc.myContactAlertEmailExistMsg, viewController: self)
-                    } else {
-                        // add it locally
-                        let contact = Contact(username: username, email: email)
-                        self.originDataSource.append(contact)
-                        self.addContact(contact)
-                        // add it to API <=============================================
+        AddEditeAlert(actionName: K.alert.add, msg: K.vc.myContactEditMsg, uemail: nil) { (action) in
+            if let email = self.alert.textFields![0].text {
+                if !email.isEmpty && Auth.shared.isValidEmail(email) {
+                    DNData.addNewContact(WithEmail: email, onView: self.view) { (success, id) in
+                        if success {
+                            let newContact = Contact(username: String(email.split(separator: "@")[0]), email: email, id: id!, identifier: UUID().uuidString)
+                            self.originDataSource.append(newContact)
+                            self.addContact(newContact)
+                        }
                     }
                 }
-            
             }
         }
        
@@ -153,7 +150,10 @@ class MyContactsVC: UIViewController {
     func addContact(_ contact: Contact) {
         var currentSnapshot = contactTableDataSource.snapshot()
         currentSnapshot.appendItems([contact])
-        contactTableDataSource.apply(currentSnapshot)
+        DispatchQueue.main.async {
+            self.contactTableDataSource.apply(currentSnapshot)
+        }
+        
     }
     
     //MARK:- Setup TableView and Configur It's DiffableDataSource
@@ -165,6 +165,7 @@ class MyContactsVC: UIViewController {
         contactTable.backgroundColor = .clear
         contactTable.register(MyContactCell.self, forCellReuseIdentifier: MyContactCell.reuseIdentifier)
         contactTable.rowHeight = 70
+        contactTable.alpha = 0.0
     }
     
     // populate table view cell
@@ -186,7 +187,10 @@ class MyContactsVC: UIViewController {
         var snapShot = NSDiffableDataSourceSnapshot<contactTableSection, Contact>()
         snapShot.appendSections(contactTableSection.allCases)
         currentDataSource.forEach { snapShot.appendItems([$0], toSection: .main) }
-        contactTableDataSource.apply(snapShot)
+        DispatchQueue.main.async {
+            self.contactTableDataSource.apply(snapShot)
+        }
+        
     }
     
     //MARK:- Search Bar's assest method
@@ -241,43 +245,19 @@ extension MyContactsVC: UISearchBarDelegate {
 
 extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editeAction = UIContextualAction(style: .normal, title: K.alert.edit) { (action, view, completion) in
-            var currentSnapshot = self.contactTableDataSource.snapshot()
-            guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
-            self.AddEditeAlert(actionName: K.alert.edit, msg: K.vc.myContactEditMsg, uname: contact.username, uemail: contact.email) { (action) in
-                if let username = self.alert.textFields![0].text, let email = self.alert.textFields![1].text {
-                    if !username.isEmpty && !email.isEmpty && Auth.shared.isValidEmail(email) {
-                        if username != contact.username || email != contact.email {
-                            if username != contact.username {
-                                contact.username = username
-                            }
-                            if email != contact.email {
-                                contact.email = email
-                            }
-                            currentSnapshot.reloadItems([contact])
-                            self.contactTableDataSource.apply(currentSnapshot)
-                            // update with api <======================================
-                        }else {
-                            // do nothing
-                        }
-                    }
-        
-                }
-            }
-           completion(true)
-        }
-        editeAction.backgroundColor = .DnDarkBlue
-        return .init(actions: [editeAction])
-    }
-    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: K.alert.delete) { (action, view, completion) in
             var currentSnapshot = self.contactTableDataSource.snapshot()
             guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
-            currentSnapshot.deleteItems([contact])
-            self.originDataSource.remove(at: indexPath.row)
-            self.contactTableDataSource.apply(currentSnapshot)
+            DNData.deleteContact(withID: contact.id, onView: self.view) { (isSuccess) in
+                if isSuccess {
+                    currentSnapshot.deleteItems([contact])
+                    self.originDataSource.remove(at: indexPath.row)
+                    DispatchQueue.main.async {
+                        self.contactTableDataSource.apply(currentSnapshot)
+                    }
+                }
+            }
             completion(true)
         }
         return .init(actions: [deleteAction])

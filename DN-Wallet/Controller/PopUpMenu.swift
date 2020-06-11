@@ -99,24 +99,7 @@ final class PopUpMenu: UIViewController {
 }
 
 extension PopUpMenu: UITableViewDelegate {
-    /*
-    func unCheckLastCell() {
-        if let cell = List.cellForRow(at: lastSelectedIndexPath!) as? PopUpMenuCell {
-            cell.checkBoxToggle(check: false)
-            lastSelectedIndexPath = nil
-        }
-    }
-     
-     if let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell {
-         if lastSelectedIndexPath == nil {
-             lastSelectedIndexPath = indexPath
-         } else {
-             unCheckLastCell()
-         }
-         selectedCell.checkBoxToggle(check: true)
-         menuDelegate?.selectedItem(title: selectedCell.getTitle())
-     }
-    */
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let selectedCell = tableView.cellForRow(at: indexPath) as? PopUpMenuCell {

@@ -8,15 +8,39 @@
 
 // convert this struct to class to enable Diffable Data Source reload item when updated it.
 // struct was confirm Hashable Protocol , but we can replace it by NSObject which confirm Hashable Protocol.
-class Contact: NSObject, Codable {
+
+
+// get all contacts
+struct ContactResponse: Codable {
+    let _id : String
+    let userID: UserID
+}
+
+struct UserID: Codable {
+    let _id: String
+    let name: String
+    let email: String
+}
+
+// creating new contact
+struct CreateContactResponse: Codable {
+    let id: String?
+    let error: String?
+}
+
+// class which populate in tableView
+class Contact: NSObject {
     var username:String
     var email:String
+    var id: String
     
-    init(username: String, email: String) {
+    init(username: String, email: String, id: String, identifier: String) {
         self.username = username
         self.email = email
+        self.identifier = identifier
+        self.id = id
     }
-    var identifier: UUID = UUID()
+    var identifier: String
 
     static func == (lhs: Contact, rhs: Contact) -> Bool{
         return lhs.identifier == rhs.identifier

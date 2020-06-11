@@ -88,7 +88,6 @@ class HomeVC: UIViewController {
     
     //MARK:- Handlers
     func initViewController() {
-        print("{\ntoken: \(Auth.shared.getUserToken())\n}")
         Auth.shared.deactiveSafeMode()
         counter = 0
         pageControl = UIPageControl()

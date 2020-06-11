@@ -33,13 +33,46 @@ class Hud {
         textOnly(hudError.invalidPassword.rawValue, onHud: hud, delay: delay)
     }
     
-    static func showLoadingHud(onView view: UIView) {
+    static func showLoadingHud(onView view: UIView, withLabel msg: String = "Loading...") {
         currentView = view
         DispatchQueue.main.async {
             if stillNeedToshowLoading {
                 currentHud = MBProgressHUD.showAdded(to: view, animated: true)
-                currentHud?.label.text = hudError.loading.rawValue
+                currentHud?.label.text = msg
             }
+        }
+    }
+    static func successAndHide(withMessage msg: String = "Success") {
+        if let safeHud = currentHud {
+            currentHud = nil
+            DispatchQueue.main.async {
+                safeHud.mode = .customView
+                let img = UIImageView(image: UIImage(systemName: "checkmark"))
+                img.tintColor = .label
+                safeHud.customView = img
+                safeHud.customView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+                safeHud.label.text = msg
+                safeHud.hide(animated: true, afterDelay: 2)
+            }
+        } else {
+            stillNeedToshowLoading = false
+        }
+    }
+    
+    static func faildAndHide(withMessage msg: String = "faild") {
+        if let safeHud = currentHud {
+            currentHud = nil
+            DispatchQueue.main.async {
+                safeHud.mode = .customView
+                let img = UIImageView(image: UIImage(systemName: "xmark"))
+                img.tintColor = .label
+                safeHud.customView = img
+                safeHud.customView?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+                safeHud.label.text = msg
+                safeHud.hide(animated: true, afterDelay: 3)
+            }
+        } else {
+            stillNeedToshowLoading = false
         }
     }
     static func hide(after seconds: TimeInterval) {
@@ -58,7 +91,6 @@ class Hud {
             currentHud = nil
             DispatchQueue.main.async {
                 safeHud.mode = .text
-                safeHud.isSquare = true
                 safeHud.label.text = hudError.network.rawValue
                 safeHud.detailsLabel.text = error.rawValue
                 safeHud.hide(animated: true, afterDelay: 3)
@@ -70,7 +102,6 @@ class Hud {
             DispatchQueue.main.async {
                 let newHud = MBProgressHUD.showAdded(to: currentView, animated: true)
                 newHud.mode = .text
-                newHud.isSquare = true
                 newHud.label.text = hudError.network.rawValue
                 newHud.detailsLabel.text = error.rawValue
                 newHud.hide(animated: true, afterDelay: 3)
