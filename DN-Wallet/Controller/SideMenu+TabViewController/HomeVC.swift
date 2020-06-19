@@ -17,129 +17,84 @@ enum Section: CaseIterable {
 
 class HomeVC: UIViewController {
     
-    // Data
-    var balance: [Balance] = [Balance(amount: 245552.54, currency: "USD"), Balance(amount: 24, currency: "EGP"), Balance(amount: 200, currency: "EUR"), Balance(amount: 245.0, currency: "KWD")]
-    var imagesNames = ["test_image1", "test_image2", "test_image3", "test_image4"]
-    //MARK:- Utilities
-    static let sectionHeaderElementKind = "section-header-element-kind"
-    
-    //MARK:- viewController Properities
-    var imageCount: Int = 0
+    // Data TEST
+    var balance: [Balance] = [Balance(amount: 252.54, currency: "USD"), Balance(amount: 240.00, currency: "EGP"), Balance(amount: 200.00, currency: "EUR"), Balance(amount: 245.00, currency: "KWD")]
+    var parteners: [Partener] = [
+        Partener(imageName: "test_image1", title: "Uber"),
+        Partener(imageName: "test_image2", title: "Makdonse"),
+        Partener(imageName: "test_image3", title: "Karfoure"),
+        Partener(imageName: "test_image4", title: "Kareem")
+    ]
+
+    //MARK:- Properities
     var isExpand: Bool = false
     var leftBarButton: UIBarButtonItem!
+    var partenerCell: PartenerTableViewCell!
     weak var delegate:HomeViewControllerDelegate?
-    
-    //MARK:- Data Will send to another vc
+    // Data Will send to notification view controller
     var notificationMessages: [Message] = []
-    
-    //MARK:- CollectionView Properities
-    var balanceCollectioView: UICollectionView!
-    var sliderCollectionView: UICollectionView!
-    var balanceDataSource: UICollectionViewDiffableDataSource<Section, Balance>! = nil
-    var sliderDataSource: UICollectionViewDiffableDataSource<Section, String>! = nil
-    var counter: Int = 0
-    var pageControl: UIPageControl!
-    let goRightButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1022848887)
-        btn.setImage(UIImage(systemName: "chevron.compact.right"), for: .normal)
-        btn.tintColor = .white
-        btn.addTarget(self, action: #selector(goRightAction), for: .touchUpInside)
-        return btn
-    }()
-    let goLeftButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.1022848887)
-        btn.setImage(UIImage(systemName: "chevron.compact.left"), for: .normal)
-        btn.tintColor = .white
-        btn.addTarget(self, action: #selector(goLeftAction), for: .touchUpInside)
-        return btn
-    }()
-    var timer: Timer!
-    
+    fileprivate var tableView: UITableView!
+   
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
+        //loadData()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
         startTimer()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopTimer()
     }
-    
-    func startTimer() {
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
-        }
-    }
-    func stopTimer() {
-        self.timer.invalidate()
-    }
-    
+ 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    //MARK:- Handlers
+    //MARK:- Network: laod data
+    fileprivate func loadData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let confirmationViewController = ConfirmEmailVC()
+            confirmationViewController.modalPresentationStyle = .fullScreen
+            self.present(confirmationViewController, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK:- Methods
+    fileprivate func setupTableView() {
+        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.register(PartenerTableViewCell.nib(), forCellReuseIdentifier: PartenerTableViewCell.identifier)
+        tableView.register(BalanceTableViewCell.nib(), forCellReuseIdentifier: BalanceTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.backgroundColor = .clear
+    }
+
     func initViewController() {
         Auth.shared.deactiveSafeMode()
-        counter = 0
-        pageControl = UIPageControl()
-        imageCount = imagesNames.count
-        pageControl.numberOfPages = imageCount
-        pageControl.currentPageIndicatorTintColor = .white
-        //Setup Layout
-        handleNavigationBar()
-        setupSliderCollectionView()
-        setupBalanceCollectionView()
+        configureNavgationBar()
+        setupTableView()
         setupLayout()
-        // Slider Collection View
-        configureSliderDataSource()
-        sliderCollectionView.dataSource = sliderDataSource
-        // Balance Collection View
-        configureBalanceDataSource()
-        balanceCollectioView.dataSource = balanceDataSource
-        
         addGestureRecognizer()
-        
         // Fetch Notifications Messages
         fetchNotificationMessages()
     }
     
-    
-    @objc func slideShow() {
-        if counter < imageCount {
-            slideToItemAt(counter)
-            counter += 1
-        }else {
-            counter = 0
-            slideToItemAt(counter, animate: false)
-            counter = 1
-        }
-    }
-    
-    func slideToItemAt(_ counter: Int, animate: Bool = true) {
-        let index = IndexPath(item: counter, section: 0)
-        self.sliderCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: animate)
-        pageControl.currentPage = counter
-    }
-    
-    private func handleNavigationBar() {
+    // Configure Navigation Bar
+    private func configureNavgationBar() {
         self.configureNavigationBar(title: "Home", preferredLargeTitle: false)
         leftBarButton = UIBarButtonItem(image: UIImage(systemName: "list.dash"), style: .plain, target: self, action: #selector(sideMenuButtonPressed))
         navigationItem.leftBarButtonItem = leftBarButton
         addRightBarButtonWithImage(name: "envelope")
-        
-    }
-    
-    private func thereIsNewMessages() {
-        addRightBarButtonWithImage(name: "envelope.badge")
     }
     
     private func addRightBarButtonWithImage(name: String) {
@@ -147,27 +102,24 @@ class HomeVC: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    private func thereIsNewMessages() {
+        addRightBarButtonWithImage(name: "envelope.badge")
+    }
     
     @objc func notificationBtnPressed() {
         let vc = NotificationVC()
         vc.originalData = notificationMessages
         self.present(vc, animated: true, completion: nil)
     }
+    
+    // add subviews
     private func setupLayout() {
-        view.addSubview(sliderCollectionView)
-        view.addSubview(goRightButton)
-        view.addSubview(goLeftButton)
-        view.addSubview(pageControl)
-        view.addSubview(balanceCollectioView)
-        sliderCollectionView.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 250))
-        goLeftButton.DNLayoutConstraint(left: sliderCollectionView.leftAnchor, bottom: sliderCollectionView.bottomAnchor, size: CGSize(width: 30, height: 200))
-        goRightButton.DNLayoutConstraint(right: sliderCollectionView.rightAnchor, bottom: sliderCollectionView.bottomAnchor, size: CGSize(width: 30, height: 200))
-        pageControl.DNLayoutConstraint(left: view.leftAnchor, right: view.rightAnchor, bottom: sliderCollectionView.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20) , size: CGSize(width: 0, height: 20))
+        view.addSubview(tableView)
+        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor)
         
-        balanceCollectioView.DNLayoutConstraint(sliderCollectionView.bottomAnchor,left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 40, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 250))
     }
     
-    //MARK:- GestureRecognizer
+    //MARK:- handle sideMenu Toggle
     func addGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeSideMenuWithGesture))
         let rightSwipGesture = UISwipeGestureRecognizer(target: self, action: #selector(sideMenuButtonPressed))
@@ -195,144 +147,19 @@ class HomeVC: UIViewController {
         }
     }
     
-    
-    @objc func goRightAction() {
-        if counter < imageCount {
-            slideToItemAt(counter, animate: true)
-            counter += 1
-        }else {
-            counter = 0
-            slideToItemAt(counter, animate: false)
-            counter = 1
+    fileprivate func startTimer() {
+        if let cell = partenerCell {
+            cell.startTimer()
         }
-        
     }
-    @objc func goLeftAction() {
-        if counter > 0 {
-            slideToItemAt(counter, animate: true)
-            counter -= 1
-        }else {
-            counter = imageCount - 1
-            slideToItemAt(counter, animate: true)
-            counter = imageCount
+    
+    fileprivate func stopTimer() {
+        if let cell = partenerCell {
+            cell.stopTimer()
         }
     }
 }
 
-//MARK:- Setup Slider Collection View
-extension HomeVC {
-    
-    
-    func setupSliderCollectionView() {
-        sliderCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createSliderLayout())
-        sliderCollectionView.backgroundColor = .clear
-        sliderCollectionView.register(SliderCell.self, forCellWithReuseIdentifier: SliderCell.reuseIdentifier)
-        sliderCollectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: HomeVC.sectionHeaderElementKind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier)
-    }
-    
-    private func createSliderLayout() -> UICollectionViewLayout {
-        //1
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        //item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
-        
-        //2
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(200))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        //3
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
-        // add header
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: HomeVC.sectionHeaderElementKind, alignment: .top)
-        headerElement.pinToVisibleBounds = true
-        //headerElement.zIndex = 2
-        section.boundarySupplementaryItems = [headerElement]
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
-    private func configureSliderDataSource() {
-        // populate cell
-        sliderDataSource = UICollectionViewDiffableDataSource(collectionView: sliderCollectionView, cellProvider: { (collection, indexPath, data) -> UICollectionViewCell? in
-            guard let cell = collection.dequeueReusableCell(withReuseIdentifier: SliderCell.reuseIdentifier, for: indexPath) as? SliderCell else {fatalError("can not dequeue slider cell")}
-            cell.data = data
-            return cell
-        })
-        sliderDataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier, for: indexPath) as? CollectionViewHeader else {fatalError("can not dequeue header for sliderCollection")}
-            header.data = "Partners"
-            header.backgroundColor = .clear
-            return header
-        }
-        // init cell
-        var snapShot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapShot.appendSections(Section.allCases)
-        imagesNames.forEach { snapShot.appendItems([$0], toSection: .main) }
-        sliderDataSource.apply(snapShot, animatingDifferences: true)
-    }
-    
-    
-}
-
-//MARK:- Setup Balance Collection View
-extension HomeVC {
-    func setupBalanceCollectionView() {
-        balanceCollectioView = UICollectionView(frame: .zero, collectionViewLayout: createBalanceLayout())
-        balanceCollectioView.backgroundColor = .clear
-        balanceCollectioView.register(CurrencyCell.self, forCellWithReuseIdentifier: CurrencyCell.reuseIdentifier)
-        balanceCollectioView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: HomeVC.sectionHeaderElementKind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier)
-    }
-    
-    private func createBalanceLayout() -> UICollectionViewLayout {
-        //1
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
-        
-        //2
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        
-        //3
-        let section = NSCollectionLayoutSection(group: group)
-        //header
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: HomeVC.sectionHeaderElementKind, alignment: .top)
-        headerElement.pinToVisibleBounds = true
-        //headerElement.zIndex = 2 // ???
-        section.boundarySupplementaryItems = [headerElement]
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
-    
-    private func configureBalanceDataSource() {
-        // populate cell
-        balanceDataSource = UICollectionViewDiffableDataSource(collectionView: balanceCollectioView, cellProvider: { (collection, indexPath, data) -> UICollectionViewCell? in
-            guard let cell = collection.dequeueReusableCell(withReuseIdentifier: CurrencyCell.reuseIdentifier , for: indexPath) as? CurrencyCell else {fatalError("can not dequeue balance cell")}
-            cell.data = data
-            return cell
-        })
-        balanceDataSource.supplementaryViewProvider = {
-            (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeader.reuseIdentifier, for: indexPath) as? CollectionViewHeader else {fatalError("can not dequeue balance header")}
-            header.data = "Balance"
-            header.backgroundColor = .clear
-            return header
-        }
-        // init cell
-        var snapShot = NSDiffableDataSourceSnapshot<Section, Balance>()
-        snapShot.appendSections(Section.allCases)
-        balance.forEach{ snapShot.appendItems([$0], toSection: .main) }
-        balanceDataSource.apply(snapShot, animatingDifferences: true)
-    }
-    
-}
 //MARK:- Networks (API)
 extension HomeVC {
     private func fetchNotificationMessages() {
@@ -342,4 +169,67 @@ extension HomeVC {
             thereIsNewMessages()
         }
     }
+}
+
+extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            partenerCell = tableView.dequeueReusableCell(withIdentifier: PartenerTableViewCell.identifier, for: indexPath) as? PartenerTableViewCell
+            if let cell = partenerCell {
+                cell.parteners = parteners
+                cell.startTimer()
+                return cell
+                
+            }
+            return UITableViewCell()
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BalanceTableViewCell.identifier , for: indexPath) as? BalanceTableViewCell else { return UITableViewCell() }
+        cell.balances = balance
+        return cell
+    }
+    
+    // handle sections header
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header =  UIView()
+        var title = "Balance"
+        if section == 0 {
+            title = "Parteners"
+        }
+        self.prepareView(for: header, withTitle: title)
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.size.height / 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    fileprivate func prepareView(for header: UIView, withTitle title: String) {
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont(name: "HeviticaNeuee-bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)
+        header.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: header.topAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 20),
+            titleLabel.bottomAnchor.constraint(equalTo: header.bottomAnchor)
+        ])
+    }
+    
+    
 }

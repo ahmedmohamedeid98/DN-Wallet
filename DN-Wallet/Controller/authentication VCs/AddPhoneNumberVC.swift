@@ -12,12 +12,9 @@ protocol UpdatePhoneDelegate: class {
     func newPhoneAndCountryInfo(phone: String, country: String)
 }
 
-
-class SignUpPhoneVC: UIViewController {
+class AddPhoneNumberVC: UIViewController {
     
     //MARK:- Properities
-    var user:User?
-    var updateState: Bool = false
     weak var updatePhoneDelegate : UpdatePhoneDelegate?
     private var countryCode: String?
     private var completePhoneNumber: String?
@@ -31,34 +28,21 @@ class SignUpPhoneVC: UIViewController {
     @IBOutlet weak var sendConfirmatioCodeOutlet: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityIndicatorContainer: UIView!
-    @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
     
     
     // MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         dropDownCountry.delegate = self
-        
         // specify opt delegation to this vc and hide this part for latter
         opt.delegate = self
         opt.isHidden = true
         confirmCodeInfoMessage.isHidden = true
         activityIndicatorContainer.isHidden = true
-        
-        
+            
         // pop keyboard down when user tapped any place except the phone textField
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(resetKeyboardState))
         self.view.addGestureRecognizer(tapGesture)
-        
-        // setup stepProgressBar
-        if !updateState {
-            steppedProgressBar.titles = ["", "", ""]
-            steppedProgressBar.currentTab = 2
-        } else {
-            vcTitle.text = "Update Phone"
-            steppedProgressBar.isHidden = true
-        }
-        //setUserPreferance()
 
     }
     
@@ -66,30 +50,6 @@ class SignUpPhoneVC: UIViewController {
         phoneNumber.resignFirstResponder()
     }
     
-    private func setUserPreferance() {
-        if let country = UserPreference.getStringValue(withKey: UserPreference.country) {
-            dropDownCountry.text = country
-        }
-        if !updateState {
-            if let phone = UserPreference.getStringValue(withKey: UserPreference.phone) {
-                phoneNumber.text = phone
-            }
-        }
-        
-    }
-    
-    private func presentSignUpConfirmEmailVC() {
-        let st = UIStoryboard(name: "Authentication", bundle: .main)
-        let vc = st.instantiateViewController(identifier: "signUpConfirmEmailVCID") as? SignUpConfirmEmailVC
-        vc?.modalPresentationStyle = .fullScreen
-        self.user?.country = self.dropDownCountry.text!
-        self.user?.phone = self.phoneNumber.text!
-        vc?.registerData = self.user
-        DispatchQueue.main.async {
-            self.present(vc!, animated: true)
-        }
-        
-    }
     private func backToEditAccountVC(with phone: String, country: String) {
         UserPreference.setValue(phone, withKey: UserPreference.phone)
         UserPreference.setValue(country, withKey: UserPreference.country)
@@ -148,7 +108,7 @@ class SignUpPhoneVC: UIViewController {
     
 }
 
-extension SignUpPhoneVC: UITextFieldDelegate, PopUpMenuDelegate {
+extension AddPhoneNumberVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
         dropDownCountry.text = "(\(code ?? " "))\t" + title
         countryCode = code
@@ -163,7 +123,7 @@ extension SignUpPhoneVC: UITextFieldDelegate, PopUpMenuDelegate {
     }
 }
 
-extension SignUpPhoneVC: GetOPTValuesProtocol {
+extension AddPhoneNumberVC: GetOPTValuesProtocol {
     /// this function called after user enter the opt code
     func getOpt(with value: String) {
         showIndicator(true)
@@ -171,11 +131,7 @@ extension SignUpPhoneVC: GetOPTValuesProtocol {
             self.showIndicator(false)
             if isSuccess {
                 self.opt.hideErrorMessgae()
-                if self.updateState {
-                    self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
-                } else {
-                    self.presentSignUpConfirmEmailVC()
-                }
+                self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
             } else {
                 DispatchQueue.main.async {
                     self.opt.reset()

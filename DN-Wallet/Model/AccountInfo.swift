@@ -9,12 +9,12 @@
 struct AccountInfo: Codable {
     let username: String
     let email: String
-    let country: String
-    let phone: String
-    let gender: String
-    let job: String
-    let photo: String
-    let balance : [Balance]
+    let country: String?
+    let phone: String?
+    let gender: String?
+    let job: String?
+    let photo: String?
+    let balance : [BalanceResponse]
     let paymentCards: [CardInfo]
     
     enum CodingKeys: String, CodingKey {
@@ -30,27 +30,17 @@ struct AccountInfo: Codable {
     }
 }
 
-struct Balance: Codable, Hashable {
+struct BalanceResponse: Codable {
     let amount: Double
     let currency: String
-    let identifier: UUID = UUID()
+}
+
+struct Balance {
+    let amount: Double
+    let currency: String
     
-    enum CodingKeys: String, CodingKey {
-        case amount
-        case currency = "currency_code"
-    }
-    
-    //confiram hashable protocol
-    func hash(into hasher: inout Hasher) {
-        return hasher.combine(identifier)
-    }
-    
-    static func == (lhs: Balance, rhs: Balance) -> Bool{
-        return lhs.identifier == rhs.identifier
-    }
-    
-    static func <= (lhs: Balance, rhs: Balance) -> Bool {
-        return lhs.amount <= rhs.amount
+    var stringAmount: String {
+        return String(format: "%i.%02i", arguments: [Int(amount), amount*100.truncatingRemainder(dividingBy: 100)])
     }
 }
 

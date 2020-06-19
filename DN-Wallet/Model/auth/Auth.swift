@@ -106,9 +106,7 @@ class Auth {
         let data = Register(name: user.username,
                             email: user.email,
                             password: user.password,
-                            confirm_password: user.password,
-                            phone: user.phone,
-                            country: user.country)
+                            confirm_password: user.password)
         DNData.register(with: data, onView: view) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {

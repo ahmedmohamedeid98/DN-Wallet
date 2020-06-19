@@ -117,8 +117,7 @@ class EditAccountVC: UIViewController {
     @IBAction func updatePhoneBtnAction(_ sender: UIButton) {
         // take user to signInPhone
         let st = UIStoryboard(name: "Authentication", bundle: .main)
-        let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
-        vc?.updateState = true
+        let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? AddPhoneNumberVC
         vc?.updatePhoneDelegate = self
         vc?.modalPresentationStyle = .fullScreen
         present(vc!, animated: true)

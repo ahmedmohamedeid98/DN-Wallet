@@ -8,21 +8,20 @@
 
 import UIKit
 
-@IBDesignable class SignUpVC: UIViewController {
+final class SignUpVC: UIViewController {
     
-     //MARK:- Outlets
+    //MARK:- Properities
     @IBOutlet weak var usernameContainer: userInput!
     @IBOutlet weak var emailContainer: userInput!
     @IBOutlet weak var passwordContainer: userInput!
     @IBOutlet weak var confirmPasswordContainer: userInput!
-    @IBOutlet weak var steppedProgressBar: SteppedProgressBar!
-    @IBOutlet weak var nextBtnOutlet: UIButton!
-    
-     //MARK:- Properities
+    @IBOutlet weak var createAccountOutlet: UIButton!
     private var name : UITextField!
     private var email: UITextField!
     private var pass1: UITextField!
     private var pass2: UITextField!
+    
+    
     
      //MARK:- Init ViewController
     override func viewDidLoad() {
@@ -32,10 +31,7 @@ import UIKit
         emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
         passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
         confirmPasswordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Confirm the password", isSecure: true)
-        nextBtnOutlet.layer.cornerRadius = 20.0
-        
-        steppedProgressBar.titles = ["", "", ""]
-        steppedProgressBar.currentTab = 1
+        createAccountOutlet.layer.cornerRadius = 20.0
     
         name = usernameContainer.textField
         email = emailContainer.textField
@@ -48,20 +44,23 @@ import UIKit
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func nextBtnPressed(_ sender: UIButton) {
-        
+    @IBAction func createAccountButtonPressed(_ sender: UIButton) {
         if isValid() {
             let username = usernameContainer.textField.text!
             let email = emailContainer.textField.text!
             let password = passwordContainer.textField.text!
-        
-            let st = UIStoryboard(name: "Authentication", bundle: .main)
-            let vc = st.instantiateViewController(identifier: "SignUpPhoneVCID") as? SignUpPhoneVC
-            vc?.user = User(username: username, email: email, password: password, phone: "", country: "")
-            vc?.modalPresentationStyle = .fullScreen
-            present(vc!, animated: true)
+            let user = User(username: username, email: email, password: password)
+            Auth.shared.createAccount(user: user, onView: view) { (success, error) in
+                if success {
+                    Auth.shared.pushHomeViewController(vc: self)
+                }
+            }
         }
     }
+    @IBAction func showTermAndServices(_ sender: UIButton) {
+        
+    }
+    
 }
 
 extension SignUpVC {

@@ -94,8 +94,8 @@ class SignInVC: UIViewController {
 //
 ////        //TEST TRST
 ////
-//        Auth.shared.pushHomeViewController(vc: self)
-//        return
+        Auth.shared.pushHomeViewController(vc: self)
+        return
 ////        // End TEST
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!

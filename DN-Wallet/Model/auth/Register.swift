@@ -11,12 +11,12 @@ struct Register: Codable {
     let email: String
     let password: String
     let confirm_password : String
-    let phone: String
-    let country: String
-    // Optional
-    //    let gender: String
-    //    let job: String
-    //    let photo: String
+    // optional
+    // let phone: String
+    // let country: String
+    // let gender: String
+    // let job: String
+    // let photo: String
 }
 
 struct RegisterResponder: Codable {

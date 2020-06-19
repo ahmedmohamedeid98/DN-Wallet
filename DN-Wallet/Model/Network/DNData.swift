@@ -28,7 +28,7 @@ final class DNData {
         case contacts, createContact, deleteContact(String)
         case charity, charityDetails(String)
         case heirs
-        case account_info
+        case me
         case UTCDateTime
         
         var stringValue: String{
@@ -37,7 +37,7 @@ final class DNData {
                 case .register: return base + "/users/register"
                 case .history: return base + "/history"
                 case .contacts: return base + "/contacts"
-                case .account_info: return base + "/account_info"
+                case .me: return base + "/users/me"
                 case .charity: return base + "/charity"
                 case .charityDetails(let id): return base + "/charity/\(id)"
                 case .heirs: return base + "/heirs"
@@ -102,7 +102,7 @@ final class DNData {
                 return
             }
             if let safeData = data {
-                print("DDT1: \(String(data: safeData, encoding: .utf8))")
+                print("DDT1: \(String(describing: String(data: safeData, encoding: .utf8)))")
                 let decoder = JSONDecoder()
                 do {
                     let res = try decoder.decode(ErrorResponse.self, from: safeData)
@@ -135,7 +135,7 @@ final class DNData {
                 return
             }
             if let safeData = data {
-                print("DDT2: \(String(data: safeData, encoding: .utf8))")
+                print("DDT2: \(String(describing: String(data: safeData, encoding: .utf8)))")
                 let decoder = JSONDecoder()
                 do {
                     let res = try decoder.decode(ErrorResponse.self, from: safeData)
@@ -166,7 +166,7 @@ final class DNData {
     
     /// ask server to return the account information for the current user
     class func getUserAccountInfo(onView view: UIView, completion: @escaping(AccountInfo?, Error?)-> Void) {
-        taskForGETRequest(url: Endpoint.account_info.url, response: AccountInfo.self) { (response, error) in
+        taskForGETRequest(url: Endpoint.me.url, response: AccountInfo.self) { (response, error) in
             if let response = response {
                 completion(response, nil)
             }else {

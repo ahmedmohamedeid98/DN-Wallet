@@ -110,13 +110,11 @@ extension UIView {
             self.layer.cornerRadius = reduis
         }
     }
-    
+    /*
     func globalPoint() -> CGPoint? {
         return self.superview?.convert(self.frame.origin, to: nil)
-    }
-    
-    
-    
+    }*/
+   
 }
 
 //MARK:- AppColor

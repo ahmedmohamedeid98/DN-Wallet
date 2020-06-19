@@ -126,7 +126,7 @@ class PayVC: UIViewController {
             let actualBalances = userBalance.filter { $0.currency == balance.currency }
             actualBalance = actualBalances.first
             if let safeActualBalance = actualBalance {
-                return balance <= safeActualBalance
+                return balance.amount <= safeActualBalance.amount
             }
             return false
         }
