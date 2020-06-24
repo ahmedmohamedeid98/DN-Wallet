@@ -50,9 +50,9 @@ final class SignUpVC: UIViewController {
             let email = emailContainer.textField.text!
             let password = passwordContainer.textField.text!
             let user = User(username: username, email: email, password: password)
-            Auth.shared.createAccount(user: user, onView: view) { (success, error) in
+            AuthManager.shared.createAccount(user: user, onView: view) { (success, error) in
                 if success {
-                    Auth.shared.pushHomeViewController(vc: self)
+                    AuthManager.shared.pushHomeViewController(vc: self)
                 }
             }
         }
@@ -78,7 +78,7 @@ extension SignUpVC {
             usernameContainer.layer.borderColor = validColor
         }
         // check email validation (2 layer)
-        if email.text == "" || !Auth.shared.isValidEmail(email.text!) {
+        if email.text == "" || !AuthManager.shared.isValidEmail(email.text!) {
             emailContainer.layer.borderColor = wrongColor
             Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
             return false

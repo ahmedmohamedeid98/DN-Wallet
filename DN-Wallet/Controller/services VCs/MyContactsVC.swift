@@ -23,7 +23,7 @@ class MyContactsVC: UIViewController {
 
     
     //MARK:- Properities
-    private var inSafeMode = Auth.shared.isAppInSafeMode
+    private var inSafeMode = AuthManager.shared.isAppInSafeMode
     
     var searchBar: UISearchBar!
     var contactTable: UITableView!
@@ -57,7 +57,7 @@ class MyContactsVC: UIViewController {
     }
     
     private func loadData() {
-        DNData.getUserConcats(onView: view) { (contacts, error) in
+        NetworkManager.getUserConcats(onView: view) { (contacts, error) in
             if error != nil {
                 return
             }
@@ -122,8 +122,8 @@ class MyContactsVC: UIViewController {
     @objc func addBtnPressed() {
         AddEditeAlert(actionName: K.alert.add, msg: K.vc.myContactEditMsg, uemail: nil) { (action) in
             if let email = self.alert.textFields![0].text {
-                if !email.isEmpty && Auth.shared.isValidEmail(email) {
-                    DNData.addNewContact(WithEmail: email, onView: self.view) { (success, id) in
+                if !email.isEmpty && AuthManager.shared.isValidEmail(email) {
+                    NetworkManager.addNewContact(WithEmail: email, onView: self.view) { (success, id) in
                         if success {
                             let newContact = Contact(username: String(email.split(separator: "@")[0]), email: email, id: id!, identifier: UUID().uuidString)
                             self.originDataSource.append(newContact)
@@ -249,7 +249,7 @@ extension MyContactsVC: UITableViewDelegate { //, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: K.alert.delete) { (action, view, completion) in
             var currentSnapshot = self.contactTableDataSource.snapshot()
             guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
-            DNData.deleteContact(withID: contact.id, onView: self.view) { (isSuccess) in
+            NetworkManager.deleteContact(withID: contact.id, onView: self.view) { (isSuccess) in
                 if isSuccess {
                     currentSnapshot.deleteItems([contact])
                     self.originDataSource.remove(at: indexPath.row)

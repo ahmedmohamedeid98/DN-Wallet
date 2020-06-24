@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !UserPreference.getBoolValue(withKey: UserPreference.firstLaunchKey) {
             // don't show guide screens again
             UserPreference.setValue(true, withKey: UserPreference.firstLaunchKey)
-            Auth.shared.canEvaluatePolicyWithFaceID()
+            AuthManager.shared.canEvaluatePolicyWithFaceID()
              window = UIWindow(windowScene: windowScene)
             // assign viewController
             let guideVC = ContainerViewController()

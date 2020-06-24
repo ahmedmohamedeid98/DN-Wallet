@@ -60,19 +60,20 @@ class AddPhoneNumberVC: UIViewController {
     }
     
     func showIndicator(_ hidden: Bool) {
-        if dropDownCountry.text != "" && phoneNumber.text != "" {
-            activityIndicatorContainer.isHidden = !hidden
-            hidden ? activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-            self.opt.isHidden = hidden
-            self.confirmCodeInfoMessage.isHidden = hidden
-        } else {
-            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.mode = .text
-            hud.detailsLabel.text = "phone number or country is missing, try again"
-            hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
-            hud.hide(animated: true, afterDelay: 3)
+        DispatchQueue.main.async {
+            if self.dropDownCountry.text != "" && self.phoneNumber.text != "" {
+                self.activityIndicatorContainer.isHidden = !hidden
+                hidden ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+                self.opt.isHidden = hidden
+                self.confirmCodeInfoMessage.isHidden = hidden
+            } else {
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                hud.mode = .text
+                hud.detailsLabel.text = "phone number or country is missing, try again"
+                hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
+                hud.hide(animated: true, afterDelay: 3)
+            }
         }
-        
     }
 
     @IBAction func backBtnPressed(_ sender: UIButton) {
@@ -84,12 +85,13 @@ class AddPhoneNumberVC: UIViewController {
             showIndicator(true)
             sendConfirmatioCodeOutlet.setTitle("resend confirmation message", for: .normal)
             completePhoneNumber = code + phoneNumber.text!
-            DNData.verifyPhone(number: completePhoneNumber ?? "wrongNumber") { (isSuccess) in
+            NetworkManager.verifyPhone(number: completePhoneNumber!) { (result) in
                 self.showIndicator(false)
-                if isSuccess {
-                    self.showHud(withMessage: "code send successfully", imgName: "checkmark")
-                } else {
-                    self.showHud(withMessage: "something was wrong, ensure that your number is correct.", imgName: "xmark")
+                switch result {
+                    case .success(_):
+                        self.showHud(withMessage: "code send successfully", imgName: "checkmark")
+                    case .failure(let error):
+                        self.showHud(withMessage: error.rawValue, imgName: "xmark")
                 }
             }
         }
@@ -127,15 +129,16 @@ extension AddPhoneNumberVC: GetOPTValuesProtocol {
     /// this function called after user enter the opt code
     func getOpt(with value: String) {
         showIndicator(true)
-        DNData.checkPhoneCode(number: completePhoneNumber ?? "wrongNumber" , code: value) { (isSuccess) in
+        NetworkManager.checkPhoneCode(number: completePhoneNumber ?? "wrongNumber" , code: value) { (result) in
             self.showIndicator(false)
-            if isSuccess {
-                self.opt.hideErrorMessgae()
-                self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
-            } else {
-                DispatchQueue.main.async {
-                    self.opt.reset()
-                    self.opt.showErrorMessgae()
+            switch result {
+                case .success(_):
+                    self.opt.hideErrorMessgae()
+                    self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        self.opt.reset()
+                        self.opt.showErrorMessgae()
                 }
             }
         }

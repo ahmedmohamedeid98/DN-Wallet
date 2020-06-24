@@ -31,7 +31,7 @@ class DonationDetailsVC: UIViewController {
     
     func loadData() {
         if let id = charityID {
-            DNData.getCharityOrganizationDetails(withID: id, onView: view) { (details, error) in
+            NetworkManager.getCharityOrganizationDetails(withID: id, onView: view) { (details, error) in
                 if let e = error {
                     print(e.localizedDescription)
                     return

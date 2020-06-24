@@ -179,7 +179,7 @@ extension SettingVC {
         let alert = UIAlertController(title: "Safe Mode Time", message: "Set safe mode time in (Hours) , we recommend you that time be at least 12 hours.", preferredStyle: .alert)
         let setAction = UIAlertAction(title: "Set", style: .default) { (action) in
             if let hours = alert.textFields![0].text {
-                Auth.shared.setSafeModeTime(hours: hours)
+                AuthManager.shared.setSafeModeTime(hours: hours)
                 self.settingTable.updateRowWith(indexPaths: [SecurityOptions.safeModeTime.indexPath], animate: .fade)
             }
         }

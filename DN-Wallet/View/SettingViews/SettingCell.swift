@@ -32,7 +32,7 @@ class SettingCell: UITableViewCell {
     }
     
     func setTime() {
-        descriptionLabel.text = "\(Auth.shared.getSafeModeTime()) hour"
+        descriptionLabel.text = "\(AuthManager.shared.getSafeModeTime()) hour"
     }
     
     func setLanguage() {
@@ -87,9 +87,9 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
-                Auth.shared.activeSafeMode()
+                AuthManager.shared.activeSafeMode()
             } else {
-                Auth.shared.deactiveSafeMode()
+                AuthManager.shared.deactiveSafeMode()
             }
         }
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {

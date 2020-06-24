@@ -19,7 +19,7 @@ class DonationCell: UITableViewCell {
             self.mail.text = safeData.email
             self.title.text = safeData.name
             self.id = safeData.id
-            DNData.loadImageWithStrURL(str: safeData.link) { (img, error) in
+            NetworkManager.loadImageWithStrURL(str: safeData.link) { (img, error) in
                 if error == nil {
                     DispatchQueue.main.async {
                         self.logo.image = img

@@ -191,7 +191,7 @@ class SendAndRequestMoney: UIViewController {
     }
     // check if all the faild is filled and if the email is valid
     private func isValidInputs() -> Bool {
-        return emailTextField.text != "" && Auth.shared.isValidEmail(emailTextField.text!) && amountTextField.text != "" && dropDown.text != ""
+        return emailTextField.text != "" && AuthManager.shared.isValidEmail(emailTextField.text!) && amountTextField.text != "" && dropDown.text != ""
     }
     
     // pop down keyboard when tap anyplace in the view
@@ -201,10 +201,10 @@ class SendAndRequestMoney: UIViewController {
     
     // add email to my contacts (also deak with api)
     @IBAction func addEmailToMyContacts(_ sender: UIButton) {
-        if emailTextField.text != "" && Auth.shared.isValidEmail(emailTextField.text!) {
+        if emailTextField.text != "" && AuthManager.shared.isValidEmail(emailTextField.text!) {
             // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
             if ["ahmed@gmail.com"].contains(emailTextField.text!) {
-                Auth.shared.buildAndPresentAlertWith(K.vc.myContactAlertEmailExist, message: K.vc.myContactAlertEmailExistMsg, viewController: self)
+                AuthManager.shared.buildAndPresentAlertWith(K.vc.myContactAlertEmailExist, message: K.vc.myContactAlertEmailExistMsg, viewController: self)
                 self.toggleAddContactButton(toDone: true)
             }
                 // if the email don't exist then add it and toggle addButton to done
@@ -228,7 +228,7 @@ class SendAndRequestMoney: UIViewController {
             
             emailTextField.endEditing(true)
         } else {
-            Auth.shared.buildAndPresentAlertWith(K.vc.sORrAlertInvalidEmail, message: K.vc.sORrAlertInvalidEmailMsg, viewController: self)
+            AuthManager.shared.buildAndPresentAlertWith(K.vc.sORrAlertInvalidEmail, message: K.vc.sORrAlertInvalidEmailMsg, viewController: self)
         }
     }
     /// change button image from addPerson to rightCheckMark and disable/enable it.
@@ -265,7 +265,7 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextField {
-            if textField.text != "" && Auth.shared.isValidEmail(textField.text!) {
+            if textField.text != "" && AuthManager.shared.isValidEmail(textField.text!) {
                 UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
                     DispatchQueue.main.async {
                         self.addContactBtnOutlet.isHidden = false

@@ -62,7 +62,7 @@ class SideMenuVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if Auth.shared.isAppInSafeMode {
+        if AuthManager.shared.isAppInSafeMode {
             isInSafeMode = true
             activeSettingButton(true) // deactive setting button if the app in safeMode else otherwise.
             serviceTable.reloadData()
@@ -122,7 +122,7 @@ class SideMenuVC: UIViewController {
     }
     
     @objc func logoutBtnWasPressed() {
-        Auth.shared.logout() // delete token before logout
+        AuthManager.shared.logout() // delete token before logout
         self.dismiss(animated: true, completion: nil)
     }
 }

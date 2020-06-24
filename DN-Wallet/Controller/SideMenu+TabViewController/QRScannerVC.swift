@@ -40,7 +40,7 @@ class QRScannerVC: UIViewController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let accept = UIAlertAction(title: "Accept", style: .default) { (action) in
             // try to send money to the user email
-            DNData.transactionAmount(amount, to: email) { (success, error) in
+            NetworkManager.transactionAmount(amount, to: email) { (success, error) in
                 if success {
                     Alert.asyncSuccessfullWith("Successful transaction process", dismissAfter: 1.0, viewController: self)
                     let detail = HistoryCategory(email: email,
@@ -49,7 +49,7 @@ class QRScannerVC: UIViewController {
                                                  date: Utile.currentDate,
                                                  category: Category.send.identifier,
                                                  innerCategory: InnerCategory.other.identitfer)
-                    DNData.addTransactionToHistoryWith(details: detail) { (success, error) in
+                    NetworkManager.addTransactionToHistoryWith(details: detail) { (success, error) in
                         if success {
                             // do nothing
                         }else {
@@ -71,7 +71,7 @@ class QRScannerVC: UIViewController {
 extension QRScannerVC: QRScannerViewDelegate {
     
     func qrScanningDidFail() {
-        Auth.shared.buildAndPresentAlertWith("Error", message: "Scanning Failed. Please try again", viewController: self)
+        AuthManager.shared.buildAndPresentAlertWith("Error", message: "Scanning Failed. Please try again", viewController: self)
     }
     
     func qrScanningSucceededWithCode(_ str: String?) {

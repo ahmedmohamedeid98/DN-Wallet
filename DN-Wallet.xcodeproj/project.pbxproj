@@ -77,10 +77,10 @@
 		048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F15243B5ED600BE464D /* PrivacyVC.swift */; };
 		048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F17243B5F8B00BE464D /* PrivacySection.swift */; };
 		048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F19243B6F9D00BE464D /* PrivacyCell.swift */; };
-		048D56432429D895008A8925 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56422429D895008A8925 /* Auth.swift */; };
+		048D56432429D895008A8925 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56422429D895008A8925 /* AuthManager.swift */; };
 		048D56452429E701008A8925 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56442429E701008A8925 /* Register.swift */; };
 		048DFBFB244E6591001DF711 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DFBFA244E6591001DF711 /* QRScannerView.swift */; };
-		0491D856240E3A330014E34C /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* extension.swift */; };
+		0491D856240E3A330014E34C /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491D855240E3A330014E34C /* UIButton+Ext.swift */; };
 		0493A843244F6BCD00F4B659 /* UserPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0493A842244F6BCD00F4B659 /* UserPreference.swift */; };
 		0495D1CE2414511600796499 /* ConfirmEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495D1CD2414511600796499 /* ConfirmEmailVC.swift */; };
 		0498940D241D7A9F00E32B34 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498940C241D7A9F00E32B34 /* History.swift */; };
@@ -90,21 +90,31 @@
 		04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70224282E7100628AA3 /* Authentication.storyboard */; };
 		04A8D70624282F9700628AA3 /* Services.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A8D70824282F9700628AA3 /* Services.storyboard */; };
 		04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3A2F244279E40011E4E0 /* SendAndRequesMoneyVC.swift */; };
+		04AFBC1F24A24848007B544F /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC1E24A24848007B544F /* UIColor+Ext.swift */; };
+		04AFBC2124A2486F007B544F /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2024A2486F007B544F /* UIView+Ext.swift */; };
+		04AFBC2324A248CA007B544F /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2224A248CA007B544F /* UIViewController+Ext.swift */; };
+		04AFBC2524A248E4007B544F /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2424A248E4007B544F /* UITextField+Ext.swift */; };
+		04AFBC2724A249E0007B544F /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2624A249E0007B544F /* UILabel+Ext.swift */; };
+		04AFBC2924A249F2007B544F /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2824A249F2007B544F /* UIFont+Ext.swift */; };
+		04AFBC2B24A24A05007B544F /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2A24A24A05007B544F /* UITableView+Ext.swift */; };
+		04AFBC2D24A24A18007B544F /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2C24A24A18007B544F /* UIStackView+Ext.swift */; };
+		04AFBC2F24A24B2D007B544F /* DNTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC2E24A24B2D007B544F /* DNTitleLabel.swift */; };
+		04AFBC3124A254A7007B544F /* DNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC3024A254A6007B544F /* DNTextField.swift */; };
+		04AFBC3324A25934007B544F /* DNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC3224A25934007B544F /* DNTextView.swift */; };
+		04AFBC3524A26480007B544F /* DNEmptyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC3424A26480007B544F /* DNEmptyContainer.swift */; };
+		04AFBC3724A2AA44007B544F /* DNError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFBC3624A2AA44007B544F /* DNError.swift */; };
 		04B10255242E763F00E17792 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B10254242E763F00E17792 /* Contact.swift */; };
 		04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90C2422C64B0062D54F /* DonationVC.swift */; };
 		04B1C90F2422C7760062D54F /* DonationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C90E2422C7760062D54F /* DonationCell.swift */; };
 		04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */; };
 		04B7688E248963100094ECAE /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7688C248963100094ECAE /* EditAccountVC.swift */; };
-		04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE67324467014003BCAC9 /* CurrencyCell.swift */; };
 		04CC0E83247B1E3F00357193 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */; };
-		04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* DNData.swift */; };
+		04DB8842242C5BC6007BA6B0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB8841242C5BC6007BA6B0 /* NetworkManager.swift */; };
 		04E6307E247148330026589E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6307D247148300026589E /* Constants.swift */; };
 		04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */; };
 		04E8ED5024812AE800DE0E0F /* DonationDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */; };
 		04E9448C2412D524000EA14B /* AddPhoneNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* AddPhoneNumberVC.swift */; };
 		04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD28C324256D6B00E41EAC /* CharityOrg.swift */; };
-		04FED9D62447289C00EDD0EF /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */; };
-		04FED9DA244757CE00EDD0EF /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FED9D9244757CE00EDD0EF /* SliderCell.swift */; };
 		9EFE329628E366D3614791F8 /* Pods_DN_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B1CD7912152245F3C6C743 /* Pods_DN_Wallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,10 +191,10 @@
 		048D2F15243B5ED600BE464D /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
 		048D2F17243B5F8B00BE464D /* PrivacySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySection.swift; sourceTree = "<group>"; };
 		048D2F19243B6F9D00BE464D /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
-		048D56422429D895008A8925 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		048D56422429D895008A8925 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		048D56442429E701008A8925 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		048DFBFA244E6591001DF711 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
-		0491D855240E3A330014E34C /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		0491D855240E3A330014E34C /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		0493A842244F6BCD00F4B659 /* UserPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreference.swift; sourceTree = "<group>"; };
 		0495D1CD2414511600796499 /* ConfirmEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailVC.swift; sourceTree = "<group>"; };
 		0498940C241D7A9F00E32B34 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -195,21 +205,31 @@
 		04A8D70324282E8100628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		04A8D70724282F9700628AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Services.storyboard; sourceTree = "<group>"; };
 		04AA3A2F244279E40011E4E0 /* SendAndRequesMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAndRequesMoneyVC.swift; sourceTree = "<group>"; };
+		04AFBC1E24A24848007B544F /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2024A2486F007B544F /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2224A248CA007B544F /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2424A248E4007B544F /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2624A249E0007B544F /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2824A249F2007B544F /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2A24A24A05007B544F /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2C24A24A18007B544F /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
+		04AFBC2E24A24B2D007B544F /* DNTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTitleLabel.swift; sourceTree = "<group>"; };
+		04AFBC3024A254A6007B544F /* DNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTextField.swift; sourceTree = "<group>"; };
+		04AFBC3224A25934007B544F /* DNTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTextView.swift; sourceTree = "<group>"; };
+		04AFBC3424A26480007B544F /* DNEmptyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNEmptyContainer.swift; sourceTree = "<group>"; };
+		04AFBC3624A2AA44007B544F /* DNError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNError.swift; sourceTree = "<group>"; };
 		04B10254242E763F00E17792 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		04B1C90C2422C64B0062D54F /* DonationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationVC.swift; sourceTree = "<group>"; };
 		04B1C90E2422C7760062D54F /* DonationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationCell.swift; sourceTree = "<group>"; };
 		04B1C9102422D94F0062D54F /* DonationDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsVC.swift; sourceTree = "<group>"; };
 		04B7688C248963100094ECAE /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
-		04BDE67324467014003BCAC9 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		04CC0E82247B1E3F00357193 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
-		04DB8841242C5BC6007BA6B0 /* DNData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNData.swift; sourceTree = "<group>"; };
+		04DB8841242C5BC6007BA6B0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		04E6307D247148300026589E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsCell.swift; sourceTree = "<group>"; };
 		04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonationDetailsCell.xib; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* AddPhoneNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhoneNumberVC.swift; sourceTree = "<group>"; };
 		04FD28C324256D6B00E41EAC /* CharityOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharityOrg.swift; sourceTree = "<group>"; };
-		04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
-		04FED9D9244757CE00EDD0EF /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		517E0ED55DC404ABB1BACDA5 /* Pods-DN-Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DN-Wallet.debug.xcconfig"; path = "Target Support Files/Pods-DN-Wallet/Pods-DN-Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		83B1CD7912152245F3C6C743 /* Pods_DN_Wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DN_Wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5019DA0B2992BB024B6C88 /* Pods-DN-Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DN-Wallet.release.xcconfig"; path = "Target Support Files/Pods-DN-Wallet/Pods-DN-Wallet.release.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +300,10 @@
 			children = (
 				042DC04C2486C7070054E911 /* SAButton.swift */,
 				042DC04E2486F0520054E911 /* SAImageView.swift */,
+				04AFBC2E24A24B2D007B544F /* DNTitleLabel.swift */,
+				04AFBC3024A254A6007B544F /* DNTextField.swift */,
+				04AFBC3224A25934007B544F /* DNTextView.swift */,
+				04AFBC3424A26480007B544F /* DNEmptyContainer.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -314,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				045A2FB5241C061300A0C643 /* Utilities.swift */,
+				04AFBC3624A2AA44007B544F /* DNError.swift */,
 			);
 			path = uitilized;
 			sourceTree = "<group>";
@@ -397,8 +422,8 @@
 		04792AE92409FF3500F781D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0449A5F12498B45D00E6BF35 /* homeViews */,
 				042DC04B2486C6620054E911 /* custom */,
+				0449A5F12498B45D00E6BF35 /* homeViews */,
 				045EC5E4244F96500030FAE9 /* Alerts */,
 				04BDE67224466FC4003BCAC9 /* tabViews */,
 				047A49F4243AE02B0077A954 /* SettingViews */,
@@ -484,7 +509,7 @@
 		0487D2F0247DAF830020F1EB /* auth */ = {
 			isa = PBXGroup;
 			children = (
-				048D56422429D895008A8925 /* Auth.swift */,
+				048D56422429D895008A8925 /* AuthManager.swift */,
 				048D56442429E701008A8925 /* Register.swift */,
 				04161474242E348800782332 /* Login.swift */,
 			);
@@ -494,7 +519,7 @@
 		048D563F2429D063008A8925 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				04DB8841242C5BC6007BA6B0 /* DNData.swift */,
+				04DB8841242C5BC6007BA6B0 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -528,7 +553,15 @@
 		0491D854240E3A050014E34C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0491D855240E3A330014E34C /* extension.swift */,
+				0491D855240E3A330014E34C /* UIButton+Ext.swift */,
+				04AFBC1E24A24848007B544F /* UIColor+Ext.swift */,
+				04AFBC2024A2486F007B544F /* UIView+Ext.swift */,
+				04AFBC2224A248CA007B544F /* UIViewController+Ext.swift */,
+				04AFBC2424A248E4007B544F /* UITextField+Ext.swift */,
+				04AFBC2624A249E0007B544F /* UILabel+Ext.swift */,
+				04AFBC2824A249F2007B544F /* UIFont+Ext.swift */,
+				04AFBC2A24A24A05007B544F /* UITableView+Ext.swift */,
+				04AFBC2C24A24A18007B544F /* UIStackView+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -573,9 +606,6 @@
 		04BDE67224466FC4003BCAC9 /* tabViews */ = {
 			isa = PBXGroup;
 			children = (
-				04BDE67324467014003BCAC9 /* CurrencyCell.swift */,
-				04FED9D52447289C00EDD0EF /* CollectionViewHeader.swift */,
-				04FED9D9244757CE00EDD0EF /* SliderCell.swift */,
 				048DFBFA244E6591001DF711 /* QRScannerView.swift */,
 				043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */,
 				0487D2EC247D58850020F1EB /* NotificationCell.swift */,
@@ -743,13 +773,15 @@
 				040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */,
 				041046C9243E661F0043CA77 /* SideMenuVC.swift in Sources */,
 				048D56452429E701008A8925 /* Register.swift in Sources */,
-				0491D856240E3A330014E34C /* extension.swift in Sources */,
+				0491D856240E3A330014E34C /* UIButton+Ext.swift in Sources */,
 				0456C357246398930018BE66 /* CurrentDateComponent.swift in Sources */,
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
 				04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */,
 				0493A843244F6BCD00F4B659 /* UserPreference.swift in Sources */,
 				048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */,
+				04AFBC3524A26480007B544F /* DNEmptyContainer.swift in Sources */,
 				048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */,
+				04AFBC2324A248CA007B544F /* UIViewController+Ext.swift in Sources */,
 				04792AF3240B1EE300F781D8 /* PayVC.swift in Sources */,
 				0411E582245B921A00EBBCF5 /* DonationDetailsSection.swift in Sources */,
 				040F754C245E682000B66A02 /* PopUpMenu.swift in Sources */,
@@ -757,21 +789,21 @@
 				04E6307E247148330026589E /* Constants.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
-				04BDE67424467014003BCAC9 /* CurrencyCell.swift in Sources */,
 				0495D1CE2414511600796499 /* ConfirmEmailVC.swift in Sources */,
-				04FED9DA244757CE00EDD0EF /* SliderCell.swift in Sources */,
+				04AFBC1F24A24848007B544F /* UIColor+Ext.swift in Sources */,
 				042DC04F2486F0520054E911 /* SAImageView.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
+				04AFBC2924A249F2007B544F /* UIFont+Ext.swift in Sources */,
 				0449A5FC2498B5B900E6BF35 /* PartenerTableViewCell.swift in Sources */,
 				0449A6002498B5F100E6BF35 /* BalanceTableViewCell.swift in Sources */,
 				043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
 				047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* SignUpVC.swift in Sources */,
-				04FED9D62447289C00EDD0EF /* CollectionViewHeader.swift in Sources */,
 				043B7ED024623AE400F2D037 /* ChargeCreditCell.swift in Sources */,
-				048D56432429D895008A8925 /* Auth.swift in Sources */,
+				048D56432429D895008A8925 /* AuthManager.swift in Sources */,
 				0498940D241D7A9F00E32B34 /* History.swift in Sources */,
+				04AFBC2D24A24A18007B544F /* UIStackView+Ext.swift in Sources */,
 				0465C6CE2421BD110032506D /* ExchangeCurrencyVC.swift in Sources */,
 				040EF4E6248EF6F200DD29F2 /* HistoryDetailsCell.swift in Sources */,
 				04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */,
@@ -779,6 +811,7 @@
 				0449A5F42498B4FC00E6BF35 /* PartenerCollectionCell.swift in Sources */,
 				047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */,
 				045A2FB1241BFAFF00A0C643 /* HistoryVC.swift in Sources */,
+				04AFBC2124A2486F007B544F /* UIView+Ext.swift in Sources */,
 				04161475242E348800782332 /* Login.swift in Sources */,
 				0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */,
 				0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */,
@@ -789,7 +822,7 @@
 				046D4C5C24313A7B001D1463 /* DataViewController.swift in Sources */,
 				0401BBD7247C8143000C597A /* Message.swift in Sources */,
 				047FA8BA240E36440097DD06 /* userInput.swift in Sources */,
-				04DB8842242C5BC6007BA6B0 /* DNData.swift in Sources */,
+				04DB8842242C5BC6007BA6B0 /* NetworkManager.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
 				04E9448C2412D524000EA14B /* AddPhoneNumberVC.swift in Sources */,
 				047040CA242050B800BBAAF5 /* PaymentCard.swift in Sources */,
@@ -797,21 +830,27 @@
 				047040C224202BDF00BBAAF5 /* HDetails.swift in Sources */,
 				04B1C9112422D94F0062D54F /* DonationDetailsVC.swift in Sources */,
 				0465C6A624211D300032506D /* Currency.swift in Sources */,
+				04AFBC2724A249E0007B544F /* UILabel+Ext.swift in Sources */,
 				047E11D2242E888700E1295B /* AccountInfo.swift in Sources */,
 				046732B824198EFE00DD436D /* FPEnterEmailVC.swift in Sources */,
 				04161477242E3FBF00782332 /* User.swift in Sources */,
+				04AFBC2B24A24A05007B544F /* UITableView+Ext.swift in Sources */,
 				0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */,
+				04AFBC3124A254A7007B544F /* DNTextField.swift in Sources */,
 				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
 				045EC5E6244F96780030FAE9 /* Alert.swift in Sources */,
+				04AFBC2524A248E4007B544F /* UITextField+Ext.swift in Sources */,
 				047A49F6243AE0F20077A954 /* UserQuikDetails.swift in Sources */,
 				04659B08243D0A0100E4BFA2 /* ChangePasswordVC.swift in Sources */,
 				04AA3A30244279E40011E4E0 /* SendAndRequesMoneyVC.swift in Sources */,
 				04792AD32409FE8F00F781D8 /* AppDelegate.swift in Sources */,
 				046D4C5A24313A3F001D1463 /* PageViewController.swift in Sources */,
 				042DC04D2486C7070054E911 /* SAButton.swift in Sources */,
+				04AFBC2F24A24B2D007B544F /* DNTitleLabel.swift in Sources */,
 				04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
 				04A5A530243FA87B000340FB /* ServiceSection.swift in Sources */,
+				04AFBC3724A2AA44007B544F /* DNError.swift in Sources */,
 				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
@@ -819,6 +858,7 @@
 				040EF4E9248F245600DD29F2 /* Hud.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
 				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,
+				04AFBC3324A25934007B544F /* DNTextView.swift in Sources */,
 				041046C5243E65CD0043CA77 /* ContainerVC.swift in Sources */,
 				0401BBD3247C7493000C597A /* NotificationVC.swift in Sources */,
 			);

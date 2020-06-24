@@ -89,7 +89,7 @@ class AddHeirVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        DNData.getUserHeirs(onView: view) { (heirs, error) in
+        NetworkManager.getUserHeirs(onView: view) { (heirs, error) in
             if error != nil {
                 print("Error: \(String(describing: error))")
             } else {

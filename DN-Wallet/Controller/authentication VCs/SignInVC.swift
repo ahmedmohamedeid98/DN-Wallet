@@ -14,7 +14,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var emailCV: userInput!
     @IBOutlet weak var passwordCV: userInput!
     @IBOutlet weak var signInOutlet: UIButton!
-    var loginWithFaceIDButton = SAButton(backgroundColor: .DnColor, title: "   Login With FaceID", systemTitle: "faceid")
+    var loginWithFaceIDButton = SAButton(backgroundColor: .DnColor, title: "   Login With FaceID", cornerRedii: 25.0, systemTitle: "faceid")
     var FaceIdFounded: Bool = false
     var TouchIdFounded: Bool = false
     var LoginWithBiometric: Bool = false
@@ -30,7 +30,7 @@ class SignInVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailCV.textField.text = Auth.shared.getUserEmail()
+        emailCV.textField.text = AuthManager.shared.getUserEmail()
         passwordCV.textField.text = ""
     }
 
@@ -41,7 +41,7 @@ class SignInVC: UIViewController {
             loginWithFaceIDButton.withTarget = { [weak self] () in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
-                    Auth.shared.loginWithBiometric(viewController: self, view: self.view)
+                    AuthManager.shared.loginWithBiometric(viewController: self, view: self.view)
                 }
             }
         }
@@ -62,11 +62,11 @@ class SignInVC: UIViewController {
         // if no FaceID then try login with touchID
         TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
         if TouchIdFounded {
-            Auth.shared.loginWithBiometric(viewController: self, view: view)
+            AuthManager.shared.loginWithBiometric(viewController: self, view: view)
             return false
         }
         // go and evaluate if the app support FaceID or Touch ID
-        Auth.shared.canEvaluatePolicyWithFaceID()
+        AuthManager.shared.canEvaluatePolicyWithFaceID()
         return false
     }
     
@@ -94,13 +94,13 @@ class SignInVC: UIViewController {
 //
 ////        //TEST TRST
 ////
-        Auth.shared.pushHomeViewController(vc: self)
+        AuthManager.shared.pushHomeViewController(vc: self)
         return
 ////        // End TEST
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!
             let password = passwordCV.textField.text!
-            if !Auth.shared.isValidEmail(email) {
+            if !AuthManager.shared.isValidEmail(email) {
                 Hud.InvalidEmailText(onView: view)
                 return
             }
@@ -108,9 +108,9 @@ class SignInVC: UIViewController {
                 Hud.InvalidPasswordText(onView: view)
                 return
             }
-            Auth.shared.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
+            AuthManager.shared.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
                 if success {
-                    Auth.shared.pushHomeViewController(vc: self)
+                    AuthManager.shared.pushHomeViewController(vc: self)
                 }
             }
         }
@@ -118,9 +118,7 @@ class SignInVC: UIViewController {
     // add loginWithFaceIDButton buttom to view, this method will fired if FaceID option exist.
     func setupLoginWithFaceIDLayout() {
         view.addSubview(loginWithFaceIDButton)
-        let loginWithFaceIdHeight: CGFloat = 50
-        loginWithFaceIDButton.DNLayoutConstraint(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 40, bottom: 20, right: loginWithFaceIdHeight), size: CGSize(width: 0, height: 50))
-        loginWithFaceIDButton.setCornerRadiusWithHeight = loginWithFaceIdHeight
+        loginWithFaceIDButton.DNLayoutConstraint(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 50), size: CGSize(width: 0, height: 50))
     }
     
 }

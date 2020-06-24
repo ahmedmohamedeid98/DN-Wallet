@@ -39,7 +39,7 @@ class DonationVC: UIViewController {
     }
     
     func loadData() {
-        DNData.getCharityOrganizationInitialData(onView: view) { (charityList, error) in
+        NetworkManager.getCharityOrganizationInitialData(onView: view) { (charityList, error) in
             if error == nil {
                 self.originDataSource = charityList
                 self.currentDataSource = self.originDataSource

@@ -28,7 +28,7 @@ class SaleVC: UIViewController {
     
     fileprivate func initViewController() {
         handleNavigationBar()
-        email.text = Auth.shared.getUserEmail() ?? "ahmedmohamedeid98@gmail.com"
+        email.text = AuthManager.shared.getUserEmail() ?? "ahmedmohamedeid98@gmail.com"
         
         if let filePath = exist(fileName: keys.qrCodeFileName) {
             // load image from filePath and show it to ui
@@ -77,14 +77,14 @@ class SaleVC: UIViewController {
     @objc func downlaodQRCodeBtn(_ sender: Any) {
         if let _ = exist(fileName: keys.qrCodeFileName) {
             // Image is already Downloaded or save automatically by the app
-            Auth.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
+            AuthManager.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
             print("file exist ::2")
         } else {
             if let _ = save(fileName: keys.qrCodeFileName) {
-                Auth.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage saved successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
+                AuthManager.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage saved successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
                 print("file save ::1")
             }else {
-                Auth.shared.buildAndPresentAlertWith("faild saving", message: "faild to save image, try again.", viewController: self)
+                AuthManager.shared.buildAndPresentAlertWith("faild saving", message: "faild to save image, try again.", viewController: self)
                 print("file faild to save ::2")
             }
         }

@@ -80,7 +80,7 @@ class HomeVC: UIViewController {
     }
 
     func initViewController() {
-        Auth.shared.deactiveSafeMode()
+        AuthManager.shared.deactiveSafeMode()
         configureNavgationBar()
         setupTableView()
         setupLayout()

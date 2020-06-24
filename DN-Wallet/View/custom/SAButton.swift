@@ -13,23 +13,19 @@ protocol SAButtonDelegate: class {
 final class SAButton: UIButton {
     
     var withTarget:(()->())?
-    var setCornerRadiusWithHeight: CGFloat = 20.0 {
-        didSet {
-            self.layer.cornerRadius = setCornerRadiusWithHeight / 2
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    convenience init(backgroundColor: UIColor, title: String? = nil, systemTitle: String? = nil, assetsTitle: String? = nil) {
+    convenience init(backgroundColor: UIColor, title: String? = nil, cornerRedii: CGFloat = 0.0, systemTitle: String? = nil, assetsTitle: String? = nil) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
         if title != nil {
             self.setTitle(title!, for: .normal)
         }
+        self.layer.cornerRadius = cornerRedii
         self.setSAImage(systemTitle: systemTitle, assestTitle: assetsTitle)
     }
     required init?(coder: NSCoder) {

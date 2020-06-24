@@ -11,8 +11,8 @@ import UIKit
 class PayVC: UIViewController {
 
     //MARK:- Properities
-    private var inSafeMode = Auth.shared.isAppInSafeMode
-    private var allowedAmount = Auth.shared.allowedAmountInSafeMode
+    private var inSafeMode = AuthManager.shared.isAppInSafeMode
+    private var allowedAmount = AuthManager.shared.allowedAmountInSafeMode
     private var actualBalance: Balance?
     // this value come from ContainerVC
     var userBalance: [Balance] = []
@@ -95,7 +95,7 @@ class PayVC: UIViewController {
                 if inSafeMode {
                     let newAmount = Int(allowedAmount - enteredBalance.amount)
                     allowedAmount = Double(newAmount)
-                    Auth.shared.updateAllowedAmoundInSafeMode(with: newAmount)
+                    AuthManager.shared.updateAllowedAmoundInSafeMode(with: newAmount)
                 }
                 preformScanOperation(with: enteredBalance)
             } else {

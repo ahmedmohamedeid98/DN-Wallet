@@ -16,7 +16,7 @@ struct ErrorResponse: Codable {
 }
 
 
-final class DNData {
+final class NetworkManager {
     
      //MARK:- Properities
     
@@ -90,30 +90,40 @@ final class DNData {
     // Verify Phone number
     //====================================
     
-    class func verifyPhone(number: String, completion: @escaping (Bool) -> () ) {
+    class func verifyPhone(number: String, completion: @escaping (Result<Bool, DNError>) -> () ) {
         var request = URLRequest(url: Endpoint.phoneVerify.url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(Auth.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
+        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
         request.httpBody = try! JSONSerialization.data(withJSONObject: ["phoneNumber": number])
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                completion(false)
+            if let _ = error {
+                completion(.failure(.unableToComplete))
                 return
             }
-            if let safeData = data {
-                print("DDT1: \(String(describing: String(data: safeData, encoding: .utf8)))")
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let safeData = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            print("DDT1: \(String(describing: String(data: safeData, encoding: .utf8)))")
+            
+            do {
                 let decoder = JSONDecoder()
-                do {
-                    let res = try decoder.decode(ErrorResponse.self, from: safeData)
-                    if res.error == nil {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                } catch {
-                    completion(false)
+                let res = try decoder.decode(ErrorResponse.self, from: safeData)
+                if res.error == nil {
+                    completion(.success(true))
+                } else {
+                    completion(.failure(.invalidPhoneNumber))
                 }
+            } catch {
+                completion(.failure(.invalidData))
             }
         }
         task.resume()
@@ -123,30 +133,37 @@ final class DNData {
     // check opt code for phone number
     //====================================
     
-    class func checkPhoneCode(number: String, code: String, completion: @escaping (Bool) -> () ) {
+    class func checkPhoneCode(number: String, code: String, completion: @escaping (Result<Bool, DNError>) -> () ) {
         var request = URLRequest(url: Endpoint.phoneVerify.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(Auth.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
+        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
         request.httpBody = try! JSONSerialization.data(withJSONObject: ["phoneNumber": number, "code": code])
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                completion(false)
+            if let _ = error {
+                completion(.failure(.unableToComplete))
                 return
             }
-            if let safeData = data {
-                print("DDT2: \(String(describing: String(data: safeData, encoding: .utf8)))")
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            guard let safeData = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            print("DDT2: \(String(describing: String(data: safeData, encoding: .utf8)))")
+            
+            do {
                 let decoder = JSONDecoder()
-                do {
-                    let res = try decoder.decode(ErrorResponse.self, from: safeData)
-                    if res.error == nil {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                } catch {
-                    completion(false)
+                let res = try decoder.decode(ErrorResponse.self, from: safeData)
+                if res.error == nil {
+                    completion(.success(true))
+                } else {
+                    completion(.failure(.invalidCode))
                 }
+            } catch {
+                completion(.failure(.invalidData))
             }
         }
         task.resume()
@@ -225,7 +242,7 @@ final class DNData {
         var request = URLRequest(url: Endpoint.createContact.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(Auth.shared.getUserToken(), forHTTPHeaderField: "x-auth-token")
+        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "x-auth-token")
         request.httpBody = try! JSONEncoder().encode(data)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -262,7 +279,7 @@ final class DNData {
     }
     class func deleteContact(withID id: String, onView view: UIView, completion: @escaping(Bool) -> () ) {
         var request = URLRequest(url: Endpoint.deleteContact(id).url)
-        let token = Auth.shared.getUserToken()
+        let token = AuthManager.shared.getUserToken()
         request.httpMethod = "DELETE"
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         Hud.showLoadingHud(onView: view, withLabel: "Deleting...")
@@ -309,7 +326,7 @@ final class DNData {
     //====================================
     class func getCharityOrganizationInitialData(onView view: UIView, completion: @escaping([Charity], Error?)-> Void) {
         var request = URLRequest(url: Endpoint.charity.url)
-        let token = Auth.shared.getUserToken()
+        let token = AuthManager.shared.getUserToken()
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         request.httpMethod = "GET"
         Hud.showLoadingHud(onView: view)
@@ -359,7 +376,7 @@ final class DNData {
     //====================================
     class func loadImageWithStrURL(str: String, completion: @escaping (UIImage?, Error?) -> () ) {
         let url = URL(string: str)!
-        if let image = DNData.imageCache.object(forKey: str as AnyObject) {
+        if let image = NetworkManager.imageCache.object(forKey: str as AnyObject) {
             completion(image, nil)
             return
         }
@@ -370,7 +387,7 @@ final class DNData {
             }
             if let safeData = data {
                 if let image = UIImage(data: safeData) {
-                    DNData.imageCache.setObject(image, forKey: str as AnyObject)
+                    NetworkManager.imageCache.setObject(image, forKey: str as AnyObject)
                     completion(image, nil)
                 } else {
                     let error: Error = "faild unwrapping image"
@@ -442,7 +459,7 @@ final class DNData {
     
     class func taskForGETRequestWithToken<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping(ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
-        let token = Auth.shared.getUserToken()
+        let token = AuthManager.shared.getUserToken()
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in

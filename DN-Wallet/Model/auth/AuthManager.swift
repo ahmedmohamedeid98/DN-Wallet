@@ -26,9 +26,9 @@ struct keys {
 // MARK:- Setup Authentication calss
 
 /// Login, SignUp and get user's information from keychain
-class Auth {
+class AuthManager {
     
-    static let shared = Auth()
+    static let shared = AuthManager()
     let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     
     /// check iphone's boimetric typr
@@ -70,7 +70,7 @@ class Auth {
         }else {
             // ask user to enrolled his local authentication (enroll faceid or touch id)
            DispatchQueue.main.async {
-                Auth.shared.enableBiometricAuthAlert(viewController: vc)
+                AuthManager.shared.enableBiometricAuthAlert(viewController: vc)
             }
         }
     }
@@ -84,7 +84,7 @@ class Auth {
     func authWithUserCredential(credintial: Login,onView view: UIView, completion: @escaping (Bool, Error?)->Void) {
         let data = Login(email: credintial.email,
                          password: credintial.password)
-        DNData.login(credintial: data, onView: view) { (response, error) in
+        NetworkManager.login(credintial: data, onView: view) { (response, error) in
             if let e = error {
                 completion(false, e)
                 
@@ -107,7 +107,7 @@ class Auth {
                             email: user.email,
                             password: user.password,
                             confirm_password: user.password)
-        DNData.register(with: data, onView: view) { [weak self] (response, error) in
+        NetworkManager.register(with: data, onView: view) { [weak self] (response, error) in
             guard let self = self else { return }
             if let response = response {
                 self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
@@ -240,7 +240,7 @@ class Auth {
     
 }
  //MARK:- Safe Mode Methods
-extension Auth {
+extension AuthManager {
     // check if the app in safe mode or not
     var isAppInSafeMode: Bool {
         get {

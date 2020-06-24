@@ -10,46 +10,55 @@ import UIKit
 
 class passwordContainer: UIView {
 
+    //MARK:- Properities
     private var showPasswordBtn = UIButton(type: .system)
-    
-    private var eyeImage: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(systemName: "eye")
-        img.contentMode = .scaleAspectFit
-        img.clipsToBounds = true
-        img.tintColor = .gray
-        return img
-    }()
-    
+    private var eyeImage = SAImageView(title: "eye", tintColor: .gray, contentMode: .scaleAspectFit, isSystemImage: true)
     private var toggleShow: Bool = true
+    var textField = DNTextField(placeholder: "Password", stopSmartActions: true, isSecure: true)
+    var text: String? { return textField.text }
     
-    var textField : UITextField = {
-        let txt = UITextField()
-        txt.placeholder = "New Password"
-        txt.textColor = .DnColor
-        txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.stopSmartActions()
-        txt.isSecureTextEntry = true
-        txt.backgroundColor = .DnCellColor
-        return txt
-    }()
     
-    fileprivate func setupLayout() {
+    //MARK:- Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    init(placeholder: String) {
+        super.init(frame: .zero)
+        textField.placeholder = placeholder
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    //MARK:- Configure View
+    private func configureTextField() {
         addSubview(textField)
-        addSubview(showPasswordBtn)
-        addSubview(eyeImage)
-        
-        eyeImage.DNLayoutConstraint(topAnchor, left: nil, right: rightAnchor, bottom: bottomAnchor, margins: .zero, size: CGSize(width: 30, height: 0))
-        showPasswordBtn.DNLayoutConstraint(eyeImage.topAnchor, left: eyeImage.leftAnchor, right: eyeImage.rightAnchor, bottom: eyeImage.bottomAnchor)
         textField.DNLayoutConstraint(topAnchor, left: leftAnchor, right: showPasswordBtn.leftAnchor, bottom: bottomAnchor, margins: .zero, size: .zero)
     }
-    
-    fileprivate func commonInit() {
-        setupLayout()
+    private func configureShowToggleButton() {
         showPasswordBtn.addTarget(self, action: #selector(toggleImage), for: .touchUpInside)
+        addSubview(showPasswordBtn)
+        showPasswordBtn.DNLayoutConstraint(eyeImage.topAnchor, left: eyeImage.leftAnchor, right: eyeImage.rightAnchor, bottom: eyeImage.bottomAnchor)
     }
     
-    @objc func toggleImage() {
+    private func configureEyeImage() {
+        addSubview(eyeImage)
+        eyeImage.DNLayoutConstraint(topAnchor, left: nil, right: rightAnchor, bottom: bottomAnchor, margins: .zero, size: CGSize(width: 30, height: 0))
+    }
+    
+    private func configure() {
+        configureEyeImage()
+        configureShowToggleButton()
+        configureTextField()
+    }
+    
+    @objc private func toggleImage() {
         
         if toggleShow {
             eyeImage.image = UIImage(systemName: "eye.slash")
@@ -62,20 +71,4 @@ class passwordContainer: UIView {
             print("it is secure password")
         }
     }
-    
-    func configureTxtFeild(placeholder: String){
-        textField.placeholder = placeholder
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-
 }
