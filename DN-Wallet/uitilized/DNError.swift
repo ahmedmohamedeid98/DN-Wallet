@@ -14,4 +14,5 @@ enum DNError: String, Error {
     case invalidData        = "The data received from the server was invalid, please try again."
     case invalidCode        = "Invalid Code, please try again."
     case invalidPhoneNumber = "Invalid Phone number, please enter a vaild phone number."
+    case invalidToSendCode  = "Failure to send confirmation Code, please try again."
 }

@@ -1,5 +1,5 @@
 //
-//  userInput.swift
+//  DNViewWithTextField.swift
 //  DN-Wallet
 //
 //  Created by Ahmed Eid on 3/2/20.
@@ -8,38 +8,32 @@
 
 import UIKit
 
-class userInput: UIView {
+class DNViewWithTextField: UIView {
 
-    let image = SAImageView(tintColor: .DnGrayColor)
     
-    let seperatorLine: UIView = {
-        let sepLine = UIView()
-        sepLine.backgroundColor = .DnGrayColor
-        return sepLine
-    }()
+    let image           = DNImageView(tintColor: .DnGrayColor)
+    let textField       = DNTextField()
+    let seperatorLine   = DNSeperatorLine()
     
-    let textField: UITextField = {
-        let txtField = UITextField()
-        txtField.font = UIFont.DN.Regular.font(size: 16)
-        txtField.minimumFontSize = 9.0
-        txtField.textColor = .DnTextColor
-        txtField.stopSmartActions()
-        return txtField
-    }()
-
-    func configureInputField(imageName: String, systemImage: Bool = false, placeholder: String, isSecure: Bool) {
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureView()
+    }
+    
+    func configure(imageName: String, placeholder: String, systemImage: Bool = false, isSecure: Bool = false) {
         systemImage ? (self.image.systemTitle = imageName) : (self.image.assetsTitle = imageName)
         self.textField.placeholder = placeholder
         self.textField.isSecureTextEntry = isSecure
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
-    
     required init?(coder aDecoder: NSCoder) {
        super.init(coder: aDecoder)
+        configureView()
+    }
+    
+    private func configureView() {
         backgroundColor = .DnCellColor
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.DnGrayColor.cgColor

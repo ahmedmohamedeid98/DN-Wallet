@@ -18,8 +18,6 @@ class AddPhoneNumberVC: UIViewController {
     weak var updatePhoneDelegate : UpdatePhoneDelegate?
     private var countryCode: String?
     private var completePhoneNumber: String?
-    //MARK:- Outlets
-    
     @IBOutlet weak var vcTitle: UILabel!
     @IBOutlet weak var dropDownCountry: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
@@ -33,6 +31,11 @@ class AddPhoneNumberVC: UIViewController {
     // MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewController()
+    }
+    
+    //MARK:- Configure Views
+    private func configureViewController() {
         dropDownCountry.delegate = self
         // specify opt delegation to this vc and hide this part for latter
         opt.delegate = self
@@ -110,6 +113,7 @@ class AddPhoneNumberVC: UIViewController {
     
 }
 
+//MARK:- Configure PopUp Menu
 extension AddPhoneNumberVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
         dropDownCountry.text = "(\(code ?? " "))\t" + title
@@ -125,6 +129,7 @@ extension AddPhoneNumberVC: UITextFieldDelegate, PopUpMenuDelegate {
     }
 }
 
+//MARK:- Check Confirmation Code validaty
 extension AddPhoneNumberVC: GetOPTValuesProtocol {
     /// this function called after user enter the opt code
     func getOpt(with value: String) {
@@ -133,14 +138,23 @@ extension AddPhoneNumberVC: GetOPTValuesProtocol {
             self.showIndicator(false)
             switch result {
                 case .success(_):
-                    self.opt.hideErrorMessgae()
-                    self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
+                    self.configureCheckPhoneCodeSuccessCase()
                 case .failure(_):
-                    DispatchQueue.main.async {
-                        self.opt.reset()
-                        self.opt.showErrorMessgae()
-                }
+                    self.configureCheckPhoneCodeFailureCase()
             }
+        }
+    }
+    
+    private func configureCheckPhoneCodeSuccessCase() {
+        DispatchQueue.main.async {
+            self.opt.hideErrorMessgae()
+            self.backToEditAccountVC(with: self.phoneNumber.text!, country: self.dropDownCountry.text!)
+        }
+    }
+    private func configureCheckPhoneCodeFailureCase() {
+        DispatchQueue.main.async {
+                self.opt.reset()
+                self.opt.showErrorMessgae()
         }
     }
 }

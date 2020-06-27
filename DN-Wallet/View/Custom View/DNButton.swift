@@ -5,12 +5,8 @@
 //  Created by Ahmed Eid on 6/2/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
-protocol SAButtonDelegate: class {
-    func sAButtonWasPressed(buttonId: Int)
-}
 
-
-final class SAButton: UIButton {
+final class DNButton: UIButton {
     
     var withTarget:(()->())?
     
@@ -26,7 +22,7 @@ final class SAButton: UIButton {
             self.setTitle(title!, for: .normal)
         }
         self.layer.cornerRadius = cornerRedii
-        self.setSAImage(systemTitle: systemTitle, assestTitle: assetsTitle)
+        self.setDNImage(systemTitle: systemTitle, assestTitle: assetsTitle)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -37,12 +33,12 @@ final class SAButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         setTitleColor(.white, for: .normal)
         tintColor = .white
-        addTarget(self, action: #selector(SAButtonWasPressed), for: .touchUpInside)
+        addTarget(self, action: #selector(DNButtonWasPressed), for: .touchUpInside)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
     
-    private func setSAImage(systemTitle: String?, assestTitle: String?) {
+    private func setDNImage(systemTitle: String?, assestTitle: String?) {
         if let title = systemTitle {
             self.setImage(UIImage(systemName: title), for: .normal)
         }
@@ -51,7 +47,7 @@ final class SAButton: UIButton {
         }
     }
     
-    @objc func SAButtonWasPressed() {
+    @objc func DNButtonWasPressed() {
         UIView.animate(withDuration: 0.1, delay:0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         }) { (_) in

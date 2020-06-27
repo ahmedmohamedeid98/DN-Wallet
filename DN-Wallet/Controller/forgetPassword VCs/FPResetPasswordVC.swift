@@ -11,14 +11,14 @@ import UIKit
 class FPResetPasswordVC: UIViewController {
     
     //MARK:- Properities
-    private var dismissBtn          = SAButton(backgroundColor: .clear, title: "", systemTitle: "multiply.circle.fill")
+    private var dismissBtn          = DNButton(backgroundColor: .clear, title: "", systemTitle: "multiply.circle.fill")
     private var checkYourInbox      = DNTitleLabel(title: K.vc.fbCheckInbox, alignment: .center)
     private var InfoMsg             = DNTextView(text: K.vc.fbInfoMsg, alignment: .center, fontSize: 16)
     private var opt                 = OPT()
     private var EnterNewPassLabel   = DNTitleLabel(title: K.vc.fbEnterNewP, alignment: .center)
-    private var NewPassword         = passwordContainer(placeholder: K.vc.fbNewPPlaceh)
-    private var confirmNewPassword  = passwordContainer(placeholder: K.vc.fbConfirmP)
-    private var doneBtn             = SAButton(backgroundColor: .DnColor, title: "Done")
+    private var NewPassword         = DNPasswordContainer(placeholder: K.vc.fbNewPPlaceh)
+    private var confirmNewPassword  = DNPasswordContainer(placeholder: K.vc.fbConfirmP)
+    private var doneBtn             = DNButton(backgroundColor: .DnColor, title: "Done")
     
     
     //MARK:- Init

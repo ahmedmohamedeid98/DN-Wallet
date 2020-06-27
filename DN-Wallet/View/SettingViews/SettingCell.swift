@@ -10,27 +10,48 @@ import UIKit
 
 class SettingCell: UITableViewCell {
     
-    // MARK:- Setting Cell's Datasource
-    var sectionType : SectionType? {
-        didSet{
-            guard let sectionType = sectionType else {return}
-            textLabel?.text = sectionType.description
-            if !sectionType.containsSwitch {
-                self.accessoryType = .disclosureIndicator
-                if sectionType.description == GeneralOptions.language.description  {
-                    addDescriptionLabel()
-                    setLanguage()
-                }
-                if sectionType.description == SecurityOptions.safeModeTime.description {
-                    addDescriptionLabel()
-                    setTime()
-                }
-            } else {
-                addSwitchToThisCellWith(tag: sectionType.id)
-            }
-        }
+    //MARK:- Properities
+    var descriptionLabel    = DNTitleLabel(title: " ", alignment: .right, fontSize: 14, weight: .light)
+    var Switch: UISwitch    = {
+        let sw = UISwitch()
+        sw.onTintColor = .DnColor
+        return sw
+    }()
+    
+   
+    //MARK:- Init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .DnCellColor
     }
     
+    required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:- Setting Cell's Datasource
+       var sectionType : SectionType? {
+           didSet{
+               guard let sectionType = sectionType else {return}
+               textLabel?.text = sectionType.description
+               if !sectionType.containsSwitch {
+                   self.accessoryType = .disclosureIndicator
+                   if sectionType.description == GeneralOptions.language.description  {
+                       addDescriptionLabel()
+                       setLanguage()
+                   }
+                   if sectionType.description == SecurityOptions.safeModeTime.description {
+                       addDescriptionLabel()
+                       setTime()
+                   }
+               } else {
+                   addSwitchToThisCellWith(tag: sectionType.id)
+               }
+           }
+       }
+       
+    
+    //MARK:- Methods
     func setTime() {
         descriptionLabel.text = "\(AuthManager.shared.getSafeModeTime()) hour"
     }
@@ -44,26 +65,6 @@ class SettingCell: UITableViewCell {
         }
     }
     
-    var descriptionLabel : UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.DN.Light.font(size: 14)
-        lb.textColor = .gray
-        lb.textAlignment = .right
-        return lb
-    }()
-    
-    var Switch: UISwitch = {
-        let sw = UISwitch()
-        sw.onTintColor = .DnColor
-        return sw
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        backgroundColor = .DnCellColor
-        
-    }
     
     func addSwitchToThisCellWith(tag: Int) {
         addSubview(Switch)
@@ -97,8 +98,6 @@ class SettingCell: UITableViewCell {
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+   
     
 }

@@ -11,13 +11,13 @@ import MBProgressHUD
 
 class SignInVC: UIViewController {
 
-    @IBOutlet weak var emailCV: userInput!
-    @IBOutlet weak var passwordCV: userInput!
+    @IBOutlet weak var emailCV: DNViewWithTextField!
+    @IBOutlet weak var passwordCV: DNViewWithTextField!
     @IBOutlet weak var signInOutlet: UIButton!
-    var loginWithFaceIDButton = SAButton(backgroundColor: .DnColor, title: "   Login With FaceID", cornerRedii: 25.0, systemTitle: "faceid")
-    var FaceIdFounded: Bool = false
-    var TouchIdFounded: Bool = false
-    var LoginWithBiometric: Bool = false
+    private var loginWithFaceIDButton = DNButton(backgroundColor: .DnColor, title: "   Login With FaceID", cornerRedii: 25.0, systemTitle: "faceid")
+    private var FaceIdFounded: Bool = false
+    private var TouchIdFounded: Bool = false
+    private var LoginWithBiometric: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,14 +72,14 @@ class SignInVC: UIViewController {
     
     private func initView() {
         signInOutlet.layer.cornerRadius = 20.0
-        emailCV.configureInputField(imageName: "envelope", systemImage: true, placeholder: "Email", isSecure: false)
-        passwordCV.configureInputField(imageName: "lock", systemImage: true, placeholder: "Password", isSecure: true)
+        emailCV.configure(imageName: "envelope", placeholder: "Email", systemImage: true)
+        passwordCV.configure(imageName: "lock", placeholder: "Password", systemImage: true, isSecure: true)
     }
     
     // if user have no account, this button will take him to a create account pages.
     @IBAction func haveNoAccountPressed(_ sender: Any) {
         let st = UIStoryboard(name: "Authentication", bundle: .main)
-        let vc = st.instantiateViewController(identifier: "signUpVCID") as? SignUpVC
+        let vc = st.instantiateViewController(identifier: "CreateAccountVCID") as? CreateAccountVC
         vc?.modalPresentationStyle = .fullScreen
         present(vc!, animated: true)
     }
@@ -94,8 +94,8 @@ class SignInVC: UIViewController {
 //
 ////        //TEST TRST
 ////
-        AuthManager.shared.pushHomeViewController(vc: self)
-        return
+    //    AuthManager.shared.pushHomeViewController(vc: self)
+     //   return
 ////        // End TEST
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!
@@ -108,9 +108,14 @@ class SignInVC: UIViewController {
                 Hud.InvalidPasswordText(onView: view)
                 return
             }
-            AuthManager.shared.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
-                if success {
-                    AuthManager.shared.pushHomeViewController(vc: self)
+            Hud.showLoadingHud(onView: view, withLabel: "Login...")
+            AuthManager.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { result in
+                switch result {
+                    case .success(_):
+                        Hud.hide(after: 0.0)
+                        AuthManager.shared.pushHomeViewController(vc: self)
+                    case .failure(let err):
+                        Hud.faildAndHide(withMessage: err.rawValue)
                 }
             }
         }

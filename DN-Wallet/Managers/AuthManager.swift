@@ -26,11 +26,12 @@ struct keys {
 // MARK:- Setup Authentication calss
 
 /// Login, SignUp and get user's information from keychain
-class AuthManager {
+final class AuthManager {
     
     static let shared = AuthManager()
-    let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
-    
+    private let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
+    private init() {}
+     //MARK:- Boimetric Existence
     /// check iphone's boimetric typr
     func canEvaluatePolicyWithFaceID() {
         let context:LAContext = LAContext()
@@ -48,7 +49,7 @@ class AuthManager {
             }
         }
     }
-    
+     //MARK:- Login With FaceID
     /// Login with Face ID or Touch ID
     func loginWithBiometric(viewController vc: UIViewController, view: UIView) {
         let reason = "Identify yourself"
@@ -59,9 +60,14 @@ class AuthManager {
                 if success {
                     guard let password = self?.keychain.get(keys.password) else { return }
                     guard let email = self?.keychain.get(keys.email) else { return }
-                    self?.authWithUserCredential(credintial: Login(email: email, password: password), onView: view) { (success, error) in
-                        if success {
-                            self?.pushHomeViewController(vc: vc)
+                    Hud.showLoadingHud(onView: view, withLabel: "Login...")
+                    self?.authWithUserCredential(credintial: Login(email: email, password: password)) { result in
+                        switch result {
+                            case .success(_):
+                                Hud.hide(after: 0.0)
+                                self?.pushHomeViewController(vc: vc)
+                            case .failure(let err):
+                                Hud.faildAndHide(withMessage: err.rawValue)
                         }
                     }
                 }
@@ -75,58 +81,57 @@ class AuthManager {
         }
     }
     
+     //MARK:- Login with email & password
     /// Login with email and password
     /// - Parameters:
     ///   - password: user password which confirmed by API
     ///   - email: user id, it must be unique and also confirmed by API
     /// - Returns:
     ///   - Bool : return true of the process success, false otherwise.
-    func authWithUserCredential(credintial: Login,onView view: UIView, completion: @escaping (Bool, Error?)->Void) {
-        let data = Login(email: credintial.email,
-                         password: credintial.password)
-        NetworkManager.login(credintial: data, onView: view) { (response, error) in
-            if let e = error {
-                completion(false, e)
-                
-            } else {
-                if let safeResponse = response {
+    func authWithUserCredential(credintial: Login, completion: @escaping (Result<Bool, DNError>)->Void) {
+        let data = Login(email: credintial.email, password: credintial.password)
+        NetworkManager.login(credintial: data) { result in
+            switch result {
+                case .success(let LoginResponse):
                     self.keychain.set(data.email, forKey: keys.email)
                     self.keychain.set(data.password, forKey: keys.password)
-                    self.keychain.set(safeResponse.token, forKey: keys.token)
-                    completion(true, nil)
-                }
+                    self.keychain.set(LoginResponse.token, forKey: keys.token)
+                    completion(.success(true))
+                case .failure(let err):
+                    completion(.failure(err))
             }
         }
     }
-    
+     //MARK:- Create Account
     /// create new acount with user info
     /// - Parameters:
     ///   - user: user is a structure with (email - password - username - phone - ...).
-    func createAccount(user: User, onView view: UIView, completion: @escaping(Bool, Error?)-> Void) {
-        let data = Register(name: user.username,
-                            email: user.email,
-                            password: user.password,
-                            confirm_password: user.password)
-        NetworkManager.register(with: data, onView: view) { [weak self] (response, error) in
-            guard let self = self else { return }
-            if let response = response {
-                self.keychain.set(user.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(user.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
-                self.keychain.set(response.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
-                completion(true, nil)
-            }else {
-                completion(false, error)
+    func createAccount(data: Register, completion: @escaping(Result<Bool, DNError>)-> Void) {
+        NetworkManager.register(with: data) { result in
+            switch result {
+                case .success(let registerResponse):
+                    self.keychain.set(data.email, forKey: keys.email, withAccess: .accessibleWhenUnlocked)
+                    self.keychain.set(data.password, forKey: keys.password, withAccess: .accessibleWhenUnlocked)
+                    self.keychain.set(registerResponse.id, forKey: keys.id, withAccess: .accessibleWhenUnlocked)
+                    self.keychain.set(registerResponse.token, forKey: keys.token, withAccess: .accessibleWhenUnlocked)
+                    completion(.success(true))
+                case .failure(let err):
+                    completion(.failure(err))
             }
         }
     }
+     //MARK:- Logout
     func logout() {
         // delete token
         keychain.set("", forKey: keys.token)
     }
+    
+    //MARK:- Get Token
     func getUserToken() -> String? {
         return keychain.get(keys.token)
     }
+    
+     //MARK:- Update Password
     /// update the user password from setting
     /// - Parameters:
     ///   - currentPassword: the current password entered to confirm the user.

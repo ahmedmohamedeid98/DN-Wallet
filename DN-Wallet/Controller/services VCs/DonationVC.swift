@@ -38,23 +38,6 @@ class DonationVC: UIViewController {
         tableView.dataSource = charityTableDataSource
     }
     
-    func loadData() {
-        NetworkManager.getCharityOrganizationInitialData(onView: view) { (charityList, error) in
-            if error == nil {
-                self.originDataSource = charityList
-                self.currentDataSource = self.originDataSource
-                self.updateTableInMainThread()
-            }
-        }
-    }
-    func updateTableInMainThread() {
-        DispatchQueue.main.async {
-            self.tableView.alpha = 1.0
-            self.updateTableViewDataSource()
-        }
-        
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -166,12 +149,45 @@ extension DonationVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DonationDetailsVC()
-        guard let charity = charityTableDataSource.itemIdentifier(for: indexPath) else { return }
-        vc.charityID = charity.id
+        let charity = currentDataSource[indexPath.row]
+        vc.charityID = charity._id
         vc.title = charity.name
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
         
+}
+//MARK:- Networking
+extension DonationVC {
+    func loadData() {
+        Hud.showLoadingHud(onView: view)
+        NetworkManager.getCharityOrganizationInitialData { (result) in
+            switch result {
+                case .success(let charityList):
+                    self.configureGetCharityDataSuccessCase(list: charityList)
+                case .failure(let error):
+                    self.configureGetCharityDataFailureCase(error: error.rawValue)
+            }
+        }
+    }
+    
+    private func configureGetCharityDataSuccessCase(list: [Charity]) {
+        self.originDataSource = list
+        self.currentDataSource = self.originDataSource
+        Hud.hide(after: 0.5)
+        self.updateTableInMainThread()
+    }
+    
+    private func configureGetCharityDataFailureCase(error: String) {
+        Hud.faildAndHide(withMessage: error)
+    }
+    
+    func updateTableInMainThread() {
+        DispatchQueue.main.async {
+            self.tableView.alpha = 1.0
+            self.updateTableViewDataSource()
+        }
+        
+    }
 }

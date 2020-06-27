@@ -14,7 +14,7 @@ protocol GetOPTValuesProtocol: class {
 
 class OPT: UIView {
 
-    weak var delegate: GetOPTValuesProtocol!
+    weak var delegate: GetOPTValuesProtocol?
     
     var errorMsg: UILabel = {
         let label = UILabel()
@@ -72,12 +72,12 @@ class OPT: UIView {
         commonInit()
     }
     
-    
     // Init for UIView Design in Storyboard
-    required init(coder: NSCoder) {
-        super.init(coder: coder)!
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         commonInit()
     }
+    
     
     func reset() {
         tf1.text = ""
@@ -92,7 +92,7 @@ class OPT: UIView {
         let tf2_val = Int(tf2.text ?? "9") ?? 11
         let tf3_val = Int(tf3.text ?? "9") ?? 11
         let tf4_val = Int(tf4.text ?? "9") ?? 11
-        delegate.getOpt(with: "\(tf1_val)\(tf2_val)\(tf3_val)\(tf4_val)")
+        delegate?.getOpt(with: "\(tf1_val)\(tf2_val)\(tf3_val)\(tf4_val)")
     }
     
     func showErrorMessgae() {

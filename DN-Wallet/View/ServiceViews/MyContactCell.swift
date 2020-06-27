@@ -16,11 +16,11 @@ class MyContactCell: UITableViewCell {
     var data: Contact? {
         didSet {
             guard let data = data else {return}
-            let first_char = data.username.first ?? "a"
+            let first_char = data.userID.name.first ?? "a"
             avatarImage.text = first_char.uppercased()
             avatarImage.backgroundColor = .randomColor(forChar: first_char)
-            contactUsername.text = data.username
-            contactEmail.text = data.email
+            contactUsername.text = data.userID.name
+            contactEmail.text = data.userID.name
         }
     }
     

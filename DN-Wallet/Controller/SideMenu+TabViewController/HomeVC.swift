@@ -28,19 +28,21 @@ class HomeVC: UIViewController {
 
     //MARK:- Properities
     var isExpand: Bool = false
-    var leftBarButton: UIBarButtonItem!
-    var partenerCell: PartenerTableViewCell!
+    private var leftBarButton: UIBarButtonItem!
+    private var partenerCell: PartenerTableViewCell!
     weak var delegate:HomeViewControllerDelegate?
     // Data Will send to notification view controller
     var notificationMessages: [Message] = []
-    fileprivate var tableView: UITableView!
+    private var tableView: UITableView!
    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
-        //loadData()
+        print("token: \(String(describing: AuthManager.shared.getUserToken()))")
+        
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,17 +60,8 @@ class HomeVC: UIViewController {
         return .lightContent
     }
     
-    //MARK:- Network: laod data
-    fileprivate func loadData() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            let confirmationViewController = ConfirmEmailVC()
-            confirmationViewController.modalPresentationStyle = .fullScreen
-            self.present(confirmationViewController, animated: true, completion: nil)
-        }
-    }
-    
     //MARK:- Methods
-    fileprivate func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(PartenerTableViewCell.nib(), forCellReuseIdentifier: PartenerTableViewCell.identifier)
         tableView.register(BalanceTableViewCell.nib(), forCellReuseIdentifier: BalanceTableViewCell.identifier)
@@ -79,8 +72,8 @@ class HomeVC: UIViewController {
         tableView.backgroundColor = .clear
     }
 
-    func initViewController() {
-        AuthManager.shared.deactiveSafeMode()
+    private func initViewController() {
+        //AuthManager.shared.deactiveSafeMode()
         configureNavgationBar()
         setupTableView()
         setupLayout()
@@ -106,7 +99,7 @@ class HomeVC: UIViewController {
         addRightBarButtonWithImage(name: "envelope.badge")
     }
     
-    @objc func notificationBtnPressed() {
+    @objc private func notificationBtnPressed() {
         let vc = NotificationVC()
         vc.originalData = notificationMessages
         self.present(vc, animated: true, completion: nil)
@@ -120,7 +113,7 @@ class HomeVC: UIViewController {
     }
     
     //MARK:- handle sideMenu Toggle
-    func addGestureRecognizer() {
+    private func addGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeSideMenuWithGesture))
         let rightSwipGesture = UISwipeGestureRecognizer(target: self, action: #selector(sideMenuButtonPressed))
         let leftSwipGesture = UISwipeGestureRecognizer(target: self, action: #selector(closeSideMenuWithGesture))
@@ -147,13 +140,13 @@ class HomeVC: UIViewController {
         }
     }
     
-    fileprivate func startTimer() {
+    private func startTimer() {
         if let cell = partenerCell {
             cell.startTimer()
         }
     }
     
-    fileprivate func stopTimer() {
+    private func stopTimer() {
         if let cell = partenerCell {
             cell.stopTimer()
         }
@@ -216,7 +209,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         return 50
     }
     
-    fileprivate func prepareView(for header: UIView, withTitle title: String) {
+    private func prepareView(for header: UIView, withTitle title: String) {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.textColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
@@ -232,4 +225,42 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+//MARK:- Networking
+extension HomeVC {
+    private func loadData() {
+        // get user data
+        Hud.showLoadingHud(onView: view, withLabel: "Load Balance...")
+        NetworkManager.getUserAccountInfo { (result) in
+            switch result {
+                case .success(let info):
+                    self.handleGetUserInfoSuccessCase(withData: info)
+                case .failure(let err):
+                    self.handleGetUserInfoFailureCase(withError: err.rawValue)
+            }
+        }
+    }
+    
+    private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
+        Hud.hide(after: 0.0)
+        self.checkIfUserNotVerified(isVerified: data.userIsValidate)
+        //self.balance = data.balance
+        print(data)
+        
+    }
+    
+    private func handleGetUserInfoFailureCase(withError error: String) {
+        Hud.faildAndHide(withMessage: error)
+    }
+    
+    private func checkIfUserNotVerified(isVerified: Bool = false) {
+        if isVerified { return }
+        DispatchQueue.main.async {
+            let st = UIStoryboard(name: "Authentication", bundle: nil)
+            let confirmationViewController = st.instantiateViewController(identifier: "ConfirmEmailVCID") as? ConfirmEmailVC
+            confirmationViewController?.modalPresentationStyle = .fullScreen
+            self.present(confirmationViewController!, animated: true, completion: nil)
+        }
+    }
 }

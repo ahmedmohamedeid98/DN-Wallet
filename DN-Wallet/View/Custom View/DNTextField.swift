@@ -13,12 +13,14 @@ class DNTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        stopSmartActions()
     }
-    init(placeholder: String, stopSmartActions: Bool = true, isSecure: Bool = false) {
+    init(placeholder: String? = nil, keyboardType: UIKeyboardType = .default ,stopSmartActions: Bool = true, isSecure: Bool = false) {
         super.init(frame: .zero)
-        self.placeholder        = placeholder
+        if (placeholder != nil) { self.placeholder  = placeholder!  }
         self.isSecureTextEntry  = isSecure
         if stopSmartActions { self.stopSmartActions() }
+        
         configure()
     }
     

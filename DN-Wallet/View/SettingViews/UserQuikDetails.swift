@@ -10,28 +10,26 @@ import UIKit
 
 class UserQuikDetails: UIView {
     
-    let userImage = SAImageView(title: "person.circle", isSystemImage: true)
+    //MARK:- Properities
+    let userImage   = DNImageView(title: "person.circle", isSystemImage: true)
+    let userName    = DNTitleLabel(title: "username", alignment: .left, fontSize: 16, weight: .bold)
+    let userEmail   = DNTitleLabel(title: "user@example.com", alignment: .left, fontSize: 12)
     
-    let userName: UILabel = {
-        let lb = UILabel()
-        lb.text = "username"
-        lb.textColor = .DnColor
-        lb.font = UIFont.DN.Bold.font(size: 16)
-        return lb
-    }()
     
-    let userEmail: UILabel = {
-        let lb = UILabel()
-        lb.text = "user@example.com"
-        lb.textColor = .lightGray
-        lb.font = UIFont.DN.Regular.font(size: 12)
-        return lb
-    }()
-    
+    //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .DnCellColor
-        
+        configureSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    //MARK:- configure
+    private func configureSubviews() {
         addSubview(userImage)
         userImage.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), size: CGSize(width: 40, height: 40), centerV: true)
         userImage.roundImageWithHeight = 40
@@ -41,9 +39,5 @@ class UserQuikDetails: UIView {
         addSubview(stackView)
         stackView.DNLayoutConstraint(left: userImage.rightAnchor, right: rightAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 20), size: CGSize(width: 0, height: 40))
         stackView.centerYAnchor.constraint(equalTo: userImage.centerYAnchor).isActive = true
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

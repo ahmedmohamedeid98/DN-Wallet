@@ -16,28 +16,23 @@ class ContainerVC: UIViewController {
     var NavPayViewController: UINavigationController!
     var NavSaleViewController: UINavigationController!
     var NavChargeViewController: UINavigationController!
-    var userInformation: AccountInfo?
+    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        handleHomeViewController()
-        /*
-        // load user data
-        DNData.getUserAccountInfo(onView: NavHomeViewController.view) { (userInfo, error) in
-            if error == nil {
-                self.userInformation = userInfo
-            }
-        }
- */
+        configureHomeViewController()
     }
     
     //MARK:- Handlers
-    func handleHomeViewController() {
+    private func configureHomeViewController() {
+        //handle tab bar
         EmbededViewControllersInNavigationController()
         centerTabBarController = UITabBarController()
         centerTabBarController.viewControllers = [NavHomeViewController, NavPayViewController, NavSaleViewController, NavChargeViewController]
         centerTabBarController.selectedViewController = NavHomeViewController
+        
+        // add home vc to it's parent (containerVC
         view.addSubview(centerTabBarController.view)
         addChild(centerTabBarController)
         centerTabBarController.didMove(toParent: self)

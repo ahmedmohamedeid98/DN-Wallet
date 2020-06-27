@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class SignUpVC: UIViewController {
+final class CreateAccountVC: UIViewController {
     
     //MARK:- Properities
-    @IBOutlet weak var usernameContainer: userInput!
-    @IBOutlet weak var emailContainer: userInput!
-    @IBOutlet weak var passwordContainer: userInput!
-    @IBOutlet weak var confirmPasswordContainer: userInput!
+    @IBOutlet weak var usernameContainer: DNViewWithTextField!
+    @IBOutlet weak var emailContainer: DNViewWithTextField!
+    @IBOutlet weak var passwordContainer: DNViewWithTextField!
+    @IBOutlet weak var confirmPasswordContainer: DNViewWithTextField!
     @IBOutlet weak var createAccountOutlet: UIButton!
     private var name : UITextField!
     private var email: UITextField!
@@ -27,10 +27,10 @@ final class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //view.backgroundColor = .DnVcBackgroundColor
-        usernameContainer.configureInputField(imageName: "person",systemImage: true, placeholder: "Username", isSecure: false)
-        emailContainer.configureInputField(imageName: "envelope",systemImage: true,  placeholder: "Email", isSecure: false)
-        passwordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Password", isSecure: true)
-        confirmPasswordContainer.configureInputField(imageName: "lock",systemImage: true, placeholder: "Confirm the password", isSecure: true)
+        usernameContainer.configure(imageName: "person", placeholder: "Username", systemImage: true, isSecure: false)
+        emailContainer.configure(imageName: "envelope", placeholder: "Email", systemImage: true, isSecure: false)
+        passwordContainer.configure(imageName: "lock", placeholder: "Enter Password", systemImage: true, isSecure: true)
+        confirmPasswordContainer.configure(imageName: "lock", placeholder: "Confirm password", systemImage: true, isSecure: true)
         createAccountOutlet.layer.cornerRadius = 20.0
     
         name = usernameContainer.textField
@@ -49,10 +49,14 @@ final class SignUpVC: UIViewController {
             let username = usernameContainer.textField.text!
             let email = emailContainer.textField.text!
             let password = passwordContainer.textField.text!
-            let user = User(username: username, email: email, password: password)
-            AuthManager.shared.createAccount(user: user, onView: view) { (success, error) in
-                if success {
-                    AuthManager.shared.pushHomeViewController(vc: self)
+            let data = Register(name: username, email: email, password: password, confirm_password: password)
+            AuthManager.shared.createAccount(data: data) { (result) in
+                switch result {
+                    case .success(_):
+                        Hud.hide(after: 0.0)
+                        AuthManager.shared.pushHomeViewController(vc: self)
+                    case .failure(let err):
+                        Hud.faildAndHide(withMessage: err.rawValue)
                 }
             }
         }
@@ -63,7 +67,7 @@ final class SignUpVC: UIViewController {
     
 }
 
-extension SignUpVC {
+extension CreateAccountVC {
     
     func isValid() -> Bool{
 

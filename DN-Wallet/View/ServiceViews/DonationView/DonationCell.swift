@@ -12,46 +12,30 @@ import UIKit
 class DonationCell: UITableViewCell {
 
     static let reuseIdentifier: String = "donation-cell-identifier"
-    var id: String = ""
+    private var logo    = DNImageView(title: "photo.fill", tintColor: .DnColor, contentMode: .scaleAspectFit, isSystemImage: true)
+    private var title   = DNTitleLabel(title: "org name", alignment: .left, fontSize: 16, weight: .regular)
+    private var mail    = DNTitleLabel(title: "org@example.com", alignment: .left, fontSize: 14, weight: .regular)
+   
     var data: Charity? {
         didSet {
             guard let safeData = data else {return}
             self.mail.text = safeData.email
             self.title.text = safeData.name
-            self.id = safeData.id
-            NetworkManager.loadImageWithStrURL(str: safeData.link) { (img, error) in
-                if error == nil {
-                    DispatchQueue.main.async {
-                        self.logo.image = img
-                    }
+            NetworkManager.loadImageWithStrURL(str: safeData.org_logo) { result in
+                switch result {
+                    case .success(let img):
+                        DispatchQueue.main.async {
+                           self.logo.image = img
+                        }
+                        
+                    case .failure(_):
+                        break
                 }
             }
         }
     }
 
-    var logo: UIImageView = {
-        let img = UIImageView()
-        img.tintColor = .DnColor
-        img.image = UIImage(systemName: "photo.fill")
-        img.contentMode = .scaleAspectFit
-        img.clipsToBounds = true
-        return img
-    }()
-    private var title: UILabel = {
-        let lb = UILabel()
-        lb.text = "Organization Name"
-        lb.textColor = .DnColor
-        lb.font = UIFont.DN.Regular.font(size: 16)
-        return lb
-    }()
     
-    private var mail: UILabel = {
-        let lb = UILabel()
-        lb.text = "orgnaization@gmail.com"
-        lb.textColor = .DnColor
-        lb.font = UIFont.DN.Regular.font(size: 14)
-        return lb
-    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

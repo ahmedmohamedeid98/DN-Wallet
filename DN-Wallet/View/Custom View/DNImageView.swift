@@ -6,7 +6,7 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
-class SAImageView: UIImageView {
+class DNImageView: UIImageView {
     
     var roundImageWithHeight: CGFloat = 20.0 {
         didSet {

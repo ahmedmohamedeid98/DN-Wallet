@@ -17,7 +17,7 @@ class BalanceCollectionCell: UICollectionViewCell {
     var data: Balance? = nil {
         didSet {
             guard let balance = data else { return }
-            amountLabel.text = balance.stringAmount
+            amountLabel.text = balance.stringAmount(amount: balance.amount)
             currencyCodeLabel.text = balance.currency
         }
     }

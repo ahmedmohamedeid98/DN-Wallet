@@ -85,14 +85,14 @@ class Hud {
         }
         currentHud = nil
     }
-    static func networkErrorText(error: hudError) {
+    static func networkErrorText(error: String) {
         // show errorMessage after indeterminedHud finish
         if let safeHud = currentHud  {
             currentHud = nil
             DispatchQueue.main.async {
                 safeHud.mode = .text
-                safeHud.label.text = hudError.network.rawValue
-                safeHud.detailsLabel.text = error.rawValue
+                safeHud.label.text = "failed"
+                safeHud.detailsLabel.text = error
                 safeHud.hide(animated: true, afterDelay: 3)
             }
         }
@@ -102,8 +102,8 @@ class Hud {
             DispatchQueue.main.async {
                 let newHud = MBProgressHUD.showAdded(to: currentView, animated: true)
                 newHud.mode = .text
-                newHud.label.text = hudError.network.rawValue
-                newHud.detailsLabel.text = error.rawValue
+                newHud.label.text = "faild"
+                newHud.detailsLabel.text = error
                 newHud.hide(animated: true, afterDelay: 3)
             }
         }

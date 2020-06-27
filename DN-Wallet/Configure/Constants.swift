@@ -50,6 +50,7 @@ struct K {
         static let fbEnterNewP = "Enter New Password"
         static let fbNewPPlaceh = "new password"
         static let fbConfirmP = "confirm password"
+        static let heirMessage = "Wellcome, To Safe your money if any something bad happend for you, you should specify a heir and you allowed to add at most two heir, note that all your money withh transmit to your's heir if you do not access the app for 90 days."
 
     }
     struct sysImage {

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class passwordContainer: UIView {
+class DNPasswordContainer: UIView {
 
     //MARK:- Properities
-    private var showPasswordBtn = UIButton(type: .system)
-    private var eyeImage = SAImageView(title: "eye", tintColor: .gray, contentMode: .scaleAspectFit, isSystemImage: true)
-    private var toggleShow: Bool = true
-    var textField = DNTextField(placeholder: "Password", stopSmartActions: true, isSecure: true)
+    private var showPasswordBtn     = UIButton(type: .system)
+    private var eyeImage            = DNImageView(title: "eye", tintColor: .gray, contentMode: .scaleAspectFit, isSystemImage: true)
+    private var toggleShow: Bool    = true
+    var textField                   = DNTextField(placeholder: "Password", stopSmartActions: true, isSecure: true)
     var text: String? { return textField.text }
     
     

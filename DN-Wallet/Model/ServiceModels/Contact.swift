@@ -11,9 +11,17 @@
 
 
 // get all contacts
-struct ContactResponse: Codable {
+struct Contact: Codable, Hashable {
     let _id : String
     let userID: UserID
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(_id)
+    }
+    
+    static func ==(lhs: Contact, rhs:Contact) -> Bool {
+        return lhs._id == rhs._id
+    }
 }
 
 struct UserID: Codable {
@@ -25,9 +33,11 @@ struct UserID: Codable {
 // creating new contact
 struct CreateContactResponse: Codable {
     let id: String?
+    let name: String?
+    let email: String?
     let error: String?
 }
-
+/*
 // class which populate in tableView
 class Contact: NSObject {
     var username:String
@@ -46,3 +56,4 @@ class Contact: NSObject {
         return lhs.identifier == rhs.identifier
     }
 }
+*/

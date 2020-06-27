@@ -13,10 +13,10 @@ class ChangePasswordVC: UIViewController {
     
     var Vstack: UIStackView!
     var activityIndicatorView: UIActivityIndicatorView!
-    var currentPassword     = passwordContainer(placeholder: "Enter Your Current Password")
-    var newPassword         = passwordContainer(placeholder: "New Password")
-    var confirmNewPassword  = passwordContainer(placeholder: "Confirm New Password")
-    var EnterBtn            = SAButton(backgroundColor: .DnColor, title: "Enter", cornerRedii: 8.0)
+    var currentPassword     = DNPasswordContainer(placeholder: "Enter Your Current Password")
+    var newPassword         = DNPasswordContainer(placeholder: "New Password")
+    var confirmNewPassword  = DNPasswordContainer(placeholder: "Confirm New Password")
+    var EnterBtn            = DNButton(backgroundColor: .DnColor, title: "Enter", cornerRedii: 8.0)
     var rightBarBtn: UIBarButtonItem!
     
     override func viewDidLoad() {

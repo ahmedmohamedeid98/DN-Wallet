@@ -14,7 +14,7 @@ class FPEnterEmailVC: UIViewController {
     private var forgetPasswordMsg   = DNTitleLabel(title: K.vc.fbMsg, alignment: .center)
     private var EnterEmailMsg       = DNTextView(text: K.vc.fbEnterMailMsg, alignment: .center, fontSize: 16)
     private var emailField          = DNTextField(placeholder: K.vc.fbEnterMailPlaceh, stopSmartActions: true)
-    private var sendResetCodeBtn    = SAButton(backgroundColor: .DnColor, title: "Send Reset Code", cornerRedii: 20.0)
+    private var sendResetCodeBtn    = DNButton(backgroundColor: .DnColor, title: "Send Reset Code", cornerRedii: 20.0)
     private var emailContainerView  = DNEmptyContainer(borderWidth: 2, borderColor: .systemGray4, backgroundColor: .DnCellColor, cornerRedii: 4)
         
     

@@ -10,92 +10,23 @@ import UIKit
 
 class AddHeirVC: UIViewController {
 
-    //MARK:- Data
+    //MARK:- Properities
     var data = [Heirs]()
+    private let infoTextView        = DNTextView(text: K.vc.heirMessage, alignment: .center, fontSize: 14, editable: false)
+    private let firstHeir           = DNTextField(placeholder: "Add first heir")
+    private let firstPrecentage     = DNTitleLabel(title: "100 %", textColor: .DnColor, alignment: .center, fontSize: 14, weight: .regular)
+    private let firstLabel          = DNTitleLabel(title: "First", textColor: .DnColor, alignment: .left, fontSize: 14, weight: .regular)
+    private let secondHeir          = DNTextField(placeholder: "Add second heir")
+    private let secondPrecentage    = DNTitleLabel(title: "0 %", textColor: .systemPink, alignment: .center, fontSize: 14, weight: .regular)
+    private let secondLabel         = DNTitleLabel(title: "Second", textColor: .systemPink, alignment: .right, fontSize: 14, weight: .regular)
+    private var sliderStack: UIStackView!
+    private var slider: UISlider!
+    private var rightBarBtn: UIBarButtonItem!
     
-    let infoTextView: UITextView = {
-        let txt = UITextView()
-        txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.textAlignment = .center
-        txt.textColor = .lightGray
-        txt.backgroundColor = .clear
-        txt.isEditable = false
-        txt.text = "Wellcome, To Safe your money if any something bad happend for you, you should specify a heir and you allowed to add at most two heir, note that all your money withh transmit to your's heir if you do not access the app for 90 days."
-        return txt
-    }()
-    
-    let firstHeir: UITextField = {
-        let txt = UITextField()
-        txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.textColor = UIColor.systemBlue
-        txt.placeholder = "Add first heir"
-        txt.backgroundColor = .DnCellColor
-        txt.leftViewMode = .always
-        txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
-        txt.stopSmartActions()
-        txt.addBorder(color: UIColor.DnColor.cgColor)
-        return txt
-    }()
-    
-    let firstPrecentage: UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = .DnColor
-        lb.text = "100 %"
-        return lb
-    }()
-    
-    let firstLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = .DnColor
-        lb.text = "first"
-        return lb
-    }()
-    
-    let secondHeir: UITextField = {
-        let txt = UITextField()
-        txt.font = UIFont.DN.Regular.font(size: 14)
-        txt.textColor = UIColor.systemBlue
-        txt.placeholder = "Add second heir"
-        txt.backgroundColor = .DnCellColor
-        txt.leftViewMode = .always
-        txt.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
-        txt.stopSmartActions()
-        txt.addBorder(color: UIColor.DnColor.cgColor)
-        return txt
-    }()
-    
-    let secondPrecentage: UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.DN.Regular.font(size: 16)
-        lb.textColor = .DnDarkBlue
-        lb.text = "0 %"
-        return lb
-    }()
-    
-    let secondLabel: UILabel = {
-        let lb = UILabel()
-        lb.font = UIFont.DN.Regular.font(size: 14)
-        lb.textColor = .DnDarkBlue
-        lb.text = "second"
-        return lb
-    }()
-    
-    var sliderStack: UIStackView!
-    var slider: UISlider!
-    var rightBarBtn: UIBarButtonItem!
-    
+    //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        NetworkManager.getUserHeirs(onView: view) { (heirs, error) in
-            if error != nil {
-                print("Error: \(String(describing: error))")
-            } else {
-                self.data = heirs
-            }
-        }
         rightBarBtn = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(UpdateBtnPressed))
         rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
@@ -108,12 +39,26 @@ class AddHeirVC: UIViewController {
             self.firstPrecentage.text = "\(currentValue) %"
             self.secondPrecentage.text = "\(100 - currentValue) %"
         }
-        
-        
-       
     }
+    
+    //MARK:- Configure views
     @objc func UpdateBtnPressed() {
         // call a API Data function which post new updates
+    }
+    
+    private func configureSecondHeirTextField() {
+        secondHeir.textColor        = .systemPink
+        secondHeir.leftViewMode     = .always
+        secondHeir.leftView         = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
+        secondHeir.backgroundColor  = .DnCellColor
+        secondHeir.addBorder(color: UIColor.systemPink.cgColor, width: 2, withCornerRaduis: true, reduis: 4)
+    }
+    private func configureFirstHierTextField() {
+        firstHeir.textColor         = .DnColor
+        firstHeir.leftViewMode      = .always
+        firstHeir.leftView          = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
+        firstHeir.backgroundColor   = .DnCellColor
+        firstHeir.addBorder(color: UIColor.DnColor.cgColor, width: 2, withCornerRaduis: true, reduis: 4)
     }
     func setupSlider() {
         slider = UISlider()
@@ -144,8 +89,28 @@ class AddHeirVC: UIViewController {
         Vstack.DNLayoutConstraint(infoTextView.bottomAnchor, left: infoTextView.leftAnchor, right: infoTextView.rightAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 140))
         
     }
+}
+//MARK:- Networking
+extension AddHeirVC {
+    func loadData() {
+        Hud.showLoadingHud(onView: view)
+        NetworkManager.getUserHeirs { (result) in
+            switch result {
+                case .success(_):
+                    self.configureNetworkingSuccessCase(withData: [])
+                case .failure(_):
+                    self.configureNetworkingFailureCase(withError: "No Hiers Found")
+            }
+        }
+    }
     
-
+    private func configureNetworkingSuccessCase(withData data: [Heirs]) {
+        Hud.hide(after: 0.5)
+    }
+    
+    private func configureNetworkingFailureCase(withError error: String) {
+        Hud.faildAndHide(withMessage: error)
+    }
 }
 
 

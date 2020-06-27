@@ -10,14 +10,8 @@ import UIKit
 
 class PrivacyCell: UITableViewCell {
     
-    var textView: UITextView = {
-        let txtView = UITextView()
-        txtView.font = UIFont.DN.Regular.font(size: 14)
-        txtView.textColor = .lightGray
-        txtView.isEditable = false
-        return txtView
-    }()
-    
+    var textView: UITextView = DNTextView(text: " ", alignment: .left, fontSize: 14)
+       
     func configureCell(text: String?) {
         self.textView.text = text
     }

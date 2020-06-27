@@ -29,28 +29,6 @@ class DonationDetailsVC: UIViewController {
         loadData()
     }
     
-    func loadData() {
-        if let id = charityID {
-            NetworkManager.getCharityOrganizationDetails(withID: id, onView: view) { (details, error) in
-                if let e = error {
-                    print(e.localizedDescription)
-                    return
-                }
-                if let safeDetails = details {
-                    self.data = safeDetails
-                    DispatchQueue.main.async {
-                        let initialLocation = CLLocation(latitude: safeDetails.location.lat, longitude: safeDetails.location.lan)
-                        self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
-                        self.mapView.setMapZoomAndBoundryRange(center: initialLocation, distance: 60000)
-                        self.addMapViewAnnotaton(at: initialLocation, title: safeDetails.name, subtitle: safeDetails.phone)
-                        self.charityTable.alpha = 1.0
-                        self.charityTable.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -118,12 +96,8 @@ extension DonationDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        let titleLabel = UILabel()
-        titleLabel.text = "Location"
-        titleLabel.textAlignment = .center
+        let titleLabel = DNTitleLabel(title: "Location", textColor: .label, alignment: .center, fontSize: 17, weight: .semibold)
         titleLabel.backgroundColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        titleLabel.textColor = .white
         header.addSubview(titleLabel)
         header.addSubview(mapView)
         titleLabel.DNLayoutConstraint(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, size: CGSize(width: 0, height: 35))
@@ -170,5 +144,37 @@ extension MKMapView {
         setCameraBoundary(boundaryRange, animated: true)
         let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 20000)
         setCameraZoomRange(zoomRange, animated: true)
+    }
+}
+
+//MARK:- Networking
+extension DonationDetailsVC {
+    func loadData() {
+        if let id = charityID {
+            Hud.showLoadingHud(onView: view, withLabel: "Get Details...")
+            NetworkManager.getCharityOrganizationDetails(withID: id) { (result) in
+                switch result {
+                    case .success(let data):
+                        self.configureNetworkingSuccessCase(withData: data)
+                    case .failure(let error):
+                        self.configureNetworkingFailureCase(withError: error.rawValue)
+                }
+            }
+        }
+    }
+    private func configureNetworkingSuccessCase(withData data: CharityDetailsResponse) {
+        Hud.hide(after: 0.0)
+        DispatchQueue.main.async {
+            let initialLocation = CLLocation(latitude: data.location.lat, longitude: data.location.lan)
+            self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
+            self.mapView.setMapZoomAndBoundryRange(center: initialLocation, distance: 60000)
+            self.addMapViewAnnotaton(at: initialLocation, title: data.name, subtitle: data.phone)
+            self.charityTable.alpha = 1.0
+            self.charityTable.reloadData()
+        }
+    }
+    
+    private func configureNetworkingFailureCase(withError error: String) {
+        Hud.faildAndHide(withMessage: error)
     }
 }
