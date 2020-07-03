@@ -23,8 +23,8 @@ class ChangePasswordVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         confirmNewPassword.textField.delegate = self
-        rightBarBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(DoneBtnPressed))
-        rightBarBtn.isEnabled = false
+        //rightBarBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(DoneBtnPressed))
+        //rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
         configureEnterButton()
         setupLayout()
@@ -32,8 +32,8 @@ class ChangePasswordVC: UIViewController {
     }
     
     private func configureEnterButton() {
-        EnterBtn.withTarget = { self.EnterBtnPressed() }
-        EnterBtn.DNLayoutConstraint(size: CGSize(width: 60, height: 0))
+        //EnterBtn.withTarget = { self.EnterBtnPressed() }
+        //EnterBtn.DNLayoutConstraint(size: CGSize(width: 60, height: 0))
     }
     
     func setupIndicatorView() {
@@ -61,7 +61,7 @@ class ChangePasswordVC: UIViewController {
         
         
     }
-    
+    /*
     @objc func EnterBtnPressed() {
         if let currentPass = currentPassword.textField.text {
             if AuthManager.shared.validateCurrentPassword(currentPassword: currentPass) {
@@ -95,7 +95,7 @@ class ChangePasswordVC: UIViewController {
         }
     }
     
-    
+    */
     
 
 }

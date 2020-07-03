@@ -5,29 +5,21 @@
 //  Created by Ahmed Eid on 3/23/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
-
+/*
 import KeychainSwift
 import LocalAuthentication
 import MBProgressHUD
 // MARK:- Setup Keychain keys
 // keychain keys
-struct keys {
-    static let keyPrefix = "dnwallet_"
-    static let id = "user_id"
-    static let password = "password"
-    static let email = "email"
-    static let token = "user_token"
-    static let safeModeTime = "safe_mode_time"
-    static let safeModeActive = "safe-mode-active"
-    static let qrCodeFileName = "DN-QRCode-Image.png"
-    static let allowedAmount = "allowed-amount"
-}
+
 
 // MARK:- Setup Authentication calss
-
+*/
 /// Login, SignUp and get user's information from keychain
 final class AuthManager {
-    
+}
+    /*
+ 
     static let shared = AuthManager()
     private let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     private init() {}
@@ -287,3 +279,4 @@ extension AuthManager {
     }
     
 }
+*/

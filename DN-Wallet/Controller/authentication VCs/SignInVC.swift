@@ -18,10 +18,12 @@ class SignInVC: UIViewController {
     private var FaceIdFounded: Bool = false
     private var TouchIdFounded: Bool = false
     private var LoginWithBiometric: Bool = false
+    private var auth: UserAuthProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // add both email & password textFiled
+        auth = UserAuth()
         initView()
         // add loginWithFaceIDButton & it's action
         // else login with TouchID else Login With (email & password)
@@ -30,7 +32,7 @@ class SignInVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailCV.textField.text = AuthManager.shared.getUserEmail()
+        emailCV.textField.text = auth.getUSerEmail()
         passwordCV.textField.text = ""
     }
 
@@ -40,11 +42,22 @@ class SignInVC: UIViewController {
             // login with faceid button's action
             loginWithFaceIDButton.withTarget = { [weak self] () in
                 guard let self = self else { return }
-                DispatchQueue.main.async {
-                    AuthManager.shared.loginWithBiometric(viewController: self, view: self.view)
-                }
+                self.signInWithBiometric()
             }
         }
+    }
+    private func signInWithBiometric() {
+        Hud.showLoadingHud(onView: view, withLabel: "Login...")
+            self.auth.signInWithBiometric { [weak self] (result) in
+                Hud.hide(after: 0.0)
+                guard let self = self else { return }
+                switch result {
+                    case .success(_):
+                        self.navigateToHomeController()
+                    case .failure(let err):
+                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                }
+            }
     }
     
     private func checkIphoneBiometricMethod() -> Bool {
@@ -62,11 +75,11 @@ class SignInVC: UIViewController {
         // if no FaceID then try login with touchID
         TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
         if TouchIdFounded {
-            AuthManager.shared.loginWithBiometric(viewController: self, view: view)
+            signInWithBiometric()
             return false
         }
         // go and evaluate if the app support FaceID or Touch ID
-        AuthManager.shared.canEvaluatePolicyWithFaceID()
+        auth.canEvaluatePolicyWithFaceID()
         return false
     }
     
@@ -100,7 +113,7 @@ class SignInVC: UIViewController {
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!
             let password = passwordCV.textField.text!
-            if !AuthManager.shared.isValidEmail(email) {
+            if !email.isValidEmail {
                 Hud.InvalidEmailText(onView: view)
                 return
             }
@@ -109,13 +122,14 @@ class SignInVC: UIViewController {
                 return
             }
             Hud.showLoadingHud(onView: view, withLabel: "Login...")
-            AuthManager.shared.authWithUserCredential(credintial: Login(email: email, password: password)) { result in
+            auth.signIn(data: Login(email: email, password: password)) { [weak self] (result) in
+                Hud.hide(after: 0.0)
+                guard let self = self else { return }
                 switch result {
                     case .success(_):
-                        Hud.hide(after: 0.0)
-                        AuthManager.shared.pushHomeViewController(vc: self)
+                        self.navigateToHomeController()
                     case .failure(let err):
-                        Hud.faildAndHide(withMessage: err.rawValue)
+                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
                 }
             }
         }
@@ -124,6 +138,14 @@ class SignInVC: UIViewController {
     func setupLoginWithFaceIDLayout() {
         view.addSubview(loginWithFaceIDButton)
         loginWithFaceIDButton.DNLayoutConstraint(nil, left: view.leftAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 40, bottom: 20, right: 50), size: CGSize(width: 0, height: 50))
+    }
+    
+    private func navigateToHomeController() {
+        DispatchQueue.main.async {
+            let containerVC = ContainerVC()
+            containerVC.modalPresentationStyle = .fullScreen
+            self.present(containerVC, animated: true, completion: nil)
+        }
     }
     
 }

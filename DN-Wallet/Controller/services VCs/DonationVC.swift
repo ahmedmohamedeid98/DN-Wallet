@@ -24,6 +24,7 @@ class DonationVC: UIViewController {
     var charityLogo: [UIImage?] = []
     var originDataSource: [Charity] = []
     var charityTableDataSource: UITableViewDiffableDataSource<charitySection, Charity>!
+    private lazy var charityManager: CharityDataProtocol = CharityData()
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -75,9 +76,21 @@ class DonationVC: UIViewController {
     }
     
     private func configureDiffableDateSource() {
-        charityTableDataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (table, indexPath, data) -> UITableViewCell? in
+        charityTableDataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self] (table, indexPath, data) -> UITableViewCell? in
+            guard let self = self else { return UITableViewCell()}
             guard let cell = table.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier, for: indexPath) as? DonationCell else {fatalError("can not dequeue charity cell")}
-            cell.data = self.currentDataSource[indexPath.row]
+            let data = self.currentDataSource[indexPath.row]
+            cell.data = data
+            self.charityManager.loadImageWithStrURL(str: data.org_logo) { result in
+                switch result {
+                    case .success(let img):
+                        DispatchQueue.main.async {
+                           cell.logo.image = img
+                        }
+                    case .failure(_):
+                        break
+                }
+            }
             return cell
         })
         
@@ -156,31 +169,34 @@ extension DonationVC: UITableViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-        
+    
 }
 //MARK:- Networking
 extension DonationVC {
     func loadData() {
         Hud.showLoadingHud(onView: view)
-        NetworkManager.getCharityOrganizationInitialData { (result) in
+        charityManager.getCharityInitData { [weak self] (result) in
+            Hud.hide(after: 0.0)
+            guard let self = self else { return }
             switch result {
                 case .success(let charityList):
                     self.configureGetCharityDataSuccessCase(list: charityList)
                 case .failure(let error):
-                    self.configureGetCharityDataFailureCase(error: error.rawValue)
+                    self.configureGetCharityDataFailureCase(error: error.localizedDescription)
             }
         }
     }
     
+    
     private func configureGetCharityDataSuccessCase(list: [Charity]) {
+        
         self.originDataSource = list
         self.currentDataSource = self.originDataSource
-        Hud.hide(after: 0.5)
         self.updateTableInMainThread()
     }
     
     private func configureGetCharityDataFailureCase(error: String) {
-        Hud.faildAndHide(withMessage: error)
+        self.asyncDismissableAlert(title: "Failure", Message: error)
     }
     
     func updateTableInMainThread() {

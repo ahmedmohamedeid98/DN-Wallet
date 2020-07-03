@@ -11,9 +11,9 @@ import UIKit
 class SaleVC: UIViewController {
 
     @IBOutlet weak var email: UILabel!
-    
     @IBOutlet weak var qrCodeImage: UIImageView!
-
+    private lazy var auth: UserAuthProtocol = UserAuth()
+    
     var documentUrl: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
@@ -28,7 +28,7 @@ class SaleVC: UIViewController {
     
     fileprivate func initViewController() {
         handleNavigationBar()
-        email.text = AuthManager.shared.getUserEmail() ?? "ahmedmohamedeid98@gmail.com"
+        email.text = auth.getUSerEmail() ?? "usermail@example.com"
         
         if let filePath = exist(fileName: keys.qrCodeFileName) {
             // load image from filePath and show it to ui
@@ -77,15 +77,15 @@ class SaleVC: UIViewController {
     @objc func downlaodQRCodeBtn(_ sender: Any) {
         if let _ = exist(fileName: keys.qrCodeFileName) {
             // Image is already Downloaded or save automatically by the app
-            AuthManager.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
-            print("file exist ::2")
+            let message = "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)"
+            self.syncDismissableAlert(title: "Save Successfully", Message: message)
         } else {
             if let _ = save(fileName: keys.qrCodeFileName) {
-                AuthManager.shared.buildAndPresentAlertWith("save success", message: "qrCodeImage saved successfully to path: /Documents/\(keys.qrCodeFileName)", viewController: self)
-                print("file save ::1")
+                let message = "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)"
+                self.syncDismissableAlert(title: "Save Successfully", Message: message)
             }else {
-                AuthManager.shared.buildAndPresentAlertWith("faild saving", message: "faild to save image, try again.", viewController: self)
-                print("file faild to save ::2")
+                let message = "faild to save image, try again."
+                self.syncDismissableAlert(title: K.alert.faild, Message: message)
             }
         }
         

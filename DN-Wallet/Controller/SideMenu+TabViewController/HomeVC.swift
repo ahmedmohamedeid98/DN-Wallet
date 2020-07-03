@@ -40,7 +40,6 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
-        print("token: \(String(describing: AuthManager.shared.getUserToken()))")
         
         loadData()
     }

@@ -11,8 +11,7 @@ import UIKit
 class PayVC: UIViewController {
 
     //MARK:- Properities
-    private var inSafeMode = AuthManager.shared.isAppInSafeMode
-    private var allowedAmount = AuthManager.shared.allowedAmountInSafeMode
+    private lazy var auth: UserAuthProtocol = UserAuth()
     private var actualBalance: Balance?
     // this value come from ContainerVC
     var userBalance: [Balance] = []
@@ -90,18 +89,16 @@ class PayVC: UIViewController {
         view.endEditing(true)
         if let amount = amountField.text, let currency = dropDown.text {
             let enteredBalance = Balance(amount: Double(amount) ?? 0.0, currency: currency)
-            if self.isValidAmount(balance: enteredBalance, isInSafeMode: inSafeMode) {
+            if self.isValidAmount(balance: enteredBalance) {
                 // if the app in safe mode the update allowed amount
-                if inSafeMode {
-                    let newAmount = Int(allowedAmount - enteredBalance.amount)
-                    allowedAmount = Double(newAmount)
-                    AuthManager.shared.updateAllowedAmoundInSafeMode(with: newAmount)
+                if auth.isAppInSafeMode {
+                    auth.allowedAmountInSafeMode = auth.allowedAmountInSafeMode - enteredBalance.amount
                 }
                 preformScanOperation(with: enteredBalance)
             } else {
                 let message: String
-                if inSafeMode {
-                    message = "Entered amount (\(amount)) greater than remaining allowed amount in safeMode (\(allowedAmount))"
+                if auth.isAppInSafeMode {
+                    message = "Entered amount (\(amount)) greater than remaining allowed amount in safeMode (\(auth.allowedAmountInSafeMode))"
                 } else {
                     if let balance = actualBalance {
                         message = "Entered amount (\(amount)) greater than your balace amount (\(balance.amount) \(Currency(rawValue: balance.currency)?.symbole ?? "")"
@@ -110,7 +107,7 @@ class PayVC: UIViewController {
                     }
                 }
                 // alert
-                Alert.syncActionOkWith(K.alert.faild, msg: message, viewController: self)
+                self.asyncDismissableAlert(title: K.alert.faild, Message: message)
             }
             amountValue = 0.0
             amountField.text = ""
@@ -118,10 +115,10 @@ class PayVC: UIViewController {
         }
     }
     
-    private func isValidAmount(balance: Balance, isInSafeMode: Bool = false) -> Bool {
+    private func isValidAmount(balance: Balance) -> Bool {
         
-        if isInSafeMode {
-            return balance.amount <= allowedAmount
+        if auth.isAppInSafeMode {
+            return balance.amount <= auth.allowedAmountInSafeMode
         } else {
             let actualBalances = userBalance.filter { $0.currency == balance.currency }
             actualBalance = actualBalances.first

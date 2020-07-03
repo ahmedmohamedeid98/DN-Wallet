@@ -45,10 +45,9 @@ class ConfirmEmailVC: UIViewController {
     //MARK:- Methods
     // send Confirmation Code
     private func sendConfirmationCode() {
-        generatedCode  = AuthManager.shared.generateConfirmationCode()
-        guard let mail = AuthManager.shared.getUserEmail(), let code = generatedCode else {
-            return
-        }
+        let code  = "DNDNDNDNND"//AuthManager.shared.generateConfirmationCode()
+        let mail = "DNDNDNNDND"//AuthManager.shared.getUserEmail(), let code = generatedCode else {
+         
         print("userEmail: \(mail)")
         print("userCode : \(code)")
         

@@ -114,7 +114,7 @@
         <!--Create AccountVC-->
         <scene sceneID="NWz-6V-Pt2">
             <objects>
-                <viewController storyboardIdentifier="signUpVCID" id="1hg-TP-rOw" customClass="CreateAccountVC" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountVCID" id="1hg-TP-rOw" customClass="CreateAccountVC" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UuI-Ot-bCA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

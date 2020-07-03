@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private lazy var auth: UserAuthProtocol = UserAuth()
     //var remainingTime: Int64 = 0
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !UserPreference.getBoolValue(withKey: UserPreference.firstLaunchKey) {
             // don't show guide screens again
             UserPreference.setValue(true, withKey: UserPreference.firstLaunchKey)
-            AuthManager.shared.canEvaluatePolicyWithFaceID()
-             window = UIWindow(windowScene: windowScene)
+            auth.canEvaluatePolicyWithFaceID()
+            window = UIWindow(windowScene: windowScene)
             // assign viewController
             let guideVC = ContainerViewController()
             window?.rootViewController = guideVC

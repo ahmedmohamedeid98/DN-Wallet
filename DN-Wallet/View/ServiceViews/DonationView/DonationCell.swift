@@ -12,26 +12,16 @@ import UIKit
 class DonationCell: UITableViewCell {
 
     static let reuseIdentifier: String = "donation-cell-identifier"
-    private var logo    = DNImageView(title: "photo.fill", tintColor: .DnColor, contentMode: .scaleAspectFit, isSystemImage: true)
+    var logo    = DNImageView(title: "photo.fill", tintColor: .DnColor, contentMode: .scaleAspectFit, isSystemImage: true)
     private var title   = DNTitleLabel(title: "org name", alignment: .left, fontSize: 16, weight: .regular)
     private var mail    = DNTitleLabel(title: "org@example.com", alignment: .left, fontSize: 14, weight: .regular)
+    
    
     var data: Charity? {
         didSet {
             guard let safeData = data else {return}
             self.mail.text = safeData.email
             self.title.text = safeData.name
-            NetworkManager.loadImageWithStrURL(str: safeData.org_logo) { result in
-                switch result {
-                    case .success(let img):
-                        DispatchQueue.main.async {
-                           self.logo.image = img
-                        }
-                        
-                    case .failure(_):
-                        break
-                }
-            }
         }
     }
 

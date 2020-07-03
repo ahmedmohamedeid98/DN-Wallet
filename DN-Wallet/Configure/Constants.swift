@@ -77,6 +77,6 @@ struct K {
         static let edit = "Edit"
         static let delete = "Delete"
         static let done = "Done"
-        static let faild = "Faild"
+        static let faild = "Failure"
     }
 }

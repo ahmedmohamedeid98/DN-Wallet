@@ -32,28 +32,7 @@ struct UserID: Codable {
 
 // creating new contact
 struct CreateContactResponse: Codable {
-    let id: String?
-    let name: String?
-    let email: String?
-    let error: String?
+    let id: String
+    let name: String
+    let email: String
 }
-/*
-// class which populate in tableView
-class Contact: NSObject {
-    var username:String
-    var email:String
-    var id: String
-    
-    init(username: String, email: String, id: String, identifier: String) {
-        self.username = username
-        self.email = email
-        self.identifier = identifier
-        self.id = id
-    }
-    var identifier: String
-
-    static func == (lhs: Contact, rhs: Contact) -> Bool{
-        return lhs.identifier == rhs.identifier
-    }
-}
-*/

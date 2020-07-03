@@ -43,4 +43,28 @@ class Alert {
             vc.present(alert, animated: true, completion: nil)
         }
     }
+    
+}
+extension UIViewController {
+    func asyncDismissableAlert(title: String?, Message msg: String, dismissAfter time: TimeInterval = 3.0) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+                    alert.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    func syncDismissableAlert(title: String?, Message msg: String, dismissAfter time: TimeInterval = 3.0) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+                 alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class SettingVC: UIViewController {
 
+    private lazy var auth: UserAuthProtocol = UserAuth()
     var settingTable: UITableView!
     var userQuikDetails: UserQuikDetails!
     var leftBarButton: UIBarButtonItem!
@@ -179,7 +180,7 @@ extension SettingVC {
         let alert = UIAlertController(title: "Safe Mode Time", message: "Set safe mode time in (Hours) , we recommend you that time be at least 12 hours.", preferredStyle: .alert)
         let setAction = UIAlertAction(title: "Set", style: .default) { (action) in
             if let hours = alert.textFields![0].text {
-                AuthManager.shared.setSafeModeTime(hours: hours)
+                self.auth.setSafeModeTime(hours: hours)
                 self.settingTable.updateRowWith(indexPaths: [SecurityOptions.safeModeTime.indexPath], animate: .fade)
             }
         }

@@ -12,17 +12,15 @@ extension String: Error {}
 
 
 struct ErrorResponse: Codable {
-    let error: String?
+    let error: String
 }
 
 
 final class NetworkManager {
     
      //MARK:- Properities
-    
     static let base = "https://dn-wallet.herokuapp.com/api"
     static var imageCache = NSCache<AnyObject, UIImage>()
-    
     enum Endpoint {
         case login, register, phoneVerify, confirmMail
         case history
@@ -58,8 +56,7 @@ final class NetworkManager {
     //====================================
     // Sign in
     //====================================
-    
-    /// login method, ask API to return a token
+    /*
     class func login(credintial: Login, comlpetion: @escaping(Result<LoginResponse, DNError>)-> Void) {
         taskForPOSTRequest(url: Endpoint.login.url, responseType: LoginResponse.self, body: credintial, comlpetion)
     }
@@ -67,21 +64,19 @@ final class NetworkManager {
     //====================================
     // Create Account
     //====================================
-    
-    /// ask API to create account, and return a user token
     class func register(with data: Register, completion: @escaping(Result<RegisterResponder, DNError>) -> Void) {
         taskForPOSTRequest(url: Endpoint.register.url, responseType: RegisterResponder.self, body: data, completion)
     }
+ */
     
     //====================================
     // Verify Phone number
     //====================================
-    
     class func verifyPhone(number: String, completion: @escaping (Result<Bool, DNError>) -> () ) {
         var request = URLRequest(url: Endpoint.phoneVerify.url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
+        request.setValue("auth.getUserToken()", forHTTPHeaderField: "a-auth-token")
         request.httpBody = try! JSONSerialization.data(withJSONObject: ["phoneNumber": number])
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let _ = error {
@@ -101,17 +96,7 @@ final class NetworkManager {
             
             print("DDT1: \(String(describing: String(data: safeData, encoding: .utf8)))")
             
-            do {
-                let decoder = JSONDecoder()
-                let res = try decoder.decode(ErrorResponse.self, from: safeData)
-                if res.error == nil {
-                    completion(.success(true))
-                } else {
-                    completion(.failure(.invalidPhoneNumber))
-                }
-            } catch {
-                completion(.failure(.invalidData))
-            }
+            completion(.success(true))
         }
         task.resume()
     }
@@ -124,7 +109,7 @@ final class NetworkManager {
         var request = URLRequest(url: Endpoint.phoneVerify.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
+        request.setValue("auth.getUserToken()", forHTTPHeaderField: "a-auth-token")
         request.httpBody = try! JSONSerialization.data(withJSONObject: ["phoneNumber": number, "code": code])
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let _ = error {
@@ -140,18 +125,7 @@ final class NetworkManager {
                 return
             }
             print("DDT2: \(String(describing: String(data: safeData, encoding: .utf8)))")
-            
-            do {
-                let decoder = JSONDecoder()
-                let res = try decoder.decode(ErrorResponse.self, from: safeData)
-                if res.error == nil {
-                    completion(.success(true))
-                } else {
-                    completion(.failure(.invalidCode))
-                }
-            } catch {
-                completion(.failure(.invalidData))
-            }
+            completion(.success(true))
         }
         task.resume()
     }
@@ -165,7 +139,6 @@ final class NetworkManager {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         //request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
         request.httpBody = try! JSONSerialization.data(withJSONObject: ["email": email, "code": code])
-        //let task = URLSession.shared.data
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let _ = error {
                 completion(.failure(.unableToComplete))
@@ -203,7 +176,7 @@ final class NetworkManager {
     class func editAccount(withObject object: [String: Any], completion: @escaping(Result<Bool, DNError>) -> () ) {
         var request = URLRequest(url: Endpoint.editInfo.url)
         request.httpMethod = "PUT"
-        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "a-auth-token")
+        request.setValue("auth.getUserToken()", forHTTPHeaderField: "a-auth-token")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONSerialization.data(withJSONObject: object)
         
@@ -247,13 +220,13 @@ final class NetworkManager {
     struct AddNewContact: Encodable {
         let email: String
     }
-    
+    /*
     class func addNewContact(WithEmail email: String, completion: @escaping(Result<Contact, String>) -> Void) {
         let data = AddNewContact(email: email)
         var request = URLRequest(url: Endpoint.createContact.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(AuthManager.shared.getUserToken(), forHTTPHeaderField: "x-auth-token")
+        request.setValue("auth.getUserToken()", forHTTPHeaderField: "x-auth-token")
         request.httpBody = try! JSONEncoder().encode(data)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -288,6 +261,7 @@ final class NetworkManager {
         }
         task.resume()
     }
+ */
     
     //====================================
     // Delete Contact
@@ -295,9 +269,10 @@ final class NetworkManager {
     struct deleteContactResponse: Codable {
         let error: String?
     }
+    
     class func deleteContact(withID id: String, completion: @escaping(Result<Bool, String>) -> () ) {
         var request = URLRequest(url: Endpoint.deleteContact(id).url)
-        let token = AuthManager.shared.getUserToken()
+        let token = "auth.getUserToken()"
         request.httpMethod = "DELETE"
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         
@@ -340,7 +315,7 @@ final class NetworkManager {
 //            }
 //        }
     }
-    
+    /*
      //MARK:- Charity
     
     //====================================
@@ -359,7 +334,7 @@ final class NetworkManager {
     }
     
     //====================================
-    // Get Charity Logo
+    // Get Charity Logo, Custom just for #cashe#
     //====================================
     class func loadImageWithStrURL(str: String, completion: @escaping (Result<UIImage, DNError>) -> () ) {
         let url = URL(string: str)!
@@ -387,7 +362,7 @@ final class NetworkManager {
         }
         task.resume()
     }
-    
+    */
     
     
     //MARK:- Transaction
@@ -403,21 +378,14 @@ final class NetworkManager {
         
     }
     
-
+    //*******************************
+    // ########### Generics #########
+    //*******************************
     
     
-    
-    /// convert currency_code to symbole if it founded
-    class func symboleFromString(str: String) -> String {
-        for currency in Currency.allCases {
-            if currency.rawValue == str {
-                return currency.symbole
-            }
-        }
-        return "unknown"
-    }
-    
-    //MARK:- Generic Get Request without Token
+    //========================================
+    //MARK:- Generic: GETRequest without Token
+    //========================================
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, _ completion: @escaping(Result<ResponseType, DNError>) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -426,11 +394,14 @@ final class NetworkManager {
         task.resume()
     }
     
-    //MARK:- Generic Get Request With Token
+    
+    //=====================================
+    //MARK:- Generic: GEtRequest With Token
+    //=====================================
     class func taskForGETRequestWithToken<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, _ completion: @escaping(Result<ResponseType, DNError>) -> Void) {
         
         var request = URLRequest(url: url)
-        let token = AuthManager.shared.getUserToken()
+        let token = "auth.getUserToken()"
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         request.httpMethod = "GET"
         
@@ -439,7 +410,11 @@ final class NetworkManager {
         }
         task.resume()
     }
-    //MARK:- Generic POST Request
+    
+    
+    //========================================
+    //MARK:- Generic POSTRequest without Token
+    //========================================
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, _ completion: @escaping(Result<ResponseType, DNError>)-> Void) {
         
         var request = URLRequest(url: url)
@@ -453,12 +428,16 @@ final class NetworkManager {
         task.resume()
     }
     
-    class func taskForPOSTRequestWithToken<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, _ completion: @escaping(Result<ResponseType, DNError>)-> Void) {
+    
+    //===============================
+    //MARK:- Generic: DELETERequest
+    //===============================
+    class func taskForDeleteRequestWithToken<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, _ completion: @escaping(Result<ResponseType, DNError>)-> Void) {
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "DELETE"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let token = AuthManager.shared.getUserToken()
+        let token = "auth.getUserToken()"
         request.setValue(token, forHTTPHeaderField: "x-auth-token")
         request.httpBody = try! JSONEncoder().encode(body)
         
@@ -468,7 +447,27 @@ final class NetworkManager {
         task.resume()
     }
     
+    //========================================
+    //MARK:- Generic POSTRequest without Token
+    //========================================
+    class func taskForPOSTRequestWithToken<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, _ completion: @escaping(Result<ResponseType, DNError>)-> Void) {
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let token = "AuthManager.shared.getUserToken()"
+        request.setValue(token, forHTTPHeaderField: "x-auth-token")
+        request.httpBody = try! JSONEncoder().encode(body)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            completion(handelTaskResponse(data, response, error, responseType))
+        }
+        task.resume()
+    }
     
+    //========================================
+    //MARK:- Helper Function
+    //========================================
     private class func handelTaskResponse<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ responseType: ResponseType.Type) -> Result<ResponseType, DNError> {
         if let _ = error {
             return .failure(.unableToComplete)
@@ -476,11 +475,24 @@ final class NetworkManager {
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             return .failure(.invalidResponse)
+            /*
+             guard let responseData = data else { return .failure(DNError.invalidResponse.rawValue)}
+             do {
+             let responseError = try JSONDecoder().decode(ErrorResponse.self, responseData)
+             if let err = responseError {
+                return .failure(err)
+             }
+             catch
+             {
+                return .failure(DNError.invalidResponse.rawValue)
+             }
+             */
             
         }
         
         guard let safeData = data else {
             return .failure(.invalidData)
+            // return .failure(DNError.invalidData.rawValue)
         }
         
         do {
@@ -489,6 +501,40 @@ final class NetworkManager {
             return .success(responseObject)
         } catch {
             return .failure(.invalidData)
+            // return .failure(DNError.invalidData.rawValue)
         }
     }
+    /*
+    private class func NhandelTaskResponse<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ responseType: ResponseType.Type) -> Result<ResponseType, String> {
+        if let _ = error {
+            return .failure(.unableToComplete)
+        }
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            guard let responseData = data else { return .failure(DNError.invalidResponse.rawValue)}
+            do {
+                let responseError = try JSONDecoder().decode(ErrorResponse.self, responseData)
+                if let err = responseError {
+                    return .failure(err)
+                }
+                catch
+                {
+                    return .failure(DNError.invalidResponse.rawValue)
+                }
+                
+        }
+        
+        guard let safeData = data else {
+             return .failure(DNError.invalidData.rawValue)
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let responseObject = try decoder.decode(responseType.self, from: safeData)
+            return .success(responseObject)
+        } catch {
+            return .failure(DNError.invalidData.rawValue)
+        }
+    }
+ */
 }

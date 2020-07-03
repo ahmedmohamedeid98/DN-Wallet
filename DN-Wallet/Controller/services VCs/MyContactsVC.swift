@@ -23,7 +23,7 @@ class MyContactsVC: UIViewController {
 
     
     //MARK:- Properities
-    private var inSafeMode = AuthManager.shared.isAppInSafeMode
+//    private var inSafeMode = AuthManager.shared.isAppInSafeMode
     var searchBar: UISearchBar!
     var contactTable: UITableView!
     var contactTableDataSource: ContactDataSource!
@@ -33,6 +33,8 @@ class MyContactsVC: UIViewController {
     var alert: UIAlertController!
     var addBarButton: UIBarButtonItem!
     var searchBarButton: UIBarButtonItem!
+    private lazy var auth: UserAuthProtocol = UserAuth()
+    private lazy var myContactManager: MyContactManagerProtocol = MyContactManager()
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -133,7 +135,7 @@ extension MyContactsVC: UITableViewDelegate {
     
     //when user select a cell check if the app in safeMode or not if it is, then prevent navigation to sendMoney page
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard !inSafeMode else { return }
+        guard !auth.isAppInSafeMode else { return }
         if let item = contactTableDataSource.itemIdentifier(for: indexPath) {
             let st = UIStoryboard(name: "Services", bundle: .main)
             guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }
@@ -214,17 +216,19 @@ extension MyContactsVC {
     //================================
     private func loadData() {
         Hud.showLoadingHud(onView: view, withLabel: "Load Contacts...")
-        NetworkManager.getUserConcats { (result) in
-            switch result {
-                case .success(let contacts):
-                    self.configureNetworkingSuccessCase(withData: contacts)
-                case .failure(let error):
-                    self.configureNetworkingFailureCase(withError: error.rawValue)
+        myContactManager.getUserContacts { [weak self] (result) in
+            Hud.hide(after: 0.0)
+            guard let self = self else { return }
+                switch result {
+                    case .success(let contacts):
+                        self.configureNetworkingSuccessCase(withData: contacts)
+                    case .failure(let error):
+                        self.configureNetworkingFailureCase(withError: error.localizedDescription)
             }
         }
     }
+    
     private func configureNetworkingSuccessCase(withData data: [Contact]) {
-        Hud.hide(after: 0.0)
         self.originDataSource = data
         self.currentDataSource = data
         DispatchQueue.main.async {
@@ -233,7 +237,7 @@ extension MyContactsVC {
         }
     }
     private func configureNetworkingFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
+        self.asyncDismissableAlert(title: "Failure", Message: error)
     }
     
     
@@ -260,28 +264,29 @@ extension MyContactsVC {
     @objc func addBtnPressed() {
         configureAddingConatactAlert(actionName: K.alert.add, msg: K.vc.myContactEditMsg, uemail: nil) { (action) in
             if let email = self.alert.textFields![0].text {
-                if !email.isEmpty && AuthManager.shared.isValidEmail(email) {
+                if !email.isEmpty && email.isValidEmail {
                     Hud.showLoadingHud(onView: self.view, withLabel: "Add Contact...")
-                    NetworkManager.addNewContact(WithEmail: email) { (result) in
+                    self.myContactManager.addNewContact(withEmail: email) { [weak self](result) in
+                        guard let self = self else { return }
+                        Hud.hide(after: 0.0)
                         switch result {
                             case .success(let contact):
                                 self.configureAddingContactSuccessCase(withContact: contact)
                             case .failure(let error):
-                                self.configureAddingContactFailureCase(withError: error)
+                                self.configureAddingContactFailureCase(withError: error.localizedDescription)
                         }
                     }
                 }
             }
         }
-       
     }
-    private func configureAddingContactSuccessCase(withContact contact: Contact) {
-        Hud.successAndHide()
-        self.originDataSource.append(contact)
-        self.addContact(contact)
+    private func configureAddingContactSuccessCase(withContact contact: CreateContactResponse) {
+        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email))
+        self.originDataSource.append(newContact)
+        self.addContact(newContact)
     }
     private func configureAddingContactFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
+        self.asyncDismissableAlert(title: "Failure", Message: error)
     }
     
     // this method call in add alert to add new contact to the table view
@@ -302,17 +307,18 @@ extension MyContactsVC {
         var currentSnapshot = self.contactTableDataSource.snapshot()
         guard let contact = self.contactTableDataSource.itemIdentifier(for: indexPath) else {return}
         Hud.showLoadingHud(onView: self.view, withLabel: "Deleting...")
-        NetworkManager.deleteContact(withID: contact._id) { (result) in
+        myContactManager.deleteContact(WithId: contact.userID._id) { [weak self] (result) in
+            guard let self = self else { return }
+            Hud.hide(after: 0.0)
             switch result {
                 case .success(_):
-                    Hud.successAndHide()
                     currentSnapshot.deleteItems([contact])
                     self.originDataSource.remove(at: indexPath.row)
                     DispatchQueue.main.async {
                         self.contactTableDataSource.apply(currentSnapshot)
-                }
+                    }
                 case .failure(let error):
-                    Hud.faildAndHide(withMessage: error)
+                    self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription)
             }
         }
     }

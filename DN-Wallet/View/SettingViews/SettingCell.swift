@@ -11,6 +11,7 @@ import UIKit
 class SettingCell: UITableViewCell {
     
     //MARK:- Properities
+    private lazy var auth: UserAuthProtocol = UserAuth()
     var descriptionLabel    = DNTitleLabel(title: " ", alignment: .right, fontSize: 14, weight: .light)
     var Switch: UISwitch    = {
         let sw = UISwitch()
@@ -53,7 +54,7 @@ class SettingCell: UITableViewCell {
     
     //MARK:- Methods
     func setTime() {
-        descriptionLabel.text = "\(AuthManager.shared.getSafeModeTime()) hour"
+        descriptionLabel.text = "\(auth.getSafeModeTime()) hour"
     }
     
     func setLanguage() {
@@ -88,9 +89,9 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
-                AuthManager.shared.activeSafeMode()
+                auth.activeSafeMode()
             } else {
-                AuthManager.shared.deactiveSafeMode()
+                auth.deactiveSafeMode()
             }
         }
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {

@@ -16,6 +16,7 @@ final class CreateAccountVC: UIViewController {
     @IBOutlet weak var passwordContainer: DNViewWithTextField!
     @IBOutlet weak var confirmPasswordContainer: DNViewWithTextField!
     @IBOutlet weak var createAccountOutlet: UIButton!
+    private var auth : UserAuthProtocol!
     private var name : UITextField!
     private var email: UITextField!
     private var pass1: UITextField!
@@ -26,6 +27,7 @@ final class CreateAccountVC: UIViewController {
      //MARK:- Init ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+        auth = UserAuth()
         //view.backgroundColor = .DnVcBackgroundColor
         usernameContainer.configure(imageName: "person", placeholder: "Username", systemImage: true, isSecure: false)
         emailContainer.configure(imageName: "envelope", placeholder: "Email", systemImage: true, isSecure: false)
@@ -50,13 +52,14 @@ final class CreateAccountVC: UIViewController {
             let email = emailContainer.textField.text!
             let password = passwordContainer.textField.text!
             let data = Register(name: username, email: email, password: password, confirm_password: password)
-            AuthManager.shared.createAccount(data: data) { (result) in
+            auth.signUp(data: data) { [weak self] (result) in
+                Hud.hide(after: 0.0)
+                guard let self = self else { return }
                 switch result {
                     case .success(_):
-                        Hud.hide(after: 0.0)
-                        AuthManager.shared.pushHomeViewController(vc: self)
+                        self.navigateToHomeController()
                     case .failure(let err):
-                        Hud.faildAndHide(withMessage: err.rawValue)
+                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
                 }
             }
         }
@@ -76,13 +79,13 @@ extension CreateAccountVC {
         // check name validation (1 layer)
         if name.text == "" {
             usernameContainer.layer.borderColor = wrongColor
-            Alert.syncActionOkWith(nil, msg: K.auth.nameIsNull, viewController: self)
+            self.syncDismissableAlert(title: nil, Message: K.auth.nameIsNull)
             return false
         } else {
             usernameContainer.layer.borderColor = validColor
         }
         // check email validation (2 layer)
-        if email.text == "" || !AuthManager.shared.isValidEmail(email.text!) {
+        if email.text == "" || !email.text!.isValidEmail {
             emailContainer.layer.borderColor = wrongColor
             Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
             return false
@@ -110,5 +113,13 @@ extension CreateAccountVC {
     
     func matchedPassword(_ passW1: String, _ passW2: String) -> Bool {
         return passW1 == passW2
+    }
+    
+    private func navigateToHomeController() {
+        DispatchQueue.main.async {
+            let containerVC = ContainerVC()
+            containerVC.modalPresentationStyle = .fullScreen
+            self.present(containerVC, animated: true, completion: nil)
+        }
     }
 }

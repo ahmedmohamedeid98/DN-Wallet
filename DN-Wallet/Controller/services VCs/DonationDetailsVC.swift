@@ -16,6 +16,7 @@ class DonationDetailsVC: UIViewController {
     private var charityTable: UITableView!
     private var mapView: MKMapView!
     var charityID: String?
+    private lazy var charityManager: CharityDataProtocol = CharityData()
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -152,18 +153,19 @@ extension DonationDetailsVC {
     func loadData() {
         if let id = charityID {
             Hud.showLoadingHud(onView: view, withLabel: "Get Details...")
-            NetworkManager.getCharityOrganizationDetails(withID: id) { (result) in
+            charityManager.getCharityDetails(withId: id) { [weak self] (result) in
+                guard let self = self else { return }
+                Hud.hide(after: 0.0)
                 switch result {
                     case .success(let data):
                         self.configureNetworkingSuccessCase(withData: data)
                     case .failure(let error):
-                        self.configureNetworkingFailureCase(withError: error.rawValue)
+                        self.configureNetworkingFailureCase(withError: error.localizedDescription)
                 }
             }
         }
     }
     private func configureNetworkingSuccessCase(withData data: CharityDetailsResponse) {
-        Hud.hide(after: 0.0)
         DispatchQueue.main.async {
             let initialLocation = CLLocation(latitude: data.location.lat, longitude: data.location.lan)
             self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
@@ -175,6 +177,6 @@ extension DonationDetailsVC {
     }
     
     private func configureNetworkingFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
+        self.asyncDismissableAlert(title: "Failure", Message: error)
     }
 }
