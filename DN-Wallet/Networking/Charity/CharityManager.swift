@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol CharityDataProtocol {
+protocol CharityManagerProtocol {
     func getCharityInitData(completion: @escaping(Result<[Charity], NSError>) -> ())
     func getCharityDetails(withId id: String, completion: @escaping(Result<CharityDetailsResponse, NSError>) -> ())
     func loadImageWithStrURL(str: String, completion: @escaping (Result<UIImage, DNError>) -> () )
 }
 
-class CharityData: BaseAPI<CharityNetworking>, CharityDataProtocol {
+class CharityManager: BaseAPI<CharityNetworking>, CharityManagerProtocol {
     
     func getCharityInitData(completion: @escaping(Result<[Charity], NSError>) -> ()) {
         self.APIRequest(target: .getInitData, responseClass: [Charity].self, completion: completion)

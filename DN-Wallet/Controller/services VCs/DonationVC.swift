@@ -24,7 +24,7 @@ class DonationVC: UIViewController {
     var charityLogo: [UIImage?] = []
     var originDataSource: [Charity] = []
     var charityTableDataSource: UITableViewDiffableDataSource<charitySection, Charity>!
-    private lazy var charityManager: CharityDataProtocol = CharityData()
+    private lazy var charityManager: CharityManagerProtocol = CharityManager()
     
     //MARK:- Init
     override func viewDidLoad() {

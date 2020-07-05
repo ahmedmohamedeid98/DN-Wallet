@@ -16,7 +16,7 @@ class DonationDetailsVC: UIViewController {
     private var charityTable: UITableView!
     private var mapView: MKMapView!
     var charityID: String?
-    private lazy var charityManager: CharityDataProtocol = CharityData()
+    private lazy var charityManager: CharityManagerProtocol = CharityManager()
     
     //MARK:- Init
     override func viewDidLoad() {

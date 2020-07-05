@@ -204,7 +204,7 @@ final class NetworkManager {
         taskForGETRequestWithToken(url: Endpoint.history.url, responseType: [History].self, completion)
     }
      //MARK:- Contacts
-    
+    /*
     //====================================
     // Get all Contacts
     //====================================
@@ -220,7 +220,8 @@ final class NetworkManager {
     struct AddNewContact: Encodable {
         let email: String
     }
-    /*
+    
+    
     class func addNewContact(WithEmail email: String, completion: @escaping(Result<Contact, String>) -> Void) {
         let data = AddNewContact(email: email)
         var request = URLRequest(url: Endpoint.createContact.url)
@@ -261,8 +262,6 @@ final class NetworkManager {
         }
         task.resume()
     }
- */
-    
     //====================================
     // Delete Contact
     //====================================
@@ -306,6 +305,7 @@ final class NetworkManager {
         task.resume()
     }
     
+    */
     class func addTransactionToHistoryWith(details: HistoryCategory, completion: @escaping (Bool, Error?) -> Void) {
 //        taskForPOSTRequest(url: Endpoint.login.url, response: LoginResponse.self, body: details) { (success, error) in
 //            if let success {

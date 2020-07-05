@@ -14,11 +14,11 @@ import MBProgressHUD
 
 
 // MARK:- Setup Authentication calss
-*/
+
 /// Login, SignUp and get user's information from keychain
 final class AuthManager {
 }
-    /*
+   
  
     static let shared = AuthManager()
     private let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
