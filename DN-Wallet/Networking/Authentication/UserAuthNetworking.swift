@@ -53,9 +53,4 @@ extension UserAuthNetworking: TargetType {
             default: return false
         }
     }
-    
-    var haveResponseClass: Bool {
-        return true
-    }
-    
 }

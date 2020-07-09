@@ -30,17 +30,7 @@ enum HDetails{
     }
     
     /// enum method return segment controller items for each one of the three history catefory
-    func segItems() -> [String] {
-        
-        switch self{
-            case .consumption:
-                return ["Purchases", "Individuals"]
-            case .received:
-                return ["Sales", "Individuals"]
-            case .donations:
-                return []
-        }
-    }
+   
     
     /// enum method return boolean value which determine if the view controller conatina a uisegment controller or not
     func withSeg() -> Bool {
@@ -54,6 +44,17 @@ enum HDetails{
         }
         
     }
+    func segItems() -> [String] {
+           
+           switch self{
+               case .consumption:
+                   return ["Purchases", "Individuals"]
+               case .received:
+                   return ["Sales", "Individuals"]
+               case .donations:
+                   return []
+           }
+       }
     
     /// enum method return the info label text for each one of the three history catefory
     func infoLabel() -> String {

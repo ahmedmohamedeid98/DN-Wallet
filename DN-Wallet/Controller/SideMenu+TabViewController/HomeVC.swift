@@ -41,7 +41,7 @@ class HomeVC: UIViewController {
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         
-        loadData()
+        //loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,7 +227,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK:- Networking
+
 extension HomeVC {
+
     private func loadData() {
         // get user data
         Hud.showLoadingHud(onView: view, withLabel: "Load Balance...")
@@ -243,10 +245,15 @@ extension HomeVC {
     
     private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
         Hud.hide(after: 0.0)
-        self.checkIfUserNotVerified(isVerified: data.userIsValidate)
-        //self.balance = data.balance
-        print(data)
         
+        self.checkIfUserNotVerified(isVerified: data.user.acountIsActive)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.charge), object: nil, userInfo: ["cards": data.payment_cards])
+        
+        let basicUserInfo = BasicUserInfo(name: data.user.name, email: data.user.email, photo: data.user.phone)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.setting), object: nil, userInfo: ["userInfo": basicUserInfo])
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.editAccount), object: nil, userInfo: ["user": data.user])
     }
     
     private func handleGetUserInfoFailureCase(withError error: String) {

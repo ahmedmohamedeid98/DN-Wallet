@@ -59,6 +59,7 @@ class PayVC: UIViewController {
         oldValue_ten = Step_ten.value
         handleNavigationBar()
         handelPopUpTextField()
+        dropDown.doNotShowTheKeyboard()
         dropDown.text = Currency.EGP.description // set default currency
         //setUserPreference()
     }

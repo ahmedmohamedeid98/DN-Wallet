@@ -56,12 +56,4 @@ extension MyContactNetworking: TargetType {
             default: return true
         }
     }
-    
-    var haveResponseClass: Bool {
-        switch self {
-            case .getUserConcats: return true
-            case .addNewContact: return true
-            case .deleteContact: return false
-        }
-    }
 }

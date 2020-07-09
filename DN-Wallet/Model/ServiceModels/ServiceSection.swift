@@ -67,7 +67,7 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
         let st = UIStoryboard(name: "Services", bundle: .main)
         switch self {
         case .history:
-            guard let vc = st.instantiateViewController(identifier: "historyVCID") as? HistoryVC else { return }
+            guard let vc = st.instantiateViewController(identifier: "UserhistoryVCID") as? UserHistoryVC else { return }
             present(vc, from: rootVC)
         case .sendMoney:
             guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }

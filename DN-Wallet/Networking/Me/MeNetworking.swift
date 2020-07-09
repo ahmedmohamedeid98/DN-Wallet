@@ -50,10 +50,4 @@ extension MeNetworking: TargetType {
     var tokenRequired: Bool {
         return true
     }
-    
-    var haveResponseClass: Bool {
-        return true
-    }
-    
-    
 }

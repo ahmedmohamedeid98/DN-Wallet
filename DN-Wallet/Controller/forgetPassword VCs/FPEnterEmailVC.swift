@@ -16,6 +16,7 @@ class FPEnterEmailVC: UIViewController {
     private var emailField          = DNTextField(placeholder: K.vc.fbEnterMailPlaceh, stopSmartActions: true)
     private var sendResetCodeBtn    = DNButton(backgroundColor: .DnColor, title: "Send Reset Code", cornerRedii: 20.0)
     private var emailContainerView  = DNEmptyContainer(borderWidth: 2, borderColor: .systemGray4, backgroundColor: .DnCellColor, cornerRedii: 4)
+    private lazy var resetManager: ResetManagerProtocol = ResetManager()
         
     
     //MARK:- Init
@@ -23,6 +24,11 @@ class FPEnterEmailVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         configureViewController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.sendResetCodeBtn.isEnabled = true
     }
     
 
@@ -54,14 +60,48 @@ class FPEnterEmailVC: UIViewController {
         
     }
     private func configureSendResetCodeButton() {
-        sendResetCodeBtn.withTarget = { self.sendResetCodeBtnPressed() }
+        sendResetCodeBtn.withTarget = { self.sendResetCode()  }
         view.addSubview(sendResetCodeBtn)
         sendResetCodeBtn.DNLayoutConstraint(emailField.bottomAnchor, margins: UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0), size: CGSize(width: 250, height: 40), centerH: true)
     }
-    private func sendResetCodeBtnPressed() {
-        let forgetPassVC = FPResetPasswordVC()
-        self.present(forgetPassVC, animated: true, completion: nil)
-    }
 }
 
+//Networking
 
+extension FPEnterEmailVC {
+    private func sendResetCode() {
+        if let email = emailField.text, email.isValidEmail {
+            Hud.showLoadingHud(onView: view)
+            sendResetCodeBtn.isEnabled = false
+            resetManager.forgetPassword(forEmail: email) { (result) in
+                Hud.hide(after: 0.0)
+                switch result {
+                    case .success(_):
+                        self.handleSendingCodeSuccessCase(email: email)
+                    case .failure(let err):
+                        self.handleSuccessCodeFailureCase(error: err.localizedDescription)
+                }
+            }
+            
+        } else {
+            self.asyncDismissableAlert(title: "invalid email", Message: "Please enter a valid email.")
+        }
+        
+    }
+    
+    private func handleSendingCodeSuccessCase(email: String) {
+        DispatchQueue.main.async {
+            let forgetPassVC = FPResetPasswordVC()
+            forgetPassVC.email = email
+            self.present(forgetPassVC, animated: true, completion: nil)
+        }
+    }
+    
+    private func handleSuccessCodeFailureCase(error: String) {
+        self.asyncDismissableAlert(title: "Failure", Message: error)
+        DispatchQueue.main.async {
+            self.sendResetCodeBtn.setTitle("Resend Reset Code.", for: .normal)
+            self.sendResetCodeBtn.isEnabled = true
+        }
+    }
+}

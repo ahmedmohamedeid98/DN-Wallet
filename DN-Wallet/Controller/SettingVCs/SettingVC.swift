@@ -15,6 +15,7 @@ class SettingVC: UIViewController {
     var userQuikDetails: UserQuikDetails!
     var leftBarButton: UIBarButtonItem!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
@@ -22,6 +23,7 @@ class SettingVC: UIViewController {
         setupUserQuikDetailsView()
         setupTableView()
         setupLayout()
+        addNotificationObserver()
         
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -217,4 +219,32 @@ extension UINavigationController {
    open override var preferredStatusBarStyle: UIStatusBarStyle {
       return topViewController?.preferredStatusBarStyle ?? .default
    }
+}
+//MARK:- Networking
+extension SettingVC {
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handelBasicUserData(_:)), name: NSNotification.Name(rawValue: NotificationName.setting), object: nil)
+    }
+    
+    @objc private func handelBasicUserData(_ notification: Notification) {
+        if let basicInfo = notification.userInfo?["userInfo"] as? BasicUserInfo {
+            DispatchQueue.main.async {
+                self.userQuikDetails.userName.text  = basicInfo.name
+                self.userQuikDetails.userEmail.text = basicInfo.email
+                
+                if let imageUrl = basicInfo.photo {
+                    ImageLoader.shared.loadImageWithStrURL(str: imageUrl) { (result) in
+                        switch result {
+                            case .success(let img):
+                                DispatchQueue.main.async { self.userQuikDetails.userImage.image = img }
+                            case .failure(_):
+                                break
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    }
 }

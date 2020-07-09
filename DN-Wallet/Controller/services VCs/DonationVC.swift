@@ -66,7 +66,7 @@ class DonationVC: UIViewController {
     }
     
     func setupTableView() {
-        tableView = UITableView()
+        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.indicatorStyle = .white
         tableView.backgroundColor = .clear
@@ -81,12 +81,10 @@ class DonationVC: UIViewController {
             guard let cell = table.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier, for: indexPath) as? DonationCell else {fatalError("can not dequeue charity cell")}
             let data = self.currentDataSource[indexPath.row]
             cell.data = data
-            self.charityManager.loadImageWithStrURL(str: data.org_logo) { result in
+            ImageLoader.shared.loadImageWithStrURL(str: data.org_logo) { result in
                 switch result {
                     case .success(let img):
-                        DispatchQueue.main.async {
-                           cell.logo.image = img
-                        }
+                        DispatchQueue.main.async { cell.logo.image = img }
                     case .failure(_):
                         break
                 }
@@ -108,7 +106,7 @@ class DonationVC: UIViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
-        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        tableView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
     }
     
     @objc func searchButtonPressed() {
@@ -168,6 +166,16 @@ extension DonationVC: UITableViewDelegate {
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = .DnCellColor
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
     
 }

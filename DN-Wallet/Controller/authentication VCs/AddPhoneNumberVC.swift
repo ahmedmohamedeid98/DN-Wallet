@@ -18,6 +18,7 @@ class AddPhoneNumberVC: UIViewController {
     weak var updatePhoneDelegate : UpdatePhoneDelegate?
     private var countryCode: String?
     private var completePhoneNumber: String?
+    private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     @IBOutlet weak var vcTitle: UILabel!
     @IBOutlet weak var dropDownCountry: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
@@ -37,6 +38,7 @@ class AddPhoneNumberVC: UIViewController {
     //MARK:- Configure Views
     private func configureViewController() {
         dropDownCountry.delegate = self
+        dropDownCountry.doNotShowTheKeyboard()
         // specify opt delegation to this vc and hide this part for latter
         opt.delegate = self
         opt.isHidden = true
@@ -70,11 +72,7 @@ class AddPhoneNumberVC: UIViewController {
                 self.opt.isHidden = hidden
                 self.confirmCodeInfoMessage.isHidden = hidden
             } else {
-                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                hud.mode = .text
-                hud.detailsLabel.text = "phone number or country is missing, try again"
-                hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
-                hud.hide(animated: true, afterDelay: 3)
+                self.syncDismissableAlert(title: "Failure", Message: "phone number or country is missing, try again")
             }
         }
     }
@@ -88,13 +86,13 @@ class AddPhoneNumberVC: UIViewController {
             showIndicator(true)
             sendConfirmatioCodeOutlet.setTitle("resend confirmation message", for: .normal)
             completePhoneNumber = code + phoneNumber.text!
-            NetworkManager.verifyPhone(number: completePhoneNumber!) { (result) in
+            verifyManager.sendPhoneVerifiCode(toPhone: completePhoneNumber!) { (result) in
                 self.showIndicator(false)
                 switch result {
-                    case .success(_):
-                        self.showHud(withMessage: "code send successfully", imgName: "checkmark")
+                    case .success(let res):
+                        self.asyncDismissableAlert(title: "Success", Message: res.success)
                     case .failure(let error):
-                        self.showHud(withMessage: error.rawValue, imgName: "xmark")
+                        self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription)
                 }
             }
         }
@@ -134,7 +132,7 @@ extension AddPhoneNumberVC: GetOPTValuesProtocol {
     /// this function called after user enter the opt code
     func getOpt(with value: String) {
         showIndicator(true)
-        NetworkManager.checkPhoneCode(number: completePhoneNumber ?? "wrongNumber" , code: value) { (result) in
+        verifyManager.verifyPhone(withCode: value, andPhone: completePhoneNumber!) { (result) in
             self.showIndicator(false)
             switch result {
                 case .success(_):

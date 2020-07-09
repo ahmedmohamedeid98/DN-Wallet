@@ -10,9 +10,9 @@ import Foundation
 
 enum VerifyNetworking {
     case sendPhoneVerifiCode(toPhone: String)
-    case sendEmailVerifiCode(toEmail: String)
+    case sendEmailVerifiCode
     case verifyPhone(withCode: String, andNumber: String)
-    case verifyEmail(withCode: String, email: String, andDate: String)
+    case verifyEmail(withCode: String)
 }
 
 extension VerifyNetworking: TargetType {
@@ -23,9 +23,9 @@ extension VerifyNetworking: TargetType {
     var path: String {
         switch self {
             case .sendPhoneVerifiCode: return "/verfiy"
-            case .sendEmailVerifiCode: return ""
+            case .sendEmailVerifiCode: return "/verfiy/email"
             case .verifyPhone: return "/verfiy"
-            case .verifyEmail: return ""
+            case .verifyEmail: return "/verfiy/email"
         }
     }
     
@@ -42,12 +42,12 @@ extension VerifyNetworking: TargetType {
         switch self {
             case .sendPhoneVerifiCode(let toPhone):
                 return .requestParameters(["phoneNumber": toPhone])
-            case .sendEmailVerifiCode(let toEmail):
-                return .requestParameters(["email": toEmail])
+            case .sendEmailVerifiCode:
+                return .requestPlain
             case .verifyPhone(let withCode, let andNumber):
                 return .requestParameters(["phoneNumber": andNumber, "code": withCode])
-            case .verifyEmail(let withCode, let email, let andDate):
-                return .requestParameters(["email": email, "code": withCode, "date": andDate])
+            case .verifyEmail(let withCode):
+                return .requestParameters(["code": withCode])
         }
     }
     
@@ -58,10 +58,4 @@ extension VerifyNetworking: TargetType {
     var tokenRequired: Bool {
         return true
     }
-    
-    var haveResponseClass: Bool {
-        return false
-    }
-    
-    
 }

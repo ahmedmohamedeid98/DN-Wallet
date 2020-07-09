@@ -24,9 +24,10 @@ class DNPasswordContainer: UIView {
         configure()
     }
     
-    init(placeholder: String) {
+    init(placeholder: String, cornerRadii: CGFloat = 8.0) {
         super.init(frame: .zero)
         textField.placeholder = placeholder
+        layer.cornerRadius = cornerRadii
         configure()
     }
     
@@ -39,7 +40,7 @@ class DNPasswordContainer: UIView {
     //MARK:- Configure View
     private func configureTextField() {
         addSubview(textField)
-        textField.DNLayoutConstraint(topAnchor, left: leftAnchor, right: showPasswordBtn.leftAnchor, bottom: bottomAnchor, margins: .zero, size: .zero)
+        textField.DNLayoutConstraint(topAnchor, left: leftAnchor, right: showPasswordBtn.leftAnchor, bottom: bottomAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8), size: .zero)
     }
     private func configureShowToggleButton() {
         showPasswordBtn.addTarget(self, action: #selector(toggleImage), for: .touchUpInside)
@@ -49,10 +50,13 @@ class DNPasswordContainer: UIView {
     
     private func configureEyeImage() {
         addSubview(eyeImage)
-        eyeImage.DNLayoutConstraint(topAnchor, left: nil, right: rightAnchor, bottom: bottomAnchor, margins: .zero, size: CGSize(width: 30, height: 0))
+        eyeImage.DNLayoutConstraint(topAnchor, left: nil, right: rightAnchor, bottom: bottomAnchor, margins: UIEdgeInsets(top: 2, left: 0, bottom: 2, right: 8), size: CGSize(width: 30, height: 0))
     }
     
     private func configure() {
+        backgroundColor = .DnCellColor
+        layer.borderWidth = 2.0
+        layer.borderColor = UIColor.systemGray4.cgColor
         configureEyeImage()
         configureShowToggleButton()
         configureTextField()

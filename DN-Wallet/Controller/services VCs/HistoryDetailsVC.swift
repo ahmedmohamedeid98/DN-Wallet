@@ -12,12 +12,12 @@ class HistoryDetailsVC: UIViewController {
     
     
     
-    func configureController(title: String, segItems: [String] = [], data:[HistoryCategory], infoLabel info: String, withSeg: Bool = true) {
-        navBarTitle = title
-        segmentItems = segItems
+    func configureController(withData data: [HistoryCategory], forCategory category: UserHistorySections) {
+        navBarTitle = category.title
+        segmentItems = category.segmentItems
         tableViewData = data
-        infoLabel.text = info
-        withSegmentController = withSeg
+        infoLabel.text = category.infoLabel
+        withSegmentController = category.withSegment
     }
     
     func seperateData(_ data: [HistoryCategory]) {

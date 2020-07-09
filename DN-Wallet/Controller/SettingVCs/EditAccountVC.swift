@@ -8,62 +8,12 @@
 
 import UIKit
 
-struct UpdateAccount: Encodable {
-    let username: String?
-    let counrty: String?
-    let gender: String?
-    let job: String?
-    let phone: String?
-}
 
 class EditAccountVC: UIViewController {
-
+    
     // Properities
-    private var gender: String? = nil {
-        didSet {
-            guard let txt = gender else { return }
-            toggleGender(to: txt)
-        }
-    }
-    private var newImage: UIImage? = nil {
-        didSet {
-            guard let image = newImage else {return}
-            self.currentImageView.image = image
-        }
-    }
-    private var newPhone: String? = nil {
-        didSet {
-            guard let phone = newPhone else {return}
-            self.currentPhone.text = phone
-        }
-    }
-    private var newCountry: String? = nil {
-        didSet {
-            guard let country = newCountry else {return}
-            self.currentCountry.text = country
-        }
-    }
-    private var newUsername: String? = nil {
-        didSet {
-            guard let username = newUsername else {return}
-            self.currentUsername.text = username
-        }
-    }
-    private var newJob: String? = nil {
-        didSet {
-            guard let job = newJob else {return}
-            self.currentJob.text = job
-        }
-    }
-    private var pickerSourceType: UIImagePickerController.SourceType? = nil {
-        didSet{
-            guard let type = pickerSourceType else {return}
-            self.presentPickerViewController(withType: type)
-        }
-    }
-    private var rightBarBtn: UIBarButtonItem!
-    // Outlets
-    //@IBOutlet weak var contentView: UIView!
+    private lazy var meManager: MeManagerProtocol       = MeManager()
+    private var editList: [String: Any] = [:]
     @IBOutlet weak var currentUsername: UILabel!
     @IBOutlet weak var newUsernameTextField: UITextField!
     @IBOutlet weak var currentCountry: UILabel!
@@ -77,6 +27,57 @@ class EditAccountVC: UIViewController {
     @IBOutlet weak var genderFemaleBtnOutlet: UIButton!
     @IBOutlet weak var updatePhoneBtnOutlet: UIButton!
     @IBOutlet weak var updateImageBtnOutlet: UIButton!
+
+    private var gender: String? = nil {
+        didSet {
+            guard let txt = gender else { return }
+            editList["gender"] = txt
+            toggleGender(to: txt)
+        }
+    }
+    private var newImage: UIImage? = nil {
+        didSet {
+            guard let image = newImage else {return}
+            self.currentImageView.image = image
+        }
+    }
+    private var newPhone: String? = nil {
+        didSet {
+            guard let phone = newPhone else {return}
+            editList["phone"] = phone
+            self.currentPhone.text = phone
+        }
+    }
+    private var newCountry: String? = nil {
+        didSet {
+            guard let country = newCountry else {return}
+            editList["country"] = country
+            self.currentCountry.text = country
+        }
+    }
+    private var newUsername: String? = nil {
+        didSet {
+            guard let username = newUsername else {return}
+            //editList["name"] = username
+            self.currentUsername.text = username
+        }
+    }
+    private var newJob: String? = nil {
+        didSet {
+            guard let job = newJob else {return}
+            editList["job"] = job
+            self.currentJob.text = job
+        }
+    }
+    private var pickerSourceType: UIImagePickerController.SourceType? = nil {
+        didSet{
+            guard let type = pickerSourceType else {return}
+            self.presentPickerViewController(withType: type)
+        }
+    }
+    private var rightBarBtn: UIBarButtonItem!
+    
+     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
@@ -85,32 +86,32 @@ class EditAccountVC: UIViewController {
     
     private func initView() {
         newCountryTextField.delegate = self
+        newCountryTextField.doNotShowTheKeyboard()
         currentImageView.layer.cornerRadius = 35.0
         updatePhoneBtnOutlet.layer.cornerRadius = 20.0
         updateImageBtnOutlet.layer.cornerRadius = 20.0
     }
     
+     //MARK:- Methods
     private func setupNavBar() {
         navigationItem.title = "Edit Account"
         rightBarBtn = UIBarButtonItem(title: "Save Changes", style: .plain, target: self, action: #selector(saveChangesButton))
         //rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
     }
-    /*
-     {
-        "username" : "ahmed eid"
-        "country" : "Egypt",
-        "job": "Developer",
-        "phone": "0154548784"
-        "gender": "male"
-     }
-     // update image
-     
-     **/
+    
     
      @objc private func saveChangesButton() {
-        let newValue = UpdateAccount(username: newUsername, counrty: newCountry, gender: gender, job: newJob, phone: newPhone)
-        print(newValue)
+        Hud.showLoadingHud(onView: view, withLabel: "Updating...")
+        meManager.editMyAccount(withData: editList) { (result) in
+            Hud.hide(after: 0.0)
+            switch result {
+                case .success(let message):
+                    self.asyncDismissableAlert(title: "Success", Message: message.success)
+                case .failure(let err):
+                    self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+            }
+        }
     }
     
     
@@ -136,16 +137,16 @@ class EditAccountVC: UIViewController {
     }
     
     @IBAction func genderMaleBtnSelected(_ sender: UIButton) {
-        gender = "male"
+        gender = "Male"
     }
     
     @IBAction func genderFemaleBtnSelected(_ sender: UIButton) {
-        gender = "female"
+        gender = "Female"
     }
     
     
     private func toggleGender(to str: String) {
-        if str == "male" {
+        if str == "Male" {
             genderMaleBtnOutlet.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             genderFemaleBtnOutlet.setImage(UIImage(systemName: "circle"), for: .normal)
         } else {
@@ -206,32 +207,3 @@ extension EditAccountVC: UpdatePhoneDelegate, PopUpMenuDelegate, UITextFieldDele
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

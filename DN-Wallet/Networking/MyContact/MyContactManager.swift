@@ -11,10 +11,11 @@ import Foundation
 protocol MyContactManagerProtocol {
     func getUserContacts(completion: @escaping(Result<[Contact], NSError>) -> () )
     func addNewContact(withEmail mail: String, completion: @escaping(Result<CreateContactResponse, NSError>) -> ())
-    func deleteContact(WithId id: String, completion: @escaping(Result<Bool, NSError>) -> () )
+    func deleteContact(WithId id: String, completion: @escaping(Result<SuccessResponse, NSError>) -> () )
 }
 
 class MyContactManager: BaseAPI<MyContactNetworking>, MyContactManagerProtocol {
+    
     func getUserContacts(completion: @escaping(Result<[Contact], NSError>) -> () ) {
         APIRequest(target: .getUserConcats, responseClass: [Contact].self, completion: completion)
     }
@@ -23,14 +24,7 @@ class MyContactManager: BaseAPI<MyContactNetworking>, MyContactManagerProtocol {
         APIRequest(target: .addNewContact(email: mail), responseClass: CreateContactResponse.self, completion: completion)
     }
     
-    func deleteContact(WithId id: String, completion: @escaping(Result<Bool, NSError>) -> () ) {
-        APIRequest(target: .deleteContact(id: id), responseClass: NoResponse.self) { (result) in
-            switch result {
-                case .success(_):
-                    completion(.success(true))
-                case .failure(let err):
-                    completion(.failure(err))
-            }
-        }
+    func deleteContact(WithId id: String, completion: @escaping(Result<SuccessResponse, NSError>) -> () ) {
+        APIRequest(target: .deleteContact(id: id), responseClass: SuccessResponse.self, completion: completion)
     }
 }

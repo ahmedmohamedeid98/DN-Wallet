@@ -69,7 +69,10 @@ class ChargeVC: UIViewController {
             cell.data = data
             return cell
         })
-        
+        updateTableViewWithData()
+    }
+    
+    private func updateTableViewWithData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, CardInfo>()
         snapshot.appendSections(Section.allCases)
         for item in cards {
@@ -77,7 +80,6 @@ class ChargeVC: UIViewController {
         }
         tableDataSource.apply(snapshot)
     }
-    
     
     //MARK:- Actions
     @objc func doneBtnPressed() {
@@ -139,4 +141,12 @@ extension ChargeVC: UITableViewDelegate {
     }
     
     
+}
+
+//Networking
+extension ChargeVC {
+    func initViewControllerWithData(cardList: [CardInfo]) {
+        self.cards = cardList
+        DispatchQueue.main.async { self.updateTableViewWithData() }
+    }
 }

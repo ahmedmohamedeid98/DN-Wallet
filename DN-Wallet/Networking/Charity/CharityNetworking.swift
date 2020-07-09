@@ -53,9 +53,4 @@ extension CharityNetworking: TargetType {
             case .getDetails:  return false
         }
     }
-    
-    var haveResponseClass: Bool {
-        return true
-    }
-    
 }

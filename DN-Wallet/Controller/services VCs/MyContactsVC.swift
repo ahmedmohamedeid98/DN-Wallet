@@ -60,7 +60,7 @@ class MyContactsVC: UIViewController {
         configureNavigationBar()
         setupTableView()
         view.addSubview(contactTable)
-        contactTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        contactTable.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
     }
     
     //MARK:- Configure Navigation Bar
@@ -88,7 +88,7 @@ class MyContactsVC: UIViewController {
     
     // initial contact table view
     func setupTableView() {
-        contactTable = UITableView()
+        contactTable = UITableView(frame: .zero, style: .grouped)
         contactTable.delegate = self
         contactTable.backgroundColor = .clear
         contactTable.register(MyContactCell.self, forCellReuseIdentifier: MyContactCell.reuseIdentifier)
@@ -145,6 +145,16 @@ extension MyContactsVC: UITableViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = .DnCellColor
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
     
 }

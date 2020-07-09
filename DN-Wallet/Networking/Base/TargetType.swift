@@ -27,6 +27,5 @@ protocol TargetType {
     var task   : Task            { get }
     var header : [String: String]?  { get }
     var tokenRequired: Bool { get }
-    var haveResponseClass: Bool { get }
 }
 

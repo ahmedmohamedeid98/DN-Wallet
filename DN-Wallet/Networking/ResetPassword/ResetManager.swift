@@ -8,24 +8,28 @@
 
 import Foundation
 
-protocol RestManagerProtocol {
-    func forgetPassword(forEmail email: String, completion: @escaping(Result<Bool, NSError>) -> ())
-    func resetPassword(newPassword: String, code: String, email: String, completion: @escaping(Result<Bool, NSError>) -> ())
-    func updatePassword(newPassword: String, completion: @escaping(Result<Bool, NSError>) -> ())
+protocol ResetManagerProtocol {
+    func forgetPassword(forEmail email: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
+    func forgetPasswordCheck(email: String, code: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
+    func resetPassword(newPassword: String, code: String, email: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
+    func updatePassword(oldPassword : String, newPassword: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
 }
 
-class ResetManager: BaseAPI<ResetNetworking>, RestManagerProtocol {
+class ResetManager: BaseAPI<ResetNetworking>, ResetManagerProtocol {
     
-    func forgetPassword(forEmail email: String, completion: @escaping (Result<Bool, NSError>) -> ()) {
-         // code
+    func forgetPassword(forEmail email: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        self.APIRequest(target: .forgetPassword(forEmail: email), responseClass: SuccessResponse.self, completion: completion)
     }
     
-    func resetPassword(newPassword: String, code: String, email: String, completion: @escaping (Result<Bool, NSError>) -> ()) {
-        // code
+    func forgetPasswordCheck(email: String, code: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        self.APIRequest(target: .forgetPasswordCheck(email: email, code: code), responseClass: SuccessResponse.self, completion: completion)
     }
     
-    func updatePassword(newPassword: String, completion: @escaping (Result<Bool, NSError>) -> ()) {
-        // code
+    func resetPassword(newPassword: String, code: String, email: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        self.APIRequest(target: .resetPassword(newPassword: newPassword, code: code, email: email), responseClass: SuccessResponse.self, completion: completion)
     }
     
+    func updatePassword(oldPassword: String, newPassword: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        self.APIRequest(target: .updatePassword(oldPassword: oldPassword, newPassword: newPassword), responseClass: SuccessResponse.self, completion: completion)
+    }
 }

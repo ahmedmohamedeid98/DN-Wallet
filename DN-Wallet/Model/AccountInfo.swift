@@ -7,16 +7,9 @@
 //
 
 struct AccountInfo: Codable {
-    let userIsValidate: Bool
-    let name: String
-    let email: String
-    let country: String?
-    let phone: String?
-    let gender: String?
-    let job: String?
-    //let photo: String?
-    //let balance : [Balance]
-    //let payment_cards: [CardInfo]
+    let user: UserInfo
+    let balance : [Balance]
+    let payment_cards: [CardInfo]
 }
 
 struct Balance: Codable {
@@ -39,3 +32,25 @@ struct CardInfo: Codable, Hashable {
     }
 }
 
+struct UserInfo: Codable {
+    let acountIsActive: Bool
+    let name: String
+    let email: String
+    let country: String?
+    let phone: String?
+    let gender: String?
+    let job: String?
+    let photo: String?
+}
+
+struct NotificationName {
+    static let charge = "charge-vc-notification"
+    static let setting = "setting-vc-notification"
+    static let editAccount = "editaccount-vc-notification"
+}
+
+struct BasicUserInfo {
+    let name: String
+    let email: String
+    let photo: String?
+}

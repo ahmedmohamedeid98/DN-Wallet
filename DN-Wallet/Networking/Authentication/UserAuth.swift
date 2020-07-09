@@ -18,6 +18,8 @@ protocol UserAuthProtocol { //this for make code testable
     func signOut()
     func getUserToken() -> String?
     func getUSerEmail() -> String?
+    func validate(currentPassword pass: String) -> Bool
+    
     func setSafeModeTime(hours: String)
     func getSafeModeTime() -> String
     func activeSafeMode()
@@ -118,6 +120,12 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
          return code
     }
     
+    func validate(currentPassword pass: String) -> Bool {
+        if let correctPassword = keychain.get(keys.password) {
+            return correctPassword == pass
+        }
+        return false
+    }
     
     //=========================
     // SafeMode

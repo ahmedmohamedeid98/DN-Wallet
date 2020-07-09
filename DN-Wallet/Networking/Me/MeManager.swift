@@ -10,7 +10,7 @@ import Foundation
 
 protocol MeManagerProtocol {
     func getMyAccountInfo(completion: @escaping(Result<AccountInfo, NSError>) -> ())
-    func editMyAccount(withData data: [String: Any], completion: @escaping(Result<Bool, NSError>) -> ())
+    func editMyAccount(withData data: [String: Any], completion: @escaping(Result<SuccessResponse, NSError>) -> ())
     func getMyHisory(completion: @escaping(Result<[History], NSError>) -> ())
     
 }
@@ -21,10 +21,11 @@ class MeManager: BaseAPI<MeNetworking>, MeManagerProtocol {
         self.APIRequest(target: .getMyBasicInfo, responseClass: AccountInfo.self, completion: completion)
     }
     
-    func editMyAccount(withData data: [String: Any], completion: @escaping(Result<Bool, NSError>) -> ()) {
-        self.APIRequest(target: .editAcount(withObject: data), responseClass: Bool.self, completion: completion)
+    func editMyAccount(withData data: [String: Any], completion: @escaping(Result<SuccessResponse, NSError>) -> ()) {
+        self.APIRequest(target: .editAcount(withObject: data), responseClass: SuccessResponse.self, completion: completion)
     }
     
+    // not add for now
     func getMyHisory(completion: @escaping(Result<[History], NSError>) -> ()) {
         self.APIRequest(target: .getMyHistory, responseClass: [History].self, completion: completion)
     }

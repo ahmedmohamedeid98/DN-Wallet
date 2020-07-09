@@ -17,17 +17,6 @@ class SendAndRequestMoney: UIViewController {
     //MARK:- Setup Properities
     //segment 0 stand for "send", segment 1 stand for "request"
     var currentSegment: Int = 1
-    // the original position to textView to return to it again after the keyboard popped down
-    var messageTextViewOriginY: CGFloat = 0.0
-    // cacluate "height" for the popped up keyboard
-    var keyboardSize: CGRect = .zero
-    // calculate the distance from the textView to the view.bottomAnchor to compare it with the keyboard height if it is greater than
-    // the keyboard size then ok else then the textView should move up.
-    var distanceFromBottom: CGFloat = 0.0
-    // the second position to the textView after move it up
-    var messageTextViewNewY: CGFloat = 0.0
-    // use flage to determine if this is the first time we calculate the keyboard height or not, if it's, don't calc it again
-    var flage: Bool = true
     // determine the current segment when we present this viewController from another viewController
     var isRequest: Bool = false
     // true if this viewController presented by Donation VC
@@ -69,6 +58,8 @@ class SendAndRequestMoney: UIViewController {
         setupSegmentController()
         configureMessageTextView()
         dropDown.delegate = self
+        dropDown.doNotShowTheKeyboard()
+        
         // determine the title of viewController be a "send money" or being a "request money"
         toggleRequestSend(isRequest: isRequest)
         if presentFromDonationVC || presentedFromMyContact {
@@ -83,12 +74,6 @@ class SendAndRequestMoney: UIViewController {
             messageTextView.delegate = self
         }
         
-        
-        // use gesture to hide keyboard when click anywhere in view
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        // setup notification to pop up any textView or textfield which may overlapped by keyboard
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // make status bar component white on dark background
@@ -138,35 +123,6 @@ class SendAndRequestMoney: UIViewController {
             case 0: toggleRequestSend(isRequest: false)
             case 1: toggleRequestSend(isRequest: true)
             default: break
-        }
-    }
-    
-    // notification center function called when the keyboard pop up
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if flage {
-            guard let size = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue  else { return }
-            keyboardSize = size
-            distanceFromBottom = view.frame.height - (messageTextView.frame.origin.y + messageTextView.frame.height)
-            messageTextViewOriginY = messageTextView.frame.origin.y
-            messageTextViewNewY = keyboardSize.height - distanceFromBottom
-            flage = false
-        }
-        if keyboardSize.height > distanceFromBottom {
-            if self.messageTextView.frame.origin.y == messageTextViewOriginY {
-                UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
-                    self.messageTextView.frame.origin.y -= self.messageTextViewNewY
-                }, completion: nil)
-                
-            }
-        }
-    }
-    // notification center function called when the keyboard hide
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.messageTextView.frame.origin.y != messageTextViewOriginY {
-            UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: .beginFromCurrentState, animations: {
-                self.messageTextView.frame.origin.y = self.messageTextViewOriginY
-            }, completion: nil)
-            
         }
     }
     
@@ -294,3 +250,4 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
         
     }
 }
+

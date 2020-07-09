@@ -39,6 +39,7 @@ class AddNewCardVC: UIViewController {
     
     private func initView() {
         cardNameTextField.delegate = self
+        cardNameTextField.doNotShowTheKeyboard()
         cardNumberTextField.delegate = self
         expireDateTextField.delegate = self
         cardNumberTextField.addTarget(self, action: #selector(cardNumberFormate), for: .editingChanged)

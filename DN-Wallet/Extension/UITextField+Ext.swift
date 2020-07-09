@@ -10,6 +10,15 @@ import Foundation
 
 extension UITextField {
     
+    func doNotShowTheKeyboard() {
+        //It will hide keyboard
+        self.inputView = UIView()
+        //It will hide keyboard tool bar
+        self.inputAccessoryView = UIView()
+        //it will hide the cursor
+        self.tintColor = .DnCellColor
+    }
+    
     func stopSmartActions(){
         self.autocorrectionType = .no
         self.autocapitalizationType = .none

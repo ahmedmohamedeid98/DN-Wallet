@@ -16,15 +16,18 @@ class ChangePasswordVC: UIViewController {
     var currentPassword     = DNPasswordContainer(placeholder: "Enter Your Current Password")
     var newPassword         = DNPasswordContainer(placeholder: "New Password")
     var confirmNewPassword  = DNPasswordContainer(placeholder: "Confirm New Password")
-    var EnterBtn            = DNButton(backgroundColor: .DnColor, title: "Enter", cornerRedii: 8.0)
+    var EnterBtn            = DNButton(backgroundColor: .DnColor, title: "Enter", cornerRedii: 4.0)
     var rightBarBtn: UIBarButtonItem!
+    private lazy var resetManager: ResetManagerProtocol = ResetManager()
+    private lazy var auth: UserAuthProtocol = UserAuth()
+    private var oldPassword: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         confirmNewPassword.textField.delegate = self
-        //rightBarBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(DoneBtnPressed))
-        //rightBarBtn.isEnabled = false
+        rightBarBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(DoneBtnPressed))
+        rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
         configureEnterButton()
         setupLayout()
@@ -32,8 +35,8 @@ class ChangePasswordVC: UIViewController {
     }
     
     private func configureEnterButton() {
-        //EnterBtn.withTarget = { self.EnterBtnPressed() }
-        //EnterBtn.DNLayoutConstraint(size: CGSize(width: 60, height: 0))
+        EnterBtn.withTarget = { self.EnterBtnPressed() }
+        EnterBtn.DNLayoutConstraint(size: CGSize(width: 70, height: 0))
     }
     
     func setupIndicatorView() {
@@ -48,7 +51,7 @@ class ChangePasswordVC: UIViewController {
         
         view.addSubview(Hstack)
         
-        Hstack.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 30))
+        Hstack.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 50))
         
         
         Vstack = UIStackView(arrangedSubviews: [newPassword, confirmNewPassword])
@@ -56,23 +59,21 @@ class ChangePasswordVC: UIViewController {
         Vstack.isHidden = true
 
         view.addSubview(Vstack)
-        Vstack.DNLayoutConstraint(Hstack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 90))
+        Vstack.DNLayoutConstraint(Hstack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 110))
         
         
         
     }
-    /*
+    
     @objc func EnterBtnPressed() {
-        if let currentPass = currentPassword.textField.text {
-            if AuthManager.shared.validateCurrentPassword(currentPassword: currentPass) {
-                Vstack.isHidden = false
-            } else {
-                AuthManager.shared.buildAndPresentAlertWith("Invalid", message: "Invalid Password, Try Again.", viewController: self)
+        guard let currentPass = currentPassword.textField.text else { return }
+        self.oldPassword = currentPass
+        if auth.validate(currentPassword: currentPass) {
+            UIView.animate(withDuration: 0.5) {
+                self.Vstack.isHidden = false
+                self.rightBarBtn.isEnabled = true
             }
-        } else {
-            AuthManager.shared.buildAndPresentAlertWith("Invalid", message: "Please Enter your password.", viewController: self)
         }
-        
     }
     
     @objc func DoneBtnPressed() {
@@ -81,22 +82,20 @@ class ChangePasswordVC: UIViewController {
             newPassword.textField.resignFirstResponder()
             confirmNewPassword.textField.resignFirstResponder()
             activityIndicatorView.startAnimating()
-            AuthManager.shared.updateCurrentPassword(newPassword: newPass) { (success, error) in
-                if success {
-                    self.activityIndicatorView.stopAnimating()
-                    self.navigationController?.popViewController(animated: true)
-                }else {
-                    self.activityIndicatorView.stopAnimating()
-                    AuthManager.shared.buildAndPresentAlertWith("Faild Update", message: "Faild Updating your password, please try again in another time.", viewController: self)
+            resetManager.updatePassword(oldPassword: oldPassword!, newPassword: newPass) { (result) in
+                DispatchQueue.main.async { self.activityIndicatorView.stopAnimating() }
+                switch result {
+                    case .success(let res):
+                        self.asyncDismissableAlert(title: "Success", Message: res.success)
+                    case .failure(let err):
+                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
                 }
             }
-        } else {
-            AuthManager.shared.buildAndPresentAlertWith("Invalid", message: "not mached password, Try Again.", viewController: self)
+        }
+        else {
+            self.asyncDismissableAlert(title: "Invalid", Message: "not mached password, Try Again.")
         }
     }
-    
-    */
-    
 
 }
 

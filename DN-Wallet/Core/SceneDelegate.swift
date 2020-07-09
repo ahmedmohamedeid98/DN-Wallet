@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private lazy var auth: UserAuthProtocol = UserAuth()
     //var remainingTime: Int64 = 0
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-       
-       // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldPlayInputClicks = true
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
         
         if !UserPreference.getBoolValue(withKey: UserPreference.firstLaunchKey) {
             // don't show guide screens again
