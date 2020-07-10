@@ -25,7 +25,6 @@ class PartenerTableViewCell: UITableViewCell {
         didSet {
             itemCount = parteners.count
             collectionView.reloadData()
-            print("image comes: \(itemCount)")
         }
     }
     fileprivate var counter: Int = 0
@@ -118,13 +117,11 @@ class PartenerTableViewCell: UITableViewCell {
 extension PartenerTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("partenersCount: \(parteners.count)")
         return parteners.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PartenerCollectionCell.identifier, for: indexPath) as! PartenerCollectionCell
-        print("partenerImage: \(parteners[indexPath.row].imageName)")
         cell.data = parteners[indexPath.row]
         return cell
     }
@@ -132,6 +129,4 @@ extension PartenerTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.contentView.frame.size.width, height: 400)
     }
-    
-    
 }

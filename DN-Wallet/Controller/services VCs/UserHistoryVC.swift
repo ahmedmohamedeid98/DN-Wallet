@@ -32,6 +32,9 @@ class UserHistoryVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextButton: UIButton!
     private var currentIndex: Int = 1
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nextButton.layer.cornerRadius = nextButton.frame.size.height / 2
@@ -98,7 +101,6 @@ extension UserHistoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("cell take size")
         return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.height - 20)
     }
     

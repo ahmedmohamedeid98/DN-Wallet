@@ -22,9 +22,9 @@ class ChargeVC: UIViewController {
     var lastSelectedIndexPath: IndexPath?
     var selectedCardId: String = "0"
     var tableDataSource: UITableViewDiffableDataSource<Section, CardInfo>!
-    var cards: [CardInfo] = [CardInfo(id: "1", name: "Visa", type: "prepad", digits: "1547"),
-    CardInfo(id: "2", name: "Master Card", type: "prepad", digits: "5427"),
-    CardInfo(id: "3", name: "Meza", type: "charge", digits: "8437")]
+    var cards: [CardInfo] = [CardInfo(id: "1", name: "Visa", type: "prepad", last4digits: "1547"),
+                             CardInfo(id: "2", name: "Master Card", type: "prepad", last4digits: "5427"),
+    CardInfo(id: "3", name: "Meza", type: "charge", last4digits: "8437")]
     
     //MARK:- Initialization
     override func viewDidLoad() {

@@ -18,7 +18,7 @@ enum Section: CaseIterable {
 class HomeVC: UIViewController {
     
     // Data TEST
-    var balance: [Balance] = [Balance(amount: 252.54, currency: "USD"), Balance(amount: 240.00, currency: "EGP"), Balance(amount: 200.00, currency: "EUR"), Balance(amount: 245.00, currency: "KWD")]
+    var balance: [Balance] = [Balance(id: "sd", amount: 2500.0, currency: "USD"), Balance(id: "sd", amount: 240.00, currency: "EGP"), Balance(id: "sd", amount: 200.00, currency: "EUR"), Balance(id: "sd", amount: 245.00, currency: "KWD")]
     var parteners: [Partener] = [
         Partener(imageName: "test_image1", title: "Uber"),
         Partener(imageName: "test_image2", title: "Makdonse"),
@@ -34,6 +34,7 @@ class HomeVC: UIViewController {
     // Data Will send to notification view controller
     var notificationMessages: [Message] = []
     private var tableView: UITableView!
+    private lazy var meManager: MeManagerProtocol = MeManager()
    
     //MARK:- Init
     override func viewDidLoad() {
@@ -41,7 +42,7 @@ class HomeVC: UIViewController {
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         
-        //loadData()
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -233,20 +234,19 @@ extension HomeVC {
     private func loadData() {
         // get user data
         Hud.showLoadingHud(onView: view, withLabel: "Load Balance...")
-        NetworkManager.getUserAccountInfo { (result) in
+        meManager.getMyAccountInfo { (result) in
+            Hud.hide(after: 0.0)
             switch result {
                 case .success(let info):
                     self.handleGetUserInfoSuccessCase(withData: info)
                 case .failure(let err):
-                    self.handleGetUserInfoFailureCase(withError: err.rawValue)
+                    self.handleGetUserInfoFailureCase(withError: err.localizedDescription)
             }
         }
     }
     
     private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
-        Hud.hide(after: 0.0)
-        
-        self.checkIfUserNotVerified(isVerified: data.user.acountIsActive)
+        self.checkIfUserNotVerified(isVerified: data.user.accountIsActive)
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.charge), object: nil, userInfo: ["cards": data.payment_cards])
         

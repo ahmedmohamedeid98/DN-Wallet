@@ -76,6 +76,7 @@ class BaseAPI<T: TargetType> {
                     return
                 }
                 // Decode the json data into out responseClass
+                print("SafeData: \(String(data: safeData, encoding: .utf8))")
                 guard let result = try? JSONDecoder().decode(M.self, from: safeData) else {
                     print("Debug::Error-> Can not parse give date to your response class")
                     completion(.failure(invalidDataError))

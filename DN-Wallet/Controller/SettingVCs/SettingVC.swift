@@ -38,8 +38,8 @@ class SettingVC: UIViewController {
     
     func setupUserQuikDetailsView() {
         userQuikDetails = UserQuikDetails()
-        userQuikDetails.userName.text = "ahmed eid"
-        userQuikDetails.userEmail.text = "ahmedmohamedeid98@gmail.com"
+        userQuikDetails.userName.text = "username"
+        userQuikDetails.userEmail.text = "example@gmail.com"
     }
     
     func setupTableView() {
@@ -222,8 +222,13 @@ extension UINavigationController {
 }
 //MARK:- Networking
 extension SettingVC {
+    
+    //let center = NotificationCenter.default
     private func addNotificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.handelBasicUserData(_:)), name: NSNotification.Name(rawValue: NotificationName.setting), object: nil)
+        let center = NotificationCenter.default
+        let observer = center.addObserver(forName: NSNotification.Name(rawValue: NotificationName.setting), object: nil, queue: nil, using: handelBasicUserData(_:))
+        print("SettingVC: Center remove observer")
+        
     }
     
     @objc private func handelBasicUserData(_ notification: Notification) {
@@ -244,7 +249,7 @@ extension SettingVC {
                 }
             }
         }
-        
-        
+        //center.removeObserver(observer)
+        print("SettingVC: Handler If Finsh")
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 DN. All rights reserved.
 //
 
+
 struct AccountInfo: Codable {
     let user: UserInfo
     let balance : [Balance]
@@ -13,6 +14,7 @@ struct AccountInfo: Codable {
 }
 
 struct Balance: Codable {
+    let id: String
     let amount: Double
     let currency: String
     
@@ -25,7 +27,7 @@ struct CardInfo: Codable, Hashable {
     let id : String
     let name: String
     let type: String
-    let digits: String
+    let last4digits: String
     
     func hash(into hasher: inout Hasher) {
         return hasher.combine(self.id)
@@ -33,14 +35,15 @@ struct CardInfo: Codable, Hashable {
 }
 
 struct UserInfo: Codable {
-    let acountIsActive: Bool
-    let name: String
-    let email: String
-    let country: String?
-    let phone: String?
     let gender: String?
+    let phone: String?
     let job: String?
     let photo: String?
+    let country: String?
+    let userIsValidate: Bool
+    let accountIsActive: Bool
+    let name: String
+    let email: String
 }
 
 struct NotificationName {

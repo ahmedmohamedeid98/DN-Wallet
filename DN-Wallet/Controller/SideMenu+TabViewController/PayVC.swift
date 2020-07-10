@@ -89,7 +89,7 @@ class PayVC: UIViewController {
     @objc func ScanButtonPressed() {
         view.endEditing(true)
         if let amount = amountField.text, let currency = dropDown.text {
-            let enteredBalance = Balance(amount: Double(amount) ?? 0.0, currency: currency)
+            let enteredBalance = Balance(id: "sd", amount: Double(amount) ?? 0.0, currency: currency)
             if self.isValidAmount(balance: enteredBalance) {
                 // if the app in safe mode the update allowed amount
                 if auth.isAppInSafeMode {

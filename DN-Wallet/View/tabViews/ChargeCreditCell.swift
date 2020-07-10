@@ -25,7 +25,7 @@ class ChargeCreditCell: UITableViewCell {
         didSet {
             guard let mydata = data else {return}
             self.creditName.text = mydata.name
-            self.creditNumber.text = "\(mydata.type) ****\(mydata.digits)"
+            self.creditNumber.text = "\(mydata.type) ****\(mydata.last4digits)"
             self.credit_Id = mydata.id
         }
     }

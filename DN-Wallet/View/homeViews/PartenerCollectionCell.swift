@@ -17,7 +17,6 @@ class PartenerCollectionCell: UICollectionViewCell {
         didSet {
             guard let partener = data else { return }
             self.imageView.image = UIImage(named: partener.imageName)
-            print("imageName: \(partener.imageName)")
         }
     }
     

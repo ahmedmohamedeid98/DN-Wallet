@@ -273,13 +273,6 @@
                                     <constraint firstAttribute="height" constant="15" id="JK2-6F-QcP"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsY-gU-vPe">
-                                <rect key="frame" x="34" y="617" width="346" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" name="Dynamic-Background"/>
                         <color key="tintColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -595,7 +588,7 @@
                                     <constraint firstItem="gaP-SW-NMd" firstAttribute="leading" secondItem="nsr-Eg-4FB" secondAttribute="leading" id="A4k-o7-iRG"/>
                                     <constraint firstAttribute="bottom" secondItem="gaP-SW-NMd" secondAttribute="bottom" id="IXK-fC-Bih"/>
                                     <constraint firstItem="gaP-SW-NMd" firstAttribute="height" secondItem="nsr-Eg-4FB" secondAttribute="height" multiplier="0.99022" priority="250" id="RrP-uz-vh3"/>
-                                    <constraint firstItem="gaP-SW-NMd" firstAttribute="width" secondItem="nsr-Eg-4FB" secondAttribute="width" id="b56-1q-vb9"/>
+                                    <constraint firstItem="gaP-SW-NMd" firstAttribute="width" secondItem="9kK-wh-pXT" secondAttribute="width" id="b56-1q-vb9"/>
                                     <constraint firstItem="gaP-SW-NMd" firstAttribute="top" secondItem="nsr-Eg-4FB" secondAttribute="top" id="bIs-UN-tT5"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="jBc-OZ-Mje"/>

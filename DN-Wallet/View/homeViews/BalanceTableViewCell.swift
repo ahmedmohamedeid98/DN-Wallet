@@ -10,7 +10,6 @@ import UIKit
 
 class BalanceTableViewCell: UITableViewCell {
 
-    fileprivate var defaultBalance: [Balance] = [Balance(amount: 0.0, currency: "USD"), Balance(amount: 0.0, currency: "EGP") ]
     //MARK:- Properities
     @IBOutlet weak var collectionView: UICollectionView!
     static let identifier = "BalanceTableViewCell"
@@ -24,7 +23,6 @@ class BalanceTableViewCell: UITableViewCell {
     //MARK:- Init
     override func awakeFromNib() {
         super.awakeFromNib()
-        balances = defaultBalance
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(BalanceCollectionCell.nib(), forCellWithReuseIdentifier: BalanceCollectionCell.identifier)
@@ -50,5 +48,4 @@ extension BalanceTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.contentView.frame.size.width / 2 - 5, height: 50)
     }
-    
 }
