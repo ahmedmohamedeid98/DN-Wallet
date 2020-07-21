@@ -46,7 +46,7 @@ class DNSegmentControl: UIView {
         segmentControl.insertSegment(with: nil, at: 0, animated: true)
         segmentControl.insertSegment(with: nil, at: 1, animated: true)
         segmentControl.selectedSegmentIndex = 0
-        segmentControl.backgroundColor          = UIColor.black
+        segmentControl.backgroundColor          = #colorLiteral(red: 0.1782214642, green: 0.4982336164, blue: 0.757638514, alpha: 1)
         segmentControl.layer.borderColor        = UIColor.white.cgColor
         segmentControl.selectedSegmentTintColor = UIColor.white
         segmentControl.layer.borderWidth        = 1

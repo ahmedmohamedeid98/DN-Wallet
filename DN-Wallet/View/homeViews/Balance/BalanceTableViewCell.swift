@@ -11,7 +11,7 @@ import UIKit
 class BalanceTableViewCell: UITableViewCell {
 
     //MARK:- Properities
-    @IBOutlet weak var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     static let identifier = "BalanceTableViewCell"
     var balances: [Balance] = [] {
         didSet {
@@ -19,19 +19,34 @@ class BalanceTableViewCell: UITableViewCell {
         }
     }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
+        configure()
+        addCollectionView()
+    }
     
-    //MARK:- Init
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func configure() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         collectionView.register(BalanceCollectionCell.nib(), forCellWithReuseIdentifier: BalanceCollectionCell.identifier)
     }
     
-    static func nib() -> UINib {
-        return UINib(nibName: "BalanceTableViewCell", bundle: nil)
+    func addCollectionView() {
+        addSubview(collectionView)
+        collectionView.DNLayoutConstraintFill()
     }
-
 }
 extension BalanceTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     

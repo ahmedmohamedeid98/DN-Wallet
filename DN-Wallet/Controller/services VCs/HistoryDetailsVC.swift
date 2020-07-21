@@ -35,7 +35,6 @@ class HistoryDetailsVC: UIViewController {
     var segmentItems: [String]!
     var infoLabel : UILabel = {
         let info = UILabel()
-        info.text = "TEST TEST TEST"
         info.textAlignment = .center
         info.textColor = .DnColor
         info.font = UIFont.DN.Regular.font(size: 16)
@@ -47,7 +46,7 @@ class HistoryDetailsVC: UIViewController {
     //MARK:- Properities
     // create a instance from custom navigation controller
     //var navBar:DNNavBar!
-    var segmentController:UISegmentedControl!
+    var segmentController:DNSegmentControl!
     var tableView:UITableView!
     
     // data section, HCard: history card contains 'Email', 'Amount', 'Date' and 'Currancy' for any transaction
@@ -86,25 +85,10 @@ class HistoryDetailsVC: UIViewController {
     
     /// initialized segment controller
     func setupSegmentController() {
-        segmentController = UISegmentedControl(items: segmentItems)
-        segmentController.selectedSegmentIndex = 0
-        segmentController.tintColor = .white
-        segmentController.selectedSegmentTintColor = .DnColor
-        segmentController.addTarget(self, action: #selector(valueWasChanged), for: .valueChanged)
-    }
-    
-    /// selector action: this method called when selected segment being changed
-    @objc func valueWasChanged() {
-        switch segmentController.selectedSegmentIndex {
-        case 0:
-            tableViewData = firstSemgentData
-            tableView.reloadData()
-        case 1:
-            tableViewData = secondSegmentData
-            tableView.reloadData()
-        default:
-            print("unknow")
-        }
+        segmentController = DNSegmentControl(frame: .zero)
+        segmentController.firstSegmentTitle = segmentItems[0]
+        segmentController.secondSegmentTitle = segmentItems[1]
+        segmentController.delegate = self
     }
     
     func setupNavigationBar() {
@@ -166,4 +150,16 @@ extension HistoryDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension HistoryDetailsVC: DNSegmentControlDelegate {
+    func segmentValueChanged(to index: Int) {
+        if index == 0 {
+            tableViewData = firstSemgentData
+            tableView.reloadData()
+        } else {
+            tableViewData = secondSegmentData
+            tableView.reloadData()
+        }
+    }
 }

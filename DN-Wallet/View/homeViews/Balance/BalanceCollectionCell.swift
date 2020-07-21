@@ -13,6 +13,7 @@ class BalanceCollectionCell: UICollectionViewCell {
     static let identifier = "BalanceCollectionCell"
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var currencyCodeLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     var data: Balance? = nil {
         didSet {
@@ -24,7 +25,11 @@ class BalanceCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        containerView.layer.cornerRadius    = 4
+        containerView.layer.shadowColor     = UIColor.label.cgColor
+        containerView.layer.shadowOffset    = CGSize(width: 0.26, height: 0.26)
+        containerView.layer.shadowOpacity   = 0.26
+        containerView.layer.shadowRadius    = 4
     }
     
     static func nib() -> UINib {

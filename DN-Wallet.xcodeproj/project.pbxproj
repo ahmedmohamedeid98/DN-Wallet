@@ -26,13 +26,10 @@
 		043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */; };
 		043B7ED024623AE400F2D037 /* ChargeCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */; };
 		0449A5F42498B4FC00E6BF35 /* PartenerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */; };
-		0449A5F52498B4FC00E6BF35 /* PartenerCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F32498B4FC00E6BF35 /* PartenerCollectionCell.xib */; };
 		0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */; };
 		0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */; };
 		0449A5FC2498B5B900E6BF35 /* PartenerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */; };
-		0449A5FD2498B5B900E6BF35 /* PartenerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5FB2498B5B900E6BF35 /* PartenerTableViewCell.xib */; };
 		0449A6002498B5F100E6BF35 /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */; };
-		0449A6012498B5F100E6BF35 /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5FF2498B5F000E6BF35 /* BalanceTableViewCell.xib */; };
 		0456642724AF43DC00A970C9 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642524AF43DC00A970C9 /* TargetType.swift */; };
 		0456642824AF43DC00A970C9 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642624AF43DC00A970C9 /* BaseAPI.swift */; };
 		0456642A24AF4C5600A970C9 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642924AF4C5600A970C9 /* UserAuth.swift */; };
@@ -160,13 +157,10 @@
 		043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
 		043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeCreditCell.swift; sourceTree = "<group>"; };
 		0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerCollectionCell.swift; sourceTree = "<group>"; };
-		0449A5F32498B4FC00E6BF35 /* PartenerCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartenerCollectionCell.xib; sourceTree = "<group>"; };
 		0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceCollectionCell.xib; sourceTree = "<group>"; };
 		0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerTableViewCell.swift; sourceTree = "<group>"; };
-		0449A5FB2498B5B900E6BF35 /* PartenerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartenerTableViewCell.xib; sourceTree = "<group>"; };
 		0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
-		0449A5FF2498B5F000E6BF35 /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		0456642524AF43DC00A970C9 /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		0456642624AF43DC00A970C9 /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		0456642924AF4C5600A970C9 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
@@ -353,14 +347,8 @@
 		0449A5F12498B45D00E6BF35 /* homeViews */ = {
 			isa = PBXGroup;
 			children = (
-				0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */,
-				0449A5F32498B4FC00E6BF35 /* PartenerCollectionCell.xib */,
-				0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */,
-				0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */,
-				0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */,
-				0449A5FB2498B5B900E6BF35 /* PartenerTableViewCell.xib */,
-				0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */,
-				0449A5FF2498B5F000E6BF35 /* BalanceTableViewCell.xib */,
+				047D3F2B24C77B5C00D09551 /* Partener */,
+				047D3F2C24C77B8D00D09551 /* Balance */,
 			);
 			path = homeViews;
 			sourceTree = "<group>";
@@ -587,6 +575,25 @@
 				048D2F19243B6F9D00BE464D /* PrivacyCell.swift */,
 			);
 			path = SettingViews;
+			sourceTree = "<group>";
+		};
+		047D3F2B24C77B5C00D09551 /* Partener */ = {
+			isa = PBXGroup;
+			children = (
+				0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */,
+				0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */,
+			);
+			path = Partener;
+			sourceTree = "<group>";
+		};
+		047D3F2C24C77B8D00D09551 /* Balance */ = {
+			isa = PBXGroup;
+			children = (
+				0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */,
+				0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */,
+				0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */,
+			);
+			path = Balance;
 			sourceTree = "<group>";
 		};
 		047FA8B6240E1EB30097DD06 /* Storyboard */ = {
@@ -833,9 +840,6 @@
 			files = (
 				04A8D70024282E7100628AA3 /* Authentication.storyboard in Resources */,
 				04792AE12409FEA900F781D8 /* LaunchScreen.storyboard in Resources */,
-				0449A5FD2498B5B900E6BF35 /* PartenerTableViewCell.xib in Resources */,
-				0449A5F52498B4FC00E6BF35 /* PartenerCollectionCell.xib in Resources */,
-				0449A6012498B5F100E6BF35 /* BalanceTableViewCell.xib in Resources */,
 				0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */,
 				04E8ED5024812AE800DE0E0F /* DonationDetailsCell.xib in Resources */,
 				04792ADE2409FEA900F781D8 /* Assets.xcassets in Resources */,

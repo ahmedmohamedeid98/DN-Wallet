@@ -63,8 +63,8 @@ class HomeVC: UIViewController {
     //MARK:- Methods
     private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(PartenerTableViewCell.nib(), forCellReuseIdentifier: PartenerTableViewCell.identifier)
-        tableView.register(BalanceTableViewCell.nib(), forCellReuseIdentifier: BalanceTableViewCell.identifier)
+        tableView.register(PartenerTableViewCell.self, forCellReuseIdentifier: PartenerTableViewCell.identifier)
+        tableView.register(BalanceTableViewCell.self, forCellReuseIdentifier: BalanceTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -73,7 +73,6 @@ class HomeVC: UIViewController {
     }
 
     private func initViewController() {
-        //AuthManager.shared.deactiveSafeMode()
         configureNavgationBar()
         setupTableView()
         setupLayout()
@@ -112,7 +111,24 @@ class HomeVC: UIViewController {
         
     }
     
-    //MARK:- handle sideMenu Toggle
+    private func startTimer() {
+        if let cell = partenerCell {
+            cell.startTimer()
+        }
+    }
+    
+    private func stopTimer() {
+        if let cell = partenerCell {
+            cell.stopTimer()
+        }
+    }
+    
+    
+}
+
+//MARK:- handle sideMenu Toggle
+extension HomeVC {
+
     private func addGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeSideMenuWithGesture))
         let rightSwipGesture = UISwipeGestureRecognizer(target: self, action: #selector(sideMenuButtonPressed))
@@ -139,31 +155,9 @@ class HomeVC: UIViewController {
             startTimer()
         }
     }
-    
-    private func startTimer() {
-        if let cell = partenerCell {
-            cell.startTimer()
-        }
-    }
-    
-    private func stopTimer() {
-        if let cell = partenerCell {
-            cell.stopTimer()
-        }
-    }
 }
 
-//MARK:- Networks (API)
-extension HomeVC {
-    private func fetchNotificationMessages() {
-        self.notificationMessages = Message.fetchMessages()
-        guard let topMessage = notificationMessages.first else {return}
-        if topMessage.isnew {
-            thereIsNewMessages()
-        }
-    }
-}
-
+//MARK:- Table view Delegate & Datasource
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -175,16 +169,17 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // init Partener Cell
         if indexPath.section == 0 {
             partenerCell = tableView.dequeueReusableCell(withIdentifier: PartenerTableViewCell.identifier, for: indexPath) as? PartenerTableViewCell
             if let cell = partenerCell {
                 cell.parteners = parteners
                 cell.startTimer()
                 return cell
-                
             }
             return UITableViewCell()
         }
+        // init Balance Cell
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BalanceTableViewCell.identifier , for: indexPath) as? BalanceTableViewCell else { return UITableViewCell() }
         cell.balances = balance
         return cell
@@ -214,23 +209,27 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         titleLabel.text = title
         titleLabel.textColor = .DnTextColor
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont(name: "HeviticaNeuee-bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.font = UIFont(name: "KohinoorBangla-regular", size: 17) ?? UIFont.boldSystemFont(ofSize: 18)
         header.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: header.topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 20),
-            titleLabel.bottomAnchor.constraint(equalTo: header.bottomAnchor)
-        ])
+        titleLabel.DNLayoutConstraint(header.topAnchor, left: header.leftAnchor, bottom: header.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0))
     }
     
     
 }
 
 //MARK:- Networking
-
 extension HomeVC {
-
+    
+    // Notification
+    private func fetchNotificationMessages() {
+        self.notificationMessages = Message.fetchMessages()
+        guard let topMessage = notificationMessages.first else {return}
+        if topMessage.isnew {
+            thereIsNewMessages()
+        }
+    }
+    
+    
     private func loadData() {
         // get user data
         meManager.getMyAccountInfo { (result) in
