@@ -27,6 +27,7 @@ class EditAccountVC: UIViewController {
     @IBOutlet weak var genderFemaleBtnOutlet: UIButton!
     @IBOutlet weak var updatePhoneBtnOutlet: UIButton!
     @IBOutlet weak var updateImageBtnOutlet: UIButton!
+    var userInfo: AccountInfo?
 
     private var gender: String? = nil {
         didSet {
@@ -82,6 +83,17 @@ class EditAccountVC: UIViewController {
         super.viewDidLoad()
         initView()
         setupNavBar()
+        updateCurrentInfoWithComingData()
+    }
+    
+    private func updateCurrentInfoWithComingData() {
+        if let data = userInfo {
+            self.currentUsername.text    = data.user.name
+            self.currentCountry.text     = data.user.country
+            self.currentJob.text         = data.user.job
+            self.currentGender.text      = data.user.gender
+            self.currentPhone.text       = data.user.photo
+        }
     }
     
     private func initView() {

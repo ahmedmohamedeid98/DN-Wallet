@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="10u-9b-kXw">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="UserhistoryVCID" id="10u-9b-kXw" customClass="UserHistoryVC" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8tq-1i-YVK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k75-Ge-9kj">
-                                <rect key="frame" x="20" y="64" width="374" height="638"/>
+                                <rect key="frame" x="20" y="20" width="335" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9xz-YS-zmk">
                                     <size key="itemSize" width="358" height="614"/>
@@ -28,7 +28,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell-identifier" id="YCH-3j-77g" customClass="UserHistoryCell" customModule="DN_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="0.0" width="358" height="614"/>
+                                        <rect key="frame" x="-11.5" y="0.0" width="358" height="614"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="J7c-nd-WfQ">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="614"/>
@@ -38,7 +38,7 @@
                                                     <rect key="frame" x="10" y="20" width="338" height="574"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPn-xn-Acw">
-                                                            <rect key="frame" x="60" y="302.66666666666669" width="218" height="33"/>
+                                                            <rect key="frame" x="60" y="303" width="218" height="33"/>
                                                             <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <state key="normal" title="Details">
@@ -61,7 +61,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Received include the sales and the money received from others." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WS-Km-Umw">
-                                                            <rect key="frame" x="20" y="212" width="298" height="40.666666666666657"/>
+                                                            <rect key="frame" x="20" y="212" width="298" height="41"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -117,7 +117,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-Pz-Fem">
-                                <rect key="frame" x="40" y="722" width="334" height="40"/>
+                                <rect key="frame" x="40" y="527" width="295" height="40"/>
                                 <color key="backgroundColor" name="Dynamic-Cell"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="LSs-WV-bLw"/>
@@ -157,49 +157,40 @@
             <objects>
                 <viewController storyboardIdentifier="sendAndRequestVC" id="YTc-sL-89w" customClass="SendAndRequestMoney" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JLB-Mx-Z2V">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MYw-Jw-f0b">
-                                <rect key="frame" x="16" y="83.999999999999972" width="382" height="443.33333333333326"/>
+                                <rect key="frame" x="16" y="40" width="343" height="452"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tzo-JD-uPZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="41"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWf-Fn-DXb" customClass="DNSegmentControl" customModule="DN_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="HNe-ae-jPl"/>
+                                            <constraint firstAttribute="height" constant="40" id="ygD-n9-efh"/>
                                         </constraints>
-                                        <segments>
-                                            <segment title="Send"/>
-                                            <segment title="Request"/>
-                                        </segments>
-                                        <color key="selectedSegmentTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="segmentControllerValueChanged:" destination="YTc-sL-89w" eventType="valueChanged" id="pkW-h9-acn"/>
-                                        </connections>
-                                    </segmentedControl>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQ4-Ls-fS1">
-                                        <rect key="frame" x="0.0" y="48" width="382" height="20"/>
+                                        <rect key="frame" x="0.0" y="48" width="343" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="7Ca-N4-Ruh"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv4-yn-OYO">
-                                        <rect key="frame" x="0.0" y="76" width="382" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="76" width="343" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-gL-Qot">
-                                        <rect key="frame" x="0.0" y="104.33333333333334" width="382" height="50"/>
+                                        <rect key="frame" x="0.0" y="106.5" width="343" height="50"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acw-bv-Yl1">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ksjdls" borderStyle="roundedRect" placeholder="user@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acw-bv-Yl1">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                                 <color key="backgroundColor" name="Dynamic-Cell"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Nr6-BK-Cg8"/>
                                                 </constraints>
-                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhQ-R4-zZk">
@@ -216,57 +207,52 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I4s-Q3-Gh7">
-                                        <rect key="frame" x="0.0" y="162.33333333333334" width="382" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="164.5" width="343" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="example: 250" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2f-s0-LJN">
-                                        <rect key="frame" x="0.0" y="190.66666666666669" width="382" height="50"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="25451" borderStyle="roundedRect" placeholder="example: 250" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2f-s0-LJN">
+                                        <rect key="frame" x="0.0" y="195" width="343" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="IEz-JU-DZn"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtE-eJ-dHO">
-                                        <rect key="frame" x="0.0" y="248.66666666666671" width="382" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="253" width="343" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8n4-fI-qqn">
-                                        <rect key="frame" x="0.0" y="277" width="382" height="50"/>
+                                        <rect key="frame" x="0.0" y="283.5" width="343" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="UaD-6j-dSK"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5D-qe-9kF">
-                                        <rect key="frame" x="0.0" y="335" width="382" height="20.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="341.5" width="343" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="this is for test" translatesAutoresizingMaskIntoConstraints="NO" id="dpL-Qa-8L6">
-                                        <rect key="frame" x="0.0" y="363.33333333333331" width="382" height="80"/>
+                                        <rect key="frame" x="0.0" y="372" width="343" height="80"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="opJ-u0-AIx"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oSt-Oz-nb7">
-                                <rect key="frame" x="365" y="381.33333333333337" width="15" height="10.333333333333314"/>
+                                <rect key="frame" x="326" y="343" width="15" height="11"/>
                                 <color key="tintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="0Ww-Hq-zrx"/>
@@ -291,7 +277,7 @@
                         <outlet property="dropDown" destination="8n4-fI-qqn" id="BJ2-4f-iGQ"/>
                         <outlet property="emailTextField" destination="Acw-bv-Yl1" id="04c-GN-mXI"/>
                         <outlet property="messageTextView" destination="dpL-Qa-8L6" id="Q37-8G-n8M"/>
-                        <outlet property="segmentController" destination="Tzo-JD-uPZ" id="hAG-yu-sUF"/>
+                        <outlet property="segmentController" destination="nWf-Fn-DXb" id="m3R-Wf-8x6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1LD-OM-T0g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -307,7 +293,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsr-Eg-4FB">
-                                <rect key="frame" x="0.0" y="44" width="414" height="1062"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1140"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gaP-SW-NMd" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1061"/>
@@ -319,13 +305,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="390" height="165"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzp-OT-8yg">
-                                                                <rect key="frame" x="12" y="12" width="73.333333333333329" height="18"/>
+                                                                <rect key="frame" x="12" y="12" width="73.5" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not specify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNa-np-pRz">
-                                                                <rect key="frame" x="12" y="42" width="85" height="20.333333333333329"/>
+                                                                <rect key="frame" x="12" y="42" width="85" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -362,7 +348,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not specify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFy-9I-p2r">
-                                                                <rect key="frame" x="12" y="42" width="85" height="20.333333333333329"/>
+                                                                <rect key="frame" x="12" y="42" width="85" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -377,7 +363,7 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="etS-KH-b8h">
-                                                                <rect key="frame" x="345" y="128.33333333333334" width="15" height="10.333333333333343"/>
+                                                                <rect key="frame" x="345" y="127.5" width="15" height="11"/>
                                                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="15" id="8By-Y7-YdH"/>
@@ -402,13 +388,13 @@
                                                         <rect key="frame" x="0.0" y="350" width="390" height="165"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yld-f5-tzW">
-                                                                <rect key="frame" x="12.000000000000004" y="12" width="45.333333333333343" height="18"/>
+                                                                <rect key="frame" x="12" y="12" width="45.5" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not specify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoC-Sr-hSz">
-                                                                <rect key="frame" x="12" y="42" width="85" height="20.333333333333329"/>
+                                                                <rect key="frame" x="12" y="42" width="85" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -449,7 +435,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lzR-Ec-vjI">
-                                                                <rect key="frame" x="160" y="24" width="70" height="68.666666666666671"/>
+                                                                <rect key="frame" x="160" y="23.5" width="70" height="69"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="70" id="B7q-0d-LsD"/>
                                                                     <constraint firstAttribute="width" constant="70" id="mem-je-9N5"/>
@@ -485,13 +471,13 @@
                                                         <rect key="frame" x="0.0" y="700" width="390" height="165"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1X-Ts-M7B">
-                                                                <rect key="frame" x="12.000000000000002" y="12" width="26.666666666666671" height="18"/>
+                                                                <rect key="frame" x="12" y="12" width="27" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not specify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ3-Qq-fqc">
-                                                                <rect key="frame" x="12" y="42" width="85" height="20.333333333333329"/>
+                                                                <rect key="frame" x="12" y="42" width="85" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -521,13 +507,13 @@
                                                         <rect key="frame" x="0.0" y="875" width="390" height="165"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obi-g7-K1h">
-                                                                <rect key="frame" x="11.999999999999996" y="12" width="52.666666666666657" height="18"/>
+                                                                <rect key="frame" x="12" y="12" width="53" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not specify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6F-1g-vec">
-                                                                <rect key="frame" x="12" y="42" width="85" height="20.333333333333329"/>
+                                                                <rect key="frame" x="12" y="42" width="85" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -536,7 +522,7 @@
                                                                 <rect key="frame" x="20" y="105" width="350" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xO-38-Wbn">
-                                                                        <rect key="frame" x="0.0" y="9" width="135.66666666666666" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="9" width="135.5" height="22"/>
                                                                         <state key="normal" title="    Male" image="circle" catalog="system">
                                                                             <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
@@ -545,7 +531,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3n-cT-D7i">
-                                                                        <rect key="frame" x="214.66666666666663" y="9" width="135.33333333333337" height="22"/>
+                                                                        <rect key="frame" x="214.5" y="9" width="135.5" height="22"/>
                                                                         <state key="normal" title="    Female" image="circle" catalog="system">
                                                                             <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
@@ -630,72 +616,66 @@
             <objects>
                 <viewController storyboardIdentifier="exchangeCurrencyVCID" id="wxq-iD-FD8" customClass="ExchangeCurrencyVC" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ma2-Jy-4my">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Z1t-lh-rgZ">
-                                <rect key="frame" x="20" y="64" width="374" height="441"/>
+                                <rect key="frame" x="20" y="20" width="335" height="447.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gua-FU-zd7">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-hA-3j8">
-                                        <rect key="frame" x="0.0" y="40.333333333333329" width="374" height="50"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-hA-3j8">
+                                        <rect key="frame" x="0.0" y="42.5" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="vlu-Ts-gnb"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yh-DD-TbM">
-                                        <rect key="frame" x="0.0" y="110.33333333333334" width="374" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="112.5" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uds-dq-WgK">
-                                        <rect key="frame" x="0.0" y="150.66666666666666" width="374" height="50"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uds-dq-WgK">
+                                        <rect key="frame" x="0.0" y="155" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="gM6-a1-Oc9"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K6-24-FoR">
-                                        <rect key="frame" x="0.0" y="220.66666666666669" width="374" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="225" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SiG-bo-bk7">
-                                        <rect key="frame" x="0.0" y="261" width="374" height="50"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="enter your amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SiG-bo-bk7">
+                                        <rect key="frame" x="0.0" y="267.5" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="uQd-ec-Vsw"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mnh-OS-lip">
-                                        <rect key="frame" x="0.0" y="331" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="337.5" width="335" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="c9f-7H-ONm"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ijy-VD-Eny">
-                                        <rect key="frame" x="0.0" y="401" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="407.5" width="335" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jx3-n4-cYL">
-                                                <rect key="frame" x="0.0" y="0.0" width="177" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="40"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 <state key="normal" title="Calculate">
@@ -706,7 +686,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbO-ev-EVB">
-                                                <rect key="frame" x="197" y="0.0" width="177" height="40"/>
+                                                <rect key="frame" x="177.5" y="0.0" width="157.5" height="40"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 <state key="normal" title="Exchange">
@@ -724,7 +704,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3aV-GR-bYd">
-                                <rect key="frame" x="361" y="124.66666666666667" width="15" height="10.333333333333329"/>
+                                <rect key="frame" x="322" y="82" width="15" height="11"/>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="EAj-Pb-OGS"/>
@@ -732,7 +712,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ySV-eF-DY1">
-                                <rect key="frame" x="361" y="235" width="15" height="10.333333333333343"/>
+                                <rect key="frame" x="322" y="194.5" width="15" height="11"/>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="WIq-Mo-kgr"/>
@@ -740,7 +720,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Y7-gV-gdy">
-                                <rect key="frame" x="20" y="811.66666666666663" width="374" height="20.333333333333371"/>
+                                <rect key="frame" x="20" y="616.5" width="335" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -779,7 +759,7 @@
             <objects>
                 <viewController storyboardIdentifier="addNewCardVCID" id="yqa-JJ-Lly" customClass="AddNewCardVC" customModule="DN_Wallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PAj-ou-Jnb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Honer Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uTb-8p-k25">
@@ -790,62 +770,111 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="B7t-oh-UuC">
-                                <rect key="frame" x="20" y="74" width="374" height="470"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="B7t-oh-UuC">
+                                <rect key="frame" x="20" y="30" width="335" height="490"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select CARD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v1i-i8-dd9">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="I1u-pI-4nr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2f-1Q-e0J">
-                                        <rect key="frame" x="0.0" y="70" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="60" width="335" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="pmS-P7-bdH"/>
+                                            <constraint firstAttribute="height" constant="20" id="pmS-P7-bdH"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cardhoner Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h72-H5-SNB">
+                                        <rect key="frame" x="0.0" y="100" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Honer Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Syp-tJ-6fu">
-                                        <rect key="frame" x="0.0" y="140" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="142.5" width="335" height="40"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="oFd-21-3SR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Number, example:  xxxx - xxxx - xxxx - xxxx" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ai9-B9-Ggc">
-                                        <rect key="frame" x="0.0" y="210" width="374" height="50"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzT-23-tlO">
+                                        <rect key="frame" x="0.0" y="202.5" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxxx - xxxx - xxxx - xxxx" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ai9-B9-Ggc">
+                                        <rect key="frame" x="0.0" y="245" width="335" height="40"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3PW-Ez-ePW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expire Date, example: 05  /  21" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zw4-Se-8J8">
-                                        <rect key="frame" x="0.0" y="280" width="374" height="50"/>
-                                        <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVV, example:  123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-df-EeZ">
-                                        <rect key="frame" x="0.0" y="350" width="374" height="50"/>
-                                        <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="afX-Z3-wbH">
+                                        <rect key="frame" x="0.0" y="305" width="335" height="22.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expire Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CA7-JO-vTk">
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmJ-Sv-yb4">
+                                                <rect key="frame" x="172.5" y="0.0" width="162.5" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-4i-hB3">
+                                        <rect key="frame" x="0.0" y="347.5" width="335" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g 05  /  21" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zw4-Se-8J8">
+                                                <rect key="frame" x="0.0" y="0.0" width="163" height="40"/>
+                                                <color key="backgroundColor" name="Dynamic-Cell"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g 123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-df-EeZ">
+                                                <rect key="frame" x="172" y="0.0" width="163" height="40"/>
+                                                <color key="backgroundColor" name="Dynamic-Cell"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="jup-Dp-PFI"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCm-QQ-i0M">
+                                        <rect key="frame" x="0.0" y="407.5" width="335" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHT-ke-rKm">
-                                        <rect key="frame" x="0.0" y="420" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="450" width="335" height="40"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="7wm-wg-UhF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Nyc-bO-GNT">
-                                <rect key="frame" x="361" y="94.333333333333343" width="15" height="10.333333333333329"/>
+                                <rect key="frame" x="322" y="44.5" width="15" height="11"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -884,7 +913,7 @@
         <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="person.crop.circle.badge.plus" catalog="system" width="64" height="50"/>
         <namedColor name="Dynamic-Background">
-            <color red="0.92100000381469727" green="0.92100000381469727" blue="0.92100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dynamic-Cell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

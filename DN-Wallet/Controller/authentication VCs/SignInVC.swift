@@ -104,12 +104,12 @@ class SignInVC: UIViewController {
     }
     // if user enter his (email & password) and pressed signIn
     @IBAction func signInBtnPressed(_ sender: UIButton) {
+
+//        //TEST TRST
 //
-////        //TEST TRST
-////
-    //    AuthManager.shared.pushHomeViewController(vc: self)
-     //   return
-////        // End TEST
+        navigateToHomeController()
+        return
+//        // End TEST
         if emailCV.textField.text != "" && passwordCV.textField.text != "" {
             let email = emailCV.textField.text!
             let password = passwordCV.textField.text!

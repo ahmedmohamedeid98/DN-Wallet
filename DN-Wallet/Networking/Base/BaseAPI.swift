@@ -12,8 +12,12 @@ import KeychainSwift
 struct SuccessResponse: Decodable {
     var success: String
 }
+struct ErrorResponse: Decodable {
+    var error: String
+}
 
 class BaseAPI<T: TargetType> {
+    // inefficient <create new keychain object with every request>
     private let keychain = KeychainSwift(keyPrefix: keys.keyPrefix)
     
     
@@ -21,8 +25,10 @@ class BaseAPI<T: TargetType> {
         
         // Construct URL
         guard let url = URL(string: target.baseURL + target.path) else {
-            print("Debug::Error-> Invalid URL, con not construct url from base and path.")
+            let err = NSError(domain: target.baseURL, code: 0, userInfo: [NSLocalizedDescriptionKey: "internal error: invalid url."])
+            completion(.failure(err))
             return
+            
         }
         
         // Build Request
@@ -42,7 +48,7 @@ class BaseAPI<T: TargetType> {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
             } catch {
-                print("No Body Coming")
+                // do nothing, request with no body
             }
             
         }
@@ -50,7 +56,6 @@ class BaseAPI<T: TargetType> {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             // Check if there is a internet error
             if let _ = error {
-                print("Debug::Error-> server return error, request can not compelete")
                 let error = NSError(domain: target.baseURL, code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.unableToComplete])
                 completion(.failure(error))
                 return
@@ -58,7 +63,6 @@ class BaseAPI<T: TargetType> {
             
             // Check if there is a response
             guard let response = response as? HTTPURLResponse else {
-                print("Debug::Warning-> No Server Response")
                 let error = NSError(domain: target.baseURL, code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.invalidResponse])
                 completion(.failure(error))
                 return
@@ -71,19 +75,15 @@ class BaseAPI<T: TargetType> {
                 
                 // Check if the server return the data correctly
                 guard let safeData = data else {
-                    print("Debug::Error-> no data comming")
                     completion(.failure(invalidDataError))
                     return
                 }
                 // Decode the json data into out responseClass
-                print("SafeData: \(String(data: safeData, encoding: .utf8))")
                 guard let result = try? JSONDecoder().decode(M.self, from: safeData) else {
-                    print("Debug::Error-> Can not parse give date to your response class")
                     completion(.failure(invalidDataError))
                     return
                 }
                 // if the two previouse steps done correctly the the request is success.
-                print("Debug::Success-> Parse Data Successfully!")
                 completion(.success(result))
                 
             }
@@ -91,7 +91,6 @@ class BaseAPI<T: TargetType> {
             else {
                 // server return an error
                 guard let safeData = data else {
-                    print("Debug::Error-> status code not 200 and also no data comming")
                     completion(.failure(invalidDataError))
                     return
                 }

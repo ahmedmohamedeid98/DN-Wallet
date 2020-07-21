@@ -46,12 +46,6 @@ struct UserInfo: Codable {
     let email: String
 }
 
-struct NotificationName {
-    static let charge = "charge-vc-notification"
-    static let setting = "setting-vc-notification"
-    static let editAccount = "editaccount-vc-notification"
-}
-
 struct BasicUserInfo {
     let name: String
     let email: String

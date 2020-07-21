@@ -42,7 +42,7 @@ class HomeVC: UIViewController {
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         
-        loadData()
+        //loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,7 +212,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     private func prepareView(for header: UIView, withTitle title: String) {
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.textColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        titleLabel.textColor = .DnTextColor
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont(name: "HeviticaNeuee-bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)
         header.addSubview(titleLabel)
@@ -233,9 +233,7 @@ extension HomeVC {
 
     private func loadData() {
         // get user data
-        Hud.showLoadingHud(onView: view, withLabel: "Load Balance...")
         meManager.getMyAccountInfo { (result) in
-            Hud.hide(after: 0.0)
             switch result {
                 case .success(let info):
                     self.handleGetUserInfoSuccessCase(withData: info)
@@ -246,18 +244,13 @@ extension HomeVC {
     }
     
     private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
-        self.checkIfUserNotVerified(isVerified: data.user.accountIsActive)
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.charge), object: nil, userInfo: ["cards": data.payment_cards])
-        
-        let basicUserInfo = BasicUserInfo(name: data.user.name, email: data.user.email, photo: data.user.phone)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.setting), object: nil, userInfo: ["userInfo": basicUserInfo])
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.editAccount), object: nil, userInfo: ["user": data.user])
+        // check if account is verified or not, if not ask user to active it
+        //self.checkIfUserNotVerified(isVerified: data.user.accountIsActive)
     }
     
     private func handleGetUserInfoFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
+
     }
     
     private func checkIfUserNotVerified(isVerified: Bool = false) {

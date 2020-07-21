@@ -93,6 +93,7 @@ class AddHeirVC: UIViewController {
 //MARK:- Networking
 extension AddHeirVC {
     func loadData() {
+        /*
         Hud.showLoadingHud(onView: view)
         NetworkManager.getUserHeirs { (result) in
             switch result {
@@ -102,6 +103,7 @@ extension AddHeirVC {
                     self.configureNetworkingFailureCase(withError: "No Hiers Found")
             }
         }
+ */
     }
     
     private func configureNetworkingSuccessCase(withData data: [Heirs]) {

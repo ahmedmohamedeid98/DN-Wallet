@@ -17,7 +17,7 @@ class ConfirmEmailVC: UIViewController {
     @IBOutlet weak var optContainerView: OPT!
     @IBOutlet weak var infoLabelOne: UILabel!
     @IBOutlet weak var infoLabelTwo: UILabel!
-    
+    private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
 
 
     //MARK:- Init
@@ -39,40 +39,10 @@ class ConfirmEmailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        sendConfirmationCode()
+        self.sendVerificationCodeToEmail()
     }
     
     //MARK:- Methods
-    // send Confirmation Code
-    private func sendConfirmationCode() {
-        let code  = "DNDNDNDNND"//AuthManager.shared.generateConfirmationCode()
-        let mail = "DNDNDNNDND"//AuthManager.shared.getUserEmail(), let code = generatedCode else {
-         
-        print("userEmail: \(mail)")
-        print("userCode : \(code)")
-        
-        Hud.showLoadingHud(onView: view, withLabel: "Sending...")
-        NetworkManager.confirmEmail(email: mail, code: code) { (result) in
-            switch result {
-                case .success(_):
-                    self.handleSendConfirmationCodeSuccessCase()
-                case .failure(let err):
-                    self.handleSendConfirmationCodeFailureCase(withError: err.rawValue)
-            }
-        }
-        
-    }
-    
-    private func handleSendConfirmationCodeSuccessCase() {
-        Hud.hide(after: 0.0)
-        hideSuccessMessage(hide: false)
-    }
-    
-    private func handleSendConfirmationCodeFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
-        hideSuccessMessage()
-    }
-    
     
     // back to login page
     @IBAction func backBtnPressed(_ sender: UIButton) {
@@ -84,46 +54,55 @@ class ConfirmEmailVC: UIViewController {
         wrongTrying = 0
         resendConfirmationCodeOutlet.isHidden = true
         hideSuccessMessage()
-        sendConfirmationCode()
+        self.sendVerificationCodeToEmail()
     }
     
 }
 
 //MARK:- Configure Confirmation Code
 extension ConfirmEmailVC: GetOPTValuesProtocol {
-    func getOpt(with value: String) {
-        guard let code = generatedCode else {
-            invalidCodeTryAgain()
-            return
-        }
-        if value == code {
-            updateProfileToBeVerified()
-        } else {
-            invalidCodeTryAgain()
-        }
-    }
     
-    
-    
-    private func updateProfileToBeVerified() {
-        Hud.showLoadingHud(onView: view, withLabel: "Validate...")
-        NetworkManager.editAccount(withObject: ["userIsValidate": true]) { (result) in
+    // SEND VERIFICATION CODE
+    private func sendVerificationCodeToEmail() {
+        Hud.showLoadingHud(onView: view, withLabel: "Sending Code...")
+        verifyManager.sendEmailVerifiCode { (result) in
+            Hud.hide(after: 0)
             switch result {
                 case .success(_):
-                    Hud.successAndHide(withMessage: DNSuccessMessage.accountValidate.rawValue)
-                    DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
-                case .failure(let err):
-                    Hud.faildAndHide(withMessage: err.rawValue)
+                    self.hideSuccessMessage(hide: false)
+                case .failure(let error):
+                    self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription, dismissAfter: 6)
             }
         }
     }
     
-    private func invalidCodeTryAgain() {
-        optContainerView.reset()
-        optContainerView.errorMsg.isHidden = false
-        wrongTrying += 1
-        if wrongTrying > 2 {
-            resendConfirmationCodeOutlet.isHidden = false
+    // CHECK ENTERED CODE
+    func getOpt(with value: String) {
+        Hud.showLoadingHud(onView: view, withLabel: "Verifying...")
+        verifyManager.verifyEmail(withCode: value) { (result) in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(_):
+                    self.handleSendConfirmationCodeSuccessCase()
+                case .failure(_):
+                    self.invalidCodeTryAgain()
+            }
         }
+    }
+    
+    private func handleSendConfirmationCodeSuccessCase() {
+        DispatchQueue.main.async { self.dismiss(animated: true, completion: nil) }
+    }
+    
+    private func invalidCodeTryAgain() {
+        DispatchQueue.main.async {
+            self.optContainerView.reset()
+            self.optContainerView.errorMsg.isHidden = false
+            self.wrongTrying += 1
+            if self.wrongTrying > 2 {
+                self.resendConfirmationCodeOutlet.isHidden = false
+            }
+        }
+        
     }
 }

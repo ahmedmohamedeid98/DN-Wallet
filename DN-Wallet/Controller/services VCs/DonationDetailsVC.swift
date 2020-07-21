@@ -98,7 +98,7 @@ extension DonationDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
         let titleLabel = DNTitleLabel(title: "Location", textColor: .label, alignment: .center, fontSize: 17, weight: .semibold)
-        titleLabel.backgroundColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        titleLabel.backgroundColor = .DnTextColor
         header.addSubview(titleLabel)
         header.addSubview(mapView)
         titleLabel.DNLayoutConstraint(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, size: CGSize(width: 0, height: 35))

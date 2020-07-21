@@ -31,7 +31,7 @@ class SendAndRequestMoney: UIViewController {
     // and this delegate function call another function
     var startCheckForAnyChange: Bool = false
     
-    @IBOutlet weak var segmentController: UISegmentedControl!
+    @IBOutlet weak var segmentController: DNSegmentControl!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var messageTextView: UITextView!
@@ -63,7 +63,7 @@ class SendAndRequestMoney: UIViewController {
         // determine the title of viewController be a "send money" or being a "request money"
         toggleRequestSend(isRequest: isRequest)
         if presentFromDonationVC || presentedFromMyContact {
-            if presentFromDonationVC { segmentController.setEnabled(false, forSegmentAt: 1) } // disable request segment
+            if presentFromDonationVC { segmentController.disableSegmentAt(index: 1) } // disable request segment
             addContactBtnOutlet.isHidden = true
             emailTextField.text = presentedEmail
             emailTextField.isUserInteractionEnabled = false // don't allow to user to edit organization email
@@ -99,10 +99,10 @@ class SendAndRequestMoney: UIViewController {
     }
     
     func setupSegmentController() {
-        isRequest ? (segmentController.selectedSegmentIndex = 1) : (segmentController.selectedSegmentIndex = 0)
-        segmentController.setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
-        segmentController.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        segmentController.selectedSegmentTintColor = .DnColor
+        segmentController.firstSegmentTitle = "Send"
+        segmentController.secondSegmentTitle = "Request"
+        segmentController.delegate = self
+        isRequest ? (segmentController.selectSegmentAt(index: 1)) : (segmentController.selectSegmentAt(index: 0))
     }
     
     
@@ -251,3 +251,15 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     }
 }
 
+extension SendAndRequestMoney: DNSegmentControlDelegate {
+    func segmentValueChanged(to index: Int) {
+        if index == 0 {
+            print("send money")
+        } else {
+            print("request mony")
+        }
+        
+    }
+    
+    
+}

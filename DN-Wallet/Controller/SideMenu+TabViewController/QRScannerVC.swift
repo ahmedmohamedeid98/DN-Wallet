@@ -40,6 +40,7 @@ class QRScannerVC: UIViewController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let accept = UIAlertAction(title: "Accept", style: .default) { (action) in
             // try to send money to the user email
+            /*
             NetworkManager.transactionAmount(amount, to: email) { (success, error) in
                 if success {
                     Alert.asyncSuccessfullWith("Successful transaction process", dismissAfter: 1.0, viewController: self)
@@ -60,6 +61,7 @@ class QRScannerVC: UIViewController {
                     Alert.asyncActionOkWith("Error", msg: "faild transaction process.", viewController: self)
                 }
             }
+ */
             
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

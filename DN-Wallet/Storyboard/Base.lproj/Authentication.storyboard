@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l1u-g8-4zI">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -24,37 +24,37 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2q-il-Zcl">
-                                <rect key="frame" x="175" y="164" width="64" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="180" y="164" width="54.5" height="24"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zLU-p4-lxd">
-                                <rect key="frame" x="40" y="218" width="334" height="120"/>
+                                <rect key="frame" x="20" y="218" width="374" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-PT-EBd" customClass="DNViewWithTextField" customModule="DN_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="IzF-B4-XYb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4m-vV-1i4" customClass="DNViewWithTextField" customModule="DN_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="334" height="56"/>
+                                        <rect key="frame" x="0.0" y="64" width="374" height="56"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </view>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="D3x-uq-vnv">
-                                <rect key="frame" x="30" y="378" width="354" height="95"/>
+                                <rect key="frame" x="30" y="358" width="354" height="95"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9Q-8e-ibQ">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="40"/>
-                                        <color key="backgroundColor" red="0.17822146420000001" green="0.49823361640000002" blue="0.75763851400000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="66i-FJ-KCH"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
                                         <state key="normal" title="Sign in">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -67,7 +67,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weU-5l-n93">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="14"/>
                                                 <state key="normal" title="Don't have an account? create account"/>
                                                 <connections>
                                                     <action selector="haveNoAccountPressed:" destination="l1u-g8-4zI" eventType="touchUpInside" id="9gq-O2-ssx"/>
@@ -75,7 +75,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAp-Cd-Vrj">
                                                 <rect key="frame" x="0.0" y="20" width="354" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="14"/>
                                                 <state key="normal" title="forget you password? Reset it."/>
                                                 <connections>
                                                     <action selector="forgetPasswordPressed:" destination="l1u-g8-4zI" eventType="touchUpInside" id="wSM-ky-WYo"/>
@@ -88,14 +88,14 @@
                         </subviews>
                         <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
-                            <constraint firstItem="D3x-uq-vnv" firstAttribute="top" secondItem="zLU-p4-lxd" secondAttribute="bottom" constant="40" id="0z3-jo-5Y0"/>
+                            <constraint firstItem="D3x-uq-vnv" firstAttribute="top" secondItem="zLU-p4-lxd" secondAttribute="bottom" constant="20" id="0z3-jo-5Y0"/>
                             <constraint firstItem="zLU-p4-lxd" firstAttribute="top" secondItem="f2q-il-Zcl" secondAttribute="bottom" constant="30" id="4IX-Yb-XRK"/>
                             <constraint firstItem="rvv-Uy-5Ie" firstAttribute="centerX" secondItem="Aa1-w3-wOP" secondAttribute="centerX" id="6Af-oW-DOK"/>
                             <constraint firstItem="f2q-il-Zcl" firstAttribute="centerX" secondItem="Aa1-w3-wOP" secondAttribute="centerX" id="AZL-lf-c6o"/>
                             <constraint firstItem="D3x-uq-vnv" firstAttribute="leading" secondItem="Aa1-w3-wOP" secondAttribute="leading" constant="30" id="FDJ-C1-8BW"/>
-                            <constraint firstItem="zLU-p4-lxd" firstAttribute="leading" secondItem="Aa1-w3-wOP" secondAttribute="leading" constant="40" id="OsS-UR-E1b"/>
+                            <constraint firstItem="zLU-p4-lxd" firstAttribute="leading" secondItem="Aa1-w3-wOP" secondAttribute="leading" constant="20" id="OsS-UR-E1b"/>
                             <constraint firstItem="f2q-il-Zcl" firstAttribute="top" secondItem="rvv-Uy-5Ie" secondAttribute="bottom" constant="20" id="dBC-HE-PuO"/>
-                            <constraint firstItem="Aa1-w3-wOP" firstAttribute="trailing" secondItem="zLU-p4-lxd" secondAttribute="trailing" constant="40" id="g9g-wN-laM"/>
+                            <constraint firstItem="Aa1-w3-wOP" firstAttribute="trailing" secondItem="zLU-p4-lxd" secondAttribute="trailing" constant="20" id="g9g-wN-laM"/>
                             <constraint firstItem="rvv-Uy-5Ie" firstAttribute="top" secondItem="Aa1-w3-wOP" secondAttribute="top" constant="40" id="gcJ-tu-7r1"/>
                             <constraint firstItem="Aa1-w3-wOP" firstAttribute="trailing" secondItem="D3x-uq-vnv" secondAttribute="trailing" constant="30" id="oFn-im-O3S"/>
                         </constraints>
@@ -120,23 +120,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create DN Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jht-mC-q1R">
-                                <rect key="frame" x="123" y="74" width="168" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="132.5" y="74" width="149.5" height="24"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ob-NG-qFG">
-                                <rect key="frame" x="20" y="73" width="61.5" height="22"/>
-                                <color key="tintColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="20" y="73.5" width="54.5" height="21"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title=" Login" image="chevron.left" catalog="system">
-                                    <color key="titleColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="backBtnPressed:" destination="1hg-TP-rOw" eventType="touchUpInside" id="Xqo-Fr-5f0"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ifs-Or-MLB">
-                                <rect key="frame" x="40" y="178" width="334" height="334"/>
+                                <rect key="frame" x="40" y="172" width="334" height="334"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jQN-ar-hvx">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="248"/>
@@ -194,16 +194,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Welcome, Enter Your Basic Information" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jsq-Bf-b10">
-                                <rect key="frame" x="40" y="118" width="334" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="40e-eQ-0iy"/>
-                                </constraints>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
-                            </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OdO-yB-vso">
                                 <rect key="frame" x="51" y="809.5" width="312" height="52.5"/>
                                 <subviews>
@@ -236,22 +226,28 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, Enter Your Basic Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4f2-1N-8wj">
+                                <rect key="frame" x="20" y="118" width="374" height="24"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
+                            <constraint firstItem="JaD-uy-7Lz" firstAttribute="trailing" secondItem="4f2-1N-8wj" secondAttribute="trailing" constant="20" id="0C4-jm-8F6"/>
                             <constraint firstItem="OdO-yB-vso" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="51" id="5E4-c2-GJs"/>
                             <constraint firstItem="Jht-mC-q1R" firstAttribute="top" secondItem="JaD-uy-7Lz" secondAttribute="top" constant="30" id="6L6-jK-G69"/>
                             <constraint firstItem="Ifs-Or-MLB" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="40" id="6bs-Yg-cFM"/>
                             <constraint firstItem="JaD-uy-7Lz" firstAttribute="bottom" secondItem="OdO-yB-vso" secondAttribute="bottom" id="7Hu-YE-F4q"/>
-                            <constraint firstItem="Ifs-Or-MLB" firstAttribute="top" secondItem="jsq-Bf-b10" secondAttribute="bottom" constant="20" id="EEj-8F-1aA"/>
                             <constraint firstItem="JaD-uy-7Lz" firstAttribute="trailing" secondItem="OdO-yB-vso" secondAttribute="trailing" constant="51" id="L1D-8L-M7c"/>
+                            <constraint firstItem="4f2-1N-8wj" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="20" id="Rv1-QY-ZVN"/>
+                            <constraint firstItem="4f2-1N-8wj" firstAttribute="top" secondItem="Jht-mC-q1R" secondAttribute="bottom" constant="20" id="VdG-gY-mJS"/>
                             <constraint firstItem="9Ob-NG-qFG" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="20" id="Y6W-5C-c9Y"/>
-                            <constraint firstItem="jsq-Bf-b10" firstAttribute="top" secondItem="Jht-mC-q1R" secondAttribute="bottom" constant="20" id="Y9K-cY-BjJ"/>
-                            <constraint firstItem="jsq-Bf-b10" firstAttribute="leading" secondItem="JaD-uy-7Lz" secondAttribute="leading" constant="40" id="ep3-L1-b1M"/>
+                            <constraint firstItem="Ifs-Or-MLB" firstAttribute="top" secondItem="4f2-1N-8wj" secondAttribute="bottom" constant="30" id="Yz9-6l-qDi"/>
                             <constraint firstItem="9Ob-NG-qFG" firstAttribute="centerY" secondItem="Jht-mC-q1R" secondAttribute="centerY" constant="-2" id="gf5-GO-qTq"/>
                             <constraint firstItem="Jht-mC-q1R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Ob-NG-qFG" secondAttribute="trailing" constant="8" symbolic="YES" id="hpq-lC-Zv6"/>
                             <constraint firstItem="Jht-mC-q1R" firstAttribute="centerX" secondItem="JaD-uy-7Lz" secondAttribute="centerX" id="iUO-Ct-EHy"/>
-                            <constraint firstItem="JaD-uy-7Lz" firstAttribute="trailing" secondItem="jsq-Bf-b10" secondAttribute="trailing" constant="40" id="rMD-K3-XI8"/>
                             <constraint firstItem="JaD-uy-7Lz" firstAttribute="trailing" secondItem="Ifs-Or-MLB" secondAttribute="trailing" constant="40" id="srq-6S-agc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JaD-uy-7Lz"/>
@@ -278,21 +274,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuM-el-KLs">
-                                <rect key="frame" x="100.5" y="74" width="213.5" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="117" y="74" width="180.5" height="24"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJW-80-UBe">
                                 <rect key="frame" x="20" y="75" width="19.5" height="22"/>
-                                <state key="normal" image="arrow.left" catalog="system"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="arrow.left" catalog="system">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="backBtnPressed:" destination="1hg-TP-rOw" eventType="touchUpInside" id="Iif-sJ-9fk"/>
                                     <action selector="backBtnPressed:" destination="xPc-n8-Z8o" eventType="touchUpInside" id="rs7-f2-Er7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WI-xh-Qw2">
-                                <rect key="frame" x="122.5" y="336" width="169" height="40"/>
+                                <rect key="frame" x="122.5" y="314" width="169" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zap-Gr-Jbp"/>
                                 </constraints>
@@ -304,7 +302,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Confirmation Code was sent to your phone number please, enter it here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="epE-Q5-chU">
-                                <rect key="frame" x="62" y="486" width="290" height="70"/>
+                                <rect key="frame" x="62" y="464" width="290" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="8e9-ic-mPp"/>
                                     <constraint firstAttribute="width" constant="290" id="BUw-us-Xn8"/>
@@ -314,25 +312,15 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Now, Select your country and enter your phone number" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="d3e-x6-vNt">
-                                <rect key="frame" x="40" y="118" width="334" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="pdY-Rl-1c9"/>
-                                </constraints>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
-                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hku-jE-Urb" customClass="OPT" customModule="DN_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="97" y="396" width="220" height="60"/>
+                                <rect key="frame" x="97" y="374" width="220" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="H1n-st-4jR"/>
                                     <constraint firstAttribute="height" constant="60" id="d5a-iv-ypw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-AH-lP8">
-                                <rect key="frame" x="16" y="336" width="382" height="220"/>
+                                <rect key="frame" x="16" y="314" width="382" height="220"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jyS-JW-FQG">
                                         <rect key="frame" x="181" y="100" width="20" height="20"/>
@@ -345,7 +333,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-5t-fKU">
-                                <rect key="frame" x="20" y="208" width="374" height="98"/>
+                                <rect key="frame" x="20" y="186" width="374" height="98"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w80-GX-7E6">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -353,8 +341,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="fcR-Q3-bg4"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rowHeight">
@@ -368,44 +355,49 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWs-Sk-TAI">
                                         <rect key="frame" x="0.0" y="54" width="374" height="44"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wvX-1f-pAK">
-                                <rect key="frame" x="361" y="224.5" width="15" height="11"/>
+                                <rect key="frame" x="361" y="202.5" width="15" height="11"/>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="7FE-Ca-TFE"/>
                                     <constraint firstAttribute="width" constant="15" id="jON-8t-3Rm"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now, Select your country and enter your phone number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mb9-dE-fFk">
+                                <rect key="frame" x="20" y="118" width="374" height="48"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="top" secondItem="3WI-xh-Qw2" secondAttribute="top" id="0Xb-qi-npk"/>
-                            <constraint firstItem="d3e-x6-vNt" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="40" id="4A1-co-h1x"/>
                             <constraint firstItem="3WI-xh-Qw2" firstAttribute="top" secondItem="Ipr-5t-fKU" secondAttribute="bottom" constant="30" id="6h9-8c-TaJ"/>
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="4RH-AH-lP8" secondAttribute="trailing" constant="16" id="CiP-7g-CPb"/>
                             <constraint firstItem="hku-jE-Urb" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="FNO-Bg-IqN"/>
                             <constraint firstItem="fJW-80-UBe" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="20" id="FNQ-cT-ZJq"/>
+                            <constraint firstItem="Ipr-5t-fKU" firstAttribute="top" secondItem="mb9-dE-fFk" secondAttribute="bottom" constant="20" id="FUT-yv-6Mc"/>
+                            <constraint firstItem="mb9-dE-fFk" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="20" id="Hea-Of-4Lq"/>
                             <constraint firstItem="wvX-1f-pAK" firstAttribute="trailing" secondItem="w80-GX-7E6" secondAttribute="trailing" constant="-18" id="Jnb-VC-6i5"/>
-                            <constraint firstItem="d3e-x6-vNt" firstAttribute="top" secondItem="vuM-el-KLs" secondAttribute="bottom" constant="20" id="Kbn-xH-IRW"/>
                             <constraint firstItem="3WI-xh-Qw2" firstAttribute="centerX" secondItem="XwI-5p-vUa" secondAttribute="centerX" id="MXj-ul-LU5"/>
                             <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="Ipr-5t-fKU" secondAttribute="trailing" constant="20" id="MgY-AG-qei"/>
-                            <constraint firstItem="Ipr-5t-fKU" firstAttribute="top" secondItem="d3e-x6-vNt" secondAttribute="bottom" constant="30" id="Qae-Zp-YTN"/>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="16" id="QqR-rR-cpO"/>
                             <constraint firstItem="epE-Q5-chU" firstAttribute="top" secondItem="hku-jE-Urb" secondAttribute="bottom" constant="30" id="cTt-Wm-WzN"/>
                             <constraint firstItem="4RH-AH-lP8" firstAttribute="bottom" secondItem="epE-Q5-chU" secondAttribute="bottom" id="fOk-ZB-DFg"/>
+                            <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="mb9-dE-fFk" secondAttribute="trailing" constant="20" id="fwm-TZ-zpm"/>
                             <constraint firstItem="epE-Q5-chU" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="lxG-Jw-pUs"/>
                             <constraint firstItem="hku-jE-Urb" firstAttribute="top" secondItem="3WI-xh-Qw2" secondAttribute="bottom" constant="20" id="m2T-UW-BET"/>
+                            <constraint firstItem="mb9-dE-fFk" firstAttribute="top" secondItem="vuM-el-KLs" secondAttribute="bottom" constant="20" id="o5m-fx-3q2"/>
                             <constraint firstItem="Ipr-5t-fKU" firstAttribute="leading" secondItem="eP7-ey-uPo" secondAttribute="leading" constant="20" id="roV-Pr-gCo"/>
                             <constraint firstItem="fJW-80-UBe" firstAttribute="centerY" secondItem="vuM-el-KLs" secondAttribute="centerY" id="sG8-n2-gap"/>
                             <constraint firstItem="wvX-1f-pAK" firstAttribute="centerY" secondItem="w80-GX-7E6" secondAttribute="centerY" id="teS-lb-PKZ"/>
                             <constraint firstItem="vuM-el-KLs" firstAttribute="top" secondItem="eP7-ey-uPo" secondAttribute="top" constant="30" id="xge-he-V0Z"/>
-                            <constraint firstItem="eP7-ey-uPo" firstAttribute="trailing" secondItem="d3e-x6-vNt" secondAttribute="trailing" constant="40" id="xnf-4v-ZP5"/>
                             <constraint firstItem="vuM-el-KLs" firstAttribute="centerX" secondItem="eP7-ey-uPo" secondAttribute="centerX" id="zFx-lk-P3b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eP7-ey-uPo"/>
@@ -452,44 +444,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Your Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYc-R1-Tlc">
-                                <rect key="frame" x="117.5" y="74" width="179" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYc-R1-Tlc">
+                                <rect key="frame" x="128.5" y="74" width="157.5" height="24"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Congrats!, the last step verified you email." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OVq-jh-vtS">
-                                <rect key="frame" x="30" y="118" width="354" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="fPY-dI-xbf"/>
-                                </constraints>
-                                <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
-                            </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nRe-l1-8Tz">
-                                <rect key="frame" x="20" y="338" width="374" height="38"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="nRe-l1-8Tz">
+                                <rect key="frame" x="20" y="336" width="374" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your Inbox" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnr-e9-TES">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="BLC-c7-ZMD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A 4-digit has been sent to your email address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="tar-GZ-S5A">
-                                        <rect key="frame" x="0.0" y="20" width="374" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                        <color key="textColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="23" width="374" height="20"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="990-BG-u92" customClass="OPT" customModule="DN_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="97" y="198" width="220" height="60"/>
+                                <rect key="frame" x="97" y="196" width="220" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Iok-wR-yrU"/>
@@ -497,23 +476,24 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-Kc-0Ww">
-                                <rect key="frame" x="20" y="73" width="61.5" height="22"/>
-                                <color key="tintColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="20" y="73.5" width="54.5" height="21"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="15"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title=" Login" image="chevron.left" catalog="system">
-                                    <color key="titleColor" red="0.14901960780000001" green="0.59999999999999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="backBtnPressed:" destination="10z-K6-pdU" eventType="touchUpInside" id="yeD-Ke-ARh"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMe-23-Rj4">
-                                <rect key="frame" x="82" y="278" width="250" height="40"/>
+                                <rect key="frame" x="82" y="276" width="250" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="8WO-qw-gdC"/>
                                     <constraint firstAttribute="height" constant="40" id="uf5-3M-rzw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
                                 <state key="normal" title="Resend confirmation code">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -521,23 +501,29 @@
                                     <action selector="resendConfirmationCode:" destination="10z-K6-pdU" eventType="touchUpInside" id="rJb-MD-03F"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congrats!, the last step verified you email address." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LwS-y7-p2W">
+                                <rect key="frame" x="20" y="118" width="374" height="48"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="Dynamic-Background"/>
                         <constraints>
-                            <constraint firstItem="990-BG-u92" firstAttribute="top" secondItem="OVq-jh-vtS" secondAttribute="bottom" constant="20" id="2XZ-aN-2zy"/>
                             <constraint firstItem="tYc-R1-Tlc" firstAttribute="top" secondItem="YnL-P4-EE4" secondAttribute="top" constant="30" id="6DB-RW-rWg"/>
                             <constraint firstItem="YnL-P4-EE4" firstAttribute="trailing" secondItem="nRe-l1-8Tz" secondAttribute="trailing" constant="20" id="7Af-n0-Adc"/>
                             <constraint firstItem="990-BG-u92" firstAttribute="centerX" secondItem="YnL-P4-EE4" secondAttribute="centerX" id="E9D-K7-HOu"/>
                             <constraint firstItem="aPK-Kc-0Ww" firstAttribute="centerY" secondItem="tYc-R1-Tlc" secondAttribute="centerY" constant="-2" id="EdQ-RY-iWe"/>
                             <constraint firstItem="CMe-23-Rj4" firstAttribute="centerX" secondItem="fjq-Kp-srP" secondAttribute="centerX" id="FTA-cM-M9Z"/>
-                            <constraint firstItem="OVq-jh-vtS" firstAttribute="leading" secondItem="YnL-P4-EE4" secondAttribute="leading" constant="30" id="HxE-ff-Jag"/>
                             <constraint firstItem="nRe-l1-8Tz" firstAttribute="leading" secondItem="YnL-P4-EE4" secondAttribute="leading" constant="20" id="IZc-YE-fcb"/>
-                            <constraint firstItem="OVq-jh-vtS" firstAttribute="top" secondItem="tYc-R1-Tlc" secondAttribute="bottom" constant="20" id="PMj-Dz-tGt"/>
-                            <constraint firstItem="YnL-P4-EE4" firstAttribute="trailing" secondItem="OVq-jh-vtS" secondAttribute="trailing" constant="30" id="QBE-nD-BQj"/>
+                            <constraint firstItem="990-BG-u92" firstAttribute="top" secondItem="LwS-y7-p2W" secondAttribute="bottom" constant="30" id="Sxl-6K-xBu"/>
                             <constraint firstItem="CMe-23-Rj4" firstAttribute="top" secondItem="990-BG-u92" secondAttribute="bottom" constant="20" id="V1v-lX-QPc"/>
+                            <constraint firstItem="LwS-y7-p2W" firstAttribute="leading" secondItem="YnL-P4-EE4" secondAttribute="leading" constant="20" id="eea-XT-vrm"/>
                             <constraint firstItem="tYc-R1-Tlc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aPK-Kc-0Ww" secondAttribute="trailing" constant="8" symbolic="YES" id="fUf-MP-GGe"/>
                             <constraint firstItem="aPK-Kc-0Ww" firstAttribute="leading" secondItem="YnL-P4-EE4" secondAttribute="leading" constant="20" id="jmE-5w-2qc"/>
+                            <constraint firstItem="YnL-P4-EE4" firstAttribute="trailing" secondItem="LwS-y7-p2W" secondAttribute="trailing" constant="20" id="lIG-7B-dpj"/>
                             <constraint firstItem="tYc-R1-Tlc" firstAttribute="centerX" secondItem="fjq-Kp-srP" secondAttribute="centerX" id="t09-OF-2a1"/>
+                            <constraint firstItem="LwS-y7-p2W" firstAttribute="top" secondItem="tYc-R1-Tlc" secondAttribute="bottom" constant="20" id="v1A-NV-7eq"/>
                             <constraint firstItem="nRe-l1-8Tz" firstAttribute="top" secondItem="CMe-23-Rj4" secondAttribute="bottom" constant="20" id="y69-bd-iHA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YnL-P4-EE4"/>
@@ -560,7 +546,7 @@
         <image name="arrowtriangle.down.fill" catalog="system" width="64" height="62"/>
         <image name="chevron.left" catalog="system" width="48" height="64"/>
         <namedColor name="Dynamic-Background">
-            <color red="0.92100000381469727" green="0.92100000381469727" blue="0.92100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dynamic-Cell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -14,7 +14,7 @@ class ChargeVC: UIViewController {
     //MARK:- Outlets
     @IBOutlet weak var dropDown: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var segmentControl: DNSegmentControl!
     @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var creditTable: UITableView!
     
@@ -27,10 +27,17 @@ class ChargeVC: UIViewController {
     CardInfo(id: "3", name: "Meza", type: "charge", last4digits: "8437")]
     
     //MARK:- Initialization
+    fileprivate func configureSegmentControl() {
+        segmentControl.firstSegmentTitle    = "Charge"
+        segmentControl.secondSegmentTitle   = "Withdrew"
+        segmentControl.delegate             = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         handleNavigationBar()
-        //view.backgroundColor = .DnVcBackgroundColor
+        configureSegmentControl()
+        
         dropDown.delegate = self
         amountField.delegate = self
         creditTable.delegate = self
@@ -135,9 +142,27 @@ extension ChargeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
         header.text = "  Select Payment Card"
-        header.textColor = #colorLiteral(red: 0.167981714, green: 0.6728672981, blue: 0.9886779189, alpha: 1)
+        header.textColor = .DnTextColor
         
         return header
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    
+}
+
+// handel segmentControl Action
+extension ChargeVC: DNSegmentControlDelegate {
+    func segmentValueChanged(to index: Int) {
+        if index == 0 {
+            // charge...
+            print("charge...")
+        } else {
+            // withdrew...
+            print("withdrew...")
+        }
     }
     
     

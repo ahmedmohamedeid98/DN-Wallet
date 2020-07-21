@@ -15,6 +15,7 @@ class SideMenuVC: UIViewController {
     //MARK:- Properities
     private lazy var auth: UserAuthProtocol = UserAuth()
     private var isInSafeMode: Bool = false
+    var userInfo: AccountInfo?
     let bg: UIView = {
         let vw = UIView()
         vw.backgroundColor = .DnColor
@@ -113,6 +114,7 @@ class SideMenuVC: UIViewController {
     //MARK:- Handle Actions
     @objc func settingBtnPressed() {
         let settingvc = SettingVC()
+        settingvc.userInfo = self.userInfo
         let vc = UINavigationController(rootViewController: settingvc)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
@@ -139,7 +141,6 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if isInSafeMode {
             if let isSafe = ServiceSection(rawValue: indexPath.row)?.isSafe {
                 if !isSafe { ServiceSection(rawValue: indexPath.row)?.pushVC(from: self) }

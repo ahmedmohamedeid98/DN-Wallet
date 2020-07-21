@@ -12,6 +12,8 @@ class SaleVC: UIViewController {
 
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var qrCodeImage: UIImageView!
+    @IBOutlet weak var BgView: UIView!
+    
     private lazy var auth: UserAuthProtocol = UserAuth()
     
     var documentUrl: URL {
@@ -28,6 +30,7 @@ class SaleVC: UIViewController {
     
     fileprivate func initViewController() {
         handleNavigationBar()
+        BgView.layer.cornerRadius = 16.0
         email.text = auth.getUSerEmail() ?? "usermail@example.com"
         
         if let filePath = exist(fileName: keys.qrCodeFileName) {

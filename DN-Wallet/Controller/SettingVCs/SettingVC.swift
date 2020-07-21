@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MBProgressHUD
+
 
 class SettingVC: UIViewController {
 
@@ -14,16 +16,18 @@ class SettingVC: UIViewController {
     var settingTable: UITableView!
     var userQuikDetails: UserQuikDetails!
     var leftBarButton: UIBarButtonItem!
-    
+    var userInfo: AccountInfo?
+    private lazy var meManager: MeManagerProtocol = MeManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
+        //loadData()
         setupNavBar()
         setupUserQuikDetailsView()
         setupTableView()
         setupLayout()
-        addNotificationObserver()
+        
         
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -121,6 +125,7 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
             if title == GeneralOptions.editProfile.description {
                 let st = UIStoryboard(name: "Services", bundle: .main)
                 let vc = st.instantiateViewController(identifier: "editAccountVCID") as? EditAccountVC
+                vc!.userInfo = self.userInfo
                 pushViewController(vc!, title: title, styleFull: true)
             }
             if title ==  GeneralOptions.privacy.description {
@@ -224,32 +229,43 @@ extension UINavigationController {
 extension SettingVC {
     
     //let center = NotificationCenter.default
-    private func addNotificationObserver() {
-        let center = NotificationCenter.default
-        let observer = center.addObserver(forName: NSNotification.Name(rawValue: NotificationName.setting), object: nil, queue: nil, using: handelBasicUserData(_:))
-        print("SettingVC: Center remove observer")
-        
+    private func loadData() {
+        // get user data
+        meManager.getMyAccountInfo { (result) in
+            switch result {
+                case .success(let info):
+                    self.handleGetUserInfoSuccessCase(withData: info)
+                case .failure(_):
+                    break
+            }
+        }
     }
     
-    @objc private func handelBasicUserData(_ notification: Notification) {
-        if let basicInfo = notification.userInfo?["userInfo"] as? BasicUserInfo {
-            DispatchQueue.main.async {
-                self.userQuikDetails.userName.text  = basicInfo.name
-                self.userQuikDetails.userEmail.text = basicInfo.email
-                
-                if let imageUrl = basicInfo.photo {
-                    ImageLoader.shared.loadImageWithStrURL(str: imageUrl) { (result) in
-                        switch result {
-                            case .success(let img):
-                                DispatchQueue.main.async { self.userQuikDetails.userImage.image = img }
-                            case .failure(_):
-                                break
-                        }
-                    }
+    private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
+        self.userInfo = data
+        DispatchQueue.main.async {
+            self.userQuikDetails.userName.text  =   data.user.name
+            self.userQuikDetails.userEmail.text =   data.user.email
+        }
+        loadImage(withURL: data.user.photo)
+    }
+    
+    private func handleGetUserInfoFailureCase(withError error: String) {
+        // handel if getting data is faild
+    }
+    
+    
+    private func loadImage(withURL: String?) {
+        if let imageUrl = withURL {
+            ImageLoader.shared.loadImageWithStrURL(str: imageUrl) { (result) in
+                switch result {
+                    case .success(let img):
+                        DispatchQueue.main.async { self.userQuikDetails.userImage.image = img }
+                    case .failure(_):
+                        break
                 }
             }
         }
-        //center.removeObserver(observer)
-        print("SettingVC: Handler If Finsh")
     }
+
 }
