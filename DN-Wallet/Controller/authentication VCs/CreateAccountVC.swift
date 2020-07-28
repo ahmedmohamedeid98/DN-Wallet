@@ -59,7 +59,7 @@ final class CreateAccountVC: UIViewController {
                     case .success(_):
                         self.navigateToHomeController()
                     case .failure(let err):
-                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
                 }
             }
         }
@@ -79,7 +79,7 @@ extension CreateAccountVC {
         // check name validation (1 layer)
         if name.text == "" {
             usernameContainer.layer.borderColor = wrongColor
-            self.syncDismissableAlert(title: nil, Message: K.auth.nameIsNull)
+            self.presentDNAlertOnForground(title: "Failure", Message: K.auth.nameIsNull)
             return false
         } else {
             usernameContainer.layer.borderColor = validColor
@@ -87,7 +87,7 @@ extension CreateAccountVC {
         // check email validation (2 layer)
         if email.text == "" || !email.text!.isValidEmail {
             emailContainer.layer.borderColor = wrongColor
-            Alert.syncActionOkWith(nil, msg: K.auth.emailNotvalid, viewController: self)
+            self.presentDNAlertOnForground(title: "Failure", Message: K.auth.emailNotvalid)
             return false
         }else {
             emailContainer.layer.borderColor = validColor
@@ -95,14 +95,14 @@ extension CreateAccountVC {
         // check password validation (3 layer)
         if pass1.text == "" || pass1.text!.count < 8 {
             passwordContainer.layer.borderColor = wrongColor
-            Alert.syncActionOkWith(nil, msg: K.auth.passwordNotValid, viewController: self)
+            self.presentDNAlertOnForground(title: "Failure", Message: K.auth.passwordNotValid)
             return false
         } else {
             passwordContainer.layer.borderColor = validColor
         }
         if pass2.text == "" || !matchedPassword(pass1.text!, pass2.text!) {
             confirmPasswordContainer.layer.borderColor = wrongColor
-            Alert.syncActionOkWith(nil, msg: K.auth.passwordNotMatch, viewController: self)
+            self.presentDNAlertOnForground(title: "Failure", Message: K.auth.passwordNotMatch)
             return false
         }else {
             confirmPasswordContainer.layer.borderColor = validColor

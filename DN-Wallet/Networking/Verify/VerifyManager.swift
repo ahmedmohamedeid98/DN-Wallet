@@ -13,6 +13,7 @@ protocol VerifyManagerProtocol {
     func sendEmailVerifiCode(completion: @escaping(Result<SuccessResponse, NSError>) -> ())
     func verifyPhone(withCode code: String, andPhone phone: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
     func verifyEmail(withCode code: String, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
+    func checkAcountActiveStatus(completion: @escaping (Result<AccountIsActive, NSError>) -> ())
 }
 
 class VerifyManager: BaseAPI<VerifyNetworking>, VerifyManagerProtocol {
@@ -31,5 +32,10 @@ class VerifyManager: BaseAPI<VerifyNetworking>, VerifyManagerProtocol {
     
     func verifyEmail(withCode code: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
         self.APIRequest(target: .verifyEmail(withCode: code), responseClass: SuccessResponse.self, completion: completion)
+    }
+    
+    // this method should return accountIsActive = true if account is active otherwise false
+    func checkAcountActiveStatus(completion: @escaping (Result<AccountIsActive, NSError>) -> ()) {
+        self.APIRequest(target: .accountIsActive, responseClass: AccountIsActive.self, completion: completion)
     }
 }

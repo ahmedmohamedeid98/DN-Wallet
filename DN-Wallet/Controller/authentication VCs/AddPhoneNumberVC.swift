@@ -72,7 +72,7 @@ class AddPhoneNumberVC: UIViewController {
                 self.opt.isHidden = hidden
                 self.confirmCodeInfoMessage.isHidden = hidden
             } else {
-                self.syncDismissableAlert(title: "Failure", Message: "phone number or country is missing, try again")
+                self.presentDNAlertOnForground(title: "Failure", Message: "phone number or country is missing, try again")
             }
         }
     }
@@ -90,9 +90,9 @@ class AddPhoneNumberVC: UIViewController {
                 self.showIndicator(false)
                 switch result {
                     case .success(let res):
-                        self.asyncDismissableAlert(title: "Success", Message: res.success)
+                        self.presentDNAlertOnTheMainThread(title: "Success", Message: res.success)
                     case .failure(let error):
-                        self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error.localizedDescription)
                 }
             }
         }

@@ -13,6 +13,7 @@ enum VerifyNetworking {
     case sendEmailVerifiCode
     case verifyPhone(withCode: String, andNumber: String)
     case verifyEmail(withCode: String)
+    case accountIsActive
 }
 
 extension VerifyNetworking: TargetType {
@@ -26,6 +27,7 @@ extension VerifyNetworking: TargetType {
             case .sendEmailVerifiCode: return "/verfiy/email"
             case .verifyPhone: return "/verfiy"
             case .verifyEmail: return "/verfiy/email"
+            case .accountIsActive: return "/users/active"
         }
     }
     
@@ -35,6 +37,7 @@ extension VerifyNetworking: TargetType {
             case .sendEmailVerifiCode: return .get
             case .verifyPhone: return .post
             case .verifyEmail: return .post
+            case .accountIsActive: return .get
         }
     }
     
@@ -48,6 +51,7 @@ extension VerifyNetworking: TargetType {
                 return .requestParameters(["phoneNumber": andNumber, "code": withCode])
             case .verifyEmail(let withCode):
                 return .requestParameters(["code": withCode])
+            case .accountIsActive: return .requestPlain
         }
     }
     

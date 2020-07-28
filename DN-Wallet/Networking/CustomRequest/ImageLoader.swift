@@ -13,31 +13,25 @@ class ImageLoader {
     static let shared = ImageLoader()
     private init() {}
     
-    private var imageCache = NSCache<AnyObject, UIImage>()
+    private var cache = NSCache<NSString, UIImage>()
     
     func loadImageWithStrURL(str: String, completion: @escaping (Result<UIImage, DNError>) -> () ) {
-        let url = URL(string: str)!
-        if let image = imageCache.object(forKey: str as AnyObject) {
+        
+        guard let url   = URL(string: str) else { return }
+        print("url: \(url)")
+        let cacheKey    = NSString(string: str)
+        if let image    = cache.object(forKey: cacheKey) {
             completion(.success(image))
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let _ = error {
-                completion(.failure(.unableToComplete))
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            guard let safeData = data, let image = UIImage(data: safeData) else {
-                completion(.failure(.invalidData))
-                return
-            }
-            //Cach
-            self.imageCache.setObject(image, forKey: str as AnyObject)
+        
+        let task  = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error         == nil else { return }
+            guard let response  = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+            guard let safeData  = data else { return }
+            guard let image     = UIImage(data: safeData) else { return }
+            self.cache.setObject(image, forKey: cacheKey)
             completion(.success(image))
-            
         }
         task.resume()
     }

@@ -28,7 +28,6 @@ class BaseAPI<T: TargetType> {
             let err = NSError(domain: target.baseURL, code: 0, userInfo: [NSLocalizedDescriptionKey: "internal error: invalid url."])
             completion(.failure(err))
             return
-            
         }
         
         // Build Request

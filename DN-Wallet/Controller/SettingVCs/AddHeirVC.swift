@@ -14,11 +14,11 @@ class AddHeirVC: UIViewController {
     var data = [Heirs]()
     private let infoTextView        = DNTextView(text: K.vc.heirMessage, alignment: .center, fontSize: 14, editable: false)
     private let firstHeir           = DNTextField(placeholder: "Add first heir")
-    private let firstPrecentage     = DNTitleLabel(title: "100 %", textColor: .DnColor, alignment: .center, fontSize: 14, weight: .regular)
-    private let firstLabel          = DNTitleLabel(title: "First", textColor: .DnColor, alignment: .left, fontSize: 14, weight: .regular)
+    private let firstPrecentage     = DNTitleLabel(textAlignment: .center, fontSize: 14)
+    private let firstLabel          = DNTitleLabel(textAlignment: .left, fontSize: 14)
     private let secondHeir          = DNTextField(placeholder: "Add second heir")
-    private let secondPrecentage    = DNTitleLabel(title: "0 %", textColor: .systemPink, alignment: .center, fontSize: 14, weight: .regular)
-    private let secondLabel         = DNTitleLabel(title: "Second", textColor: .systemPink, alignment: .right, fontSize: 14, weight: .regular)
+    private let secondPrecentage    = DNTitleLabel(textAlignment: .center, fontSize: 14)
+    private let secondLabel         = DNTitleLabel(textAlignment: .right, fontSize: 14)
     private var sliderStack: UIStackView!
     private var slider: UISlider!
     private var rightBarBtn: UIBarButtonItem!
@@ -47,6 +47,12 @@ class AddHeirVC: UIViewController {
     }
     
     private func configureSecondHeirTextField() {
+        secondPrecentage.text       = "0 %"
+        secondPrecentage.textColor  = .systemPink
+        
+        secondLabel.text            = "Second"
+        secondLabel.textColor       = .systemPink
+        
         secondHeir.textColor        = .systemPink
         secondHeir.leftViewMode     = .always
         secondHeir.leftView         = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
@@ -54,6 +60,12 @@ class AddHeirVC: UIViewController {
         secondHeir.addBorder(color: UIColor.systemPink.cgColor, width: 2, withCornerRaduis: true, reduis: 4)
     }
     private func configureFirstHierTextField() {
+        firstPrecentage.text        = "100 %"
+        firstPrecentage.textColor   = .DnColor
+        
+        firstLabel.text             = "First"
+        firstLabel.textColor        = .DnColor
+        
         firstHeir.textColor         = .DnColor
         firstHeir.leftViewMode      = .always
         firstHeir.leftView          = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))

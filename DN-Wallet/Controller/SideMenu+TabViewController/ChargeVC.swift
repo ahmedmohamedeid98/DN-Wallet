@@ -38,14 +38,11 @@ class ChargeVC: UIViewController {
         handleNavigationBar()
         configureSegmentControl()
         
-        dropDown.delegate = self
-        amountField.delegate = self
-        creditTable.delegate = self
+        dropDown.delegate       = self
+        amountField.delegate    = self
+        creditTable.delegate    = self
         setupCreditTableDataSource()
-        creditTable.dataSource = tableDataSource
-        
         dropDown.text = "EGP"
-        //setUserPreference()
     }
     
     private func setUserPreference() {
@@ -55,20 +52,18 @@ class ChargeVC: UIViewController {
     }
     
     func handleNavigationBar() {
-        navigationItem.title = "Charge - Withdraw"
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backgroundColor = .DnColor
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
+        navigationItem.title                                        = "Charge - Withdraw"
+        let appearance                                              = UINavigationBarAppearance()
+        appearance.titleTextAttributes                              = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor                                  = .DnColor
+        navigationController?.navigationBar.standardAppearance      = appearance
+        navigationController?.navigationBar.compactAppearance       = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance    = appearance
         let scanBarButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBtnPressed))
-        navigationItem.rightBarButtonItem = scanBarButton
-        navigationItem.rightBarButtonItem?.tintColor = .white
-            
-        }
+        navigationItem.rightBarButtonItem                           = scanBarButton
+        navigationItem.rightBarButtonItem?.tintColor                = .white
+        
+    }
     
     private func setupCreditTableDataSource() {
         tableDataSource = UITableViewDiffableDataSource(tableView: creditTable, cellProvider: { (MyTable, indexPath, data) -> UITableViewCell? in

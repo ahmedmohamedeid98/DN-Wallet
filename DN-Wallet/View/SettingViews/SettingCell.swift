@@ -12,7 +12,7 @@ class SettingCell: UITableViewCell {
     
     //MARK:- Properities
     private lazy var auth: UserAuthProtocol = UserAuth()
-    var descriptionLabel    = DNTitleLabel(title: " ", alignment: .right, fontSize: 14, weight: .light)
+    var descriptionLabel    = DNSecondaryTitleLabel(fontSize: 14)
     var Switch: UISwitch    = {
         let sw = UISwitch()
         sw.onTintColor = .DnColor

@@ -11,7 +11,7 @@ import UIKit
 class FPEnterEmailVC: UIViewController {
     
     //MARK:- Properities
-    private var forgetPasswordMsg   = DNTitleLabel(title: K.vc.fbMsg, alignment: .center)
+    private var forgetPasswordMsg   = DNTitleLabel(textAlignment: .center, fontSize: 28)
     private var EnterEmailMsg       = DNTextView(text: K.vc.fbEnterMailMsg, alignment: .center, fontSize: 16)
     private var emailField          = DNTextField(placeholder: K.vc.fbEnterMailPlaceh, stopSmartActions: true)
     private var sendResetCodeBtn    = DNButton(backgroundColor: .DnColor, title: "Send Reset Code", cornerRedii: 20.0)
@@ -42,6 +42,7 @@ class FPEnterEmailVC: UIViewController {
     }
     
     private func configureForgetPasswordMsg() {
+        forgetPasswordMsg.text  = K.vc.fbMsg
         view.addSubview(forgetPasswordMsg)
         forgetPasswordMsg.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, margins: UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0), centerH: true)
     }
@@ -84,7 +85,7 @@ extension FPEnterEmailVC {
             }
             
         } else {
-            self.asyncDismissableAlert(title: "invalid email", Message: "Please enter a valid email.")
+            self.presentDNAlertOnTheMainThread(title: "invalid email", Message: "Please enter a valid email.")
         }
         
     }
@@ -98,7 +99,7 @@ extension FPEnterEmailVC {
     }
     
     private func handleSuccessCodeFailureCase(error: String) {
-        self.asyncDismissableAlert(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
         DispatchQueue.main.async {
             self.sendResetCodeBtn.setTitle("Resend Reset Code.", for: .normal)
             self.sendResetCodeBtn.isEnabled = true

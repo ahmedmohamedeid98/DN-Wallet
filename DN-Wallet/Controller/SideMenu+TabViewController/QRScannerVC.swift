@@ -73,7 +73,7 @@ class QRScannerVC: UIViewController {
 extension QRScannerVC: QRScannerViewDelegate {
     
     func qrScanningDidFail() {
-        self.asyncDismissableAlert(title: "Failure", Message: "Scanning Failed. Please try again")
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: "Scanning Failed. Please try again")
     }
     
     func qrScanningSucceededWithCode(_ str: String?) {

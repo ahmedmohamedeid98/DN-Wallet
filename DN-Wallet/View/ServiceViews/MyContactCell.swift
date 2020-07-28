@@ -11,28 +11,18 @@ import UIKit
 class MyContactCell: UITableViewCell {
 
     static var reuseIdentifier = "my-contact-cell-identifier"
-    
+    let avatarImage            = DNAvatarImageView(frame: .zero)
+    let usernameTitleLabel     = DNTitleLabel(textAlignment: .left, fontSize: 24)
+    let emailTitleLabel        = DNSecondaryTitleLabel(fontSize: 14)
     
     var data: Contact? {
         didSet {
             guard let data = data else {return}
-            let first_char = data.userID.name.first ?? "a"
-            avatarImage.text = first_char.uppercased()
-            avatarImage.backgroundColor = .randomColor(forChar: first_char)
             contactUsername.text = data.userID.name
-            contactEmail.text = data.userID.name
+            contactEmail.text = data.userID.email
+            avatarImage.downlaodedImage(from: "jk")
         }
     }
-    
-    var avatarImage: UILabel = {
-        let avatarLabel = UILabel()
-        avatarLabel.textAlignment = .center
-        avatarLabel.textColor = .white
-        avatarLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        avatarLabel.layer.cornerRadius = 25
-        avatarLabel.clipsToBounds = true
-        return avatarLabel
-    }()
     
     var contactUsername: UILabel = {
         let lb = UILabel()

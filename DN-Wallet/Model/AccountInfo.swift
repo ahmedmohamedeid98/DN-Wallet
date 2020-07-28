@@ -41,9 +41,13 @@ struct UserInfo: Codable {
     let photo: String?
     let country: String?
     let userIsValidate: Bool
-    let accountIsActive: Bool
     let name: String
     let email: String
+}
+
+// Check if the user verfied his email after registeration process or not
+struct AccountIsActive: Codable {
+    let accountIsActive : Bool
 }
 
 struct BasicUserInfo {

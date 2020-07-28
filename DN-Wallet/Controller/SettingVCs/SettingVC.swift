@@ -22,7 +22,7 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        //loadData()
+        loadData()
         setupNavBar()
         setupUserQuikDetailsView()
         setupTableView()
@@ -246,8 +246,8 @@ extension SettingVC {
         DispatchQueue.main.async {
             self.userQuikDetails.userName.text  =   data.user.name
             self.userQuikDetails.userEmail.text =   data.user.email
+            self.userQuikDetails.userImage.downlaodedImage(from: data.user.photo ?? "no url")
         }
-        loadImage(withURL: data.user.photo)
     }
     
     private func handleGetUserInfoFailureCase(withError error: String) {

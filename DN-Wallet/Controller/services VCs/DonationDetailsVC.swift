@@ -16,6 +16,7 @@ class DonationDetailsVC: UIViewController {
     private var charityTable: UITableView!
     private var mapView: MKMapView!
     var charityID: String?
+    var charityName: String?
     private lazy var charityManager: CharityManagerProtocol = CharityManager()
     
     //MARK:- Init
@@ -23,6 +24,7 @@ class DonationDetailsVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         setupNavBar()
+        if let title = charityName { self.navigationItem.title = title }
         setupTableView()
         setupLayout()
         mapView = MKMapView()
@@ -96,9 +98,11 @@ extension DonationDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        let titleLabel = DNTitleLabel(title: "Location", textColor: .label, alignment: .center, fontSize: 17, weight: .semibold)
-        titleLabel.backgroundColor = .DnTextColor
+        let header                  = UIView()
+        let titleLabel              = DNTitleLabel(textAlignment: .center, fontSize: 17)
+        titleLabel.textColor        = .white
+        titleLabel.text             = "Location"
+        titleLabel.backgroundColor  = #colorLiteral(red: 0.1490196078, green: 0.6, blue: 0.9843137255, alpha: 1)
         header.addSubview(titleLabel)
         header.addSubview(mapView)
         titleLabel.DNLayoutConstraint(header.topAnchor, left: header.leftAnchor, right: header.rightAnchor, size: CGSize(width: 0, height: 35))
@@ -106,7 +110,7 @@ extension DonationDetailsVC: UITableViewDelegate, UITableViewDataSource {
         return header
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 400
+        return 300
     }
 
 }
@@ -166,6 +170,7 @@ extension DonationDetailsVC {
         }
     }
     private func configureNetworkingSuccessCase(withData data: CharityDetailsResponse) {
+        self.data = data
         DispatchQueue.main.async {
             let initialLocation = CLLocation(latitude: data.location.lat, longitude: data.location.lan)
             self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
@@ -177,6 +182,6 @@ extension DonationDetailsVC {
     }
     
     private func configureNetworkingFailureCase(withError error: String) {
-        self.asyncDismissableAlert(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
     }
 }

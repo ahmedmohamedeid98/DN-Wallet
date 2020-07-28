@@ -27,7 +27,7 @@ class DNTextView: UITextView {
     }
     
     private func configure() {
-        textColor           = .DnColor
+        textColor           = .secondaryLabel
         backgroundColor     = .clear
     }
 }

@@ -11,10 +11,10 @@ import UIKit
 
 class DonationCell: UITableViewCell {
 
-    static let reuseIdentifier: String = "donation-cell-identifier"
-    var logo    = DNImageView(title: "photo.fill", tintColor: .DnColor, contentMode: .scaleAspectFit, isSystemImage: true)
-    private var title   = DNTitleLabel(title: "org name", alignment: .left, fontSize: 16, weight: .regular)
-    private var mail    = DNTitleLabel(title: "org@example.com", alignment: .left, fontSize: 14, weight: .regular)
+    static let reuseIdentifier: String  = "donation-cell-identifier"
+    private var logo                    = DNAvatarImageView(frame: .zero)
+    private var title                   = DNTitleLabel(textAlignment: .left, fontSize: 16)
+    private var mail                    = DNSecondaryTitleLabel(fontSize: 14)
     
    
     var data: Charity? {
@@ -22,6 +22,7 @@ class DonationCell: UITableViewCell {
             guard let safeData = data else {return}
             self.mail.text = safeData.email
             self.title.text = safeData.name
+            self.logo.downlaodedImage(from: safeData.org_logo)
         }
     }
 
@@ -29,9 +30,9 @@ class DonationCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .DnCellColor
+        backgroundColor    = .DnCellColor
+        accessoryType      = .disclosureIndicator
         setupLayout()
-        self.accessoryType = .disclosureIndicator
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +49,5 @@ class DonationCell: UITableViewCell {
         logo.DNLayoutConstraint(left: contentView.leftAnchor, margins: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0), size: CGSize(width: 50, height: 50), centerV: true)
         Vstack.DNLayoutConstraint(contentView.topAnchor, left: logo.rightAnchor, right: contentView.rightAnchor, bottom: contentView.bottomAnchor, margins: UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8))
     }
-    
 }
 

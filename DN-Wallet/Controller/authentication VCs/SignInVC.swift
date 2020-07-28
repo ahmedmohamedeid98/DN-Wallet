@@ -55,7 +55,7 @@ class SignInVC: UIViewController {
                     case .success(_):
                         self.navigateToHomeController()
                     case .failure(let err):
-                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
                 }
             }
     }
@@ -105,35 +105,37 @@ class SignInVC: UIViewController {
     // if user enter his (email & password) and pressed signIn
     @IBAction func signInBtnPressed(_ sender: UIButton) {
 
-//        //TEST TRST
-//
-        navigateToHomeController()
-        return
-//        // End TEST
-        if emailCV.textField.text != "" && passwordCV.textField.text != "" {
-            let email = emailCV.textField.text!
-            let password = passwordCV.textField.text!
-            if !email.isValidEmail {
-                Hud.InvalidEmailText(onView: view)
-                return
-            }
-            if password.count < 8 {
-                Hud.InvalidPasswordText(onView: view)
-                return
-            }
-            Hud.showLoadingHud(onView: view, withLabel: "Login...")
-            auth.signIn(data: Login(email: email, password: password)) { [weak self] (result) in
-                Hud.hide(after: 0.0)
-                guard let self = self else { return }
-                switch result {
-                    case .success(_):
-                        self.navigateToHomeController()
-                    case .failure(let err):
-                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
-                }
+        guard let email = emailCV.textField.text, !email.isEmpty else {
+            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "email is required.", buttonTitle: "ok")
+            return
+        }
+        
+        guard email.isValidEmail else {
+            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "email is invalid.", buttonTitle: "ok")
+            return
+        }
+        
+        guard let password = passwordCV.textField.text, !password.isEmpty else {
+            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "password is required.", buttonTitle: "ok")
+            return
+        }
+        guard password.count >= 8 else {
+            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "password must be at least 8 characters.", buttonTitle: "ok")
+            return
+        }
+
+        Hud.showLoadingHud(onView: view, withLabel: "Login...")
+        auth.signIn(data: Login(email: email, password: password)) { [weak self] (result) in
+            Hud.hide(after: 0.0)
+            guard let self = self else { return }
+            switch result {
+                case .success(_):
+                    self.navigateToHomeController()
+                case .failure(let err):
+                    self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
             }
         }
-    }
+}
     // add loginWithFaceIDButton buttom to view, this method will fired if FaceID option exist.
     func setupLoginWithFaceIDLayout() {
         view.addSubview(loginWithFaceIDButton)

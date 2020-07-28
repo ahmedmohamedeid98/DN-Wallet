@@ -11,9 +11,9 @@ import UIKit
 class UserQuikDetails: UIView {
     
     //MARK:- Properities
-    let userImage   = DNImageView(title: "person.circle", isSystemImage: true)
-    let userName    = DNTitleLabel(title: "username", alignment: .left, fontSize: 16, weight: .bold)
-    let userEmail   = DNTitleLabel(title: "user@example.com", alignment: .left, fontSize: 12)
+    let userImage   = DNAvatarImageView(frame: .zero)
+    let userName    = DNTitleLabel(textAlignment: .left, fontSize: 16)
+    let userEmail   = DNSecondaryTitleLabel(fontSize: 12)
     
     
     //MARK:- Init
@@ -32,8 +32,6 @@ class UserQuikDetails: UIView {
     private func configureSubviews() {
         addSubview(userImage)
         userImage.DNLayoutConstraint(left: leftAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0), size: CGSize(width: 40, height: 40), centerV: true)
-        userImage.roundImageWithHeight = 40
-        
         let stackView = UIStackView(arrangedSubviews: [userName, userEmail])
         stackView.configureHstack()
         addSubview(stackView)

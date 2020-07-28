@@ -71,7 +71,7 @@ extension ConfirmEmailVC: GetOPTValuesProtocol {
                 case .success(_):
                     self.hideSuccessMessage(hide: false)
                 case .failure(let error):
-                    self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription, dismissAfter: 6)
+                    self.presentDNAlertOnTheMainThread(title: "Failure", Message: error.localizedDescription)
             }
         }
     }

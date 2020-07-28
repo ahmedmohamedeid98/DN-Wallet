@@ -12,10 +12,10 @@ class FPResetPasswordVC: UIViewController {
     
     //MARK:- Properities
     private var dismissBtn          = DNButton(backgroundColor: .clear, title: "", systemTitle: "multiply.circle.fill")
-    private var checkYourInbox      = DNTitleLabel(title: K.vc.fbCheckInbox, alignment: .center)
+    private var checkYourInbox      = DNTitleLabel(textAlignment: .center, fontSize: 28)
     private var InfoMsg             = DNTextView(text: K.vc.fbInfoMsg, alignment: .center, fontSize: 16)
     private var opt                 = OPT()
-    private var EnterNewPassLabel   = DNTitleLabel(title: K.vc.fbEnterNewP, alignment: .center)
+    private var EnterNewPassLabel   = DNTitleLabel(textAlignment: .center, fontSize: 18)
     private var NewPassword         = DNPasswordContainer(placeholder: K.vc.fbNewPPlaceh)
     private var confirmNewPassword  = DNPasswordContainer(placeholder: K.vc.fbConfirmP)
     private var ResetPasswordBtn    = DNButton(backgroundColor: .DnColor, title: "Reset Password")
@@ -41,6 +41,7 @@ class FPResetPasswordVC: UIViewController {
     }
     
     private func configureCheckYouInboxLabel() {
+        checkYourInbox.text = K.vc.fbCheckInbox
         view.addSubview(checkYourInbox)
         checkYourInbox.DNLayoutConstraint(dismissBtn.bottomAnchor ,margins: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), centerH: true)
     }
@@ -60,7 +61,8 @@ class FPResetPasswordVC: UIViewController {
     }
     
     private func configureEnterNewPassLabel() {
-        EnterNewPassLabel.isHidden = true
+        EnterNewPassLabel.isHidden  = true
+        EnterNewPassLabel.text      = K.vc.fbEnterNewP
         view.addSubview(EnterNewPassLabel)
         EnterNewPassLabel.DNLayoutConstraint(opt.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) ,centerH: true)
     }
@@ -135,12 +137,12 @@ extension FPResetPasswordVC: GetOPTValuesProtocol {
     private func resetPasswordBtnAction() {
         // check if password failed are filled
         guard let password = NewPassword.textField.text, let passwordConfirm = confirmNewPassword.textField.text else {
-            self.asyncDismissableAlert(title: nil, Message: "Password are required.")
+            self.presentDNAlertOnTheMainThread(title: nil, Message: "Password are required.")
             return
         }
         // check maching
         if password != passwordConfirm {
-            self.asyncDismissableAlert(title: "Not Maching", Message: "Password not matching. Try again.")
+            self.presentDNAlertOnTheMainThread(title: "Not Maching", Message: "Password not matching. Try again.")
             return
         }
         
@@ -153,7 +155,7 @@ extension FPResetPasswordVC: GetOPTValuesProtocol {
                     case .success(_):
                         self.handelResetPasswordSuccessCase()
                     case .failure(let err):
-                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
                 }
             }
         }

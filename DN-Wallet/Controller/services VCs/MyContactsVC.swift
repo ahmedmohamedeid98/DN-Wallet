@@ -40,12 +40,17 @@ class MyContactsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        
         configureViewController()
         configureContactTableDataSource()
         contactTable.dataSource = contactTableDataSource
         loadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -88,12 +93,12 @@ class MyContactsVC: UIViewController {
     
     // initial contact table view
     func setupTableView() {
-        contactTable = UITableView(frame: .zero, style: .grouped)
-        contactTable.delegate = self
-        contactTable.backgroundColor = .clear
+        contactTable = UITableView()
         contactTable.register(MyContactCell.self, forCellReuseIdentifier: MyContactCell.reuseIdentifier)
-        contactTable.rowHeight = 70
-        contactTable.alpha = 0.0
+        contactTable.delegate           = self
+        contactTable.backgroundColor    = .clear
+        contactTable.rowHeight          = 70
+        contactTable.alpha              = 0.0
     }
     
     // populate table view cell
@@ -111,13 +116,9 @@ class MyContactsVC: UIViewController {
     func updateTableViewDataSource() {
         var snapShot = NSDiffableDataSourceSnapshot<contactTableSection, Contact>()
         snapShot.appendSections(contactTableSection.allCases)
-        currentDataSource.forEach { snapShot.appendItems([$0], toSection: .main) }
-        DispatchQueue.main.async {
-            self.contactTableDataSource.apply(snapShot)
-        }
-        
+        snapShot.appendItems(currentDataSource)
+        DispatchQueue.main.async { self.contactTableDataSource.apply(snapShot, animatingDifferences: true) }
     }
-    
 }
 
  
@@ -146,17 +147,6 @@ extension MyContactsVC: UITableViewDelegate {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = .DnCellColor
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
 }
 
 //MARK:- Configure Search Bar Delegate
@@ -165,21 +155,18 @@ extension MyContactsVC: UISearchBarDelegate {
     // init method
     //=================
     private func configureSearchBar() {
-        searchBar = UISearchBar()
-        searchBar.searchTextField.stopSmartActions()
-        searchBar.delegate = self
-        searchBar.searchTextField.backgroundColor = .white
-        searchBar.searchTextField.textColor = .systemBlue
-        searchBar.placeholder = K.vc.myContactSearchBarPlaceholder
-        
+        searchBar                                   = UISearchBar()
+        searchBar.delegate                          = self
+        searchBar.searchTextField.backgroundColor   = .DnCellColor
+        searchBar.searchTextField.textColor         = .label
+        searchBar.placeholder                       = "type a username"
     }
     //==================
     // delegate methods
     //==================
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            filtercurrentDataSource(searchTerm: text)
-        }
+        guard let filter = searchBar.text, !filter.isEmpty else { return }
+        filtercurrentDataSource(searchTerm: filter)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -247,7 +234,7 @@ extension MyContactsVC {
         }
     }
     private func configureNetworkingFailureCase(withError error: String) {
-        self.asyncDismissableAlert(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
     }
     
     
@@ -296,7 +283,7 @@ extension MyContactsVC {
         self.addContact(newContact)
     }
     private func configureAddingContactFailureCase(withError error: String) {
-        self.asyncDismissableAlert(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
     }
     
     // this method call in add alert to add new contact to the table view
@@ -328,7 +315,7 @@ extension MyContactsVC {
                         self.contactTableDataSource.apply(currentSnapshot)
                     }
                 case .failure(let error):
-                    self.asyncDismissableAlert(title: "Failure", Message: error.localizedDescription)
+                    self.presentDNAlertOnTheMainThread(title: "Failure", Message: error.localizedDescription)
             }
         }
     }

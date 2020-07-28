@@ -66,7 +66,7 @@ class DonationVC: UIViewController {
     }
     
     func setupTableView() {
-        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView = UITableView()
         tableView.delegate = self
         tableView.indicatorStyle = .white
         tableView.backgroundColor = .clear
@@ -81,17 +81,8 @@ class DonationVC: UIViewController {
             guard let cell = table.dequeueReusableCell(withIdentifier: DonationCell.reuseIdentifier, for: indexPath) as? DonationCell else {fatalError("can not dequeue charity cell")}
             let data = self.currentDataSource[indexPath.row]
             cell.data = data
-            ImageLoader.shared.loadImageWithStrURL(str: data.org_logo) { result in
-                switch result {
-                    case .success(let img):
-                        DispatchQueue.main.async { cell.logo.image = img }
-                    case .failure(_):
-                        break
-                }
-            }
             return cell
         })
-        
         updateTableViewDataSource()
     }
     
@@ -162,22 +153,11 @@ extension DonationVC: UITableViewDelegate {
         let vc = DonationDetailsVC()
         let charity = currentDataSource[indexPath.row]
         vc.charityID = charity._id
-        vc.title = charity.name
+        vc.charityName = charity.name
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = .DnCellColor
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
-    }
-    
 }
 //MARK:- Networking
 extension DonationVC {
@@ -204,7 +184,7 @@ extension DonationVC {
     }
     
     private func configureGetCharityDataFailureCase(error: String) {
-        self.asyncDismissableAlert(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
     }
     
     func updateTableInMainThread() {

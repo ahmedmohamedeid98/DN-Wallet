@@ -39,4 +39,21 @@ extension UIViewController {
         navigationController?.navigationItem.rightBarButtonItem?.tintColor = tintColor
         navigationItem.title = title
     }
-}}
+}
+    
+    func presentDNAlertOnTheMainThread(title: String?, Message msg: String, buttonTitle: String = "OK") {
+        DispatchQueue.main.async {
+            let alert = DNAlertVC(title: title ?? "", message: msg, buttonTitle: buttonTitle)
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle   = .crossDissolve
+            self.present(alert, animated: true)
+        }
+    }
+    func presentDNAlertOnForground(title: String?, Message msg: String, buttonTitle: String = "OK") {
+        let alert = DNAlertVC(title: title ?? "", message: msg, buttonTitle: buttonTitle)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.modalTransitionStyle   = .crossDissolve
+        self.present(alert, animated: true)
+    }
+    
+}

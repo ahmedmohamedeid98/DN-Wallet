@@ -18,23 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldPlayInputClicks = true
-        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        // windowScene.statusBarManager?.statusBarStyle = UIStatusBarStyle.lightContent
+        configureIQKeyboardManager()
+        configureFirstLaunchCase(in: windowScene)
         
-        if !UserPreference.getBoolValue(withKey: UserPreference.firstLaunchKey) {
-            // don't show guide screens again
-            UserPreference.setValue(true, withKey: UserPreference.firstLaunchKey)
-            auth.canEvaluatePolicyWithFaceID()
-            window = UIWindow(windowScene: windowScene)
-            // assign viewController
-            let guideVC = ContainerViewController()
-            window?.rootViewController = guideVC
-            // make it the first viewController appear in the window
-            self.window?.makeKeyAndVisible()
-        }
 /*        // app in the safe mode
         if Auth.shared.isAppInSafeMode {
 
@@ -68,6 +54,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }*/
     }
+    
+    func configureIQKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldPlayInputClicks = true
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
+    
+    func configureFirstLaunchCase(in windowScene: UIWindowScene) {
+        if !UserPreference.getBoolValue(withKey: UserPreference.firstLaunchKey) {
+            // don't show guide screens again
+            UserPreference.setValue(true, withKey: UserPreference.firstLaunchKey)
+            auth.canEvaluatePolicyWithFaceID()
+            window = UIWindow(windowScene: windowScene)
+            // assign viewController
+            let guideVC = ContainerViewController()
+            window?.rootViewController = guideVC
+            
+            configureNavigationBar()
+            // make it the first viewController appear in the window
+            self.window?.makeKeyAndVisible()
+        }
+    }
+    
+    func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemGreen
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

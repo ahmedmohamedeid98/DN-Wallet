@@ -108,7 +108,7 @@ class PayVC: UIViewController {
                     }
                 }
                 // alert
-                self.asyncDismissableAlert(title: K.alert.faild, Message: message)
+                self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: message)
             }
             amountValue = 0.0
             amountField.text = ""

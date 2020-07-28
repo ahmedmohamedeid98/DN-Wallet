@@ -142,7 +142,7 @@ class SendAndRequestMoney: UIViewController {
                 // end indicator loading...
             }
         } else {
-            Alert.asyncActionOkWith(nil, msg: "missing input, try again", viewController: self)
+            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "missing inputs, try again.")
         }
     }
     // check if all the faild is filled and if the email is valid
@@ -160,7 +160,7 @@ class SendAndRequestMoney: UIViewController {
         if emailTextField.text != "" && emailTextField.text!.isValidEmail {
             // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
             if ["ahmed@gmail.com"].contains(emailTextField.text!) {
-                self.syncDismissableAlert(title: K.vc.myContactAlertEmailExist, Message: K.vc.myContactAlertEmailExistMsg)
+                self.presentDNAlertOnForground(title: K.vc.myContactAlertEmailExist, Message: K.vc.myContactAlertEmailExistMsg)
                 self.toggleAddContactButton(toDone: true)
             }
                 // if the email don't exist then add it and toggle addButton to done
@@ -184,7 +184,7 @@ class SendAndRequestMoney: UIViewController {
             
             emailTextField.endEditing(true)
         } else {
-            self.syncDismissableAlert(title: K.vc.sORrAlertInvalidEmail, Message: K.vc.sORrAlertInvalidEmailMsg)
+            self.presentDNAlertOnForground(title: K.vc.sORrAlertInvalidEmail, Message: K.vc.sORrAlertInvalidEmailMsg)
         }
     }
     /// change button image from addPerson to rightCheckMark and disable/enable it.

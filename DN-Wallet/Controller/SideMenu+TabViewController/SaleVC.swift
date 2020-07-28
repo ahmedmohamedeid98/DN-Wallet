@@ -81,14 +81,14 @@ class SaleVC: UIViewController {
         if let _ = exist(fileName: keys.qrCodeFileName) {
             // Image is already Downloaded or save automatically by the app
             let message = "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)"
-            self.syncDismissableAlert(title: "Save Successfully", Message: message)
+            self.presentDNAlertOnForground(title: "Save Successfully", Message: message)
         } else {
             if let _ = save(fileName: keys.qrCodeFileName) {
                 let message = "qrCodeImage downloaded successfully to path: /Documents/\(keys.qrCodeFileName)"
-                self.syncDismissableAlert(title: "Save Successfully", Message: message)
+                self.presentDNAlertOnForground(title: "Save Successfully", Message: message)
             }else {
                 let message = "faild to save image, try again."
-                self.syncDismissableAlert(title: K.alert.faild, Message: message)
+                self.presentDNAlertOnForground(title: K.alert.faild, Message: message)
             }
         }
         

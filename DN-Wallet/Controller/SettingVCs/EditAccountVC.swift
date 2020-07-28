@@ -12,14 +12,14 @@ import UIKit
 class EditAccountVC: UIViewController {
     
     // Properities
-    private lazy var meManager: MeManagerProtocol       = MeManager()
+    private lazy var meManager: MeManagerProtocol  = MeManager()
     private var editList: [String: Any] = [:]
     @IBOutlet weak var currentUsername: UILabel!
     @IBOutlet weak var newUsernameTextField: UITextField!
     @IBOutlet weak var currentCountry: UILabel!
     @IBOutlet weak var newCountryTextField: UITextField!
     @IBOutlet weak var currentPhone: UILabel!
-    @IBOutlet weak var currentImageView: UIImageView!
+    @IBOutlet weak var currentImageView: DNAvatarImageView!
     @IBOutlet weak var currentJob: UILabel!
     @IBOutlet weak var newJobTextField: UITextField!
     @IBOutlet weak var currentGender: UILabel!
@@ -27,7 +27,7 @@ class EditAccountVC: UIViewController {
     @IBOutlet weak var genderFemaleBtnOutlet: UIButton!
     @IBOutlet weak var updatePhoneBtnOutlet: UIButton!
     @IBOutlet weak var updateImageBtnOutlet: UIButton!
-    var userInfo: AccountInfo?
+    var userInfo: AccountInfo? // this data come from setting vc
 
     private var gender: String? = nil {
         didSet {
@@ -92,7 +92,8 @@ class EditAccountVC: UIViewController {
             self.currentCountry.text     = data.user.country
             self.currentJob.text         = data.user.job
             self.currentGender.text      = data.user.gender
-            self.currentPhone.text       = data.user.photo
+            self.currentPhone.text       = data.user.phone
+            self.currentImageView.downlaodedImage(from: data.user.photo ?? "")
         }
     }
     
@@ -119,9 +120,9 @@ class EditAccountVC: UIViewController {
             Hud.hide(after: 0.0)
             switch result {
                 case .success(let message):
-                    self.asyncDismissableAlert(title: "Success", Message: message.success)
+                    self.presentDNAlertOnTheMainThread(title: "Success", Message: message.success)
                 case .failure(let err):
-                    self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                    self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
             }
         }
     }
@@ -174,10 +175,29 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             self.currentImageView.image = pickedImage
+            guard let imageData   = pickedImage.pngData() else { return }
+            print("--------------")
+            guard let imageURL    = info[.imageURL] as? String else { return }
+            
+            print(imageURL.split(separator: "/").last as! String)
+            print("--------------")
+            
+            
         }else {
             // Error Message
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateImageOnServer(imagePath: String, imageData: Data) {
+        ImageUploader.shared.uploadImage(formFields: ["photo":imagePath], imageData: imageData) { result in
+            switch result {
+                case .success(let res):
+                print(res)
+                case .failure(_):
+                print("upload image failure")
+            }
+        }
     }
     
     private func showPickerImageFromCameraOrPhotoLibraryAlertSheet() {

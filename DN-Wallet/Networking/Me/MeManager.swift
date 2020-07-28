@@ -17,6 +17,8 @@ protocol MeManagerProtocol {
 
 class MeManager: BaseAPI<MeNetworking>, MeManagerProtocol {
     
+    
+    
     func getMyAccountInfo(completion: @escaping(Result<AccountInfo, NSError>) -> ()) {
         self.APIRequest(target: .getMyBasicInfo, responseClass: AccountInfo.self, completion: completion)
     }

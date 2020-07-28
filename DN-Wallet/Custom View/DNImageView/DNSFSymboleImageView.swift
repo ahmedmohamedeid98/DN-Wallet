@@ -1,16 +1,22 @@
 //
-//  DNSearchBar.swift
+//  DNSFSymboleImageView.swift
 //  DN-Wallet
 //
-//  Created by Mac OS on 6/27/20.
+//  Created by Mac OS on 7/27/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
 import UIKit
 
-class DNSearchBar: UISearchBar {
+class DNSFSymboleImageView: UIImageView {
 
-    var originDataSource: [AnyObject] = []
+    init(sfSymbol: SFSymobol, tintColor tColor: UIColor) {
+        super.init(frame: .zero)
+        image       = UIImage(systemName: sfSymbol.rawValue)
+        tintColor   = tColor
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -23,5 +29,4 @@ class DNSearchBar: UISearchBar {
         
     }
     
-
 }

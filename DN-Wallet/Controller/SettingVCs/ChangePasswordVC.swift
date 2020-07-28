@@ -86,14 +86,14 @@ class ChangePasswordVC: UIViewController {
                 DispatchQueue.main.async { self.activityIndicatorView.stopAnimating() }
                 switch result {
                     case .success(let res):
-                        self.asyncDismissableAlert(title: "Success", Message: res.success)
+                        self.presentDNAlertOnTheMainThread(title: "Success", Message: res.success)
                     case .failure(let err):
-                        self.asyncDismissableAlert(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
                 }
             }
         }
         else {
-            self.asyncDismissableAlert(title: "Invalid", Message: "not mached password, Try Again.")
+            self.presentDNAlertOnTheMainThread(title: "Invalid", Message: "not mached password, Try Again.")
         }
     }
 

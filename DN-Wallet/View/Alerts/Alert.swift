@@ -7,7 +7,7 @@
 //
 
 class Alert {
-    
+    /*
     /// Alert to success situation show then disappear after time interval, don't wait for some task to compelete.
     class func syncSuccessfullWith(_ msg: String, dismissAfter time: TimeInterval = 1.0, viewController vc: UIViewController) {
         let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
@@ -30,41 +30,18 @@ class Alert {
         
     }
     /// alert with ok action, don't wait another task to execute.
-    class func syncActionOkWith(_ title: String?, msg: String?, viewController vc: UIViewController) {
+    class func yncActionOkWith(_ title: String?, msg: String?, viewController vc: UIViewController) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         vc.present(alert, animated: true, completion: nil)
     }
     /// alert with ok action, wait another task to execute.
-    class func asyncActionOkWith(_ title: String?, msg: String?, viewController vc: UIViewController) {
+    class func syncActionOkWith(_ title: String?, msg: String?, viewController vc: UIViewController) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             vc.present(alert, animated: true, completion: nil)
         }
     }
-    
-}
-extension UIViewController {
-    func asyncDismissableAlert(title: String?, Message msg: String, dismissAfter time: TimeInterval = 3.0) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + time) {
-                    alert.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    func syncDismissableAlert(title: String?, Message msg: String, dismissAfter time: TimeInterval = 3.0) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-        self.present(alert, animated: true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + time) {
-                 alert.dismiss(animated: true, completion: nil)
-            }
-        }
-    }
+ */
 }

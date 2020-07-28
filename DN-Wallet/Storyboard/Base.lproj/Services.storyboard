@@ -184,7 +184,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-gL-Qot">
                                         <rect key="frame" x="0.0" y="106.5" width="343" height="50"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ksjdls" borderStyle="roundedRect" placeholder="user@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acw-bv-Yl1">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acw-bv-Yl1">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                                 <color key="backgroundColor" name="Dynamic-Cell"/>
                                                 <constraints>
@@ -211,14 +211,14 @@
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="25451" borderStyle="roundedRect" placeholder="example: 250" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2f-s0-LJN">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="example: 250" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2f-s0-LJN">
                                         <rect key="frame" x="0.0" y="195" width="343" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="IEz-JU-DZn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtE-eJ-dHO">
                                         <rect key="frame" x="0.0" y="253" width="343" height="22.5"/>
@@ -239,7 +239,7 @@
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="this is for test" translatesAutoresizingMaskIntoConstraints="NO" id="dpL-Qa-8L6">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpL-Qa-8L6">
                                         <rect key="frame" x="0.0" y="372" width="343" height="80"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
@@ -434,8 +434,9 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lzR-Ec-vjI">
-                                                                <rect key="frame" x="160" y="23.5" width="70" height="69"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lzR-Ec-vjI" customClass="DNAvatarImageView" customModule="DN_Wallet" customModuleProvider="target">
+                                                                <rect key="frame" x="160" y="24.5" width="70" height="67"/>
+                                                                <color key="tintColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="70" id="B7q-0d-LsD"/>
                                                                     <constraint firstAttribute="width" constant="70" id="mem-je-9N5"/>
@@ -594,7 +595,7 @@
                     <connections>
                         <outlet property="currentCountry" destination="fFy-9I-p2r" id="fjU-Eo-e6i"/>
                         <outlet property="currentGender" destination="Z6F-1g-vec" id="JcY-Jw-bXu"/>
-                        <outlet property="currentImageView" destination="lzR-Ec-vjI" id="tp3-EM-c8R"/>
+                        <outlet property="currentImageView" destination="lzR-Ec-vjI" id="gGD-aP-gzn"/>
                         <outlet property="currentJob" destination="UJ3-Qq-fqc" id="jcQ-3h-Nfu"/>
                         <outlet property="currentPhone" destination="PoC-Sr-hSz" id="SpB-rn-Mac"/>
                         <outlet property="currentUsername" destination="pNa-np-pRz" id="ug2-1D-eA3"/>
@@ -627,7 +628,7 @@
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-hA-3j8">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6m-hA-3j8">
                                         <rect key="frame" x="0.0" y="42.5" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
@@ -641,7 +642,7 @@
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uds-dq-WgK">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Currency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uds-dq-WgK">
                                         <rect key="frame" x="0.0" y="155" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
@@ -655,7 +656,7 @@
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="enter your amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SiG-bo-bk7">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SiG-bo-bk7">
                                         <rect key="frame" x="0.0" y="267.5" width="335" height="50"/>
                                         <color key="backgroundColor" name="Dynamic-Cell"/>
                                         <constraints>
@@ -910,8 +911,8 @@
     <resources>
         <image name="arrowtriangle.down.fill" catalog="system" width="64" height="62"/>
         <image name="circle" catalog="system" width="64" height="60"/>
-        <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="person.crop.circle.badge.plus" catalog="system" width="64" height="50"/>
+        <image name="person.fill" catalog="system" width="64" height="60"/>
         <namedColor name="Dynamic-Background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

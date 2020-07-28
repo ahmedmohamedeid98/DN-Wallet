@@ -35,13 +35,14 @@ class HomeVC: UIViewController {
     var notificationMessages: [Message] = []
     private var tableView: UITableView!
     private lazy var meManager: MeManagerProtocol = MeManager()
+    private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
-        
+        checkAccountActiveStatus()
         //loadData()
     }
     
@@ -230,30 +231,36 @@ extension HomeVC {
     }
     
     
-    private func loadData() {
-        // get user data
-        meManager.getMyAccountInfo { (result) in
+    private func loadUserBalances() {
+        // ...
+    }
+    
+    private func handleGetUserBalanceSuccessCase(withData data: AccountInfo) {
+        
+        // ...
+    }
+    
+    private func handleGetUserBalanceFailureCase(withError error: String) {
+        // ...
+    }
+    
+    private func checkAccountActiveStatus() {
+        verifyManager.checkAcountActiveStatus { (result) in
             switch result {
-                case .success(let info):
-                    self.handleGetUserInfoSuccessCase(withData: info)
-                case .failure(let err):
-                    self.handleGetUserInfoFailureCase(withError: err.localizedDescription)
+                case .success(let response):
+                    self.checkIfUserNotVerified(isVerified: response.accountIsActive)
+                case .failure(_):
+                    break
             }
         }
     }
     
-    private func handleGetUserInfoSuccessCase(withData data: AccountInfo) {
-        
-        // check if account is verified or not, if not ask user to active it
-        //self.checkIfUserNotVerified(isVerified: data.user.accountIsActive)
-    }
-    
-    private func handleGetUserInfoFailureCase(withError error: String) {
-
-    }
-    
     private func checkIfUserNotVerified(isVerified: Bool = false) {
-        if isVerified { return }
+        if isVerified {
+            print("Account is verified :)")
+            return
+        }
+        print("Account is not verified :(")
         DispatchQueue.main.async {
             let st = UIStoryboard(name: "Authentication", bundle: nil)
             let confirmationViewController = st.instantiateViewController(identifier: "ConfirmEmailVCID") as? ConfirmEmailVC

@@ -25,6 +25,13 @@
 		042DC04F2486F0520054E911 /* DNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC04E2486F0520054E911 /* DNImageView.swift */; };
 		043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */; };
 		043B7ED024623AE400F2D037 /* ChargeCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */; };
+		043CA4EA24CF2D0F000033B7 /* DNAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4E924CF2D0F000033B7 /* DNAvatarImageView.swift */; };
+		043CA4EC24CF3019000033B7 /* DNSFSymboleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4EB24CF3019000033B7 /* DNSFSymboleImageView.swift */; };
+		043CA4EE24CF3042000033B7 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4ED24CF3042000033B7 /* Constant.swift */; };
+		043CA4F024CF362A000033B7 /* DNBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4EF24CF362A000033B7 /* DNBodyLabel.swift */; };
+		043CA4F224CF366D000033B7 /* DNSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F124CF366D000033B7 /* DNSecondaryTitleLabel.swift */; };
+		043CA4F424CF68EE000033B7 /* DNAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F324CF68EE000033B7 /* DNAlertVC.swift */; };
+		043CA4F624CFC8EC000033B7 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F524CFC8EC000033B7 /* ImageUploader.swift */; };
 		0449A5F42498B4FC00E6BF35 /* PartenerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */; };
 		0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */; };
 		0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */; };
@@ -75,7 +82,6 @@
 		047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F7243AEC3A0077A954 /* SettingCell.swift */; };
 		047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A49F9243AECBF0077A954 /* SettingSection.swift */; };
 		047E11D2242E888700E1295B /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E11D1242E888700E1295B /* AccountInfo.swift */; };
-		047F68FC24A78F8E0018F6FA /* DNSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F68FB24A78F8E0018F6FA /* DNSearchBar.swift */; };
 		047F68FE24A79D920018F6FA /* DNSuccessMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F68FD24A79D920018F6FA /* DNSuccessMessage.swift */; };
 		047FA8B3240E1E700097DD06 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B2240E1E700097DD06 /* SignInVC.swift */; };
 		047FA8B5240E1E910097DD06 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FA8B4240E1E910097DD06 /* CreateAccountVC.swift */; };
@@ -156,6 +162,13 @@
 		042DC04E2486F0520054E911 /* DNImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNImageView.swift; sourceTree = "<group>"; };
 		043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
 		043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeCreditCell.swift; sourceTree = "<group>"; };
+		043CA4E924CF2D0F000033B7 /* DNAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAvatarImageView.swift; sourceTree = "<group>"; };
+		043CA4EB24CF3019000033B7 /* DNSFSymboleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSFSymboleImageView.swift; sourceTree = "<group>"; };
+		043CA4ED24CF3042000033B7 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		043CA4EF24CF362A000033B7 /* DNBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNBodyLabel.swift; sourceTree = "<group>"; };
+		043CA4F124CF366D000033B7 /* DNSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSecondaryTitleLabel.swift; sourceTree = "<group>"; };
+		043CA4F324CF68EE000033B7 /* DNAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAlertVC.swift; sourceTree = "<group>"; };
+		043CA4F524CFC8EC000033B7 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceCollectionCell.xib; sourceTree = "<group>"; };
@@ -208,7 +221,6 @@
 		047A49F7243AEC3A0077A954 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		047A49F9243AECBF0077A954 /* SettingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSection.swift; sourceTree = "<group>"; };
 		047E11D1242E888700E1295B /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
-		047F68FB24A78F8E0018F6FA /* DNSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSearchBar.swift; sourceTree = "<group>"; };
 		047F68FD24A79D920018F6FA /* DNSuccessMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSuccessMessage.swift; sourceTree = "<group>"; };
 		047FA8B2240E1E700097DD06 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		047FA8B4240E1E910097DD06 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
@@ -328,20 +340,88 @@
 		042DC04B2486C6620054E911 /* Custom View */ = {
 			isa = PBXGroup;
 			children = (
+				043CA4E824CF2C9F000033B7 /* DNImageView */,
+				043CA4E724CF2C16000033B7 /* DNSegmentControl */,
+				043CA4E624CF2C0B000033B7 /* DNView */,
+				043CA4E524CF2BF8000033B7 /* DNTextView */,
+				043CA4E424CF2BE1000033B7 /* DNTextField */,
+				043CA4E324CF2BD5000033B7 /* DNViewController */,
+				043CA4E224CF2BC9000033B7 /* DNLabel */,
+				043CA4E124CF2BBE000033B7 /* DNButton */,
+			);
+			path = "Custom View";
+			sourceTree = "<group>";
+		};
+		043CA4E124CF2BBE000033B7 /* DNButton */ = {
+			isa = PBXGroup;
+			children = (
 				042DC04C2486C7070054E911 /* DNButton.swift */,
-				042DC04E2486F0520054E911 /* DNImageView.swift */,
+			);
+			path = DNButton;
+			sourceTree = "<group>";
+		};
+		043CA4E224CF2BC9000033B7 /* DNLabel */ = {
+			isa = PBXGroup;
+			children = (
 				04AFBC2E24A24B2D007B544F /* DNTitleLabel.swift */,
+				043CA4EF24CF362A000033B7 /* DNBodyLabel.swift */,
+				043CA4F124CF366D000033B7 /* DNSecondaryTitleLabel.swift */,
+			);
+			path = DNLabel;
+			sourceTree = "<group>";
+		};
+		043CA4E324CF2BD5000033B7 /* DNViewController */ = {
+			isa = PBXGroup;
+			children = (
+				043CA4F324CF68EE000033B7 /* DNAlertVC.swift */,
+			);
+			path = DNViewController;
+			sourceTree = "<group>";
+		};
+		043CA4E424CF2BE1000033B7 /* DNTextField */ = {
+			isa = PBXGroup;
+			children = (
 				04AFBC3024A254A6007B544F /* DNTextField.swift */,
+			);
+			path = DNTextField;
+			sourceTree = "<group>";
+		};
+		043CA4E524CF2BF8000033B7 /* DNTextView */ = {
+			isa = PBXGroup;
+			children = (
 				04AFBC3224A25934007B544F /* DNTextView.swift */,
-				04AFBC3424A26480007B544F /* DNEmptyContainer.swift */,
+			);
+			path = DNTextView;
+			sourceTree = "<group>";
+		};
+		043CA4E624CF2C0B000033B7 /* DNView */ = {
+			isa = PBXGroup;
+			children = (
 				04952E0B24A4964E00060E36 /* DNSeperatorLine.swift */,
+				04AFBC3424A26480007B544F /* DNEmptyContainer.swift */,
 				047FA8B9240E36440097DD06 /* DNViewWithTextField.swift */,
 				04688E392427F02A00183DF5 /* OPT.swift */,
 				049D1DFA241A7C02003DF669 /* DNPasswordContainer.swift */,
-				047F68FB24A78F8E0018F6FA /* DNSearchBar.swift */,
+			);
+			path = DNView;
+			sourceTree = "<group>";
+		};
+		043CA4E724CF2C16000033B7 /* DNSegmentControl */ = {
+			isa = PBXGroup;
+			children = (
 				04ABD57E24C6961100BC3A3D /* DNSegmentControl.swift */,
 			);
-			path = "Custom View";
+			path = DNSegmentControl;
+			sourceTree = "<group>";
+		};
+		043CA4E824CF2C9F000033B7 /* DNImageView */ = {
+			isa = PBXGroup;
+			children = (
+				042DC04E2486F0520054E911 /* DNImageView.swift */,
+				043CA4E924CF2D0F000033B7 /* DNAvatarImageView.swift */,
+				043CA4EB24CF3019000033B7 /* DNSFSymboleImageView.swift */,
+			);
+			path = DNImageView;
 			sourceTree = "<group>";
 		};
 		0449A5F12498B45D00E6BF35 /* homeViews */ = {
@@ -422,6 +502,7 @@
 				045A2FB5241C061300A0C643 /* Utilities.swift */,
 				04AFBC3624A2AA44007B544F /* DNError.swift */,
 				047F68FD24A79D920018F6FA /* DNSuccessMessage.swift */,
+				043CA4ED24CF3042000033B7 /* Constant.swift */,
 			);
 			path = uitilized;
 			sourceTree = "<group>";
@@ -480,6 +561,7 @@
 				0491D854240E3A050014E34C /* Extension */,
 				04CC0E81247B1E1900357193 /* fonts */,
 				04792AEA2409FF3F00F781D8 /* Model */,
+				042DC04B2486C6620054E911 /* Custom View */,
 				04792AE92409FF3500F781D8 /* View */,
 				04792AE82409FF2200F781D8 /* Controller */,
 				047FA8B6240E1EB30097DD06 /* Storyboard */,
@@ -506,7 +588,6 @@
 		04792AE92409FF3500F781D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				042DC04B2486C6620054E911 /* Custom View */,
 				0449A5F12498B45D00E6BF35 /* homeViews */,
 				045EC5E4244F96500030FAE9 /* Alerts */,
 				04BDE67224466FC4003BCAC9 /* tabViews */,
@@ -755,6 +836,7 @@
 			isa = PBXGroup;
 			children = (
 				04F81C5C24B4AD7E00D10702 /* ImageLoader.swift */,
+				043CA4F524CFC8EC000033B7 /* ImageUploader.swift */,
 			);
 			path = CustomRequest;
 			sourceTree = "<group>";
@@ -903,6 +985,7 @@
 				04B10255242E763F00E17792 /* Contact.swift in Sources */,
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
+				043CA4EC24CF3019000033B7 /* DNSFSymboleImageView.swift in Sources */,
 				0465C6CC2421A70D0032506D /* MyContactCell.swift in Sources */,
 				0456642E24AF647D00A970C9 /* String+Ext.swift in Sources */,
 				040F754E245E6C5F00B66A02 /* PopMenuItem.swift in Sources */,
@@ -912,6 +995,7 @@
 				0456642A24AF4C5600A970C9 /* UserAuth.swift in Sources */,
 				0491D856240E3A330014E34C /* UIButton+Ext.swift in Sources */,
 				0456C357246398930018BE66 /* CurrentDateComponent.swift in Sources */,
+				043CA4F424CF68EE000033B7 /* DNAlertVC.swift in Sources */,
 				047040C624202F5A00BBAAF5 /* HistoryDetailsVC.swift in Sources */,
 				04B1C90D2422C64B0062D54F /* DonationVC.swift in Sources */,
 				0493A843244F6BCD00F4B659 /* UserPreference.swift in Sources */,
@@ -927,12 +1011,14 @@
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
 				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
 				0495D1CE2414511600796499 /* ConfirmEmailVC.swift in Sources */,
+				043CA4EA24CF2D0F000033B7 /* DNAvatarImageView.swift in Sources */,
 				04AFBC1F24A24848007B544F /* UIColor+Ext.swift in Sources */,
 				042DC04F2486F0520054E911 /* DNImageView.swift in Sources */,
 				04792AD92409FE8F00F781D8 /* SaleVC.swift in Sources */,
 				04AFBC2924A249F2007B544F /* UIFont+Ext.swift in Sources */,
 				0449A5FC2498B5B900E6BF35 /* PartenerTableViewCell.swift in Sources */,
 				0449A6002498B5F100E6BF35 /* BalanceTableViewCell.swift in Sources */,
+				043CA4EE24CF3042000033B7 /* Constant.swift in Sources */,
 				043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */,
 				04952E0C24A4964E00060E36 /* DNSeperatorLine.swift in Sources */,
 				04659FF824B61E1500EF8B5B /* UserHistorySections.swift in Sources */,
@@ -967,7 +1053,6 @@
 				047FA8BA240E36440097DD06 /* DNViewWithTextField.swift in Sources */,
 				047F68FE24A79D920018F6FA /* DNSuccessMessage.swift in Sources */,
 				04792AF5240B1F0100F781D8 /* ChargeVC.swift in Sources */,
-				047F68FC24A78F8E0018F6FA /* DNSearchBar.swift in Sources */,
 				04E9448C2412D524000EA14B /* AddPhoneNumberVC.swift in Sources */,
 				04AACF5524B20CDE003CF758 /* MeManager.swift in Sources */,
 				047040CA242050B800BBAAF5 /* PaymentCard.swift in Sources */,
@@ -1003,11 +1088,14 @@
 				04AFBC2F24A24B2D007B544F /* DNTitleLabel.swift in Sources */,
 				04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */,
 				046D4C5824313924001D1463 /* ContainerViewController.swift in Sources */,
+				043CA4F224CF366D000033B7 /* DNSecondaryTitleLabel.swift in Sources */,
 				04A5A530243FA87B000340FB /* ServiceSection.swift in Sources */,
 				04AFBC3724A2AA44007B544F /* DNError.swift in Sources */,
 				047A49FA243AECBF0077A954 /* SettingSection.swift in Sources */,
+				043CA4F024CF362A000033B7 /* DNBodyLabel.swift in Sources */,
 				04792AD52409FE8F00F781D8 /* SceneDelegate.swift in Sources */,
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
+				043CA4F624CFC8EC000033B7 /* ImageUploader.swift in Sources */,
 				04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */,
 				040EF4E9248F245600DD29F2 /* Hud.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
