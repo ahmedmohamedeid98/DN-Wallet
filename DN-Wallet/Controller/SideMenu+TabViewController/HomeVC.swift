@@ -36,6 +36,7 @@ class HomeVC: UIViewController {
     private var tableView: UITableView!
     private lazy var meManager: MeManagerProtocol = MeManager()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
+    var isCommingFromCreateAccountVC: Bool = false
    
     //MARK:- Init
     override func viewDidLoad() {
@@ -265,6 +266,7 @@ extension HomeVC {
             let st = UIStoryboard(name: "Authentication", bundle: nil)
             let confirmationViewController = st.instantiateViewController(identifier: "ConfirmEmailVCID") as? ConfirmEmailVC
             confirmationViewController?.modalPresentationStyle = .fullScreen
+            confirmationViewController?.isCommingFromCreateAccountVC = self.isCommingFromCreateAccountVC
             self.present(confirmationViewController!, animated: true, completion: nil)
         }
     }

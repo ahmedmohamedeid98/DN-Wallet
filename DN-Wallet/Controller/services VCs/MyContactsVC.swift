@@ -30,12 +30,13 @@ class MyContactsVC: UIViewController {
     var currentDataSource: [Contact] = []
     var originDataSource: [Contact] = []
     var shouldRestoreCurrentDataSource: Bool = false
+    var isEmptyStateViewPresented: Bool = false
     var alert: UIAlertController!
     var addBarButton: UIBarButtonItem!
     var searchBarButton: UIBarButtonItem!
     private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var myContactManager: MyContactManagerProtocol = MyContactManager()
-    
+    var emptyStateView: UIView?
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,7 +210,7 @@ extension MyContactsVC: UISearchBarDelegate {
 //MARK:- Networking
 extension MyContactsVC {
     ///================================
-    //2. Load Table View Data
+    //1. Load Table View Data
     //================================
     private func loadData() {
         Hud.showLoadingHud(onView: view, withLabel: "Load Contacts...")
@@ -226,6 +227,14 @@ extension MyContactsVC {
     }
     
     private func configureNetworkingSuccessCase(withData data: [Contact]) {
+        if data.count == 0 {
+            isEmptyStateViewPresented = true
+            self.showEmptyStateView(withMessage: "No Contact Found, you can add one now 😀.") { emptyStateView in
+                self.emptyStateView = emptyStateView
+            }
+            //Hud.hide(after: 0.0)
+            return
+        }
         self.originDataSource = data
         self.currentDataSource = data
         DispatchQueue.main.async {
@@ -278,7 +287,15 @@ extension MyContactsVC {
         }
     }
     private func configureAddingContactSuccessCase(withContact contact: CreateContactResponse) {
-        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email))
+        if isEmptyStateViewPresented { DispatchQueue.main.async {
+            self.emptyStateView?.removeFromSuperview()
+            self.emptyStateView = nil // deallocate view from memory
+            self.contactTable.alpha = 1
+            
+            }
+}
+        #warning("add photo link")
+        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email, photo: "photo"))
         self.originDataSource.append(newContact)
         self.addContact(newContact)
     }

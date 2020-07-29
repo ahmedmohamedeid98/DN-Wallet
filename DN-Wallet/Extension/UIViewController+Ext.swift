@@ -55,5 +55,13 @@ extension UIViewController {
         alert.modalTransitionStyle   = .crossDissolve
         self.present(alert, animated: true)
     }
+    func showEmptyStateView(withMessage message: String, completion: @escaping(UIView) -> ()) {
+        DispatchQueue.main.async {
+            let emptyStateView      = DNEmptyStateView(message: message)
+            emptyStateView.frame    = self.view.bounds
+            self.view.addSubview(emptyStateView)
+            completion(emptyStateView)
+        }
+    }
     
 }

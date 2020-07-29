@@ -32,6 +32,7 @@
 		043CA4F224CF366D000033B7 /* DNSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F124CF366D000033B7 /* DNSecondaryTitleLabel.swift */; };
 		043CA4F424CF68EE000033B7 /* DNAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F324CF68EE000033B7 /* DNAlertVC.swift */; };
 		043CA4F624CFC8EC000033B7 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F524CFC8EC000033B7 /* ImageUploader.swift */; };
+		043CA4F824D0DFDA000033B7 /* DNEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */; };
 		0449A5F42498B4FC00E6BF35 /* PartenerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */; };
 		0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */; };
 		0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */; };
@@ -169,6 +170,7 @@
 		043CA4F124CF366D000033B7 /* DNSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 		043CA4F324CF68EE000033B7 /* DNAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAlertVC.swift; sourceTree = "<group>"; };
 		043CA4F524CFC8EC000033B7 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNEmptyStateView.swift; sourceTree = "<group>"; };
 		0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceCollectionCell.xib; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				047FA8B9240E36440097DD06 /* DNViewWithTextField.swift */,
 				04688E392427F02A00183DF5 /* OPT.swift */,
 				049D1DFA241A7C02003DF669 /* DNPasswordContainer.swift */,
+				043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */,
 			);
 			path = DNView;
 			sourceTree = "<group>";
@@ -1032,6 +1035,7 @@
 				040EF4E6248EF6F200DD29F2 /* HistoryDetailsCell.swift in Sources */,
 				0456642C24AF4C7300A970C9 /* UserAuthNetworking.swift in Sources */,
 				04A8D6F7242815BC00628AA3 /* SideMenuCell.swift in Sources */,
+				043CA4F824D0DFDA000033B7 /* DNEmptyStateView.swift in Sources */,
 				0456643624AF9C4200A970C9 /* MyContactNetworking.swift in Sources */,
 				04AACF5324B20CCC003CF758 /* MeNetworking.swift in Sources */,
 				048DFBFB244E6591001DF711 /* QRScannerView.swift in Sources */,

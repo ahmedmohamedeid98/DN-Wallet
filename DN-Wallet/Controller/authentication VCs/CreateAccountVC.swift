@@ -57,7 +57,12 @@ final class CreateAccountVC: UIViewController {
                 guard let self = self else { return }
                 switch result {
                     case .success(_):
-                        self.navigateToHomeController()
+                        DispatchQueue.main.async {
+                            let containerVC = ContainerVC()
+                            containerVC.modalPresentationStyle = .fullScreen
+                            containerVC.isPresentingFromCreateAccount = true
+                            self.present(containerVC, animated: true, completion: nil)
+                        }
                     case .failure(let err):
                         self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
                 }

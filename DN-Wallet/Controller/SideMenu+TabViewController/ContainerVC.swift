@@ -16,7 +16,7 @@ class ContainerVC: UIViewController {
     var NavPayViewController: UINavigationController!
     var NavSaleViewController: UINavigationController!
     var NavChargeViewController: UINavigationController!
-    
+    var isPresentingFromCreateAccount: Bool = false
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,7 @@ class ContainerVC: UIViewController {
     fileprivate func EmbededViewControllersInNavigationController() {
         let st = UIStoryboard(name: "Main", bundle: .main)
         let homeViewController = HomeVC()
+        homeViewController.isCommingFromCreateAccountVC = isPresentingFromCreateAccount
         homeViewController.delegate = self
         configureTabBarItems(vc: homeViewController, title: "Home", image: "house")
         NavHomeViewController = UINavigationController(rootViewController: homeViewController)

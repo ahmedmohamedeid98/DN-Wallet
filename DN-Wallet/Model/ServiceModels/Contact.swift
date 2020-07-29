@@ -28,6 +28,7 @@ struct UserID: Codable {
     let _id: String
     let name: String
     let email: String
+    let photo: String
 }
 
 // creating new contact
@@ -35,4 +36,5 @@ struct CreateContactResponse: Codable {
     let id: String
     let name: String
     let email: String
+    //let photo: String
 }

@@ -10,18 +10,20 @@ import Foundation
 
 class ImageUploader {
     static let shared = ImageUploader()
+    private lazy var auth:UserAuthProtocol = UserAuth()
     private init() {}
     
     func uploadImage(formFields: [String: String], imageData: Data, completion: @escaping(Result<SuccessResponse, NSError>) -> () ) {
         
     
-        let urlString   = ""
+        let urlString   = "https://dn-wallet.herokuapp.com/api/users/pic"
         let url         = URL(string: urlString)!
         
         var request     = URLRequest(url: url)
         let boundary = "Boundary-\(UUID().uuidString)"
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue(auth.getUserToken(), forHTTPHeaderField: "x-auth-token")
         
         let httpBody = NSMutableData()
 

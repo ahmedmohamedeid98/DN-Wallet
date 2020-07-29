@@ -18,6 +18,7 @@ class ConfirmEmailVC: UIViewController {
     @IBOutlet weak var infoLabelOne: UILabel!
     @IBOutlet weak var infoLabelTwo: UILabel!
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
+    var isCommingFromCreateAccountVC: Bool = false
 
 
     //MARK:- Init
@@ -46,7 +47,11 @@ class ConfirmEmailVC: UIViewController {
     
     // back to login page
     @IBAction func backBtnPressed(_ sender: UIButton) {
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        if isCommingFromCreateAccountVC {
+            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true)
+        } else {
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     // ask api to resent confirmation code

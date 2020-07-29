@@ -17,7 +17,13 @@ protocol MeManagerProtocol {
 
 class MeManager: BaseAPI<MeNetworking>, MeManagerProtocol {
     
+    override init() {
+        print("new Object was created")
+    }
     
+    deinit {
+        print("Object was dealocated")
+    }
     
     func getMyAccountInfo(completion: @escaping(Result<AccountInfo, NSError>) -> ()) {
         self.APIRequest(target: .getMyBasicInfo, responseClass: AccountInfo.self, completion: completion)

@@ -9,5 +9,5 @@
 import Foundation
 
 enum SFSymobol: String {
-    case test = "as"
+    case eye = "eye"
 }

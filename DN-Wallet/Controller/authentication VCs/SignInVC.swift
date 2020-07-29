@@ -27,16 +27,16 @@ class SignInVC: UIViewController {
         initView()
         // add loginWithFaceIDButton & it's action
         // else login with TouchID else Login With (email & password)
-        initAuth()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailCV.textField.text = auth.getUSerEmail()
         passwordCV.textField.text = ""
+        manageAuthentication()
     }
 
-    private func initAuth() {
+    private func manageAuthentication() {
     
         if checkIphoneBiometricMethod() {
             // login with faceid button's action
@@ -47,9 +47,9 @@ class SignInVC: UIViewController {
         }
     }
     private func signInWithBiometric() {
-        Hud.showLoadingHud(onView: view, withLabel: "Login...")
+        //Hud.showLoadingHud(onView: view, withLabel: "Login...")
             self.auth.signInWithBiometric { [weak self] (result) in
-                Hud.hide(after: 0.0)
+          //      Hud.hide(after: 0.0)
                 guard let self = self else { return }
                 switch result {
                     case .success(_):
@@ -73,7 +73,7 @@ class SignInVC: UIViewController {
             return true
         }
         // if no FaceID then try login with touchID
-        TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeFaceID)
+        TouchIdFounded = UserPreference.getBoolValue(withKey: UserPreference.biometricTypeTouchID)
         if TouchIdFounded {
             signInWithBiometric()
             return false

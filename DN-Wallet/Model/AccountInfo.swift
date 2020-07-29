@@ -9,8 +9,8 @@
 
 struct AccountInfo: Codable {
     let user: UserInfo
-    let balance : [Balance]
-    let payment_cards: [CardInfo]
+    //let balance : [Balance]
+    //let payment_cards: [CardInfo]
 }
 
 struct Balance: Codable {

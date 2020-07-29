@@ -12,33 +12,17 @@ class MyContactCell: UITableViewCell {
 
     static var reuseIdentifier = "my-contact-cell-identifier"
     let avatarImage            = DNAvatarImageView(frame: .zero)
-    let usernameTitleLabel     = DNTitleLabel(textAlignment: .left, fontSize: 24)
-    let emailTitleLabel        = DNSecondaryTitleLabel(fontSize: 14)
+    let contactUsername = DNTitleLabel(textAlignment: .left, fontSize: 18)
+    let contactEmail = DNSecondaryTitleLabel(fontSize: 14)
     
     var data: Contact? {
         didSet {
             guard let data = data else {return}
             contactUsername.text = data.userID.name
             contactEmail.text = data.userID.email
-            avatarImage.downlaodedImage(from: "jk")
+            avatarImage.downlaodedImage(from: data.userID.photo)
         }
     }
-    
-    var contactUsername: UILabel = {
-        let lb = UILabel()
-        lb.text = "Contact 1"
-        lb.textColor = .DnDarkBlue
-        lb.font = UIFont.DN.Regular.font(size: 18)
-        return lb
-    }()
-    
-    var contactEmail: UILabel = {
-        let lb = UILabel()
-        lb.text = "Contact1@gmail.com"
-        lb.textColor = .DnDarkBlue
-        lb.font = UIFont.DN.Regular.font(size: 16)
-        return lb
-    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
