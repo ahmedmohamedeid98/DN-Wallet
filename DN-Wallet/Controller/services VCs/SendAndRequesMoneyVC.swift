@@ -241,10 +241,7 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == dropDown {
-            let vc = PopUpMenu()
-            vc.menuDelegate = self
-            vc.dataSource = .currency
-            self.present(vc, animated: true, completion: nil)
+            self.presentPopUpMenu(withCategory: .creditCard, to: self)
             textField.endEditing(true)
         }
         

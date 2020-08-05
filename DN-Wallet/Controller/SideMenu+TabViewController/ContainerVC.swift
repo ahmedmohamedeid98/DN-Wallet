@@ -9,19 +9,29 @@
 class ContainerVC: UIViewController {
     
     //MARK:- Properities
+    var isExpand: Bool = false
+    var isPresentingFromCreateAccount: Bool = false
+    
+    // Two Child VC
     var sideMenuController: UIViewController!
     var centerTabBarController: UITabBarController!
-    var isExpand: Bool = false
+    
+    // Navigation Controllers
     var NavHomeViewController: UINavigationController!
     var NavPayViewController: UINavigationController!
     var NavSaleViewController: UINavigationController!
     var NavChargeViewController: UINavigationController!
-    var isPresentingFromCreateAccount: Bool = false
+    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         configureHomeViewController()
+    }
+    
+    //handle status bar style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     //MARK:- Handlers

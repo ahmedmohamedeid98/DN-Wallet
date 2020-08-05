@@ -26,60 +26,68 @@ enum PopUpMenuDataSource {
 
 final class PopUpMenu: UIViewController {
 
-    private var searchBar: UISearchBar!
-    private var List: UITableView!
+    private var searchController            = UISearchController()
+    private var List                        = UITableView()
     private var shouldReloadTableView: Bool = false
-    var dataSource: PopUpMenuDataSource = .currency {
+    var dataSource: PopUpMenuDataSource     = .currency {
         didSet {
             originalDataSource = dataSource.data
         }
     }
     private var originalDataSource : [PopMenuItem] = []
-    private var currentDataSource : [PopMenuItem] = []
+    private var currentDataSource  : [PopMenuItem] = []
     weak var menuDelegate: PopUpMenuDelegate?
     private var listDataSource : UITableViewDiffableDataSource<Section, PopMenuItem>!
     private var lastSelectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
-        currentDataSource = originalDataSource
         setupSearchBar()
+        configureNavBar()
+        view.backgroundColor    = .DnVcBackgroundColor
+        currentDataSource       = originalDataSource
         setupListTable()
-        setupLayout()
-        
         configureDataSource()
-        List.dataSource = listDataSource
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = false
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 11.0, *) {
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
+    }
+    
+    private func configureNavBar() {
+        navigationController?.navigationBar.tintColor = .secondaryLabel
+        navigationItem.title = "Menu"
     }
     
     private func setupSearchBar() {
-        searchBar = UISearchBar()
-        searchBar.searchTextField.placeholder = K.vc.popMenuSearchBarPlaceholder
-        searchBar.searchTextField.textColor = .systemBlue
-        searchBar.delegate = self
-        searchBar.searchTextField.backgroundColor = .systemGroupedBackground
-        searchBar.showsCancelButton = true
+        searchController.searchBar.placeholder                  = "Search"
+        //searchController.searchResultsUpdater                   = self
+        searchController.searchBar.delegate                     = self
+        searchController.obscuresBackgroundDuringPresentation   = false
+        navigationItem.searchController                         = searchController
     }
     private func setupListTable() {
-        List = UITableView()
-        //List.backgroundColor = .DnBackgroundColor
         List.register(PopUpMenuCell.self, forCellReuseIdentifier: PopUpMenuCell.reuseIdentifier)
-        //List.rowHeight = 60
-        List.indicatorStyle = .white
+        List.showsHorizontalScrollIndicator = false
+        List.backgroundColor = .clear
         List.delegate = self
-    }
-    
-    private func setupLayout() {
-        view.addSubview(searchBar)
-        view.addSubview(List)
         
-        searchBar.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,margins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16), size: CGSize(width: 0, height: 50))
-        List.DNLayoutConstraint(searchBar.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
+        view.addSubview(List)
+        List.DNLayoutConstraintFill()
     }
     
     private func configureDataSource() {
-        listDataSource = UITableViewDiffableDataSource(tableView: List, cellProvider: { (myTable, indexPath, data) -> UITableViewCell? in
+        listDataSource = UITableViewDiffableDataSource<Section, PopMenuItem>(tableView: List, cellProvider: { (myTable, indexPath, data) -> UITableViewCell? in
             guard let cell = myTable.dequeueReusableCell(withIdentifier: PopUpMenuCell.reuseIdentifier, for: indexPath) as? PopUpMenuCell else { return UITableViewCell() }
             cell.data = data
             return cell
@@ -90,9 +98,7 @@ final class PopUpMenu: UIViewController {
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, PopMenuItem>()
         snapshot.appendSections(Section.allCases)
-        for item in currentDataSource {
-            snapshot.appendItems([item])
-        }
+        snapshot.appendItems(currentDataSource)
         listDataSource.apply(snapshot)
     }
     
@@ -115,31 +121,30 @@ extension PopUpMenu: UITableViewDelegate {
 }
 
 extension PopUpMenu: UISearchBarDelegate {
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.searchTextField.text = ""
-        searchBar.searchTextField.endEditing(true)
         if self.shouldReloadTableView { restorDataSource() }
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            filterResult(searchTerm: text)
-        }
-    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterResult(searchTerm: searchText)
     }
     
-    private func filterResult(searchTerm: String) {
-        if !searchTerm.isEmpty {
-            shouldReloadTableView = true
+    private func filterResult(searchTerm: String?) {
+        guard let filter = searchTerm else { return }
+        if filter.isEmpty {
             currentDataSource = originalDataSource
-            let filterdResult = currentDataSource.filter {
-                $0.title.replacingOccurrences(of: " ", with: "").lowercased().contains(searchTerm.replacingOccurrences(of: " ", with: "").lowercased())
-            }
-            currentDataSource = filterdResult
             applySnapshot()
+            return
         }
+        
+        shouldReloadTableView = true
+        currentDataSource = originalDataSource
+        let filterdResult = currentDataSource.filter {
+            $0.title.replacingOccurrences(of: " ", with: "").lowercased().contains(filter.replacingOccurrences(of: " ", with: "").lowercased())
+        }
+        currentDataSource = filterdResult
+        applySnapshot()
     }
     
     private func restorDataSource() {

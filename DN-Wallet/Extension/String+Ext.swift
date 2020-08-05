@@ -14,4 +14,13 @@ extension String {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
     }
+    
+    /// used usually to determine table view cell height
+    func textHeight() -> CGFloat {
+        let width = UIScreen.main.bounds.width - 40
+        let font = UIFont.DN.Regular.font(size: 16)
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
+        return boundingBox.height
+    }
 }

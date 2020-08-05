@@ -12,7 +12,7 @@ class DNPasswordContainer: UIView {
 
     //MARK:- Properities
     private var showPasswordBtn     = UIButton(type: .system)
-    private var eyeImage            = DNSFSymboleImageView(sfSymbol: .eye, tintColor: .gray)
+    private var eyeImage            = DNSFSymboleImageView(sfSymbol: .eye)
     private var toggleShow: Bool    = true
     var textField                   = DNTextField(placeholder: "Password", stopSmartActions: true, isSecure: true)
     var text: String? { return textField.text }

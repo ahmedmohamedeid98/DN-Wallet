@@ -99,10 +99,7 @@ extension AddNewCardVC: UITextFieldDelegate, PopUpMenuDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
          if textField == cardNameTextField {
-            let vc = PopUpMenu()
-            vc.menuDelegate = self
-            vc.dataSource = .creditCard
-            present(vc, animated: true, completion: nil)
+            self.presentPopUpMenu(withCategory: .creditCard, to: self)
         }
     }
     

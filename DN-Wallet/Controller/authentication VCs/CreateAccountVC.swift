@@ -70,7 +70,10 @@ final class CreateAccountVC: UIViewController {
         }
     }
     @IBAction func showTermAndServices(_ sender: UIButton) {
-        
+        let termsVC = TermsVC()
+        let NCTerms = UINavigationController(rootViewController: termsVC)
+        NCTerms.title = "Pravicy & Terms"
+        present(NCTerms, animated: true)
     }
     
 }

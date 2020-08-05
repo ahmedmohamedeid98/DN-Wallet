@@ -12,7 +12,6 @@ class DataViewController: UIViewController {
 
     let imageView: UIImageView = {
         let img = UIImageView()
-        img.backgroundColor = .lightGray
         return img
     }()
     
@@ -22,8 +21,9 @@ class DataViewController: UIViewController {
         let lb = UITextView()
         lb.isEditable = false
         lb.textAlignment = .center
-        lb.font = UIFont.DN.Regular.font(size: 25)
-        lb.textColor = .DnColor
+        lb.font = UIFont.systemFont(ofSize: 24, weight: .regular)
+        lb.textColor = #colorLiteral(red: 0.1490196078, green: 0.6, blue: 0.9843137255, alpha: 1)
+        lb.backgroundColor = .clear
         return lb
     }()
     

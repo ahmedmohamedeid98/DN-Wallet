@@ -41,6 +41,14 @@ extension UIViewController {
     }
 }
     
+    func presentPopUpMenu(withCategory data: PopUpMenuDataSource, to vc: PopUpMenuDelegate) {
+        let viewController = PopUpMenu()
+        viewController.menuDelegate = vc
+        viewController.dataSource = data
+        let NavigationControllerPopUpMenu = UINavigationController(rootViewController: viewController)
+        self.present(NavigationControllerPopUpMenu, animated: true, completion: nil)
+    }
+    
     func presentDNAlertOnTheMainThread(title: String?, Message msg: String, buttonTitle: String = "OK") {
         DispatchQueue.main.async {
             let alert = DNAlertVC(title: title ?? "", message: msg, buttonTitle: buttonTitle)

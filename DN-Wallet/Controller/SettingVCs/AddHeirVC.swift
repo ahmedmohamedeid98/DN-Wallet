@@ -39,7 +39,15 @@ class AddHeirVC: UIViewController {
             self.firstPrecentage.text = "\(currentValue) %"
             self.secondPrecentage.text = "\(100 - currentValue) %"
         }
+        configureFirstHierTextField()
+        configureSecondHeirTextField()
     }
+    
+    //handle status bar style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     
     //MARK:- Configure views
     @objc func UpdateBtnPressed() {
@@ -73,32 +81,38 @@ class AddHeirVC: UIViewController {
         firstHeir.addBorder(color: UIColor.DnColor.cgColor, width: 2, withCornerRaduis: true, reduis: 4)
     }
     func setupSlider() {
-        slider = UISlider()
-        slider.minimumValue = 0
-        slider.maximumValue = 100
-        slider.value = data.count > 0 ? data[0].precent : 100
-        slider.minimumTrackTintColor = .DnColor
-        slider.maximumTrackTintColor = .DnDarkBlue
+        slider                          = UISlider()
+        slider.minimumValue             = 0
+        slider.maximumValue             = 100
+        slider.value                    = data.count > 0 ? data[0].precent : 100
+        slider.minimumTrackTintColor    = .DnColor
+        slider.maximumTrackTintColor    = .DnDarkBlue
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
     @objc func sliderValueChanged(_ sender: UISlider) {
-        let currentValue = Int(sender.value)
-        self.firstPrecentage.text = "\(currentValue) %"
-        self.secondPrecentage.text = "\(100 - currentValue) %"
-        rightBarBtn.isEnabled = true
+        let currentValue            = Int(sender.value)
+        self.firstPrecentage.text   = "\(currentValue) %"
+        self.secondPrecentage.text  = "\(100 - currentValue) %"
+        rightBarBtn.isEnabled       = true
     }
     func setupLayout() {
         view.addSubview(infoTextView)
-        infoTextView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 120))
+        infoTextView.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
+                                        right: view.rightAnchor,
+                                        margins: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20),
+                                        size: CGSize(width: 0, height: 120))
         
         sliderStack = UIStackView(arrangedSubviews: [firstLabel, firstPrecentage, slider, secondPrecentage, secondLabel])
         sliderStack.configureStack(axis: .horizontal, distribution: .fill, alignment: .fill, space: 8)
-        slider.DNLayoutConstraint(size: CGSize(width: 150, height: 0))
+        //slider.DNLayoutConstraint(size: CGSize(width: view.frame.width / 2 - 20, height: 0))
         
         let Vstack = UIStackView(arrangedSubviews: [firstHeir, sliderStack, secondHeir])
         Vstack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 10)
         view.addSubview(Vstack)
-        Vstack.DNLayoutConstraint(infoTextView.bottomAnchor, left: infoTextView.leftAnchor, right: infoTextView.rightAnchor, margins: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 140))
+        Vstack.DNLayoutConstraint(infoTextView.bottomAnchor, left: view.leftAnchor,
+                                  right: view.rightAnchor,
+                                  margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20),
+                                  size: CGSize(width: 0, height: 140))
         
     }
 }

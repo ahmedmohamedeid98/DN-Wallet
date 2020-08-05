@@ -137,12 +137,12 @@ extension FPResetPasswordVC: GetOPTValuesProtocol {
     private func resetPasswordBtnAction() {
         // check if password failed are filled
         guard let password = NewPassword.textField.text, let passwordConfirm = confirmNewPassword.textField.text else {
-            self.presentDNAlertOnTheMainThread(title: nil, Message: "Password are required.")
+            self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.passwordRequired)
             return
         }
         // check maching
         if password != passwordConfirm {
-            self.presentDNAlertOnTheMainThread(title: "Not Maching", Message: "Password not matching. Try again.")
+            self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.passwordRequired)
             return
         }
         
@@ -155,7 +155,7 @@ extension FPResetPasswordVC: GetOPTValuesProtocol {
                     case .success(_):
                         self.handelResetPasswordSuccessCase()
                     case .failure(let err):
-                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: err.localizedDescription)
                 }
             }
         }

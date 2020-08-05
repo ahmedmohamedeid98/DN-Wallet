@@ -58,10 +58,6 @@ class HomeVC: UIViewController {
         stopTimer()
     }
  
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
     //MARK:- Methods
     private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)

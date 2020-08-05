@@ -34,6 +34,12 @@ class ChangePasswordVC: UIViewController {
         setupIndicatorView()
     }
     
+    //handle status bar style
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
+    
     private func configureEnterButton() {
         EnterBtn.withTarget = { self.EnterBtnPressed() }
         EnterBtn.DNLayoutConstraint(size: CGSize(width: 70, height: 0))

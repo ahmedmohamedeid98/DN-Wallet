@@ -23,13 +23,17 @@ class BalanceCollectionCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    fileprivate func configureContainerView() {
         containerView.layer.cornerRadius    = 4
         containerView.layer.shadowColor     = UIColor.label.cgColor
         containerView.layer.shadowOffset    = CGSize(width: 0.26, height: 0.26)
         containerView.layer.shadowOpacity   = 0.26
         containerView.layer.shadowRadius    = 4
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        //configureContainerView()
     }
     
     static func nib() -> UINib {

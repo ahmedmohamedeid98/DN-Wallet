@@ -111,15 +111,6 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         return keychain.get(keys.email)
     }
     
-    func generateConfirmationCode() -> String {
-         var code = ""
-         repeat {
-             // Create a string with a random number 0...9999
-             code = String(format:"%04d", arc4random_uniform(10000) )
-         } while Set<Character>(code).count < 4
-         return code
-    }
-    
     func validate(currentPassword pass: String) -> Bool {
         if let correctPassword = keychain.get(keys.password) {
             return correctPassword == pass

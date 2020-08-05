@@ -35,7 +35,7 @@ class PopUpMenuCell: UITableViewCell {
    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .DnCellColor
+        self.backgroundColor = .clear
         setupLayout()
     }
     private func setupLayout() {

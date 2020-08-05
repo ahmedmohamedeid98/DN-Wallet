@@ -85,7 +85,7 @@ extension FPEnterEmailVC {
             }
             
         } else {
-            self.presentDNAlertOnTheMainThread(title: "invalid email", Message: "Please enter a valid email.")
+            self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.invaildEmail)
         }
         
     }
@@ -99,7 +99,7 @@ extension FPEnterEmailVC {
     }
     
     private func handleSuccessCodeFailureCase(error: String) {
-        self.presentDNAlertOnTheMainThread(title: "Failure", Message: error)
+        self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: error)
         DispatchQueue.main.async {
             self.sendResetCodeBtn.setTitle("Resend Reset Code.", for: .normal)
             self.sendResetCodeBtn.isEnabled = true

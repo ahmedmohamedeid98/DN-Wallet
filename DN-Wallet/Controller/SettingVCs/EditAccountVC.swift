@@ -92,6 +92,11 @@ class EditAccountVC: UIViewController {
         updateCurrentInfoWithComingData()
     }
     
+    //handle status bar
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func updateCurrentInfoWithComingData() {
         if let data = userInfo {
             self.currentUsername.text    = data.user.name
@@ -226,10 +231,7 @@ extension EditAccountVC: UpdatePhoneDelegate, PopUpMenuDelegate, UITextFieldDele
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == newCountryTextField {
-            let vc = PopUpMenu()
-            vc.menuDelegate = self
-            vc.dataSource = .country
-            self.present(vc, animated: true, completion: nil)
+            self.presentPopUpMenu(withCategory: .creditCard, to: self)
             textField.endEditing(true)
         }
     }

@@ -106,21 +106,21 @@ class SignInVC: UIViewController {
     @IBAction func signInBtnPressed(_ sender: UIButton) {
 
         guard let email = emailCV.textField.text, !email.isEmpty else {
-            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "email is required.", buttonTitle: "ok")
+            presentDNAlertOnTheMainThread(title: K.alert.faild , Message: ErrorMessage.emailRequired)
             return
         }
         
         guard email.isValidEmail else {
-            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "email is invalid.", buttonTitle: "ok")
+            presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.invaildEmail)
             return
         }
         
         guard let password = passwordCV.textField.text, !password.isEmpty else {
-            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "password is required.", buttonTitle: "ok")
+            presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.passwordRequired)
             return
         }
         guard password.count >= 8 else {
-            presentDNAlertOnTheMainThread(title: "Something want wrong", Message: "password must be at least 8 characters.", buttonTitle: "ok")
+            presentDNAlertOnTheMainThread(title: K.alert.faild, Message: ErrorMessage.invaildPassword)
             return
         }
 
@@ -132,7 +132,7 @@ class SignInVC: UIViewController {
                 case .success(_):
                     self.navigateToHomeController()
                 case .failure(let err):
-                    self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
+                    self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: err.localizedDescription)
             }
         }
 }

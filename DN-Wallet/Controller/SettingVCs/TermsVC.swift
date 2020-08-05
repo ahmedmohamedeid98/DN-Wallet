@@ -1,15 +1,15 @@
 //
-//  EditProfileVC.swift
+//  TermsVC.swift
 //  DN-Wallet
 //
-//  Created by Ahmed Eid on 4/6/20.
+//  Created by Mac OS on 8/4/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
 
 import UIKit
 
-class PrivacyVC: PrivacyTermsVC {
-
+class TermsVC: PrivacyTermsVC {
+    
     // in future this data will come from API
     let data: [PrivacySection] = [
         PrivacySection(title: "Camera",
@@ -22,8 +22,13 @@ class PrivacyVC: PrivacyTermsVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .DnVcBackgroundColor
         self.items = data
+        view.backgroundColor = .DnVcBackgroundColor
+        configureNavBar()
+    }
+    
+    func configureNavBar() {
+        navigationController?.navigationBar.tintColor = .secondaryLabel
+        navigationItem.title = "Privacy & Terms"
     }
 }
-

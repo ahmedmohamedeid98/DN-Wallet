@@ -11,11 +11,11 @@ import UIKit
 
 class DNAlertVC: UIViewController {
     
-    let containerView = UIView()
-    let titleLabel = DNTitleLabel(textAlignment: .center, fontSize: 20)
-    let messageLabel = DNBodyLabel(textAlignment: .center)
-    let actionButton = DNButton(backgroundColor: .DnColor, title: "Ok")
-    let padding: CGFloat = 20
+    let containerView       = UIView()
+    let titleLabel          = DNTitleLabel(textAlignment: .center, fontSize: 20)
+    let messageLabel        = DNBodyLabel(textAlignment: .center)
+    let actionButton        = DNButton(backgroundColor: .DnColor, title: "Ok")
+    let padding: CGFloat    = 20
     var alertTitle: String?
     var alertMessage: String?
     var buttonTitle: String?
@@ -80,6 +80,7 @@ class DNAlertVC: UIViewController {
     }
     
     private func configureActionButton() {
+        actionButton.layer.cornerRadius = 12.0
         containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)

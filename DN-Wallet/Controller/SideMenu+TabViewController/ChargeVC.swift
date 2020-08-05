@@ -100,10 +100,7 @@ extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
         if textField == dropDown {
             textField.endEditing(true)
             amountField.endEditing(true)
-            let vc = PopUpMenu()
-            vc.menuDelegate = self
-            vc.dataSource = .currency
-            self.present(vc, animated: true, completion: nil)
+            self.presentPopUpMenu(withCategory: .creditCard, to: self)
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -33,6 +33,8 @@
 		043CA4F424CF68EE000033B7 /* DNAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F324CF68EE000033B7 /* DNAlertVC.swift */; };
 		043CA4F624CFC8EC000033B7 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F524CFC8EC000033B7 /* ImageUploader.swift */; };
 		043CA4F824D0DFDA000033B7 /* DNEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */; };
+		04456BFB24D9D80300353C48 /* PrivacyTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04456BFA24D9D80300353C48 /* PrivacyTermsVC.swift */; };
+		04456BFD24D9E89600353C48 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04456BFC24D9E89600353C48 /* TermsVC.swift */; };
 		0449A5F42498B4FC00E6BF35 /* PartenerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */; };
 		0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */; };
 		0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */; };
@@ -90,7 +92,6 @@
 		0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0487D2EC247D58850020F1EB /* NotificationCell.swift */; };
 		0487D2EF247D58850020F1EB /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0487D2ED247D58850020F1EB /* NotificationCell.xib */; };
 		048D2F16243B5ED600BE464D /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F15243B5ED600BE464D /* PrivacyVC.swift */; };
-		048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F17243B5F8B00BE464D /* PrivacySection.swift */; };
 		048D2F1A243B6F9D00BE464D /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D2F19243B6F9D00BE464D /* PrivacyCell.swift */; };
 		048D56452429E701008A8925 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D56442429E701008A8925 /* Register.swift */; };
 		048DFBFB244E6591001DF711 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DFBFA244E6591001DF711 /* QRScannerView.swift */; };
@@ -171,6 +172,8 @@
 		043CA4F324CF68EE000033B7 /* DNAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAlertVC.swift; sourceTree = "<group>"; };
 		043CA4F524CFC8EC000033B7 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNEmptyStateView.swift; sourceTree = "<group>"; };
+		04456BFA24D9D80300353C48 /* PrivacyTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyTermsVC.swift; sourceTree = "<group>"; };
+		04456BFC24D9E89600353C48 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		0449A5F22498B4FC00E6BF35 /* PartenerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F62498B55300E6BF35 /* BalanceCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceCollectionCell.swift; sourceTree = "<group>"; };
 		0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceCollectionCell.xib; sourceTree = "<group>"; };
@@ -230,7 +233,6 @@
 		0487D2EC247D58850020F1EB /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		0487D2ED247D58850020F1EB /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		048D2F15243B5ED600BE464D /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
-		048D2F17243B5F8B00BE464D /* PrivacySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySection.swift; sourceTree = "<group>"; };
 		048D2F19243B6F9D00BE464D /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
 		048D56442429E701008A8925 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		048DFBFA244E6591001DF711 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				043CA4F324CF68EE000033B7 /* DNAlertVC.swift */,
+				040F754B245E682000B66A02 /* PopUpMenu.swift */,
 			);
 			path = DNViewController;
 			sourceTree = "<group>";
@@ -583,7 +586,6 @@
 				046D4C52242F8FC8001D1463 /* lunchGuideVCs */,
 				046732B624198EA600DD436D /* forgetPassword VCs */,
 				04B1C90B2422C5840062D54F /* services VCs */,
-				040F754B245E682000B66A02 /* PopUpMenu.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -632,10 +634,12 @@
 			isa = PBXGroup;
 			children = (
 				047A49F1243ADFCE0077A954 /* SettingVC.swift */,
-				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
 				04659B07243D0A0100E4BFA2 /* ChangePasswordVC.swift */,
 				04659B09243D376C00E4BFA2 /* AddHeirVC.swift */,
 				04B7688C248963100094ECAE /* EditAccountVC.swift */,
+				04456BFA24D9D80300353C48 /* PrivacyTermsVC.swift */,
+				048D2F15243B5ED600BE464D /* PrivacyVC.swift */,
+				04456BFC24D9E89600353C48 /* TermsVC.swift */,
 			);
 			path = SettingVCs;
 			sourceTree = "<group>";
@@ -644,7 +648,6 @@
 			isa = PBXGroup;
 			children = (
 				047A49F9243AECBF0077A954 /* SettingSection.swift */,
-				048D2F17243B5F8B00BE464D /* PrivacySection.swift */,
 				04659AFF243CC18C00E4BFA2 /* LanguageSection.swift */,
 				04659B0D243D717D00E4BFA2 /* Heirs.swift */,
 			);
@@ -985,6 +988,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04456BFB24D9D80300353C48 /* PrivacyTermsVC.swift in Sources */,
 				04B10255242E763F00E17792 /* Contact.swift in Sources */,
 				04659B00243CC18C00E4BFA2 /* LanguageSection.swift in Sources */,
 				047A49F2243ADFCE0077A954 /* SettingVC.swift in Sources */,
@@ -1012,6 +1016,7 @@
 				040F7550245E6D6800B66A02 /* PopUpMenuCell.swift in Sources */,
 				04E6307E247148330026589E /* Constants.swift in Sources */,
 				04659B0A243D376C00E4BFA2 /* AddHeirVC.swift in Sources */,
+				04456BFD24D9E89600353C48 /* TermsVC.swift in Sources */,
 				041046C7243E65DE0043CA77 /* HomeVC.swift in Sources */,
 				0495D1CE2414511600796499 /* ConfirmEmailVC.swift in Sources */,
 				043CA4EA24CF2D0F000033B7 /* DNAvatarImageView.swift in Sources */,
@@ -1073,7 +1078,6 @@
 				04AFBC2B24A24A05007B544F /* UITableView+Ext.swift in Sources */,
 				0487D2EE247D58850020F1EB /* NotificationCell.swift in Sources */,
 				04AFBC3124A254A7007B544F /* DNTextField.swift in Sources */,
-				048D2F18243B5F8B00BE464D /* PrivacySection.swift in Sources */,
 				0456642724AF43DC00A970C9 /* TargetType.swift in Sources */,
 				045EC5E6244F96780030FAE9 /* Alert.swift in Sources */,
 				04AFBC2524A248E4007B544F /* UITextField+Ext.swift in Sources */,

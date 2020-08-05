@@ -12,13 +12,17 @@ import MBProgressHUD
 
 class SettingVC: UIViewController {
 
-    private lazy var auth: UserAuthProtocol = UserAuth()
+    // properities
     var settingTable: UITableView!
     var userQuikDetails: UserQuikDetails!
     var leftBarButton: UIBarButtonItem!
     var userInfo: AccountInfo?
-    private lazy var meManager: MeManagerProtocol = MeManager()
     
+    // network instance
+    private lazy var meManager: MeManagerProtocol = MeManager()
+    private lazy var auth: UserAuthProtocol = UserAuth()
+    
+    // init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
@@ -27,9 +31,9 @@ class SettingVC: UIViewController {
         setupUserQuikDetailsView()
         setupTableView()
         setupLayout()
-        
-        
     }
+    
+    // handle status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }

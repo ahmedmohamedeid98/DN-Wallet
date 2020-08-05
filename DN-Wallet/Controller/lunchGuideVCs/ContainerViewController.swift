@@ -21,7 +21,7 @@ class ContainerViewController: UIViewController {
     let skipBtn : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("skip", for: .normal)
-        btn.tintColor = .DnColor
+        btn.tintColor = #colorLiteral(red: 0.1490196078, green: 0.6, blue: 0.9843137255, alpha: 1)
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 20)
         btn.titleLabel?.textAlignment = .left
         btn.addTarget(self, action: #selector(skipButtonWasPressed), for: .touchUpInside)
@@ -30,7 +30,7 @@ class ContainerViewController: UIViewController {
     let nextBtn : UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("next", for: .normal)
-        btn.tintColor = .DnColor
+        btn.tintColor = #colorLiteral(red: 0.1490196078, green: 0.6, blue: 0.9843137255, alpha: 1)
         btn.titleLabel?.font = UIFont.DN.Regular.font(size: 20)
         btn.titleLabel?.textAlignment = .right
         btn.addTarget(self, action: #selector(nextButtonWasPressed), for: .touchUpInside)
@@ -39,7 +39,8 @@ class ContainerViewController: UIViewController {
     
     let dataSource = ["Welcome To the Fast, easy and the most secrue Payment App. Every Financial Procee become more easy",
                       "Send and Recive Money in Seconds, send Money Request, Exchange Currency and donate to the charities all of this and more in this App",
-                      "First step you must create acount then you can enjoy with our services."]
+                      "Thank you for install our app. Now let us go and create acount to enjoy with our services."]
+    let imageSource = ["GD1", "GD2", "GD3"]
     var currentViewControllerIndex: Int = 0
     var nextViewControllerIndex: Int = 1
     
@@ -86,6 +87,7 @@ class ContainerViewController: UIViewController {
         let dataViewController = DataViewController()
         dataViewController.index = index
         dataViewController.text = dataSource[index]
+        dataViewController.imageView.image = UIImage(named: imageSource[index])
         
         return dataViewController
     }

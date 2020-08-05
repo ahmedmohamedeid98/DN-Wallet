@@ -80,9 +80,6 @@ extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == fromCurrencyTextField { isDataForFromCurrencyTextField = true }
-        let vc = PopUpMenu()
-        vc.menuDelegate = self
-        vc.dataSource = .currency
-        present(vc, animated: true, completion: nil)
+        self.presentPopUpMenu(withCategory: .creditCard, to: self)
     }
 }

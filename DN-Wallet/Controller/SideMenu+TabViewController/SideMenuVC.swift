@@ -13,52 +13,28 @@ protocol sideMenuTimerDelegate {
 class SideMenuVC: UIViewController {
 
     //MARK:- Properities
-    private lazy var auth: UserAuthProtocol = UserAuth()
-    private var isInSafeMode: Bool = false
+    let assistView                  = UIView()
+    let appLogo                     = DNAvatarImageView(frame: .zero)
+    let logoutButton                = DNButton(backgroundColor: .clear, title: " Logout", systemTitle: "arrow.left.square")
+    let settingButton               = DNButton(backgroundColor: .clear, title: " Setting", assetsTitle: "setting_white_24")
+    private var isInSafeMode: Bool  = false
     var userInfo: AccountInfo?
-    let bg: UIView = {
-        let vw = UIView()
-        vw.backgroundColor = .DnColor
-        return vw
-    }()
-    
-    let assistView: UIView = {
-       let vw = UIView()
-        vw.backgroundColor = .DnDarkBlue
-        return vw
-    }()
-    let appLogo: UIImageView =  {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Dynamic-Logo")
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-   
     var serviceTable:UITableView!
-    let logoutButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "arrow.left.square"), for: .normal)
-        btn.setTitle(" Logout", for: .normal)
-        btn.addTarget(self, action: #selector(logoutBtnWasPressed), for: .touchUpInside)
-        btn.tintColor = .white
-        return btn
-    }()
-    let settingButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(named: "setting_white_24"), for: .normal)
-        btn.setTitle("  Setting", for: .normal)
-        btn.tintColor = .white
-        btn.addTarget(self, action: #selector(settingBtnPressed), for: .touchUpInside)
-        return btn
-    }()
+    
+    // network instance
+    private lazy var auth: UserAuthProtocol = UserAuth()
+    
     
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        isInSafeMode = auth.isAppInSafeMode
-        view.backgroundColor = .DnVcBackgroundColor
+        isInSafeMode                = auth.isAppInSafeMode
+        view.backgroundColor        = .DnColor
+        assistView.backgroundColor  = .DnColor
         setupServiceTable()
+        configureLogoImage()
+        configureLogoutButton()
+        configureSettingButton()
         setupLayout()
         
     }
@@ -70,34 +46,57 @@ class SideMenuVC: UIViewController {
 
     //MARK:- Handlers
     func setupServiceTable() {
-        serviceTable = UITableView()
-        serviceTable.delegate = self
-        serviceTable.dataSource = self
+        serviceTable                    = UITableView()
+        serviceTable.delegate           = self
+        serviceTable.dataSource         = self
         serviceTable.register(SideMenuCell.self, forCellReuseIdentifier: SideMenuCell.reuseIdentifier)
-        serviceTable.rowHeight = 50
-        serviceTable.separatorStyle = .none
-        serviceTable.backgroundColor = .clear
+        serviceTable.rowHeight          = 50
+        serviceTable.separatorStyle     = .none
+        serviceTable.backgroundColor    = .clear
     }
+    
+    private func configureLogoImage() {
+        appLogo.image                   = UIImage(named: "Dynamic-Logo")
+    }
+    
+    private func configureLogoutButton() {
+        logoutButton.titleLabel?.font   = UIFont.systemFont(ofSize: 16)
+        logoutButton.withTarget         = {  self.logoutBtnWasPressed() }
+    }
+    
+    private func configureSettingButton() {
+        settingButton.titleLabel?.font  = UIFont.systemFont(ofSize: 16)
+        settingButton.withTarget        = { self.settingBtnPressed() }
+    }
+    
     func setupLayout() {
-        view.addSubview(assistView)
-        assistView.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,size: CGSize(width: 0, height: 90))
-        view.addSubview(bg)
-        bg.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 81))
-   
         let topStack = UIStackView(arrangedSubviews: [appLogo, settingButton])
+        view.addSubview(assistView)
+        view.addSubview(topStack)
+        view.addSubview(serviceTable)
+        view.addSubview(logoutButton)
+        
+        assistView.DNLayoutConstraint(view.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                                      size: CGSize(width: 0, height: 90))
+           
         topStack.configureStack(axis: .vertical, distribution: .fill, alignment: .center, space: 10)
         appLogo.DNLayoutConstraint(size: CGSize(width: 70, height: 70))
-        bg.addSubview(topStack)
-        bg.addSubview(serviceTable)
-        bg.addSubview(logoutButton)
         let viewWidth = self.view.frame.width
         let stackWidth:CGFloat = 100.0
         let stackHeight:CGFloat = 120.0
         let leftDistance = (viewWidth - 81) / 2 - (stackWidth / 2.0)
-        topStack.DNLayoutConstraint(bg.topAnchor , left: bg.leftAnchor, margins: UIEdgeInsets(top: 60, left: leftDistance, bottom: 0, right: 0), size: CGSize(width: stackWidth, height: stackHeight))
+        
+        topStack.DNLayoutConstraint(view.topAnchor , left: view.leftAnchor,
+                                    margins: UIEdgeInsets(top: 60, left: leftDistance, bottom: 0, right: 81),
+                                    size: CGSize(width: stackWidth, height: stackHeight))
 
-        serviceTable.DNLayoutConstraint(topStack.bottomAnchor, left: bg.leftAnchor, right: bg.rightAnchor, bottom: logoutButton.topAnchor, margins: UIEdgeInsets(top: 40, left: 16, bottom: 8, right: 4))
-        logoutButton.DNLayoutConstraint(left: bg.leftAnchor, bottom: bg.bottomAnchor, margins: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 0), size: CGSize(width: 80, height: 30))
+        serviceTable.DNLayoutConstraint(topStack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                                        bottom: logoutButton.topAnchor,
+                                        margins: UIEdgeInsets(top: 40, left: 16, bottom: 8, right: 81))
+        
+        logoutButton.DNLayoutConstraint(left: view.leftAnchor, bottom: view.bottomAnchor,
+                                        margins: UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 0),
+                                        size: CGSize(width: 80, height: 30))
     }
     
     func activeSettingButton(_ active: Bool) {
@@ -151,5 +150,3 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-

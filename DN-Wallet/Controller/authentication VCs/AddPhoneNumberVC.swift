@@ -119,10 +119,7 @@ extension AddPhoneNumberVC: UITextFieldDelegate, PopUpMenuDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let vc = PopUpMenu()
-        vc.menuDelegate = self
-        vc.dataSource = .country
-        self.present(vc, animated: true, completion: nil)
+        self.presentPopUpMenu(withCategory: .creditCard, to: self)
         textField.endEditing(true)
     }
 }
