@@ -37,7 +37,7 @@ class UserHistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextButton.layer.cornerRadius = nextButton.frame.size.height / 2
+        configureNextButton()
         configureCollectionView()
         setupNavigationBar()
         
@@ -45,6 +45,14 @@ class UserHistoryVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
+    }
+    
+    private func configureNextButton() {
+        nextButton.layer.cornerRadius = nextButton.frame.size.height / 2
+        nextButton.layer.shadowColor = UIColor.label.cgColor
+        nextButton.layer.shadowOffset = CGSize(width: 0.26, height: 0.26)
+        nextButton.layer.shadowOpacity = 0.26
+        nextButton.layer.shadowRadius = 8
     }
     
     private func setupNavigationBar() {

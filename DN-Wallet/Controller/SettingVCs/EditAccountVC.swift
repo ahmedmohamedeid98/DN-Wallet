@@ -231,7 +231,7 @@ extension EditAccountVC: UpdatePhoneDelegate, PopUpMenuDelegate, UITextFieldDele
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == newCountryTextField {
-            self.presentPopUpMenu(withCategory: .creditCard, to: self)
+            self.presentPopUpMenu(withCategory: .country, to: self)
             textField.endEditing(true)
         }
     }

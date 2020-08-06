@@ -138,6 +138,7 @@
 		04E8ED4F24812AE700DE0E0F /* DonationDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */; };
 		04E8ED5024812AE800DE0E0F /* DonationDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */; };
 		04E9448C2412D524000EA14B /* AddPhoneNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9448B2412D524000EA14B /* AddPhoneNumberVC.swift */; };
+		04F5A8DA24DB8B4100CA9FA9 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5A8D924DB8B4100CA9FA9 /* Date+Ext.swift */; };
 		04F81C5D24B4AD7E00D10702 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C5C24B4AD7E00D10702 /* ImageLoader.swift */; };
 		04F81C6024B4FCB400D10702 /* UserHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C5F24B4FCB400D10702 /* UserHistoryVC.swift */; };
 		04F81C6224B4FE2A00D10702 /* UserHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C6124B4FE2A00D10702 /* UserHistoryCell.swift */; };
@@ -280,6 +281,7 @@
 		04E8ED4D24812AE700DE0E0F /* DonationDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailsCell.swift; sourceTree = "<group>"; };
 		04E8ED4E24812AE700DE0E0F /* DonationDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonationDetailsCell.xib; sourceTree = "<group>"; };
 		04E9448B2412D524000EA14B /* AddPhoneNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhoneNumberVC.swift; sourceTree = "<group>"; };
+		04F5A8D924DB8B4100CA9FA9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		04F81C5C24B4AD7E00D10702 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		04F81C5F24B4FCB400D10702 /* UserHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryVC.swift; sourceTree = "<group>"; };
 		04F81C6124B4FE2A00D10702 /* UserHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryCell.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 				04AFBC2A24A24A05007B544F /* UITableView+Ext.swift */,
 				04AFBC2C24A24A18007B544F /* UIStackView+Ext.swift */,
 				0456642D24AF647D00A970C9 /* String+Ext.swift */,
+				04F5A8D924DB8B4100CA9FA9 /* Date+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				046732BA24198F3300DD436D /* FPResetPasswordVC.swift in Sources */,
 				043CA4F624CFC8EC000033B7 /* ImageUploader.swift in Sources */,
 				04659B0E243D717D00E4BFA2 /* Heirs.swift in Sources */,
+				04F5A8DA24DB8B4100CA9FA9 /* Date+Ext.swift in Sources */,
 				040EF4E9248F245600DD29F2 /* Hud.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
 				04AACF5D24B21A14003CF758 /* ResetNetworking.swift in Sources */,

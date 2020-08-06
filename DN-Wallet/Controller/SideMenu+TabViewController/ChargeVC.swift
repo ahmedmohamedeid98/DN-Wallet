@@ -42,7 +42,7 @@ class ChargeVC: UIViewController {
         amountField.delegate    = self
         creditTable.delegate    = self
         setupCreditTableDataSource()
-        dropDown.text = "EGP"
+        
     }
     
     private func setUserPreference() {
@@ -93,14 +93,14 @@ class ChargeVC: UIViewController {
 
 extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
-        dropDown.text = title + "\t\t(\(code ?? " "))"
+        dropDown.text = title + "  [\(code ?? " ")]"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == dropDown {
             textField.endEditing(true)
             amountField.endEditing(true)
-            self.presentPopUpMenu(withCategory: .creditCard, to: self)
+            self.presentPopUpMenu(withCategory: .currency, to: self)
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

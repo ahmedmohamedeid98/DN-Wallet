@@ -215,7 +215,7 @@ extension SendAndRequestMoney: UITextViewDelegate {
 }
 extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     func selectedItem(title: String, code: String?) {
-        dropDown.text = title + "\t\t(\(code ?? " "))"
+        dropDown.text = title + "  [\(code ?? " ")]"
     }
     
     
@@ -241,7 +241,7 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == dropDown {
-            self.presentPopUpMenu(withCategory: .creditCard, to: self)
+            self.presentPopUpMenu(withCategory: .currency, to: self)
             textField.endEditing(true)
         }
         

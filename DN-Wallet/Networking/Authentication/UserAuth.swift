@@ -126,7 +126,7 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
     // check if the app in safe mode or not
     var isAppInSafeMode: Bool {
         get {
-            return false//keychain.getBool(keys.safeModeActive) ?? false
+            return keychain.getBool(keys.safeModeActive) ?? false
         }
     }
     func setSafeModeTime(hours: String = "12") {
@@ -158,6 +158,13 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         }
     }
     
+    // active safe mode
+    // reload side menu table
+    // caculate the current time
+    // add a deta time (safe mode time to it)
+    // store new time to keychain
+    // check if the current time greater that the safed time of not
+    // if it is greater deactive save mode else
     func checkIfAppOutTheSafeMode(compeletion: @escaping(Int64, Error?) -> Void) {
         //DNData.taskForGETRequest(url: <#T##URL#>, response: <#T##Decodable.Protocol#>, completion: <#T##(Decodable?, Error?) -> Void#>)
     }

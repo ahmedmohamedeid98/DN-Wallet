@@ -34,7 +34,9 @@ class ExchangeCurrencyVC: UIViewController {
   
     private func initView() {
         fromCurrencyTextField.delegate = self
+        fromCurrencyTextField.doNotShowTheKeyboard()
         toCurrencyTextField.delegate = self
+        toCurrencyTextField.doNotShowTheKeyboard()
         resultLabel.isHidden = true
         exchangeBtnOutlet.layer.cornerRadius = 20.0
         calculateBtnOutlet.layer.cornerRadius = 20.0
@@ -80,6 +82,6 @@ extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == fromCurrencyTextField { isDataForFromCurrencyTextField = true }
-        self.presentPopUpMenu(withCategory: .creditCard, to: self)
+        self.presentPopUpMenu(withCategory: .currency, to: self)
     }
 }

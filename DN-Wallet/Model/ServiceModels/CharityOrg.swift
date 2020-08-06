@@ -5,14 +5,7 @@
 //  Created by Ahmed Eid on 3/20/20.
 //  Copyright © 2020 DN. All rights reserved.
 //
-/*
-struct CharityResponse: Codable {
-    let _id : String
-    let name: String
-    let email: String
-    let org_logo: String
-}
-*/
+
 struct Charity: Decodable, Hashable {
     var _id : String
     var name: String
@@ -23,6 +16,7 @@ struct Charity: Decodable, Hashable {
         return hasher.combine(self._id)
     }
 }
+
 struct CharityDetailsResponse: Codable {
     let name: String
     let address: String

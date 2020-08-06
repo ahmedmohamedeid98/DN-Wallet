@@ -114,12 +114,12 @@ class AddPhoneNumberVC: UIViewController {
 //MARK:- Configure PopUp Menu
 extension AddPhoneNumberVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
-        dropDownCountry.text = "(\(code ?? " "))\t" + title
+        dropDownCountry.text = "[\(code ?? " ")]  " + title
         countryCode = code
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.presentPopUpMenu(withCategory: .creditCard, to: self)
+        self.presentPopUpMenu(withCategory: .country, to: self)
         textField.endEditing(true)
     }
 }

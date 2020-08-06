@@ -25,7 +25,7 @@ extension VerifyNetworking: TargetType {
         switch self {
             case .sendPhoneVerifiCode: return "/verfiy"
             case .sendEmailVerifiCode: return "/verfiy/email"
-            case .verifyPhone: return "/verfiy"
+            case .verifyPhone: return "/verfiy/check"
             case .verifyEmail: return "/verfiy/email"
             case .accountIsActive: return "/users/active"
         }
@@ -33,7 +33,7 @@ extension VerifyNetworking: TargetType {
     
     var method: HTTPMethod {
         switch self {
-            case .sendPhoneVerifiCode: return .get
+            case .sendPhoneVerifiCode: return .post
             case .sendEmailVerifiCode: return .get
             case .verifyPhone: return .post
             case .verifyEmail: return .post

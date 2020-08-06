@@ -89,7 +89,7 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
-                auth.activeSafeMode()
+                
             } else {
                 auth.deactiveSafeMode()
             }
@@ -98,6 +98,7 @@ class SettingCell: UITableViewCell {
             UserPreference.setValue(sender.isOn, withKey: UserPreference.loginWithBiometric)
         }
     }
+    
     
    
     

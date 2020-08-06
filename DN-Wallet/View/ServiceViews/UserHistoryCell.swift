@@ -25,7 +25,7 @@ enum UserHistoryCellColor {
     
     var color: UIColor {
         switch self {
-            case .consumptionColor: return .red
+            case .consumptionColor: return #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
             case .recievedColor: return #colorLiteral(red: 0.2274509804, green: 0.6862745098, blue: 0.2666666667, alpha: 1)
             case .donationsColor: return #colorLiteral(red: 0.1782214642, green: 0.4982336164, blue: 0.757638514, alpha: 1)
         }
