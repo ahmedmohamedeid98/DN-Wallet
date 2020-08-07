@@ -51,12 +51,13 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
+        print("Home willAppear")
         startTimer()
-        auth.deactiveSafeMode()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("Home willDisappear")
         stopTimer()
     }
  

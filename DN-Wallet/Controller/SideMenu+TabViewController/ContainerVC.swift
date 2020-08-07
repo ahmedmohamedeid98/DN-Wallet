@@ -11,6 +11,7 @@ class ContainerVC: UIViewController {
     //MARK:- Properities
     var isExpand: Bool = false
     var isPresentingFromCreateAccount: Bool = false
+    var auth: UserAuthProtocol = UserAuth()
     
     // Two Child VC
     var sideMenuController: UIViewController!
@@ -85,6 +86,7 @@ class ContainerVC: UIViewController {
     func showMenu(shouldExpand: Bool) {
         if shouldExpand {
             // show side menu
+            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerTabBarController.view.frame.origin.x = self.centerTabBarController.view.frame.width - 80
             }, completion: nil)

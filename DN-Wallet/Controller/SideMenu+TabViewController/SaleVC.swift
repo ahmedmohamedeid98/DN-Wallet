@@ -25,6 +25,7 @@ class SaleVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
+        auth.deactiveSafeMode()
         
     }
     

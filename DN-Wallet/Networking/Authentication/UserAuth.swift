@@ -133,10 +133,6 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         }
     }
     func setSafeModeTime(hours: String = "12") {
-        let hoursNumber: Double = Double(hours) ?? 12.0
-        let date = Date().addingTimeInterval(hoursNumber * 60 * 60)
-        let StrDate = date.convertDateToString()
-        keychain.set(StrDate, forKey: keys.safeModeTime)
         keychain.set(hours, forKey: keys.safeModeHours)
     }
     
@@ -154,17 +150,25 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
     }
     // active safe mode "we can do this in the app setting"
     func activeSafeMode() {
+        print("DN:: Active Safe Mode")
+        // set safe mode time
+        let hoursNumber: Double = Double(getSafeModeTime()) ?? 12.0
+        let date = Date().addingTimeInterval(hoursNumber * 3)//hoursNumber * 60 * 60
+        let StrDate = date.convertDateToString()
+        keychain.set(StrDate, forKey: keys.safeModeTime)
+        // active it
         keychain.set(true, forKey: keys.safeModeActive)
     }
     // deactive safe mode "this may during app Luanch"
     // or if the remaining time less than 3 h try after that time
     func deactiveSafeMode() {
+        print("DN:: Deactive Safe Mode ")
         keychain.set(false, forKey: keys.safeModeActive)
     }
     // this is properity which contain the limited amount that user can deal with it (Pay) during safe mode
     var allowedAmountInSafeMode: Double {
         get {
-            return Double(keychain.get(keys.allowedAmount) ?? "0") ?? 0.0
+            return Double(keychain.get(keys.allowedAmount) ?? "10.0") ?? 10.0
         }
         set {
             keychain.set(String(newValue), forKey: keys.allowedAmount)
@@ -172,12 +176,17 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
     }
 
     func checkIfAppOutTheSafeMode() -> Bool {
+        print("DN:: Check App Safe Mode")
         guard let safeDate = getSafeModeDate() else { return false }
         let now = Date()
+        print("DN:: Current Date: \(now)")
+        print("DN:: Safe Date: \(safeDate)")
         if now > safeDate {
+            print("Now Greater than SafeDate")
             deactiveSafeMode()
             return true
         } else {
+            print("Now Less than safe mode")
             return false
         }
     }
