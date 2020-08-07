@@ -35,6 +35,7 @@ class HomeVC: UIViewController {
     var notificationMessages: [Message] = []
     private var tableView: UITableView!
     private lazy var meManager: MeManagerProtocol = MeManager()
+    private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
    
@@ -51,6 +52,7 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
         startTimer()
+        auth.deactiveSafeMode()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -21,11 +21,14 @@ protocol UserAuthProtocol { //this for make code testable
     func validate(currentPassword pass: String) -> Bool
     
     func setSafeModeTime(hours: String)
-    func getSafeModeTime() -> String
+    func getSafeModeDate() -> Date?
     func activeSafeMode()
     func deactiveSafeMode()
+    func checkIfAppOutTheSafeMode() -> Bool
+    func getSafeModeTime() -> String
     var isAppInSafeMode: Bool { get }
     var allowedAmountInSafeMode: Double { get set }
+    
 }
 
 class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
@@ -130,14 +133,24 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         }
     }
     func setSafeModeTime(hours: String = "12") {
-        keychain.set(hours, forKey: keys.safeModeTime)
+        let hoursNumber: Double = Double(hours) ?? 12.0
+        let date = Date().addingTimeInterval(hoursNumber * 60 * 60)
+        let StrDate = date.convertDateToString()
+        keychain.set(StrDate, forKey: keys.safeModeTime)
+        keychain.set(hours, forKey: keys.safeModeHours)
     }
     
+    
     func getSafeModeTime() -> String {
-        if let safeData = keychain.get(keys.safeModeTime) {
-            return safeData
+        return keychain.get(keys.safeModeHours) ?? "12"
+    }
+    
+    func getSafeModeDate() -> Date? {
+        if let safeDate = keychain.get(keys.safeModeTime) {
+            let date = safeDate.convertStringToDate()
+            return date
         }
-        return "0"
+        return nil
     }
     // active safe mode "we can do this in the app setting"
     func activeSafeMode() {
@@ -157,16 +170,16 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
             keychain.set(String(newValue), forKey: keys.allowedAmount)
         }
     }
-    
-    // active safe mode
-    // reload side menu table
-    // caculate the current time
-    // add a deta time (safe mode time to it)
-    // store new time to keychain
-    // check if the current time greater that the safed time of not
-    // if it is greater deactive save mode else
-    func checkIfAppOutTheSafeMode(compeletion: @escaping(Int64, Error?) -> Void) {
-        //DNData.taskForGETRequest(url: <#T##URL#>, response: <#T##Decodable.Protocol#>, completion: <#T##(Decodable?, Error?) -> Void#>)
+
+    func checkIfAppOutTheSafeMode() -> Bool {
+        guard let safeDate = getSafeModeDate() else { return false }
+        let now = Date()
+        if now > safeDate {
+            deactiveSafeMode()
+            return true
+        } else {
+            return false
+        }
     }
 }
 //=======================
@@ -183,6 +196,7 @@ struct keys {
     static let safeModeActive = "safe-mode-active"
     static let qrCodeFileName = "DN-QRCode-Image.png"
     static let allowedAmount = "allowed-amount"
+    static let safeModeHours = "safe_mode_hours"
 }
 
 

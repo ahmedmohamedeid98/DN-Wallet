@@ -60,13 +60,13 @@ class PayVC: UIViewController {
         handleNavigationBar()
         handelPopUpTextField()
         dropDown.doNotShowTheKeyboard()
-        dropDown.text = Currency.EGP.description // set default currency
-        //setUserPreference()
     }
     
-    private func setUserPreference() {
-        if let currency = UserPreference.getStringValue(withKey: UserPreference.currencyKey) {
-            dropDown.text = currency
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if auth.isAppInSafeMode {
+            _ = auth.checkIfAppOutTheSafeMode()
+            print("app in safe mode")
         }
     }
     

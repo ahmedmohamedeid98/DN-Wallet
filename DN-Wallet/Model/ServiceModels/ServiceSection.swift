@@ -58,7 +58,7 @@ enum ServiceSection: Int, CaseIterable, CustomStringConvertible {
             case .sendRequest: return true
             case .exchangeCurrency: return false
             case .myConcats: return false
-            case .addNewPaymentCard: return false
+            case .addNewPaymentCard: return true
             case .donation: return true
         }
     }

@@ -28,7 +28,7 @@ class SideMenuVC: UIViewController {
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        isInSafeMode                = auth.isAppInSafeMode
+        
         view.backgroundColor        = .DnColor
         assistView.backgroundColor  = .DnColor
         setupServiceTable()
@@ -40,8 +40,11 @@ class SideMenuVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isInSafeMode = auth.isAppInSafeMode
         activeSettingButton(isInSafeMode) // deactive setting button if the app in safeMode else otherwise.
-        if isInSafeMode { serviceTable.reloadData() }
+        if isInSafeMode {
+            _ = auth.checkIfAppOutTheSafeMode()
+            serviceTable.reloadData() }
     }
 
     //MARK:- Handlers
