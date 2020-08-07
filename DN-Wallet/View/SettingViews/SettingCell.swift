@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SettingVCDelegate: class {
+    func didSafeModeToggleBeingOn(completion: @escaping() -> ())
+}
+
 class SettingCell: UITableViewCell {
     
     //MARK:- Properities
@@ -18,7 +22,7 @@ class SettingCell: UITableViewCell {
         sw.onTintColor = .DnColor
         return sw
     }()
-    
+    weak var delegate: SettingVCDelegate!
    
     //MARK:- Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -71,7 +75,7 @@ class SettingCell: UITableViewCell {
         addSubview(Switch)
         Switch.tag = tag
         if tag == SecurityOptions.safeMode.id {
-            Switch.isOn = UserPreference.getBoolValue(withKey: UserPreference.enableSafeMode)
+            Switch.isOn = auth.isAppInSafeMode
         }
         if tag == SecurityOptions.enableLoginWithFaceID.id {
             Switch.isOn = UserPreference.getBoolValue(withKey: UserPreference.loginWithBiometric)
@@ -89,6 +93,11 @@ class SettingCell: UITableViewCell {
     @objc func toggleSwitch(_ sender: UISwitch) {
         if sender.tag == SecurityOptions.safeMode.id {
             if sender.isOn {
+                delegate.didSafeModeToggleBeingOn {
+                    if !self.auth.isAppInSafeMode {
+                        DispatchQueue.main.async { sender.setOn(false, animated: true) }
+                    }
+                }
                 
             } else {
                 auth.deactiveSafeMode()
@@ -97,9 +106,5 @@ class SettingCell: UITableViewCell {
         if sender.tag == SecurityOptions.enableLoginWithFaceID.id {
             UserPreference.setValue(sender.isOn, withKey: UserPreference.loginWithBiometric)
         }
-    }
-    
-    
-   
-    
+    }    
 }

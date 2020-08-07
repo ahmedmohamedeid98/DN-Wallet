@@ -21,11 +21,14 @@ protocol UserAuthProtocol { //this for make code testable
     func validate(currentPassword pass: String) -> Bool
     
     func setSafeModeTime(hours: String)
-    func getSafeModeTime() -> String
+    func getSafeModeDate() -> Date?
     func activeSafeMode()
     func deactiveSafeMode()
+    func checkIfAppOutTheSafeMode() -> Bool
+    func getSafeModeTime() -> String
     var isAppInSafeMode: Bool { get }
     var allowedAmountInSafeMode: Double { get set }
+    
 }
 
 class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
@@ -130,43 +133,62 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         }
     }
     func setSafeModeTime(hours: String = "12") {
-        keychain.set(hours, forKey: keys.safeModeTime)
+        keychain.set(hours, forKey: keys.safeModeHours)
     }
     
+    
     func getSafeModeTime() -> String {
-        if let safeData = keychain.get(keys.safeModeTime) {
-            return safeData
+        return keychain.get(keys.safeModeHours) ?? "12"
+    }
+    
+    func getSafeModeDate() -> Date? {
+        if let safeDate = keychain.get(keys.safeModeTime) {
+            let date = safeDate.convertStringToDate()
+            return date
         }
-        return "0"
+        return nil
     }
     // active safe mode "we can do this in the app setting"
     func activeSafeMode() {
+        print("DN:: Active Safe Mode")
+        // set safe mode time
+        let hoursNumber: Double = Double(getSafeModeTime()) ?? 12.0
+        let date = Date().addingTimeInterval(hoursNumber * 3)//hoursNumber * 60 * 60
+        let StrDate = date.convertDateToString()
+        keychain.set(StrDate, forKey: keys.safeModeTime)
+        // active it
         keychain.set(true, forKey: keys.safeModeActive)
     }
     // deactive safe mode "this may during app Luanch"
     // or if the remaining time less than 3 h try after that time
     func deactiveSafeMode() {
+        print("DN:: Deactive Safe Mode ")
         keychain.set(false, forKey: keys.safeModeActive)
     }
     // this is properity which contain the limited amount that user can deal with it (Pay) during safe mode
     var allowedAmountInSafeMode: Double {
         get {
-            return Double(keychain.get(keys.allowedAmount) ?? "0") ?? 0.0
+            return Double(keychain.get(keys.allowedAmount) ?? "10.0") ?? 10.0
         }
         set {
             keychain.set(String(newValue), forKey: keys.allowedAmount)
         }
     }
-    
-    // active safe mode
-    // reload side menu table
-    // caculate the current time
-    // add a deta time (safe mode time to it)
-    // store new time to keychain
-    // check if the current time greater that the safed time of not
-    // if it is greater deactive save mode else
-    func checkIfAppOutTheSafeMode(compeletion: @escaping(Int64, Error?) -> Void) {
-        //DNData.taskForGETRequest(url: <#T##URL#>, response: <#T##Decodable.Protocol#>, completion: <#T##(Decodable?, Error?) -> Void#>)
+
+    func checkIfAppOutTheSafeMode() -> Bool {
+        print("DN:: Check App Safe Mode")
+        guard let safeDate = getSafeModeDate() else { return false }
+        let now = Date()
+        print("DN:: Current Date: \(now)")
+        print("DN:: Safe Date: \(safeDate)")
+        if now > safeDate {
+            print("Now Greater than SafeDate")
+            deactiveSafeMode()
+            return true
+        } else {
+            print("Now Less than safe mode")
+            return false
+        }
     }
 }
 //=======================
@@ -183,6 +205,7 @@ struct keys {
     static let safeModeActive = "safe-mode-active"
     static let qrCodeFileName = "DN-QRCode-Image.png"
     static let allowedAmount = "allowed-amount"
+    static let safeModeHours = "safe_mode_hours"
 }
 
 

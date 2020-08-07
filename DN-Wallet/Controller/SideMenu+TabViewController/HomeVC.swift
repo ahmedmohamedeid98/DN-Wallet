@@ -35,6 +35,7 @@ class HomeVC: UIViewController {
     var notificationMessages: [Message] = []
     private var tableView: UITableView!
     private lazy var meManager: MeManagerProtocol = MeManager()
+    private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
    
@@ -50,11 +51,13 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
+        print("Home willAppear")
         startTimer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("Home willDisappear")
         stopTimer()
     }
  

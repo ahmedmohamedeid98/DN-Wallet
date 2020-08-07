@@ -91,11 +91,12 @@ extension SettingVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = settingTable.dequeueReusableCell(withIdentifier: "settingcellid", for: indexPath) as? SettingCell else {return UITableViewCell()}
-
         guard let section = SettingSection(rawValue: indexPath.section) else {return UITableViewCell()}
         switch section {
         case .General : cell.sectionType = GeneralOptions(rawValue: indexPath.row)
-        case .Security: cell.sectionType = SecurityOptions(rawValue: indexPath.row)
+        case .Security:
+            if SecurityOptions(rawValue: indexPath.row) == SecurityOptions.safeMode { cell.delegate = self }
+            cell.sectionType = SecurityOptions(rawValue: indexPath.row)
         }
         
         return cell
@@ -207,20 +208,6 @@ extension SettingVC {
         alert.addAction(setAction)
         present(alert, animated: true, completion: nil)
     }
-    func showSafeModeAlert(completion: @escaping (Bool) -> ()) {
-            
-            let alert = UIAlertController(title: "By Activate \"Safe Mode\" You Accept to Stop Some Service For Specific Time.", message: "Send Money, Send Request, Withdraw Money will be Stopped. Pay From Purchases Will be Limited.", preferredStyle: .alert)
-            let Cancle = UIAlertAction(title: "Cancle", style: .cancel) { (action) in
-                completion(false)
-            }
-            let Continue = UIAlertAction(title: "Continue", style: .default) { (action) in
-                completion(true)
-            }
-            
-            alert.addAction(Cancle)
-            alert.addAction(Continue)
-            self.present(alert, animated: true, completion: nil)
-    }
 }
 
 extension UINavigationController {
@@ -272,4 +259,21 @@ extension SettingVC {
         }
     }
 
+}
+//MARK:- Handel Safe Mode
+extension SettingVC: SettingVCDelegate {
+    func didSafeModeToggleBeingOn(completion: @escaping() -> ()) {
+        let alert = UIAlertController(title: "Warning\nBy Activate \"Safe Mode\" you accept to stop some service for specific time", message: "Send Money, Send Request, Withdrew, and donate will be stopped,and Pay for Purchases will be limited.", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            completion()
+        }
+        let active = UIAlertAction(title: "Countinue", style: .default) { _ in
+            self.auth.activeSafeMode()
+            completion()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(active)
+        present(alert, animated: true)
+    }
 }

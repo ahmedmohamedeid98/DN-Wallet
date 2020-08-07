@@ -9,7 +9,6 @@ protocol sideMenuTimerDelegate {
     func stopTimer()
 }
 
-
 class SideMenuVC: UIViewController {
 
     //MARK:- Properities
@@ -28,7 +27,7 @@ class SideMenuVC: UIViewController {
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        isInSafeMode                = auth.isAppInSafeMode
+        
         view.backgroundColor        = .DnColor
         assistView.backgroundColor  = .DnColor
         setupServiceTable()
@@ -36,13 +35,28 @@ class SideMenuVC: UIViewController {
         configureLogoutButton()
         configureSettingButton()
         setupLayout()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        activeSettingButton(isInSafeMode) // deactive setting button if the app in safeMode else otherwise.
-        if isInSafeMode { serviceTable.reloadData() }
+        isAppInSafeMode()
+        NotificationCenter.default.addObserver(self, selector: #selector(isAppInSafeMode), name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
+    }
+    
+    
+    @objc func isAppInSafeMode() {
+        isInSafeMode = auth.isAppInSafeMode
+        activeSettingButton(isInSafeMode) // deactive setting button if the app in safeMode else otherwise.
+        if isInSafeMode {
+            _ = auth.checkIfAppOutTheSafeMode()
+            serviceTable.reloadData() }
+    }
+    
 
     //MARK:- Handlers
     func setupServiceTable() {
