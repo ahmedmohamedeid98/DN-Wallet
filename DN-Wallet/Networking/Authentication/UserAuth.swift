@@ -27,7 +27,7 @@ protocol UserAuthProtocol { //this for make code testable
     func checkIfAppOutTheSafeMode() -> Bool
     func getSafeModeTime() -> String
     var isAppInSafeMode: Bool { get }
-    var allowedAmountInSafeMode: Double { get set }
+    var allowedAmountInSafeMode: Int { get set }
     
 }
 
@@ -166,9 +166,9 @@ class UserAuth: BaseAPI<UserAuthNetworking>, UserAuthProtocol {
         keychain.set(false, forKey: keys.safeModeActive)
     }
     // this is properity which contain the limited amount that user can deal with it (Pay) during safe mode
-    var allowedAmountInSafeMode: Double {
+    var allowedAmountInSafeMode: Int {
         get {
-            return Double(keychain.get(keys.allowedAmount) ?? "10.0") ?? 10.0
+            return Int(keychain.get(keys.allowedAmount) ?? "10") ?? 10
         }
         set {
             keychain.set(String(newValue), forKey: keys.allowedAmount)

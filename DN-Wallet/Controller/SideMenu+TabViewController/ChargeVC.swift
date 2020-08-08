@@ -20,11 +20,11 @@ class ChargeVC: UIViewController {
     
     //MARK:- Properities
     var lastSelectedIndexPath: IndexPath?
-    var selectedCardId: String = "0"
-    var tableDataSource: UITableViewDiffableDataSource<Section, CardInfo>!
-    var cards: [CardInfo] = [CardInfo(id: "1", name: "Visa", type: "prepad", last4digits: "1547"),
-                             CardInfo(id: "2", name: "Master Card", type: "prepad", last4digits: "5427"),
-    CardInfo(id: "3", name: "Meza", type: "charge", last4digits: "8437")]
+    var selectedCardId: String?
+    var tableDataSource: UITableViewDiffableDataSource<Section, GetPaymentCards>!
+    var cards: [GetPaymentCards]  = []
+    var selectedSegmentIndex: Int = 0
+    var selectedCurrencyCode: String = "EGP"
     
     //MARK:- Initialization
     fileprivate func configureSegmentControl() {
@@ -39,9 +39,11 @@ class ChargeVC: UIViewController {
         configureSegmentControl()
         
         dropDown.delegate       = self
+        dropDown.doNotShowTheKeyboard()
         amountField.delegate    = self
         creditTable.delegate    = self
         setupCreditTableDataSource()
+        initViewControllerWithData()
         
     }
     
@@ -66,7 +68,7 @@ class ChargeVC: UIViewController {
     }
     
     private func setupCreditTableDataSource() {
-        tableDataSource = UITableViewDiffableDataSource(tableView: creditTable, cellProvider: { (MyTable, indexPath, data) -> UITableViewCell? in
+        tableDataSource = UITableViewDiffableDataSource<Section, GetPaymentCards>(tableView: creditTable, cellProvider: { (MyTable, indexPath, data) -> UITableViewCell? in
             guard let cell = MyTable.dequeueReusableCell(withIdentifier: ChargeCreditCell.reuseIdentifier, for: indexPath)  as? ChargeCreditCell else {return UITableViewCell()}
             cell.data = data
             return cell
@@ -75,7 +77,7 @@ class ChargeVC: UIViewController {
     }
     
     private func updateTableViewWithData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CardInfo>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, GetPaymentCards>()
         snapshot.appendSections(Section.allCases)
         for item in cards {
             snapshot.appendItems([item])
@@ -85,7 +87,59 @@ class ChargeVC: UIViewController {
     
     //MARK:- Actions
     @objc func doneBtnPressed() {
-        print("done button pressed")
+        
+        guard let amount = amountField.text else {
+            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "amount is required. and must be large than 0.0")
+            return
+        }
+        guard let cardID =  selectedCardId else {
+            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "You must select an payment card.")
+            return
+        }
+        
+        Hud.showLoadingHud(onView: view, withLabel: "In Process....")
+        // charge
+        if selectedSegmentIndex == 0 {
+            TransferManager.shared.chargeAccount(withData: Transfer(amount: amount, currency_code: selectedCurrencyCode), id: cardID) { result in
+                Hud.hide(after: 0)
+                switch result {
+                    case .success(let res):
+                        self.handelChargeSuccessCase(msg: res.success)
+                    case .failure(let err):
+                        self.handelChargeFailureCase(msg: err.localizedDescription)
+                }
+            }
+        }
+        // withdraw
+        else {
+            TransferManager.shared.withdrawAccount(withData: Transfer(amount: amount, currency_code: selectedCurrencyCode), id: cardID) { result in
+                Hud.hide(after: 0)
+                switch result {
+                    case .success(let res):
+                        self.handelWithdrawSuccessCase(msg: res.success)
+                    case .failure(let err):
+                        self.handelWithdrewFailureCase(msg: err.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func handelChargeSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func handelWithdrawSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func handelChargeFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
+    private func handelWithdrewFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
     }
     
 
@@ -94,6 +148,7 @@ class ChargeVC: UIViewController {
 extension ChargeVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
         dropDown.text = title + "  [\(code ?? " ")]"
+        selectedCurrencyCode = code ?? "EGP"
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -150,10 +205,10 @@ extension ChargeVC: DNSegmentControlDelegate {
     func segmentValueChanged(to index: Int) {
         if index == 0 {
             // charge...
-            print("charge...")
+            selectedSegmentIndex = 0
         } else {
             // withdrew...
-            print("withdrew...")
+            selectedSegmentIndex = 1
         }
     }
     
@@ -162,8 +217,24 @@ extension ChargeVC: DNSegmentControlDelegate {
 
 //Networking
 extension ChargeVC {
-    func initViewControllerWithData(cardList: [CardInfo]) {
-        self.cards = cardList
+    func initViewControllerWithData() {
+        TransferManager.shared.getPaymentCards { (result) in
+            switch result {
+                case .success(let data):
+                    self.handelGetPaymentCardsSuccessCase(cards: data)
+                case .failure(let err):
+                    self.handelGetPaymentCardsFailureCase(withError: err.localizedDescription)
+            }
+        }
+    }
+    
+    func handelGetPaymentCardsSuccessCase(cards: [GetPaymentCards]) {
+        self.cards = cards
         DispatchQueue.main.async { self.updateTableViewWithData() }
     }
+    
+    func handelGetPaymentCardsFailureCase(withError err: String) {
+        print("Failure Get Cards: \(err)")
+    }
+    
 }

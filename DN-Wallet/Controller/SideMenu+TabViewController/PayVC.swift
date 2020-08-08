@@ -89,11 +89,11 @@ class PayVC: UIViewController {
     @objc func ScanButtonPressed() {
         view.endEditing(true)
         if let amount = amountField.text, let currency = dropDown.text {
-            let enteredBalance = Balance(id: "sd", amount: Double(amount) ?? 0.0, currency: currency)
+            let enteredBalance = Balance(amount: amount, currency_code: currency)
             if self.isValidAmount(balance: enteredBalance) {
                 // if the app in safe mode the update allowed amount
                 if auth.isAppInSafeMode {
-                    auth.allowedAmountInSafeMode = auth.allowedAmountInSafeMode - enteredBalance.amount
+                    auth.allowedAmountInSafeMode = auth.allowedAmountInSafeMode - (Int(enteredBalance.amount) ?? 0)
                 }
                 preformScanOperation(with: enteredBalance)
             } else {
@@ -102,7 +102,7 @@ class PayVC: UIViewController {
                     message = "Entered amount (\(amount)) greater than remaining allowed amount in safeMode (\(auth.allowedAmountInSafeMode))"
                 } else {
                     if let balance = actualBalance {
-                        message = "Entered amount (\(amount)) greater than your balace amount (\(balance.amount) \(Currency(rawValue: balance.currency)?.symbole ?? "")"
+                        message = "Entered amount (\(amount)) greater than your balace amount (\(balance.amount)  \(balance.currency_code)"
                     } else {
                         message = "something was wrong please try again"
                     }
@@ -119,9 +119,9 @@ class PayVC: UIViewController {
     private func isValidAmount(balance: Balance) -> Bool {
         
         if auth.isAppInSafeMode {
-            return balance.amount <= auth.allowedAmountInSafeMode
+            return Int(balance.amount) ?? 0 <= auth.allowedAmountInSafeMode
         } else {
-            let actualBalances = userBalance.filter { $0.currency == balance.currency }
+            let actualBalances = userBalance.filter { $0.currency_code == balance.currency_code }
             actualBalance = actualBalances.first
             if let safeActualBalance = actualBalance {
                 return balance.amount <= safeActualBalance.amount

@@ -13,7 +13,6 @@ protocol SelectedCardDelegate {
 class ChargeCreditCell: UITableViewCell {
     
     static let reuseIdentifier = "credit-cell-identifie"
-    
     @IBOutlet weak var creditLogo: UIImageView!
     @IBOutlet weak var creditName: UILabel!
     @IBOutlet weak var creditNumber: UILabel!
@@ -21,12 +20,12 @@ class ChargeCreditCell: UITableViewCell {
     var credit_Id: String = ""
 
     
-    var data: CardInfo? {
+    var data: GetPaymentCards? {
         didSet {
             guard let mydata = data else {return}
-            self.creditName.text = mydata.name
-            self.creditNumber.text = "\(mydata.type) ****\(mydata.last4digits)"
-            self.credit_Id = mydata.id
+            self.creditName.text = mydata.cardID.cardType
+            self.creditNumber.text = "Prepaid ****\(mydata.cardID.last4Num)"
+            self.credit_Id = mydata.cardID._id
         }
     }
     

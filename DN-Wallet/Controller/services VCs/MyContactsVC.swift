@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MyContactDelegate: class {
+    func didAddNewContact(contact: CreateContactResponse)
+}
+
 enum contactTableSection: CaseIterable {
     case main
 }
@@ -28,7 +32,7 @@ class MyContactsVC: UIViewController {
     var contactTable: UITableView!
     var contactTableDataSource: ContactDataSource!
     var currentDataSource: [Contact] = []
-    var originDataSource: [Contact] = []
+    var originDataSource:  [Contact] = []
     var shouldRestoreCurrentDataSource: Bool = false
     var isEmptyStateViewPresented: Bool = false
     var alert: UIAlertController!
@@ -79,9 +83,9 @@ class MyContactsVC: UIViewController {
     }
     
     @objc func searchButtonPressed() {
-        navigationItem.titleView = searchBar
-        searchBar.showsCancelButton = true
-        navigationItem.rightBarButtonItems = []
+        navigationItem.titleView            = searchBar
+        searchBar.showsCancelButton         = true
+        navigationItem.rightBarButtonItems  = []
     }
     
     @objc func backBtnAction() {
@@ -106,7 +110,7 @@ class MyContactsVC: UIViewController {
     func configureContactTableDataSource() {
         contactTableDataSource = .init(tableView: contactTable, cellProvider: {
             (table, indexPath, data) -> UITableViewCell? in
-            guard let cell = self.contactTable.dequeueReusableCell(withIdentifier: MyContactCell.reuseIdentifier, for: indexPath) as? MyContactCell else {fatalError("can not dequue my contact cell")}
+            guard let cell = self.contactTable.dequeueReusableCell(withIdentifier: MyContactCell.reuseIdentifier, for: indexPath) as? MyContactCell else { fatalError("can not dequue my contact cell") }
             cell.data = data
             return cell
         })
@@ -143,6 +147,7 @@ extension MyContactsVC: UITableViewDelegate {
             guard let vc = st.instantiateViewController(identifier: "sendAndRequestVC") as? SendAndRequestMoney else { return }
             vc.presentedFromMyContact = true
             vc.presentedEmail = item.userID.email
+            vc.delegate = self
             vc.modalPresentationStyle = .fullScreen
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -162,6 +167,7 @@ extension MyContactsVC: UISearchBarDelegate {
         searchBar.searchTextField.textColor         = .label
         searchBar.placeholder                       = "type a username"
     }
+    
     //==================
     // delegate methods
     //==================
@@ -174,7 +180,7 @@ extension MyContactsVC: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItems = [addBarButton, searchBarButton]
-        if shouldRestoreCurrentDataSource { restoreCurrentDataSource() }
+        if shouldRestoreCurrentDataSource    { restoreCurrentDataSource() }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -291,11 +297,9 @@ extension MyContactsVC {
             self.emptyStateView?.removeFromSuperview()
             self.emptyStateView = nil // deallocate view from memory
             self.contactTable.alpha = 1
-            
             }
-}
-        #warning("add photo link")
-        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email, photo: "photo"))
+        }
+        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email, photo: "https://res.cloudinary.com/ddsxppshz/image/upload/v1594240360/DN-Wallet%20default%20pic/default_mquwcm.png"))
         self.originDataSource.append(newContact)
         self.addContact(newContact)
     }
@@ -336,6 +340,16 @@ extension MyContactsVC {
             }
         }
     }
-    
 }
-
+extension MyContactsVC: MyContactDelegate {
+    
+    func didAddNewContact(contact: CreateContactResponse) {
+        let newContact = Contact(_id: contact.id, userID: UserID(_id: contact.id, name: contact.name, email: contact.email, photo: "https://res.cloudinary.com/ddsxppshz/image/upload/v1594240360/DN-Wallet%20default%20pic/default_mquwcm.png"))
+        self.originDataSource.append(newContact)
+        self.currentDataSource.append(newContact)
+        DispatchQueue.main.async {
+            self.contactTable.alpha = 1.0
+            self.updateTableViewDataSource()
+        }
+    }
+}

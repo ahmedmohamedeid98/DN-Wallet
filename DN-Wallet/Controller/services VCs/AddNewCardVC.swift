@@ -50,10 +50,10 @@ class AddNewCardVC: UIViewController {
     }
     
     @objc func cardNumberFormate() {
-        if previousLocation == 3 || previousLocation == 10 || previousLocation == 17 {
-            cardNumberTextField.text = "\(previousTextFieldContent)\(nextTextFieldContent) - "
+        if previousLocation == 3 || previousLocation == 8 || previousLocation == 13 {
+            cardNumberTextField.text = "\(previousTextFieldContent)\(nextTextFieldContent) "
         }
-        if previousLocation == 24 {
+        if previousLocation == 18 {
             expireDateTextField.becomeFirstResponder()
         }
     }
@@ -79,12 +79,36 @@ class AddNewCardVC: UIViewController {
     
     @objc func addPaymentCardBtnPressed() {
         
-        //navBar.rightBtn.isEnabled = false
-        let alert = UIAlertController(title: K.alert.success, message: K.vc.addNewCardAlertMessage, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: K.alert.ok, style: .default, handler: nil)
-        alert.addAction(okAction)
-        
-        self.present(alert, animated: true, completion: nil)
+        let card = createCard()
+        Hud.showLoadingHud(onView: view, withLabel: "Adding...")
+        TransferManager.shared.addPaymentCard(withData: card) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.handelAddPaymentCardSuccessCase(message: res.success)
+                case .failure(let err):
+                    self.handelAddPaymentCardFailureCase(withError: err.localizedDescription)
+            }
+        }
+    }
+    
+    private func handelAddPaymentCardSuccessCase(message: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: message)
+    }
+    
+    private func handelAddPaymentCardFailureCase(withError err: String) {
+        self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: err)
+    }
+    
+    private func createCard() -> PostPaymentCard {
+        let expireDate  = expireDateTextField.text ?? "02 / 22"
+        let parts       = expireDate.split(separator: "/")
+        let expM        = String(parts[0]).replacingOccurrences(of: " ", with: "")
+        let expY        = "20\(String(parts[1]))".replacingOccurrences(of: " ", with: "")
+        let cardType    = cardNameTextField.text ?? ""
+        let cvc         = cvvTextField.text ?? ""
+        let cardNumber  = cardNumberTextField.text ?? ""
+        return PostPaymentCard(cardType: cardType.lowercased() , cardNumber: cardNumber.replacingOccurrences(of: " ", with: ""), cvc: cvc, expYear: expY, expMonth: expM)
     }
 }
 

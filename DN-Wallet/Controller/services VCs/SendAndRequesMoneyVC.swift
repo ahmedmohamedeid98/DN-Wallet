@@ -21,6 +21,7 @@ class SendAndRequestMoney: UIViewController {
     var isRequest: Bool = false
     // true if this viewController presented by Donation VC
     var presentFromDonationVC: Bool = false
+    var charityId: String?
     // true if this viewController presented by Contact VC
     var presentedFromMyContact: Bool = false
     // if this view Controller present by DonationVC or MyContactVC  these VCs will send an email of person or charity
@@ -30,6 +31,9 @@ class SendAndRequestMoney: UIViewController {
     // this properity just for prevent call this method everytime the email textField Change delegate function "textFieldDidChangeSelection"
     // and this delegate function call another function
     var startCheckForAnyChange: Bool = false
+    private lazy var myContactManager: MyContactManagerProtocol = MyContactManager()
+    weak var delegate: MyContactDelegate?
+    var selectedCurrencyCode: String = "EGP"
     
     @IBOutlet weak var segmentController: DNSegmentControl!
     @IBOutlet weak var emailTextField: UITextField!
@@ -134,17 +138,67 @@ class SendAndRequestMoney: UIViewController {
     @objc private func sendMonyOrRequest() {
         if  isValidInputs() {
             // start indicator loading...
+            Hud.showLoadingHud(onView: view, withLabel: "In Process...")
             if isRequest {
                 // request money
                 // end indicator loading...
-            } else {
-                // send money
-                // end indicator loading...
             }
-        } else {
-            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "missing inputs, try again.")
+            else {
+                if presentFromDonationVC { donate() }
+                else { send() }
+            }
+        }
+        else { self.presentDNAlertOnTheMainThread(title: "Failure", Message: "missing inputs, try again.") }
+    }
+    
+    func donate() {
+        let amount = amountTextField.text!
+        let code   = selectedCurrencyCode
+        TransferManager.shared.donate(withData: Transfer(amount: amount, currency_code: code), id: charityId!) { (result) in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.donateSuccessCase(msg: res.success)
+                case .failure(let err):
+                    self.donateFailureCase(msg: err.localizedDescription)
+            }
         }
     }
+    
+    private func donateSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func donateFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
+    func send() {
+        let amount = amountTextField.text!
+        let code   = selectedCurrencyCode
+        let email  = emailTextField.text!
+        
+        TransferManager.shared.transfer(withData: Transfer(amount: amount, currency_code: code), email: email) { (result) in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.sendSuccessCase(msg: res.success)
+                case .failure(let err):
+                    self.sendFailureCase(msg: err.localizedDescription)
+            }
+        }
+    }
+    
+    private func sendSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func sendFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
     // check if all the faild is filled and if the email is valid
     private func isValidInputs() -> Bool {
         return emailTextField.text != "" && emailTextField.text!.isValidEmail && amountTextField.text != "" && dropDown.text != ""
@@ -157,36 +211,32 @@ class SendAndRequestMoney: UIViewController {
     
     // add email to my contacts (also deak with api)
     @IBAction func addEmailToMyContacts(_ sender: UIButton) {
-        if emailTextField.text != "" && emailTextField.text!.isValidEmail {
-            // if email is already exist in the user contact list >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
-            if ["ahmed@gmail.com"].contains(emailTextField.text!) {
-                self.presentDNAlertOnForground(title: K.vc.myContactAlertEmailExist, Message: K.vc.myContactAlertEmailExistMsg)
-                self.toggleAddContactButton(toDone: true)
+        guard let email = emailTextField.text, !email.isEmpty else {
+            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "Email is Required.")
+            return
+        }
+        Hud.showLoadingHud(onView: self.view, withLabel: "Add Contact...")
+        self.myContactManager.addNewContact(withEmail: email) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let contact):
+                    self.configureAddingContactSuccessCase(withContact: contact)
+                case .failure(let err):
+                    self.configureAddingContactFailureCase(withError: err.localizedDescription)
             }
-                // if the email don't exist then add it and toggle addButton to done
-            else {
-                let alert = UIAlertController(title: K.vc.sORrAlertAddUsTitle, message: K.vc.sORrAlertAddUsMsg, preferredStyle: .alert)
-                let add = UIAlertAction(title: K.alert.add, style: .default) { (action) in
-                    // >>>>>>>>> Call Api to add >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> need to edit in future
-                    self.toggleAddContactButton(toDone: true)
-                    
-                }
-                let cancel = UIAlertAction(title: K.alert.cancel, style: .cancel, handler: nil)
-                alert.addTextField { (txt) in
-                    txt.placeholder = "\(self.emailTextField.text!.split(separator: "@")[0])"
-                    txt.basicConfigure()
-                }
-                alert.addAction(cancel)
-                alert.addAction(add)
-                present(alert, animated: true, completion: nil)
-            }
-            
-            
-            emailTextField.endEditing(true)
-        } else {
-            self.presentDNAlertOnForground(title: K.vc.sORrAlertInvalidEmail, Message: K.vc.sORrAlertInvalidEmailMsg)
+                
         }
     }
+    
+    private func configureAddingContactSuccessCase(withContact contact: CreateContactResponse) {
+        self.delegate?.didAddNewContact(contact: contact)
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: "Contact Added Successfully.")
+        self.toggleAddContactButton(toDone: true)
+    }
+    private func configureAddingContactFailureCase(withError err: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err)
+    }
+    
     /// change button image from addPerson to rightCheckMark and disable/enable it.
     func toggleAddContactButton(toDone: Bool) {
         if toDone {
@@ -201,7 +251,6 @@ class SendAndRequestMoney: UIViewController {
         }
         
     }
-    
 }
 
 extension SendAndRequestMoney: UITextViewDelegate {
@@ -216,6 +265,7 @@ extension SendAndRequestMoney: UITextViewDelegate {
 extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     func selectedItem(title: String, code: String?) {
         dropDown.text = title + "  [\(code ?? " ")]"
+        selectedCurrencyCode = code ?? "EGP"
     }
     
     

@@ -18,8 +18,8 @@ class BalanceCollectionCell: UICollectionViewCell {
     var data: Balance? = nil {
         didSet {
             guard let balance = data else { return }
-            amountLabel.text = balance.stringAmount(amount: balance.amount)
-            currencyCodeLabel.text = balance.currency
+            amountLabel.text = String(format: "%i.%02i", arguments: [Int(balance.amount) ?? 0, 0])//amount*100.truncatingRemainder(dividingBy: 100)
+            currencyCodeLabel.text = balance.currency_code
         }
     }
     
