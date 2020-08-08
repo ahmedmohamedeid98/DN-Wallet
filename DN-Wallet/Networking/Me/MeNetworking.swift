@@ -23,7 +23,7 @@ extension MeNetworking: TargetType {
         switch self {
             case .getMyBasicInfo:  return "/users/me"
             case .editAcount: return "/users/info"
-            case .getMyHistory: return "/history"
+            case .getMyHistory: return "/cards/history"
         }
     }
     

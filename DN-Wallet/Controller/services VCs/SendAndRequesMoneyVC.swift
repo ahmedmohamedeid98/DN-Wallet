@@ -145,14 +145,18 @@ class SendAndRequestMoney: UIViewController {
     /// change button image from addPerson to rightCheckMark and disable/enable it.
     func toggleAddContactButton(toDone: Bool) {
         if toDone {
+            DispatchQueue.main.async {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             self.addContactBtnOutlet.isUserInteractionEnabled = false
             emailTextField.endEditing(true)
             startCheckForAnyChange = true
+            }
         }else {
+            Dispatch.main.async {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
             self.addContactBtnOutlet.isUserInteractionEnabled = true
             startCheckForAnyChange = false
+            }
         }
         
     }

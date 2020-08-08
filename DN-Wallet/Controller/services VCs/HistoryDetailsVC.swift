@@ -22,7 +22,7 @@ class HistoryDetailsVC: UIViewController {
     
     func seperateData(_ data: [HistoryCategory]) {
         for item in data {
-            if item.innerCategory == 0 {
+            if item.inner_category == "1" {
                 firstSemgentData.append(item)
             }else{
                 secondSegmentData.append(item)
@@ -67,7 +67,9 @@ class HistoryDetailsVC: UIViewController {
         }
         setupTableView()
         setupLayout()
-        tableViewData = firstSemgentData
+        if !(navBarTitle == "DONATIONS") {
+            tableViewData = firstSemgentData
+        }
         
     }
     
@@ -141,7 +143,7 @@ extension HistoryDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryDetailsCell.reuseIdentifier, for: indexPath) as? HistoryDetailsCell else { return UITableViewCell() }
         let currentData = tableViewData[indexPath.row]
-        cell.configureCell(email: currentData.email , amount: "\(currentData.amount) \(currentData.currency)" , date: "\(currentData.date)")
+        cell.configureCell(email: currentData.email , amount: "\(currentData.amount) \(currentData.currencuy_code)" , date: "\(currentData.date)")
         return cell
     }
     

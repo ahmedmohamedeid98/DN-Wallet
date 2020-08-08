@@ -43,7 +43,7 @@ extension UIViewController {
 }
     
     func presentPopUpMenu(withCategory data: PopUpMenuDataSource, to vc: PopUpMenuDelegate) {
-        IQKeyboardManager.shared.enable = false
+        //IQKeyboardManager.shared.enable = false
         let viewController = PopUpMenu()
         viewController.menuDelegate = vc
         viewController.dataSource = data

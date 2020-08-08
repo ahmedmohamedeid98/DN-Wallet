@@ -22,7 +22,7 @@ struct K {
         static let myContactAlertAddMessage = "add new contact"
         static let myContactAlertEmailExist = "Email Exist"
         static let myContactAlertEmailExistMsg = "this email is already exist in your contacts"
-        static let myContactEditMsg = "Edite Contact"
+        static let myContactEditMsg = "Add Contact"
         static let myContactSearchBarPlaceholder = "Contact Username ..."
         static let exchangeCurrTitle = "Exchange Currency"
         static let exchangeCurrExchangeBtnTitle = "Exchange"

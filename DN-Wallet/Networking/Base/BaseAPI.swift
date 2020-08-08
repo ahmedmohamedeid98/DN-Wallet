@@ -77,17 +77,11 @@ class BaseAPI<T: TargetType> {
                     completion(.failure(invalidDataError))
                     return
                 }
-                
-                print("**************")
-                
+    
                 let stringData = String(data: safeData, encoding: .utf8)
-                print("StringData: \(stringData)")
-                
-                print("**************")
-                
+            
                 // Decode the json data into out responseClass
                 guard let result = try? JSONDecoder().decode(M.self, from: safeData) else {
-                    print("SafeData: \(safeData)")
                     completion(.failure(invalidDataError))
                     return
                 }

@@ -44,7 +44,7 @@ class TransferManager: BaseAPI<TransferNetworking> {
     }
     
     func donate(withData: Transfer, id: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
-        APIRequest(target: .transfer(withData, id), responseClass: SuccessResponse.self, completion: completion)
+        APIRequest(target: .donate(withData, id), responseClass: SuccessResponse.self, completion: completion)
     }
     
     func transfer(withData: Transfer, email: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
