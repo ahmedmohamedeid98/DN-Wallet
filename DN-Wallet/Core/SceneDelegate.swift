@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldPlayInputClicks = true
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        //IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
     
     func configureFirstLaunchCase(in windowScene: UIWindowScene) {

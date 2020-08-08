@@ -53,8 +53,9 @@ class HomeVC: UIViewController {
     
     @objc func updateBalance() {
         DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
                 self.loadUserBalances()
+                print("::::::Balance was updated.")
             }
         }
     }

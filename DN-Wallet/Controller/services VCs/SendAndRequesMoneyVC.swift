@@ -32,6 +32,7 @@ class SendAndRequestMoney: UIViewController {
     // and this delegate function call another function
     var startCheckForAnyChange: Bool = false
     private lazy var myContactManager: MyContactManagerProtocol = MyContactManager()
+    // this delegate handel add contact from this page to my contact list
     weak var delegate: MyContactDelegate?
     var selectedCurrencyCode: String = "EGP"
     
@@ -118,9 +119,6 @@ class SendAndRequestMoney: UIViewController {
         }
         self.isRequest = isRequest
     }
-    
-    //MARK:- Objc function
-    
     /// selector action: this method called when selected segment being changed
     @IBAction func segmentControllerValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -134,107 +132,14 @@ class SendAndRequestMoney: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // the important function which responsible to deal with the api
-    @objc private func sendMonyOrRequest() {
-        if  isValidInputs() {
-            // start indicator loading...
-            Hud.showLoadingHud(onView: view, withLabel: "In Process...")
-            if isRequest {
-                // request money
-                // end indicator loading...
-            }
-            else {
-                if presentFromDonationVC { donate() }
-                else { send() }
-            }
-        }
-        else { self.presentDNAlertOnTheMainThread(title: "Failure", Message: "missing inputs, try again.") }
-    }
-    
-    func donate() {
-        let amount = amountTextField.text!
-        let code   = selectedCurrencyCode
-        TransferManager.shared.donate(withData: Transfer(amount: amount, currency_code: code), id: charityId!) { (result) in
-            Hud.hide(after: 0)
-            switch result {
-                case .success(let res):
-                    self.donateSuccessCase(msg: res.success)
-                case .failure(let err):
-                    self.donateFailureCase(msg: err.localizedDescription)
-            }
-        }
-    }
-    
-    private func donateSuccessCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
-        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
-    }
-    
-    private func donateFailureCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
-    }
-    
-    func send() {
-        let amount = amountTextField.text!
-        let code   = selectedCurrencyCode
-        let email  = emailTextField.text!
-        
-        TransferManager.shared.transfer(withData: Transfer(amount: amount, currency_code: code), email: email) { (result) in
-            Hud.hide(after: 0)
-            switch result {
-                case .success(let res):
-                    self.sendSuccessCase(msg: res.success)
-                case .failure(let err):
-                    self.sendFailureCase(msg: err.localizedDescription)
-            }
-        }
-    }
-    
-    private func sendSuccessCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
-        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
-    }
-    
-    private func sendFailureCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
-    }
-    
     // check if all the faild is filled and if the email is valid
     private func isValidInputs() -> Bool {
-        return emailTextField.text != "" && emailTextField.text!.isValidEmail && amountTextField.text != "" && dropDown.text != ""
+        return emailTextField.text != "" && amountTextField.text != "" && dropDown.text != ""
     }
     
     // pop down keyboard when tap anyplace in the view
     @objc func hideKeyboard() {
         messageTextView.resignFirstResponder()
-    }
-    
-    // add email to my contacts (also deak with api)
-    @IBAction func addEmailToMyContacts(_ sender: UIButton) {
-        guard let email = emailTextField.text, !email.isEmpty else {
-            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "Email is Required.")
-            return
-        }
-        Hud.showLoadingHud(onView: self.view, withLabel: "Add Contact...")
-        self.myContactManager.addNewContact(withEmail: email) { result in
-            Hud.hide(after: 0)
-            switch result {
-                case .success(let contact):
-                    self.configureAddingContactSuccessCase(withContact: contact)
-                case .failure(let err):
-                    self.configureAddingContactFailureCase(withError: err.localizedDescription)
-            }
-                
-        }
-    }
-    
-    private func configureAddingContactSuccessCase(withContact contact: CreateContactResponse) {
-        self.delegate?.didAddNewContact(contact: contact)
-        self.presentDNAlertOnTheMainThread(title: "Success", Message: "Contact Added Successfully.")
-        self.toggleAddContactButton(toDone: true)
-    }
-    private func configureAddingContactFailureCase(withError err: String) {
-        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err)
     }
     
     /// change button image from addPerson to rightCheckMark and disable/enable it.
@@ -253,6 +158,7 @@ class SendAndRequestMoney: UIViewController {
     }
 }
 
+ //MARK:- TextView Delegate
 extension SendAndRequestMoney: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if messageTextViewFirstEditing {
@@ -262,6 +168,8 @@ extension SendAndRequestMoney: UITextViewDelegate {
         }
     }
 }
+
+//MARK:- TextField Delegate
 extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
     func selectedItem(title: String, code: String?) {
         dropDown.text = title + "  [\(code ?? " ")]"
@@ -294,19 +202,109 @@ extension SendAndRequestMoney: UITextFieldDelegate, PopUpMenuDelegate{
             self.presentPopUpMenu(withCategory: .currency, to: self)
             textField.endEditing(true)
         }
-        
     }
 }
 
 extension SendAndRequestMoney: DNSegmentControlDelegate {
     func segmentValueChanged(to index: Int) {
-        if index == 0 {
-            print("send money")
-        } else {
-            print("request mony")
+        isRequest = index == 1 ? true: false
+    }
+}
+
+//MARK:- Networking
+extension SendAndRequestMoney {
+    // Button
+    @objc private func sendMonyOrRequest() {
+        if  isValidInputs() {
+            // start indicator loading...
+            Hud.showLoadingHud(onView: view, withLabel: "In Process...")
+            if isRequest {
+                // request money
+                // end indicator loading...
+            }
+            else {
+                if presentFromDonationVC { donate() }
+                else { send() }
+            }
         }
-        
+        else { self.presentDNAlertOnTheMainThread(title: "Failure", Message: "missing inputs, try again.") }
     }
     
+    // Donate method
+    func donate() {
+        let amount = amountTextField.text!
+        let code   = selectedCurrencyCode
+        TransferManager.shared.donate(withData: Transfer(amount: amount, currency_code: code), id: charityId!) { (result) in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.donateSuccessCase(msg: res.success)
+                case .failure(let err):
+                    self.donateFailureCase(msg: err.localizedDescription)
+            }
+        }
+    }
     
+    private func donateSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func donateFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
+    // Send Method
+    func send() {
+        let amount = amountTextField.text!
+        let code   = selectedCurrencyCode
+        let email  = emailTextField.text!
+        
+        TransferManager.shared.transfer(withData: Transfer(amount: amount, currency_code: code), email: email) { (result) in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.sendSuccessCase(msg: res.success)
+                case .failure(let err):
+                    self.sendFailureCase(msg: err.localizedDescription)
+            }
+        }
+    }
+    
+    private func sendSuccessCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    private func sendFailureCase(msg: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
+    // add email to my contacts (also deak with api)
+    @IBAction func addEmailToMyContacts(_ sender: UIButton) {
+        guard let email = emailTextField.text, !email.isEmpty else {
+            self.presentDNAlertOnTheMainThread(title: "Failure", Message: "Email is Required.")
+            return
+        }
+        Hud.showLoadingHud(onView: self.view, withLabel: "Add Contact...")
+        self.myContactManager.addNewContact(withEmail: email) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let contact):
+                    self.configureAddingContactSuccessCase(withContact: contact)
+                case .failure(let err):
+                    self.configureAddingContactFailureCase(withError: err.localizedDescription)
+            }
+                
+        }
+    }
+    
+    private func configureAddingContactSuccessCase(withContact contact: CreateContactResponse) {
+        self.delegate?.didAddNewContact(contact: contact)
+        self.presentDNAlertOnTheMainThread(title: "Success", Message: "Contact Added Successfully.")
+        self.toggleAddContactButton(toDone: true)
+    }
+    private func configureAddingContactFailureCase(withError err: String) {
+        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err)
+    }
 }
