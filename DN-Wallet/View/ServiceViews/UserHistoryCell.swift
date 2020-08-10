@@ -53,10 +53,10 @@ class UserHistoryCell: UICollectionViewCell {
         }
     }
     
-    var transactionAmount: Double? = nil {
+    var transactionAmount: Int? = nil {
         didSet {
             guard let amount = transactionAmount else { return }
-            self.transactionAmountLabel.text = "\(amount)$"//String(format: "%i.%02$", arguments: [amount])
+            self.transactionAmountLabel.text = "\(amount).00 EGP"//String(format: "%i.%02$", arguments: [amount])
         }
     }
     

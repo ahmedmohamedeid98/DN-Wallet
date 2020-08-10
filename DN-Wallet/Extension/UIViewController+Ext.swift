@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IQKeyboardManagerSwift
 
 extension UIViewController {
     
@@ -42,6 +43,7 @@ extension UIViewController {
 }
     
     func presentPopUpMenu(withCategory data: PopUpMenuDataSource, to vc: PopUpMenuDelegate) {
+        //IQKeyboardManager.shared.enable = false
         let viewController = PopUpMenu()
         viewController.menuDelegate = vc
         viewController.dataSource = data
@@ -57,12 +59,23 @@ extension UIViewController {
             self.present(alert, animated: true)
         }
     }
+    
+    func presentAlertOnTheMainThread(title: String?, Message msg: String, buttonTitle: String = "OK") {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+            let cancel = UIAlertAction(title: buttonTitle, style: .cancel)
+            alert.addAction(cancel)
+            self.present(alert, animated: true)
+        }
+    }
+    
     func presentDNAlertOnForground(title: String?, Message msg: String, buttonTitle: String = "OK") {
         let alert = DNAlertVC(title: title ?? "", message: msg, buttonTitle: buttonTitle)
         alert.modalPresentationStyle = .overFullScreen
         alert.modalTransitionStyle   = .crossDissolve
         self.present(alert, animated: true)
     }
+    
     func showEmptyStateView(withMessage message: String, completion: @escaping(UIView) -> ()) {
         DispatchQueue.main.async {
             let emptyStateView      = DNEmptyStateView(message: message)

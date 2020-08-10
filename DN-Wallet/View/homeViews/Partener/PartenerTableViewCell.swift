@@ -82,7 +82,7 @@ class PartenerTableViewCell: UITableViewCell {
     func startTimer() {
         if itemCount > 0 {
             DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
+                self.timer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
             }
         }
         
@@ -97,11 +97,11 @@ class PartenerTableViewCell: UITableViewCell {
     // timer's action
     @objc func slideShow() {
            if counter < itemCount {
-               slideToItemAt(counter)
+            DispatchQueue.main.async { self.slideToItemAt(self.counter) }
                counter += 1
            }else {
                counter = 0
-               slideToItemAt(counter, animate: false)
+            DispatchQueue.main.async { self.slideToItemAt(self.counter, animate: false) }
                counter = 1
            }
        }

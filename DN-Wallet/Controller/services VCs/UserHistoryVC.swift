@@ -11,23 +11,11 @@ import UIKit
 
 class UserHistoryVC: UIViewController {
     
-    //TEST TEST TEST
-    var hh: [HistoryCategory] =
-    [
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 0, innerCategory: 0),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 0, innerCategory: 0),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 1, innerCategory: 1),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "XCN", date: "25-7-23 8:06", category: 0, innerCategory: 1),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "USD", date: "25-7-23 8:06", category: 1, innerCategory: 1),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0),
-    HistoryCategory(email: "ahmed@gmail.com", amount: 25, currency: "EGP", date: "25-7-23 8:06", category: 2, innerCategory: 0)
-    ]
     var consumData = [HistoryCategory]()
     var reciveData = [HistoryCategory]()
     var donationData = [HistoryCategory]()
-    
-    // ============== TEST TEST ===========
+    var data: History?
+    lazy var meManager: MeManagerProtocol = MeManager()
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextButton: UIButton!
@@ -40,7 +28,7 @@ class UserHistoryVC: UIViewController {
         configureNextButton()
         configureCollectionView()
         setupNavigationBar()
-        
+        loadData()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -103,7 +91,13 @@ extension UserHistoryVC: UICollectionViewDataSource, UICollectionViewDelegateFlo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserHistoryCell.identifier, for: indexPath) as? UserHistoryCell else { return UICollectionViewCell() }
         let section = UserHistorySections(rawValue: indexPath.row)
         cell.data = section
-        cell.transactionAmount = 2500.451
+        if let _data = data {
+            if indexPath.row == 0 {         cell.transactionAmount = _data.consumption }
+            else if indexPath.row == 1 {    cell.transactionAmount = _data.recevie }
+            else {                          cell.transactionAmount = _data.donate }
+        } else {
+            cell.transactionAmount = 0
+        }
         cell.delegate = self
         return cell
     }
@@ -137,4 +131,36 @@ extension UserHistoryVC: UserHistoryCellProtocol {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+//MARK:- Networking
+extension UserHistoryVC {
     
+    func loadData() {
+        meManager.getMyHisory { result in
+            switch result {
+                case .success(let data):
+                    self.historySuccess(data: data)
+                case .failure(let err):
+                    self.historyFailure(err: err.localizedDescription)
+            }
+        }
+    }
+    
+    private func historySuccess(data: History) {
+        self.data = data
+        DispatchQueue.main.async { self.collectionView.reloadData() }
+        
+        for item in data.result {
+            if item.category == "1" {
+                consumData.append(item)
+            } else if item.category == "2" {
+                reciveData.append(item)
+            } else {
+                donationData.append(item)
+            }
+        }
+    }
+    
+    private func historyFailure(err: String) {
+        print("filuew: \(err)")
+    }
+}

@@ -14,25 +14,44 @@ struct AccountInfo: Codable {
 }
 
 struct Balance: Codable {
-    let id: String
-    let amount: Double
-    let currency: String
-    
-    func stringAmount(amount: Double) -> String {
-        return String(format: "%i.%02i", arguments: [Int(amount), amount*100.truncatingRemainder(dividingBy: 100)])
-    }
+    let amount: String
+    let currency_code: String
 }
 
-struct CardInfo: Codable, Hashable {
-    let id : String
-    let name: String
-    let type: String
-    let last4digits: String
+struct PostPaymentCard: Codable {
+    let cardType: String
+    let cardNumber: String
+    let cvc: String
+    let expYear: String
+    let expMonth: String
+}
+
+struct GetPaymentCards: Codable, Hashable {
+    let _id: String
+    let cardID: CardInfo
     
     func hash(into hasher: inout Hasher) {
-        return hasher.combine(self.id)
+        return hasher.combine(self._id)
     }
 }
+struct CardInfo: Codable, Hashable {
+    let _id : String
+    let cardType: String
+    let last4Num: String
+}
+/*
+ {
+     "amount": 500,
+     "currency_code" : "EGP"
+ }
+ **/
+
+struct Transfer: Codable {
+    let amount: String
+    let currency_code: String
+}
+
+
 
 struct UserInfo: Codable {
     let gender: String?

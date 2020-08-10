@@ -52,6 +52,7 @@ class DonationDetailsVC: UIViewController {
         vc.presentFromDonationVC = true
         vc.presentedEmail = data?.email ?? "Not valid email, Try Again"
         vc.modalPresentationStyle = .fullScreen
+        vc.charityId = charityID
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -173,8 +174,8 @@ extension DonationDetailsVC {
         self.data = data
         DispatchQueue.main.async {
             let initialLocation = CLLocation(latitude: data.location.lat, longitude: data.location.lan)
-            self.mapView.centerToLocation(initialLocation, regionReduis: 10000)
             self.mapView.setMapZoomAndBoundryRange(center: initialLocation, distance: 60000)
+            self.mapView.centerToLocation(initialLocation, regionReduis: 1000)
             self.addMapViewAnnotaton(at: initialLocation, title: data.name, subtitle: data.phone)
             self.charityTable.alpha = 1.0
             self.charityTable.reloadData()

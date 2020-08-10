@@ -22,19 +22,6 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let now = Date()
-//        print("now: \(now)")
-//        let soon = Date().addingTimeInterval(12 * 60 * 60)
-//        let StringSoon = soon.convertDateToString()
-//        print("string date: \(StringSoon)")
-//        let dateFromString = StringSoon.convertStringToDate()
-//        print("date string: \(dateFromString)")
-//        print(now == dateFromString)
-//        print(now > dateFromString!)
-//        print(now < dateFromString!)
-        
-        
         // add both email & password textFiled
         auth = UserAuth()
         initView()
@@ -68,7 +55,7 @@ class SignInVC: UIViewController {
                     case .success(_):
                         self.navigateToHomeController()
                     case .failure(let err):
-                        self.presentDNAlertOnTheMainThread(title: "Failure", Message: err.localizedDescription)
+                        self.presentDNAlertOnTheMainThread(title: "Biometric Auth", Message: err.localizedDescription)
                 }
             }
     }

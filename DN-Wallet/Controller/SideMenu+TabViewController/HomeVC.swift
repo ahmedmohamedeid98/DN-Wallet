@@ -18,7 +18,7 @@ enum Section: CaseIterable {
 class HomeVC: UIViewController {
     
     // Data TEST
-    var balance: [Balance] = [Balance(id: "sd", amount: 2500.0, currency: "USD"), Balance(id: "sd", amount: 240.00, currency: "EGP"), Balance(id: "sd", amount: 200.00, currency: "EUR"), Balance(id: "sd", amount: 245.00, currency: "KWD")]
+    var balance: [Balance] = []
     var parteners: [Partener] = [
         Partener(imageName: "test_image1", title: "Uber"),
         Partener(imageName: "test_image2", title: "Makdonse"),
@@ -38,26 +38,44 @@ class HomeVC: UIViewController {
     private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
-   
+    var completeUpdateAlert = DNWordAlert(message: "Balance Updated.")
+    let documentFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Balance.plist")
+    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         checkAccountActiveStatus()
-        //loadData()
+        loadUserBalances()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalance), name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    
+    @objc func updateBalance() {
+        DispatchQueue.main.async {
+            Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
+                self.loadUserBalances()
+                print("::::::Balance was updated.")
+            }
+        }
+    }
+    
+    // TEST TEST 
+    func addDNWordAlert() {
+        completeUpdateAlert.isHidden = true
+        view.addSubview(completeUpdateAlert)
+        completeUpdateAlert.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 200, height: 60))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
-        print("Home willAppear")
         startTimer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("Home willDisappear")
         stopTimer()
     }
  
@@ -231,17 +249,36 @@ extension HomeVC {
     }
     
     
-    private func loadUserBalances() {
-        // ...
+    func loadUserBalances() {
+        print("load balance...")
+        TransferManager.shared.getUserBalace { (result) in
+            switch result {
+                case .success(let data):
+                    self.handleGetUserBalanceSuccessCase(withData: data)
+                case .failure(let err):
+                    self.handleGetUserBalanceFailureCase(withError: err.localizedDescription)
+            }
+        }
     }
     
-    private func handleGetUserBalanceSuccessCase(withData data: AccountInfo) {
-        
-        // ...
+    private func handleGetUserBalanceSuccessCase(withData data: [Balance]) {
+        self.balance = data
+        prepareDataForPay(balance: data)
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
     private func handleGetUserBalanceFailureCase(withError error: String) {
-        // ...
+        print("Failure Get Balance: \(error)")
+    }
+    
+    private func prepareDataForPay(balance: [Balance]) {
+        let coder = PropertyListEncoder()
+        do {
+            let data = try coder.encode(balance)
+            try data.write(to: documentFilePath!)
+        } catch {
+            print("Error to write balabce")
+        }
     }
     
     private func checkAccountActiveStatus() {

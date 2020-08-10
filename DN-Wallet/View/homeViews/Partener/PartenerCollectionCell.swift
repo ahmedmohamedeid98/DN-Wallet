@@ -13,9 +13,9 @@ class PartenerCollectionCell: UICollectionViewCell {
     static let identifier = "PartenerCollectionCell"
     var imageView: UIImageView = {
         let imgView = UIImageView()
-        imgView.contentMode = .scaleAspectFill
+        imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
-        imgView.backgroundColor = .red
+        imgView.backgroundColor = .white
         return imgView
     }()
     
