@@ -148,14 +148,14 @@ class SendAndRequestMoney: UIViewController {
             DispatchQueue.main.async {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             self.addContactBtnOutlet.isUserInteractionEnabled = false
-            emailTextField.endEditing(true)
-            startCheckForAnyChange = true
+                self.emailTextField.endEditing(true)
+                self.startCheckForAnyChange = true
             }
         }else {
-            Dispatch.main.async {
+            DispatchQueue.main.async {
             self.addContactBtnOutlet.setImage(UIImage(systemName: "person.crop.circle.fill.badge.plus"), for: .normal)
             self.addContactBtnOutlet.isUserInteractionEnabled = true
-            startCheckForAnyChange = false
+                self.startCheckForAnyChange = false
             }
         }
         
