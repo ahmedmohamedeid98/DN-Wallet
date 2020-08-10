@@ -15,7 +15,7 @@ class PayVC: UIViewController {
     private var actualBalance: Balance?
     // this value come from ContainerVC
     var userBalance: [Balance] = []
-    
+    let documentFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Balance.plist")
     //MARK:- Outlets
     @IBOutlet weak var dropDown: UITextField!
     @IBOutlet weak var conditionLabel: UILabel!
@@ -44,7 +44,7 @@ class PayVC: UIViewController {
     var oldValue_one: Double = 0
     var oldValue_five: Double = 0
     var oldValue_ten: Double = 0
-    //MARK:- Properities
+    var currency_code: String?
     
     
     //MARK:- Initialization
@@ -60,14 +60,24 @@ class PayVC: UIViewController {
         handleNavigationBar()
         handelPopUpTextField()
         dropDown.doNotShowTheKeyboard()
+        loadBalanceData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if auth.isAppInSafeMode {
-            _ = auth.checkIfAppOutTheSafeMode()
-            print("app in safe mode")
+        auth.checkIfAppOutTheSafeMode()
+    }
+    
+    func loadBalanceData() {
+        do {
+            let decoder = PropertyListDecoder()
+            let data = try Data(contentsOf: documentFilePath!)
+            let balance = try decoder.decode([Balance].self, from: data)
+            self.userBalance = balance
+        } catch {
+            
         }
+        
     }
     
     func handleNavigationBar() {
@@ -88,56 +98,26 @@ class PayVC: UIViewController {
     
     @objc func ScanButtonPressed() {
         view.endEditing(true)
-        if let amount = amountField.text, let currency = dropDown.text {
-            let enteredBalance = Balance(amount: amount, currency_code: currency)
-            if self.isValidAmount(balance: enteredBalance) {
-                // if the app in safe mode the update allowed amount
-                if auth.isAppInSafeMode {
-                    auth.allowedAmountInSafeMode = auth.allowedAmountInSafeMode - (Int(enteredBalance.amount) ?? 0)
-                }
-                preformScanOperation(with: enteredBalance)
-            } else {
-                let message: String
-                if auth.isAppInSafeMode {
-                    message = "Entered amount (\(amount)) greater than remaining allowed amount in safeMode (\(auth.allowedAmountInSafeMode))"
-                } else {
-                    if let balance = actualBalance {
-                        message = "Entered amount (\(amount)) greater than your balace amount (\(balance.amount)  \(balance.currency_code)"
-                    } else {
-                        message = "something was wrong please try again"
-                    }
-                }
-                // alert
-                self.presentDNAlertOnTheMainThread(title: K.alert.faild, Message: message)
-            }
-            amountValue = 0.0
-            amountField.text = ""
-            
+        let balanceChecker = BalancePro(userBalance: self.userBalance)
+        if balanceChecker.canMakeTransactionOn(amount: amountField.text, code: currency_code) {
+            preformScanOperation(with: balanceChecker.balance)
+        } else {
+            presentAlertOnTheMainThread(title: "Failure", Message: balanceChecker.errorMessage!)
         }
+        amountValue = 0.0
+        amountField.text = ""
     }
     
-    private func isValidAmount(balance: Balance) -> Bool {
-        
-        if auth.isAppInSafeMode {
-            return Int(balance.amount) ?? 0 <= auth.allowedAmountInSafeMode
-        } else {
-            let actualBalances = userBalance.filter { $0.currency_code == balance.currency_code }
-            actualBalance = actualBalances.first
-            if let safeActualBalance = actualBalance {
-                return balance.amount <= safeActualBalance.amount
-            }
-            return false
-        }
-    }
     
     private func preformScanOperation(with balance: Balance) {
-        print("preform scan operation")
+        let vc = QRScannerVC()
+        vc.balance = balance
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func handelPopUpTextField() {
         dropDown.delegate = self
         dropDown.placeholder = "select currency"
-        //dropDown.text = UserPreference.getStringValue(withKey: UserPreference.currencyKey)
     }
     
     @IBAction func Stepper_one(_ sender: UIStepper) {
@@ -175,6 +155,7 @@ class PayVC: UIViewController {
 extension PayVC: UITextFieldDelegate, PopUpMenuDelegate {
     func selectedItem(title: String, code: String?) {
         dropDown.text = title + "  [\(code ?? " ")]"
+        self.currency_code = code
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -196,10 +177,5 @@ extension PayVC: UITextFieldDelegate, PopUpMenuDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-       // key
     }
 }

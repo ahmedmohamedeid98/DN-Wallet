@@ -39,7 +39,8 @@ class HomeVC: UIViewController {
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
     var completeUpdateAlert = DNWordAlert(message: "Balance Updated.")
-   
+    let documentFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Balance.plist")
+    
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -262,11 +263,22 @@ extension HomeVC {
     
     private func handleGetUserBalanceSuccessCase(withData data: [Balance]) {
         self.balance = data
+        prepareDataForPay(balance: data)
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
     private func handleGetUserBalanceFailureCase(withError error: String) {
         print("Failure Get Balance: \(error)")
+    }
+    
+    private func prepareDataForPay(balance: [Balance]) {
+        let coder = PropertyListEncoder()
+        do {
+            let data = try coder.encode(balance)
+            try data.write(to: documentFilePath!)
+        } catch {
+            print("Error to write balabce")
+        }
     }
     
     private func checkAccountActiveStatus() {

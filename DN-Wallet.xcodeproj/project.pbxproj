@@ -40,6 +40,7 @@
 		0449A5F92498B55300E6BF35 /* BalanceCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */; };
 		0449A5FC2498B5B900E6BF35 /* PartenerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */; };
 		0449A6002498B5F100E6BF35 /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */; };
+		045600C124E1E10D000C4CA0 /* BalancePro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045600C024E1E10D000C4CA0 /* BalancePro.swift */; };
 		0456642724AF43DC00A970C9 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642524AF43DC00A970C9 /* TargetType.swift */; };
 		0456642824AF43DC00A970C9 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642624AF43DC00A970C9 /* BaseAPI.swift */; };
 		0456642A24AF4C5600A970C9 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456642924AF4C5600A970C9 /* UserAuth.swift */; };
@@ -181,6 +182,7 @@
 		0449A5F72498B55300E6BF35 /* BalanceCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceCollectionCell.xib; sourceTree = "<group>"; };
 		0449A5FA2498B5B900E6BF35 /* PartenerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartenerTableViewCell.swift; sourceTree = "<group>"; };
 		0449A5FE2498B5F000E6BF35 /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
+		045600C024E1E10D000C4CA0 /* BalancePro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalancePro.swift; sourceTree = "<group>"; };
 		0456642524AF43DC00A970C9 /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		0456642624AF43DC00A970C9 /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		0456642924AF4C5600A970C9 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				04792AF4240B1F0100F781D8 /* ChargeVC.swift */,
 				043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */,
 				0401BBD2247C7493000C597A /* NotificationVC.swift */,
+				045600C024E1E10D000C4CA0 /* BalancePro.swift */,
 			);
 			path = "SideMenu+TabViewController";
 			sourceTree = "<group>";
@@ -1060,6 +1063,7 @@
 				0465C6CA2421A0F10032506D /* MyContactsVC.swift in Sources */,
 				0449A5F82498B55300E6BF35 /* BalanceCollectionCell.swift in Sources */,
 				047040C82420488D00BBAAF5 /* AddNewCardVC.swift in Sources */,
+				045600C124E1E10D000C4CA0 /* BalancePro.swift in Sources */,
 				045A2FB6241C061300A0C643 /* Utilities.swift in Sources */,
 				049D1DFB241A7C02003DF669 /* DNPasswordContainer.swift in Sources */,
 				04AACF5824B212AD003CF758 /* VerifyNetworking.swift in Sources */,

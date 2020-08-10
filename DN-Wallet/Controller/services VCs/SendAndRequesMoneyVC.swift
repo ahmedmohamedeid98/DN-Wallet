@@ -276,12 +276,12 @@ extension SendAndRequestMoney {
     }
     
     private func sendSuccessCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        self.presentAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
         NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
     }
     
     private func sendFailureCase(msg: String) {
-        self.presentDNAlertOnTheMainThread(title: "Failure", Message: msg)
+        self.presentAlertOnTheMainThread(title: "Failure", Message: msg)
     }
     
     // add email to my contacts (also deak with api)

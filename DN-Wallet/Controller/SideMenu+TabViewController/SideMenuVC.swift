@@ -23,7 +23,6 @@ class SideMenuVC: UIViewController {
     // network instance
     private lazy var auth: UserAuthProtocol = UserAuth()
     
-    
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,26 +34,25 @@ class SideMenuVC: UIViewController {
         configureLogoutButton()
         configureSettingButton()
         setupLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        isAppInSafeMode()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(isAppInSafeMode), name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkIfAppOutTheSafeMode), name: NSNotification.Name.init(rawValue: "CHECK_APP_OUT_SAFE_MODE"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "CHECK_APP_OUT_SAFE_MODE"), object: nil)
     }
     
+    @objc func checkIfAppOutTheSafeMode() {
+        _ = auth.checkIfAppOutTheSafeMode()
+    }
     
     @objc func isAppInSafeMode() {
         isInSafeMode = auth.isAppInSafeMode
         activeSettingButton(isInSafeMode) // deactive setting button if the app in safeMode else otherwise.
-        if isInSafeMode {
-            _ = auth.checkIfAppOutTheSafeMode()
-            serviceTable.reloadData() }
+        serviceTable.reloadData()
     }
     
 
