@@ -19,6 +19,8 @@ class ExchangeCurrencyVC: UIViewController {
     @IBOutlet weak var calculateBtnOutlet: UIButton!
     @IBOutlet weak var exchangeBtnOutlet: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
+    private var curr1: String?
+    private var curr2: String?
 
     private var isDataForFromCurrencyTextField: Bool = false
     //MARK:- Init
@@ -61,7 +63,9 @@ class ExchangeCurrencyVC: UIViewController {
     }
     
     @IBAction func exchangeButtonAction(_ sender: UIButton) {
+        exchange()
     }
+    
 }
 
 extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {
@@ -73,9 +77,11 @@ extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {
             fromCurrencyTextField.text = value
             fromCurrencyTextField.endEditing(true)
             isDataForFromCurrencyTextField = false
+            curr1 = code
         } else {
             toCurrencyTextField.text = value
             toCurrencyTextField.endEditing(true)
+            curr2 = code
         }
         
     }
@@ -83,5 +89,48 @@ extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == fromCurrencyTextField { isDataForFromCurrencyTextField = true }
         self.presentPopUpMenu(withCategory: .currency, to: self)
+    }
+}
+
+//MARK:- Networking
+extension ExchangeCurrencyVC {
+    
+    private func exchange() {
+        validateInput()
+        Hud.showLoadingHud(onView: view, withLabel: "exchanging...")
+        TransferManager.shared.exchange(amount: Int(amountTextField.text!) ?? 0 , from: curr1!, to: curr2!) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res):
+                    self.exchangeSuccess(msg: res.success)
+                case .failure(let err):
+                    self.exchangeFailure(msg: err.localizedDescription)
+            }
+        }
+    }
+    
+    private func exchangeSuccess(msg: String) {
+        self.presentAlertOnTheMainThread(title: "Success", Message: msg + ", your request may take from 10 - 30 seconds to confirmed.")
+        NotificationCenter.default.post(name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+    }
+    private func exchangeFailure(msg: String) {
+        self.presentAlertOnTheMainThread(title: "Failure", Message: msg)
+    }
+    
+    func validateInput() {
+        guard let code1 = curr1, !code1.isEmpty else {
+            presentAlertOnTheMainThread(title: "Required", Message: "Enter the first currency. and Try again.")
+            return
+        }
+        
+        guard let code2 = curr2, !code2.isEmpty else {
+            presentAlertOnTheMainThread(title: "Required", Message: "Enter the second currency. and Try again.")
+            return
+        }
+        
+        guard let amount = amountTextField.text, !amount.isEmpty else {
+            presentAlertOnTheMainThread(title: "Required", Message: "Amount is required. Try again")
+            return
+        }
     }
 }
