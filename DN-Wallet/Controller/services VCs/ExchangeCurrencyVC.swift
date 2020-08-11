@@ -65,7 +65,7 @@ class ExchangeCurrencyVC: UIViewController {
     @IBAction func exchangeButtonAction(_ sender: UIButton) {
         exchange()
     }
-    
+
 }
 
 extension ExchangeCurrencyVC: UITextFieldDelegate, PopUpMenuDelegate {

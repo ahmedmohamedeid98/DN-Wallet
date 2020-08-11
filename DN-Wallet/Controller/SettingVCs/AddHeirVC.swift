@@ -11,7 +11,7 @@ import UIKit
 class AddHeirVC: UIViewController {
 
     //MARK:- Properities
-    var data = [Heirs]()
+    var data = [getHeir]()
     private let infoTextView        = DNTextView(text: K.vc.heirMessage, alignment: .center, fontSize: 14, editable: false)
     private let firstHeir           = DNTextField(placeholder: "Add first heir")
     private let firstPrecentage     = DNTitleLabel(textAlignment: .center, fontSize: 14)
@@ -22,12 +22,13 @@ class AddHeirVC: UIViewController {
     private var sliderStack: UIStackView!
     private var slider: UISlider!
     private var rightBarBtn: UIBarButtonItem!
+    private lazy var me :MeManagerProtocol = MeManager()
     
     //MARK:- Init
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .DnVcBackgroundColor
-        rightBarBtn = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(UpdateBtnPressed))
+        rightBarBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(UpdateBtnPressed))
         rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
         
@@ -35,12 +36,17 @@ class AddHeirVC: UIViewController {
         setupLayout()
         
         if data.count > 0 {
-            let currentValue = Int(data[0].precent)
+            let currentValue = data[0].heir1Precentage
             self.firstPrecentage.text = "\(currentValue) %"
             self.secondPrecentage.text = "\(100 - currentValue) %"
         }
         configureFirstHierTextField()
         configureSecondHeirTextField()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
     }
     
     //handle status bar style
@@ -51,7 +57,11 @@ class AddHeirVC: UIViewController {
     
     //MARK:- Configure views
     @objc func UpdateBtnPressed() {
-        // call a API Data function which post new updates
+        if data.count == 0 {
+            addHier()
+        } else {
+            updateHeirs()
+        }
     }
     
     private func configureSecondHeirTextField() {
@@ -84,7 +94,7 @@ class AddHeirVC: UIViewController {
         slider                          = UISlider()
         slider.minimumValue             = 0
         slider.maximumValue             = 100
-        slider.value                    = data.count > 0 ? data[0].precent : 100
+        slider.value                    = 0
         slider.minimumTrackTintColor    = .DnColor
         slider.maximumTrackTintColor    = .DnDarkBlue
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
@@ -104,7 +114,6 @@ class AddHeirVC: UIViewController {
         
         sliderStack = UIStackView(arrangedSubviews: [firstLabel, firstPrecentage, slider, secondPrecentage, secondLabel])
         sliderStack.configureStack(axis: .horizontal, distribution: .fill, alignment: .fill, space: 8)
-        //slider.DNLayoutConstraint(size: CGSize(width: view.frame.width / 2 - 20, height: 0))
         
         let Vstack = UIStackView(arrangedSubviews: [firstHeir, sliderStack, secondHeir])
         Vstack.configureStack(axis: .vertical, distribution: .fillEqually, alignment: .fill, space: 10)
@@ -118,26 +127,73 @@ class AddHeirVC: UIViewController {
 }
 //MARK:- Networking
 extension AddHeirVC {
-    func loadData() {
-        /*
-        Hud.showLoadingHud(onView: view)
-        NetworkManager.getUserHeirs { (result) in
+    private func loadData() {
+        Hud.showLoadingHud(onView: view, withLabel: "Get Heirs...")
+        me.getMyHeirs { result in
+            Hud.hide(after: 0)
             switch result {
-                case .success(_):
-                    self.configureNetworkingSuccessCase(withData: [])
-                case .failure(_):
-                    self.configureNetworkingFailureCase(withError: "No Hiers Found")
+                case .success(let res): self.configureSuccessCase(data: res)
+                case .failure(let err): self.configureGeneralFailureCase(msg: err.localizedDescription)
             }
         }
- */
     }
     
-    private func configureNetworkingSuccessCase(withData data: [Heirs]) {
-        Hud.hide(after: 0.5)
+    private func addHier() {
+        guard validInput() else { return }
+        print("after validate....add")
+        Hud.showLoadingHud(onView: view, withLabel: "Adding...")
+        me.addHeir(heir: PostHeir(first_heir: firstHeir.text!, second_heir: secondHeir.text!, precentage: Int(slider.value))) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res): self.configureGeneralSuccessCase(msg: res.success)
+                case .failure(let err): self.configureGeneralFailureCase(msg: err.localizedDescription)
+            }
+        }
     }
     
-    private func configureNetworkingFailureCase(withError error: String) {
-        Hud.faildAndHide(withMessage: error)
+    private func updateHeirs() {
+        guard validInput() else { return }
+        print("after validate....update")
+        Hud.showLoadingHud(onView: view, withLabel: "Updating...")
+        me.updateHeir(heir: PostHeir(first_heir: firstHeir.text!, second_heir: secondHeir.text!, precentage: Int(slider.value))) { result in
+            Hud.hide(after: 0)
+            switch result {
+                case .success(let res): self.configureGeneralSuccessCase(msg: res.success)
+                case .failure(let err): self.configureGeneralFailureCase(msg: err.localizedDescription)
+            }
+        }
+    }
+    
+    func validInput() -> Bool {
+        guard let first = firstHeir.text, !first.isEmpty else {
+            presentAlertOnTheMainThread(title: "Required", Message: "Adding first heir is required. Try again")
+            return false
+        }
+        
+        guard let second = secondHeir.text, !second.isEmpty else {
+            presentAlertOnTheMainThread(title: "Required", Message: "Adding second heir is required. Try again")
+            return false
+        }
+        
+        return true
+    }
+    
+    private func configureSuccessCase(data: [getHeir]) {
+        self.data = data
+        guard let safeData = data.first else { return }
+        DispatchQueue.main.async {
+            self.firstHeir.text = safeData.heir1
+            self.secondHeir.text = safeData.heir2
+            self.slider.value = Float(safeData.heir1Precentage)
+        }
+    }
+    
+    private func configureGeneralSuccessCase(msg: String) {
+        presentAlertOnTheMainThread(title: "Success", Message: msg)
+    }
+    
+    private func configureGeneralFailureCase(msg: String) {
+        presentAlertOnTheMainThread(title: "Failure", Message: msg)
     }
 }
 
