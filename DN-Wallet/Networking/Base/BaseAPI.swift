@@ -79,7 +79,7 @@ class BaseAPI<T: TargetType> {
                 }
     
                 let stringData = String(data: safeData, encoding: .utf8)
-            
+                
                 // Decode the json data into out responseClass
                 guard let result = try? JSONDecoder().decode(M.self, from: safeData) else {
                     completion(.failure(invalidDataError))
