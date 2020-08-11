@@ -16,6 +16,7 @@ enum TransferNetworking {
     case withdraw(Transfer, String)
     case transfer(Transfer, String)
     case donate(Transfer, String)
+    case exchange(String, String, Int)
 }
 
 extension TransferNetworking: TargetType {
@@ -33,6 +34,7 @@ extension TransferNetworking: TargetType {
             case .withdraw(_, let id):  return "/cards/withdraw/\(id)"
             case .transfer:             return "/cards/transfer"
             case .donate(_, let id):    return "/charity/donate/\(id)"
+            case .exchange:             return "/cards/exchange"
         }
     }
     
@@ -45,6 +47,7 @@ extension TransferNetworking: TargetType {
             case .withdraw:             return .post
             case .transfer:             return .post
             case .donate:               return .post
+            case .exchange:             return .post
         }
     }
     
@@ -87,6 +90,8 @@ extension TransferNetworking: TargetType {
                     "amount": data.amount,
                     "currency_code": data.currency_code
                 ])
+            case .exchange(let curr_from,let curr_to,let amount):
+                return .requestParameters(["curr_from": curr_from , "curr_to": curr_to, "amount": amount])
         }
     }
     

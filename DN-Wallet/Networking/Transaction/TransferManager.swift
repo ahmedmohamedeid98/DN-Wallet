@@ -51,6 +51,8 @@ class TransferManager: BaseAPI<TransferNetworking> {
         APIRequest(target: .transfer(withData, email), responseClass: SuccessResponse.self, completion: completion)
     }
     
-    
+    func exchange(amount: Int, from curr1: String, to curr2: String, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        APIRequest(target: .exchange(curr1, curr2, amount), responseClass: SuccessResponse.self, completion: completion)
+    }
     
 }
