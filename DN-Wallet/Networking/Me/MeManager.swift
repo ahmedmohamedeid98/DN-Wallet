@@ -12,19 +12,14 @@ protocol MeManagerProtocol {
     func getMyAccountInfo(completion: @escaping(Result<AccountInfo, NSError>) -> ())
     func editMyAccount(withData data: [String: Any], completion: @escaping(Result<SuccessResponse, NSError>) -> ())
     func getMyHisory(completion: @escaping(Result<History, NSError>) -> ())
+    func getMyHeirs(completion: @escaping(Result<[getHeir], NSError>) -> ())
+    func addHeir(heir: PostHeir, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
+    func updateHeir(heir: PostHeir, completion: @escaping(Result<SuccessResponse, NSError>) -> ())
     
 }
 
 class MeManager: BaseAPI<MeNetworking>, MeManagerProtocol {
-    
-    override init() {
-        print("new Object was created")
-    }
-    
-    deinit {
-        print("Object was dealocated")
-    }
-    
+
     func getMyAccountInfo(completion: @escaping(Result<AccountInfo, NSError>) -> ()) {
         self.APIRequest(target: .getMyBasicInfo, responseClass: AccountInfo.self, completion: completion)
     }
@@ -38,4 +33,15 @@ class MeManager: BaseAPI<MeNetworking>, MeManagerProtocol {
         self.APIRequest(target: .getMyHistory, responseClass: History.self, completion: completion)
     }
     
+    func getMyHeirs(completion: @escaping (Result<[getHeir], NSError>) -> ()) {
+        APIRequest(target: .getHeir, responseClass: [getHeir].self, completion: completion)
+    }
+    
+    func addHeir(heir: PostHeir, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        APIRequest(target: .addHeir(heir), responseClass: SuccessResponse.self, completion: completion)
+    }
+    
+    func updateHeir(heir: PostHeir, completion: @escaping (Result<SuccessResponse, NSError>) -> ()) {
+        APIRequest(target: .editHeir(heir), responseClass: SuccessResponse.self, completion: completion)
+    }
 }
