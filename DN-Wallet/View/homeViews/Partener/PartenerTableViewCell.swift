@@ -13,6 +13,10 @@ struct Partener {
     let title: String
 }
 
+protocol PartenerCellDelegate {
+    
+}
+
 class PartenerTableViewCell: UITableViewCell {
 
     //MARK:- Properities
@@ -21,13 +25,14 @@ class PartenerTableViewCell: UITableViewCell {
     static let identifier = "PartenerTableViewCell"
     private var counter: Int = 0
     private var itemCount: Int = 0
-    private var timer: Timer!
-    
+    private var timer: Timer? = nil
+    private var shouldExpand: Bool = false // first time timer toggle the cell still not init
+
     var parteners: [Partener] = [] {
         didSet {
             itemCount = parteners.count
-            print("image comes, itemCount: \(itemCount)")
             collectionView.reloadData()
+            toggleTimer()
         }
     }
     
@@ -38,10 +43,16 @@ class PartenerTableViewCell: UITableViewCell {
         configureCollectionView()
         configurePageControl()
         configureLayout()
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleTimer), name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "TOGGLE_TIMER"), object: nil)
+        print("Cell deinit")
     }
     
     //MARK:- Configures
@@ -78,33 +89,32 @@ class PartenerTableViewCell: UITableViewCell {
     }
     
     //MARK:- Timer
-   
-    func startTimer() {
-        if itemCount > 0 {
-            DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
+    @objc func toggleTimer() {
+        if shouldExpand {
+            if itemCount > 0 && timer == nil {
+                timer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
+                timer?.tolerance = 0.3
+            }
+        } else {
+            if timer != nil {
+                timer?.invalidate()
+                timer = nil
             }
         }
-        
+        shouldExpand = !shouldExpand
     }
-    // stop timer
-    func stopTimer() {
-        if let _ = timer {
-            timer.invalidate()
-        }
-        
-    }
+    
     // timer's action
     @objc func slideShow() {
-           if counter < itemCount {
+        if counter < itemCount {
             DispatchQueue.main.async { self.slideToItemAt(self.counter) }
-               counter += 1
-           }else {
-               counter = 0
+            counter += 1
+        }else {
+            counter = 0
             DispatchQueue.main.async { self.slideToItemAt(self.counter, animate: false) }
-               counter = 1
-           }
-       }
+            counter = 1
+        }
+    }
     
     private func slideToItemAt(_ counter: Int, animate: Bool = true) {
         let index = IndexPath(item: counter, section: 0)
@@ -126,19 +136,6 @@ extension PartenerTableViewCell: UICollectionViewDataSource, UICollectionViewDel
         cell.data = parteners[indexPath.row]
         return cell
     }
-    /*
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.pageControl.currentPage = indexPath.row
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleRect = CGRect(origin: self.collectionview.contentOffset, size: self.collectionview.bounds.size)
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        if let visibleIndexPath = self.collectionview.indexPathForItem(at: visiblePoint) {
-            self.pageControl.currentPage = visibleIndexPath.row
-        }
-    }
-    */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.contentView.frame.size.width, height: self.contentView.frame.size.height - 10)
     }

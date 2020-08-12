@@ -84,8 +84,8 @@ class ContainerVC: UIViewController {
     }
     
     func showMenu(shouldExpand: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
         if shouldExpand {
-            // show side menu
             NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "CHECK_APP_OUT_SAFE_MODE"), object: nil)
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerTabBarController.view.frame.origin.x = self.centerTabBarController.view.frame.width - 80

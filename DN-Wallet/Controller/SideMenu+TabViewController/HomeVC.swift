@@ -48,7 +48,7 @@ class HomeVC: UIViewController {
         initViewController()
         checkAccountActiveStatus()
         loadUserBalances()
-        
+        print("View Did Load")
         NotificationCenter.default.addObserver(self, selector: #selector(updateBalance), name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
     }
     
@@ -71,12 +71,12 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
-        startTimer()
+        NotificationCenter.default.post(name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopTimer()
+        NotificationCenter.default.post(name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
     }
  
     //MARK:- Methods
@@ -130,19 +130,6 @@ class HomeVC: UIViewController {
         
     }
     
-    private func startTimer() {
-        if let cell = partenerCell {
-            cell.startTimer()
-        }
-    }
-    
-    private func stopTimer() {
-        if let cell = partenerCell {
-            cell.stopTimer()
-        }
-    }
-    
-    
 }
 
 //MARK:- handle sideMenu Toggle
@@ -161,17 +148,11 @@ extension HomeVC {
     @objc func sideMenuButtonPressed() {
         delegate?.handleSideMenuToggle()
         isExpand = !isExpand
-        if isExpand {
-            stopTimer()
-        }else {
-            startTimer()
-        }
     }
     @objc func closeSideMenuWithGesture() {
         if isExpand {
             delegate?.handleSideMenuToggle()
             isExpand = !isExpand
-            startTimer()
         }
     }
 }
@@ -193,7 +174,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             partenerCell = tableView.dequeueReusableCell(withIdentifier: PartenerTableViewCell.identifier, for: indexPath) as? PartenerTableViewCell
             if let cell = partenerCell {
                 cell.parteners = parteners
-                cell.startTimer()
                 return cell
             }
             return UITableViewCell()
