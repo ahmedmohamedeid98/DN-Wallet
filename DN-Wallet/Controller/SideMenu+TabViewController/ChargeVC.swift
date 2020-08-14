@@ -25,6 +25,7 @@ class ChargeVC: UIViewController {
     var cards: [GetPaymentCards]  = []
     var selectedSegmentIndex: Int = 0
     var selectedCurrencyCode: String = "EGP"
+    var emptyStateView: UIView? = nil
     
     //MARK:- Initialization
     fileprivate func configureSegmentControl() {
@@ -37,14 +38,17 @@ class ChargeVC: UIViewController {
         super.viewDidLoad()
         handleNavigationBar()
         configureSegmentControl()
-        
         dropDown.delegate       = self
         dropDown.doNotShowTheKeyboard()
         amountField.delegate    = self
         creditTable.delegate    = self
+        //creditTable.alpha       = 0
         setupCreditTableDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         initViewControllerWithData()
-        
     }
     
     private func setUserPreference() {
@@ -218,7 +222,9 @@ extension ChargeVC: DNSegmentControlDelegate {
 //Networking
 extension ChargeVC {
     func initViewControllerWithData() {
+        self.creditTable.showLoadingView()
         TransferManager.shared.getPaymentCards { (result) in
+            self.creditTable.dismissLoadingView()
             switch result {
                 case .success(let data):
                     self.handelGetPaymentCardsSuccessCase(cards: data)
@@ -229,8 +235,15 @@ extension ChargeVC {
     }
     
     func handelGetPaymentCardsSuccessCase(cards: [GetPaymentCards]) {
+        if cards.count == 0 {
+            creditTable.showEmptyState(message: "No Payment Card Founded, Go now and add one 🙃.")
+            return
+        }
+        creditTable.dismissEmptyStateView()
         self.cards = cards
-        DispatchQueue.main.async { self.updateTableViewWithData() }
+        DispatchQueue.main.async {
+            self.updateTableViewWithData()
+        }
     }
     
     func handelGetPaymentCardsFailureCase(withError err: String) {

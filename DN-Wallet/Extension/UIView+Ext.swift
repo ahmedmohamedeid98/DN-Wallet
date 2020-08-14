@@ -10,6 +10,7 @@ import Foundation
 
 fileprivate var containerView   : UIView!
 fileprivate var loadingLabel    : DNSecondaryTitleLabel!
+fileprivate var emptyStateView  : UIView!
 
 extension UIView {
     
@@ -119,4 +120,22 @@ extension UIView {
         }
     }
    
+    func showEmptyState(message: String) {
+        DispatchQueue.main.async {
+            if emptyStateView == nil {
+                emptyStateView = DNEmptyStateSubview(message: message)
+                emptyStateView.frame = self.bounds
+                self.addSubview(emptyStateView)
+            }
+        }
+    }
+    
+    func dismissEmptyStateView() {
+        DispatchQueue.main.async {
+            if emptyStateView != nil {
+                emptyStateView.removeFromSuperview()
+                emptyStateView = nil
+            }
+        }
+    }
 }
