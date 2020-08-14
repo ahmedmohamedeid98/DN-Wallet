@@ -8,6 +8,9 @@
 
 import Foundation
 
+fileprivate var containerView   : UIView!
+fileprivate var loadingLabel    : DNSecondaryTitleLabel!
+
 extension UIView {
     
     func DNLayoutConstraint(_ top:NSLayoutYAxisAnchor? = nil, left:NSLayoutXAxisAnchor? = nil, right:NSLayoutXAxisAnchor? = nil, bottom:NSLayoutYAxisAnchor? = nil, margins:UIEdgeInsets = .zero, size: CGSize = .zero, centerH: Bool = false, centerV: Bool = false){
@@ -80,5 +83,40 @@ extension UIView {
     func globalPoint() -> CGPoint? {
         return self.superview?.convert(self.frame.origin, to: nil)
     }*/
+    
+    func showLoadingView() {
+        containerView                   = UIView(frame: self.bounds)
+        containerView.backgroundColor   = .systemBackground
+        containerView.alpha             = 0
+        loadingLabel                    = DNSecondaryTitleLabel(fontSize: 16)
+        loadingLabel.text               = "Loading..."
+        loadingLabel.textAlignment      = .center
+        addSubview(containerView)
+        
+        UIView.animate(withDuration: 0.25) { containerView.alpha = 0.8 }
+        
+        let activityIndicatorView = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(activityIndicatorView)
+        containerView.addSubview(loadingLabel)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        loadingLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            loadingLabel.topAnchor.constraint(equalTo: activityIndicatorView.bottomAnchor, constant: 10),
+            loadingLabel.centerXAnchor.constraint(equalTo: activityIndicatorView.centerXAnchor)
+        ])
+        
+        activityIndicatorView.startAnimating()
+    }
+    
+    func dismissLoadingView() {
+        DispatchQueue.main.async {
+            containerView.removeFromSuperview()
+            containerView = nil
+            loadingLabel  = nil
+        }
+    }
    
 }

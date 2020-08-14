@@ -45,6 +45,7 @@ class BalanceTableViewCell: UITableViewCell {
     }
     
     func configure() {
+        collectionView.alpha = 0
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
@@ -81,8 +82,9 @@ extension BalanceTableViewCell: UICollectionViewDataSource, UICollectionViewDele
 extension BalanceTableViewCell {
     
     func loadUserBalances() {
-        print("load balance...")
+        showLoadingView()
         TransferManager.shared.getUserBalace { (result) in
+            self.dismissLoadingView()
             switch result {
                 case .success(let data):
                     self.handleGetUserBalanceSuccessCase(withData: data)
@@ -95,7 +97,10 @@ extension BalanceTableViewCell {
     private func handleGetUserBalanceSuccessCase(withData data: [Balance]) {
         self.balance = data
         prepareDataForPay(balance: data)
-        DispatchQueue.main.async { self.collectionView.reloadData() }
+        DispatchQueue.main.async {
+            self.collectionView.alpha = 1.0
+            self.collectionView.reloadData()
+        }
     }
     
     private func handleGetUserBalanceFailureCase(withError error: String) {
