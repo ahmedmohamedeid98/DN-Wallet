@@ -26,13 +26,13 @@ class PartenerTableViewCell: UITableViewCell {
     private var counter: Int = 0
     private var itemCount: Int = 0
     private var timer: Timer? = nil
-    private var shouldExpand: Bool = false // first time timer toggle the cell still not init
+    
 
     var parteners: [Partener] = [] {
         didSet {
             itemCount = parteners.count
             collectionView.reloadData()
-            toggleTimer()
+            startTimer()
         }
     }
     
@@ -43,7 +43,8 @@ class PartenerTableViewCell: UITableViewCell {
         configureCollectionView()
         configurePageControl()
         configureLayout()
-        NotificationCenter.default.addObserver(self, selector: #selector(toggleTimer), name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name("START_TIMER"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(stopTimer), name: NSNotification.Name("STOP_TIMER"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -51,7 +52,8 @@ class PartenerTableViewCell: UITableViewCell {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "TOGGLE_TIMER"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "START_TIMER"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "STOP_TIMER"), object: nil)
         print("Cell deinit")
     }
     
@@ -89,20 +91,21 @@ class PartenerTableViewCell: UITableViewCell {
     }
     
     //MARK:- Timer
-    @objc func toggleTimer() {
-        if shouldExpand {
-            if itemCount > 0 && timer == nil {
-                timer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
-                timer?.tolerance = 0.3
-            }
-        } else {
-            if timer != nil {
-                timer?.invalidate()
-                timer = nil
-            }
+    
+    @objc func startTimer() {
+        if itemCount > 0 && timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 9, target: self, selector: #selector(self.slideShow), userInfo: nil, repeats: true)
+            timer?.tolerance = 0.3
         }
-        shouldExpand = !shouldExpand
     }
+    
+    @objc func stopTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
     
     // timer's action
     @objc func slideShow() {
