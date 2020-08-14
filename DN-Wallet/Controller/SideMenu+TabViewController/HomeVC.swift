@@ -38,8 +38,7 @@ class HomeVC: UIViewController {
     private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
-    var completeUpdateAlert = DNWordAlert(message: "Balance Updated.")
-    let documentFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Balance.plist")
+
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -47,36 +46,17 @@ class HomeVC: UIViewController {
         view.backgroundColor = .DnVcBackgroundColor
         initViewController()
         checkAccountActiveStatus()
-        loadUserBalances()
-        print("View Did Load")
-        NotificationCenter.default.addObserver(self, selector: #selector(updateBalance), name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
-    }
-    
-    @objc func updateBalance() {
-        DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
-                self.loadUserBalances()
-                print("::::::Balance was updated.")
-            }
-        }
-    }
-    
-    // TEST TEST 
-    func addDNWordAlert() {
-        completeUpdateAlert.isHidden = true
-        view.addSubview(completeUpdateAlert)
-        completeUpdateAlert.DNLayoutConstraint(view.safeAreaLayoutGuide.topAnchor, left: view.rightAnchor, margins: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 200, height: 60))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
-        NotificationCenter.default.post(name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("START_TIMER"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name("TOGGLE_TIMER"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("STOP_TIMER"), object: nil)
     }
  
     //MARK:- Methods
@@ -180,7 +160,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         }
         // init Balance Cell
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BalanceTableViewCell.identifier , for: indexPath) as? BalanceTableViewCell else { return UITableViewCell() }
-        cell.balances = balance
         return cell
     }
     
@@ -228,38 +207,6 @@ extension HomeVC {
         }
     }
     
-    
-    func loadUserBalances() {
-        print("load balance...")
-        TransferManager.shared.getUserBalace { (result) in
-            switch result {
-                case .success(let data):
-                    self.handleGetUserBalanceSuccessCase(withData: data)
-                case .failure(let err):
-                    self.handleGetUserBalanceFailureCase(withError: err.localizedDescription)
-            }
-        }
-    }
-    
-    private func handleGetUserBalanceSuccessCase(withData data: [Balance]) {
-        self.balance = data
-        prepareDataForPay(balance: data)
-        DispatchQueue.main.async { self.tableView.reloadData() }
-    }
-    
-    private func handleGetUserBalanceFailureCase(withError error: String) {
-        print("Failure Get Balance: \(error)")
-    }
-    
-    private func prepareDataForPay(balance: [Balance]) {
-        let coder = PropertyListEncoder()
-        do {
-            let data = try coder.encode(balance)
-            try data.write(to: documentFilePath!)
-        } catch {
-            print("Error to write balabce")
-        }
-    }
     
     private func checkAccountActiveStatus() {
         verifyManager.checkAcountActiveStatus { (result) in
