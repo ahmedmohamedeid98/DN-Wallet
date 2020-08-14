@@ -13,6 +13,7 @@ class EditAccountVC: UIViewController {
     
     // Properities
     private lazy var meManager: MeManagerProtocol  = MeManager()
+    private lazy var auth:UserAuthProtocol = UserAuth()
     private var editList: [String: Any] = [:]
     @IBOutlet weak var currentUsername: UILabel!
     @IBOutlet weak var newUsernameTextField: UITextField!
@@ -187,8 +188,10 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
         if let pickedImage = info[.originalImage] as? UIImage {
             self.currentImageView.image = pickedImage
             //guard let imageData   = pickedImage.pngData() else { return }
-            //updateImageOnServer(imagePath: "kljdldjkdf.jepg", imageData: imageData)
-            
+            //updateImageOnServer(imageData: imageData)
+            let url = info[UIImagePickerController.InfoKey.imageURL] as! URL
+            print("sssssS: \(url)")
+            updateImageOnServer(imageURL: url)
             
         }else {
             // Error Message
@@ -196,15 +199,58 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func updateImageOnServer(imagePath: String, imageData: Data) {
-        ImageUploader.shared.uploadImage(formFields: ["photo":imagePath], imageData: imageData) { result in
-            switch result {
-                case .success(let res):
-                print(res)
-                case .failure(_):
-                print("upload image failure")
+    func updateImageOnServer(imageURL: URL) {
+        Hud.showLoadingHud(onView: view, withLabel: "upload image...")
+//        ImageUploader.shared.uploadImage(requestURL: URL(string: "https://www.google.com")!, imageRequest: ImageRequest(attachment: imageData.base64EncodedString(), fileName: "userProfileImage")){ result in
+//            Hud.hide(after: 0)
+//            switch result {
+//                case .success(let res):
+//                print(res)
+//                case .failure(_):
+//                print("upload image failure")
+//            }
+//        }
+        let urlString   = "https://dn-wallet.herokuapp.com/api/users/pic"
+        let url         = URL(string: urlString)!
+        
+        var request     = URLRequest(url: url)
+        //let boundary = "----------------------------\(UUID().uuidString)"
+        request.httpMethod = "POST"
+        //request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue(auth.getUserToken(), forHTTPHeaderField: "x-auth-token")
+        
+//        var requestData = Data()
+//        requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
+//        //name=\"attachment\"
+//       requestData.append("content-disposition; form-data; \r\n\r\n".data(using: .utf8)!)
+//        requestData.append(imageData)
+//        //
+//        requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
+//       requestData.append("content-disposition; form-data; name=\"fileName\" \r\n\r\n".data(using: .utf8)!)
+//        requestData.append("userImage".data(using: .utf8)!)
+//
+//       requestData.append("--\(boundary)--\r\n".data(using: .utf8)!)
+//
+//        request.addValue("\(requestData.count)", forHTTPHeaderField: "Content-Length")
+        
+        
+        let task = URLSession.shared.uploadTask(with: request, fromFile: imageURL) { (data, response, error) in
+            Hud.hide(after: 0)
+            if let err = error {
+                print("error in image uploading...\(err.localizedDescription)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode == 200 {
+                    print("success")
+                    print(String(data: data!, encoding: .utf8))
+                }else {
+                    print("invalid status code : \(response.statusCode)")
+                }
             }
         }
+        task.resume()
     }
     
     private func showPickerImageFromCameraOrPhotoLibraryAlertSheet() {
