@@ -56,7 +56,7 @@ extension MeNetworking: TargetType {
     }
     
     var header: [String : String]? {
-        return ["ContentType": "application/json"]
+        return ["Content-Type": "application/json"]
     }
     
     var tokenRequired: Bool {

@@ -149,6 +149,7 @@ extension AddHeirVC {
                 case .failure(let err): self.configureGeneralFailureCase(msg: err.localizedDescription)
             }
         }
+
     }
     
     private func updateHeirs() {
@@ -182,9 +183,11 @@ extension AddHeirVC {
         self.data = data
         guard let safeData = data.first else { return }
         DispatchQueue.main.async {
-            self.firstHeir.text = safeData.heir1
-            self.secondHeir.text = safeData.heir2
-            self.slider.value = Float(safeData.heir1Precentage)
+            self.firstHeir.text         = safeData.heir1
+            self.secondHeir.text        = safeData.heir2
+            self.slider.value           = Float(safeData.heir1Precentage)
+            self.firstPrecentage.text   = "\(safeData.heir1Precentage)"
+            self.secondPrecentage.text  = "\(100 - safeData.heir1Precentage)"
         }
     }
     
@@ -196,30 +199,3 @@ extension AddHeirVC {
         presentAlertOnTheMainThread(title: "Failure", Message: msg)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

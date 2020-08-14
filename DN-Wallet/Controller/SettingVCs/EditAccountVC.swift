@@ -52,28 +52,24 @@ class EditAccountVC: UIViewController {
     private var newPhone: String? = nil {
         didSet {
             guard let phone = newPhone else {return}
-            editList["phone"] = phone
             self.currentPhone.text = phone
         }
     }
     private var newCountry: String? = nil {
         didSet {
             guard let country = newCountry else {return}
-            editList["country"] = country
             self.currentCountry.text = country
         }
     }
     private var newUsername: String? = nil {
         didSet {
             guard let username = newUsername else {return}
-            //editList["name"] = username
             self.currentUsername.text = username
         }
     }
     private var newJob: String? = nil {
         didSet {
             guard let job = newJob else {return}
-            editList["job"] = job
             self.currentJob.text = job
         }
     }
@@ -125,8 +121,30 @@ class EditAccountVC: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarBtn
     }
     
+    private func getInputs() {
+        if let _gender = gender, !_gender.isEmpty {
+            editList["gender"] = _gender
+        }
+        
+        if let job = newJobTextField.text, !job.isEmpty {
+            editList["job"] = job
+        }
+        
+        if let phone = newPhone, !phone.isEmpty {
+            editList["phone"] = phone
+        }
+        
+        if let country = newCountryTextField.text, !country.isEmpty {
+            editList["country"] = country
+        }
+        
+        if let username = newUsernameTextField.text, !username.isEmpty {
+            editList["username"] = username
+        }
+    }
     
      @objc private func saveChangesButton() {
+        getInputs()
         Hud.showLoadingHud(onView: view, withLabel: "Updating...")
         meManager.editMyAccount(withData: editList) { (result) in
             Hud.hide(after: 0.0)
@@ -191,7 +209,7 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
             //updateImageOnServer(imageData: imageData)
             let url = info[UIImagePickerController.InfoKey.imageURL] as! URL
             print("sssssS: \(url)")
-            updateImageOnServer(imageURL: url)
+            updateImageOnServer(imageURL: url, imageData: pickedImage.pngData()!)
             
         }else {
             // Error Message
@@ -199,7 +217,7 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func updateImageOnServer(imageURL: URL) {
+    func updateImageOnServer(imageURL: URL, imageData: Data) {
         Hud.showLoadingHud(onView: view, withLabel: "upload image...")
 //        ImageUploader.shared.uploadImage(requestURL: URL(string: "https://www.google.com")!, imageRequest: ImageRequest(attachment: imageData.base64EncodedString(), fileName: "userProfileImage")){ result in
 //            Hud.hide(after: 0)
@@ -214,24 +232,24 @@ extension EditAccountVC: UIImagePickerControllerDelegate, UINavigationController
         let url         = URL(string: urlString)!
         
         var request     = URLRequest(url: url)
-        //let boundary = "----------------------------\(UUID().uuidString)"
+        let boundary = "--\(UUID().uuidString)"
         request.httpMethod = "POST"
-        //request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
+        request.setValue("multipart/form-data; boundary=\(boundary)\r\n", forHTTPHeaderField: "Content-Type")
         request.setValue(auth.getUserToken(), forHTTPHeaderField: "x-auth-token")
         
-//        var requestData = Data()
-//        requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
+       var requestData = Data()
+       requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
 //        //name=\"attachment\"
 //       requestData.append("content-disposition; form-data; \r\n\r\n".data(using: .utf8)!)
-//        requestData.append(imageData)
+       requestData.append(imageData)
 //        //
 //        requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
 //       requestData.append("content-disposition; form-data; name=\"fileName\" \r\n\r\n".data(using: .utf8)!)
 //        requestData.append("userImage".data(using: .utf8)!)
 //
-//       requestData.append("--\(boundary)--\r\n".data(using: .utf8)!)
+    requestData.append("--\(boundary)\r\n".data(using: .utf8)!)
 //
-//        request.addValue("\(requestData.count)", forHTTPHeaderField: "Content-Length")
+        request.addValue("\(requestData.count)", forHTTPHeaderField: "Content-Length")
         
         
         let task = URLSession.shared.uploadTask(with: request, fromFile: imageURL) { (data, response, error) in
