@@ -39,11 +39,6 @@ class SideMenuVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(checkIfAppOutTheSafeMode), name: NSNotification.Name.init(rawValue: "CHECK_APP_OUT_SAFE_MODE"), object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "SIDEMENUNOTIFICATIONS"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "CHECK_APP_OUT_SAFE_MODE"), object: nil)
-    }
     
     @objc func checkIfAppOutTheSafeMode() {
         _ = auth.checkIfAppOutTheSafeMode()

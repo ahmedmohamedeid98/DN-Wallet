@@ -51,7 +51,7 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .DnVcBackgroundColor
-        NotificationCenter.default.post(name: NSNotification.Name("START_TIMER"), object: nil)
+        if !isExpand { NotificationCenter.default.post(name: NSNotification.Name("START_TIMER"), object: nil) }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
