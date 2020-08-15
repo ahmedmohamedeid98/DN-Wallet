@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04011B2724E72E56006579E4 /* DNEmptyStateSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04011B2624E72E56006579E4 /* DNEmptyStateSubview.swift */; };
 		0401BBD3247C7493000C597A /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401BBD2247C7493000C597A /* NotificationVC.swift */; };
 		0401BBD7247C8143000C597A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0401BBD6247C8143000C597A /* Message.swift */; };
 		040EF4E6248EF6F200DD29F2 /* HistoryDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EF4E4248EF6F200DD29F2 /* HistoryDetailsCell.swift */; };
@@ -24,6 +25,7 @@
 		042DC04D2486C7070054E911 /* DNButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC04C2486C7070054E911 /* DNButton.swift */; };
 		042DC04F2486F0520054E911 /* DNImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042DC04E2486F0520054E911 /* DNImageView.swift */; };
 		043429C5244ECBEA00D5D0BB /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */; };
+		0439122024E46C080028D324 /* DNEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439121F24E46C080028D324 /* DNEditView.swift */; };
 		043B7ED024623AE400F2D037 /* ChargeCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */; };
 		043CA4EA24CF2D0F000033B7 /* DNAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4E924CF2D0F000033B7 /* DNAvatarImageView.swift */; };
 		043CA4EC24CF3019000033B7 /* DNSFSymboleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA4EB24CF3019000033B7 /* DNSFSymboleImageView.swift */; };
@@ -150,6 +152,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04011B2624E72E56006579E4 /* DNEmptyStateSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNEmptyStateSubview.swift; sourceTree = "<group>"; };
 		0401BBD2247C7493000C597A /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		0401BBD6247C8143000C597A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		040EF4E4248EF6F200DD29F2 /* HistoryDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailsCell.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 		042DC04C2486C7070054E911 /* DNButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNButton.swift; sourceTree = "<group>"; };
 		042DC04E2486F0520054E911 /* DNImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNImageView.swift; sourceTree = "<group>"; };
 		043429C4244ECBEA00D5D0BB /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
+		0439121F24E46C080028D324 /* DNEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNEditView.swift; sourceTree = "<group>"; };
 		043B7ECF24623AE400F2D037 /* ChargeCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeCreditCell.swift; sourceTree = "<group>"; };
 		043CA4E924CF2D0F000033B7 /* DNAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNAvatarImageView.swift; sourceTree = "<group>"; };
 		043CA4EB24CF3019000033B7 /* DNSFSymboleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSFSymboleImageView.swift; sourceTree = "<group>"; };
@@ -418,6 +422,8 @@
 				049D1DFA241A7C02003DF669 /* DNPasswordContainer.swift */,
 				043CA4F724D0DFD9000033B7 /* DNEmptyStateView.swift */,
 				04C2727624DE119E00426CD6 /* File.swift */,
+				0439121F24E46C080028D324 /* DNEditView.swift */,
+				04011B2624E72E56006579E4 /* DNEmptyStateSubview.swift */,
 			);
 			path = DNView;
 			sourceTree = "<group>";
@@ -1044,6 +1050,7 @@
 				04952E0C24A4964E00060E36 /* DNSeperatorLine.swift in Sources */,
 				045600C324E2BEE2000C4CA0 /* PostHeir.swift in Sources */,
 				04659FF824B61E1500EF8B5B /* UserHistorySections.swift in Sources */,
+				0439122024E46C080028D324 /* DNEditView.swift in Sources */,
 				04688E3A2427F02A00183DF5 /* OPT.swift in Sources */,
 				047A49F8243AEC3A0077A954 /* SettingCell.swift in Sources */,
 				047FA8B5240E1E910097DD06 /* CreateAccountVC.swift in Sources */,
@@ -1123,6 +1130,7 @@
 				04F5A8DA24DB8B4100CA9FA9 /* Date+Ext.swift in Sources */,
 				040EF4E9248F245600DD29F2 /* Hud.swift in Sources */,
 				0467D75B2425673200C67D7C /* DNAnnotation.swift in Sources */,
+				04011B2724E72E56006579E4 /* DNEmptyStateSubview.swift in Sources */,
 				04AACF5D24B21A14003CF758 /* ResetNetworking.swift in Sources */,
 				04F81C6224B4FE2A00D10702 /* UserHistoryCell.swift in Sources */,
 				04FD28C424256D6B00E41EAC /* CharityOrg.swift in Sources */,

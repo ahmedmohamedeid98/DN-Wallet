@@ -44,8 +44,9 @@ class BaseAPI<T: TargetType> {
         let params = buildParameters(task: target.task)
         
         if let body = params {
+            print("Data From Me: \(body)")
             do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+                request.httpBody =  try JSONSerialization.data(withJSONObject: body, options: [])
             } catch {
                 // do nothing, request with no body
             }
@@ -79,7 +80,7 @@ class BaseAPI<T: TargetType> {
                 }
     
                 let stringData = String(data: safeData, encoding: .utf8)
-                
+                print("Comming Data: \(stringData)")
                 // Decode the json data into out responseClass
                 guard let result = try? JSONDecoder().decode(M.self, from: safeData) else {
                     completion(.failure(invalidDataError))
