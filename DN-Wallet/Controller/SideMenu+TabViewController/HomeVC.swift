@@ -38,7 +38,7 @@ class HomeVC: UIViewController {
     private lazy var auth: UserAuthProtocol = UserAuth()
     private lazy var verifyManager: VerifyManagerProtocol = VerifyManager()
     var isCommingFromCreateAccountVC: Bool = false
-
+    var refreshButton = UIButton(type: .system)
     
     //MARK:- Init
     override func viewDidLoad() {
@@ -79,7 +79,18 @@ class HomeVC: UIViewController {
         // Fetch Notifications Messages
         fetchNotificationMessages()
     }
-    
+    /*
+    private func configureRefreshButton() {
+        refreshButton.setImage(UIImage(systemName: "arrow.2.circlepath.circle"), for: .normal)
+        refreshButton.tintColor = .label
+        refreshButton.frame     = CGRect(x: 0, y: 0, width: 30, height: 30)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
+    }
+    */
+    @objc func refreshButtonAction() {
+        
+    }
     // Configure Navigation Bar
     private func configureNavgationBar() {
         self.configureNavigationBar(title: "Home", preferredLargeTitle: false)

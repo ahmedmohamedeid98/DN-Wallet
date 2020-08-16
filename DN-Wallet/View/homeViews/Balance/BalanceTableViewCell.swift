@@ -15,6 +15,8 @@ class BalanceTableViewCell: UITableViewCell {
     static let identifier = "BalanceTableViewCell"
     let documentFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Balance.plist")
     var balance: [Balance] = []
+    var firstTime: Bool = true
+    var inProcess: Bool = false
 //    {
 //        didSet {
 //            DispatchQueue.main.async { self.collectionView.reloadData() }
@@ -27,7 +29,8 @@ class BalanceTableViewCell: UITableViewCell {
         addCollectionView()
         configure()
         loadUserBalances()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateBalance), name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(updateBalance), name: NSNotification.Name("BALANCEWASUPDATED"), object: nil)
+        updateBalance()
     }
     
     
@@ -37,9 +40,14 @@ class BalanceTableViewCell: UITableViewCell {
     
     @objc func updateBalance() {
         DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { _ in
-                self.loadUserBalances()
-                print("::::::Balance was updated.")
+            Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { _ in
+                print("Timer ask for Balance?")
+                if !self.inProcess {
+                    self.loadUserBalances()
+                    print("YES.")
+                } else {
+                    print("NO.")
+                }
             }
         }
     }
@@ -82,17 +90,46 @@ extension BalanceTableViewCell: UICollectionViewDataSource, UICollectionViewDele
 extension BalanceTableViewCell {
     
     func loadUserBalances() {
-        showLoadingView()
-        TransferManager.shared.getUserBalace { (result) in
-            self.dismissLoadingView()
+        if firstTime { showLoadingView() }
+        self.inProcess = true
+        TransferManager.shared.getUserBalace { [weak self] (result) in
+            guard let self = self else {return}
+            if self.firstTime { self.dismissLoadingView() }
             switch result {
                 case .success(let data):
-                    self.handleGetUserBalanceSuccessCase(withData: data)
+                    //self.handleGetUserBalanceSuccessCase(withData: data)
+                    self.handleSucessCase(withData: data)
                 case .failure(let err):
                     self.handleGetUserBalanceFailureCase(withError: err.localizedDescription)
             }
         }
     }
+    //TEST TEST
+    private func handleSucessCase(withData data: [Balance]) {
+        if firstTime {
+            firstTime = false
+            self.balance = data
+            prepareDataForPay(balance: data)
+            DispatchQueue.main.async {
+                self.collectionView.alpha = 1.0
+                self.collectionView.reloadData()
+            }
+        } else {
+            guard let oldBalance = loadOldBalance() else { return }
+            if showReloadCollection(new: data, old: oldBalance) {
+                prepareDataForPay(balance: data)
+                self.balance = data
+                DispatchQueue.main.async { self.showLoadingView(withLabel: "Updating...") }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                    self.dismissLoadingView()
+                    self.collectionView.alpha = 1.0
+                    self.collectionView.reloadData()
+                })
+            }
+        }
+        inProcess = false
+    }
+    
     
     private func handleGetUserBalanceSuccessCase(withData data: [Balance]) {
         self.balance = data
@@ -105,6 +142,7 @@ extension BalanceTableViewCell {
     
     private func handleGetUserBalanceFailureCase(withError error: String) {
         print("Failure Get Balance: \(error)")
+        inProcess = false
     }
     
     private func prepareDataForPay(balance: [Balance]) {
@@ -115,5 +153,23 @@ extension BalanceTableViewCell {
         } catch {
             print("Error to write balabce")
         }
+    }
+    
+    //TEST TEST
+    private func showReloadCollection(new: [Balance], old: [Balance])-> Bool {
+        guard new[0].amount == old[0].amount else { return true }
+        guard new[1].amount == old[1].amount else { return true }
+        guard new[2].amount == old[2].amount else { return true }
+        guard new[3].amount == old[3].amount else { return true }
+        return false
+    }
+    
+    private func loadOldBalance() -> [Balance]? {
+            do {
+                let decoder = PropertyListDecoder()
+                let data = try Data(contentsOf: documentFilePath!)
+                let balance = try decoder.decode([Balance].self, from: data)
+                return balance
+            } catch { return nil }
     }
 }

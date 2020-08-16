@@ -85,12 +85,12 @@ extension UIView {
         return self.superview?.convert(self.frame.origin, to: nil)
     }*/
     
-    func showLoadingView() {
+    func showLoadingView(withLabel: String = "Loading...") {
         containerView                   = UIView(frame: self.bounds)
         containerView.backgroundColor   = .systemBackground
         containerView.alpha             = 0
         loadingLabel                    = DNSecondaryTitleLabel(fontSize: 16)
-        loadingLabel.text               = "Loading..."
+        loadingLabel.text               = withLabel
         loadingLabel.textAlignment      = .center
         addSubview(containerView)
         

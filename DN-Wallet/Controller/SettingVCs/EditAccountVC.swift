@@ -116,7 +116,7 @@ class EditAccountVC: UIViewController {
      //MARK:- Methods
     private func setupNavBar() {
         navigationItem.title = "Edit Account"
-        rightBarBtn = UIBarButtonItem(title: "Save Changes", style: .plain, target: self, action: #selector(saveChangesButton))
+        rightBarBtn = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveChangesButton))
         //rightBarBtn.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarBtn
     }
@@ -131,7 +131,7 @@ class EditAccountVC: UIViewController {
         }
         
         if let phone = newPhone, !phone.isEmpty {
-            editList["phone"] = phone
+            //editList["phone"] = phone
         }
         
         if let country = newCountryTextField.text, !country.isEmpty {
