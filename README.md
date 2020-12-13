@@ -1,17 +1,31 @@
 # DN-Wallet
-Graduation Project
+Graduation Project <a href="https://drive.google.com/file/d/1rRhZ9k5Vzstn3OoWsltn59JMyiQh_fTU/view?usp=sharing">Show Video</a>
+
+## Thanks to
+<ul>
+ <li>Dr.Mohamed Tahoun - Our Instructor</li>
+ <li><a href="https://github.com/mohamedelraghy">Mohamed EL-Raghy</a> - Responsible for RESTful API</li>
+ <li><a href="https://github.com/DataDetactive">Karim Elgohary</a> - Responsible for Machine Learning Part</li>
+ <li><a href="https://github.com/AbdelrhmanSaied98">Abdelrahman Saied</a> - Responsible for Blockchain </li>
+ <li>Esraa Samir - Responsible for Web Platform </li>
+ <li>Hanan Mostafa - Responsible for Web Platform</li>
+</ul>
+
+## Project Structure
+<p>
+  <img src="imgs/ps.png" width="1100" height= "650">
+</p>
+<br>
 
 ## Motivation
 <p>
 Money is the main thing that all humanity shares and interested in, so we want to make it easy to be controlled, more secure, and fast for any person and protect its privacy. All that just in one click. Most people who use cash could put them in danger of mugging. They are also afraid of using finance technology because it's difficult to use and it could have several problems and insecurity that lead to fraud.
 </p>
-<br>
 
 ## Idea
 <p>
 DN-Wallet is a movement from traditional payment methods to digitalization for faster transactions. It’s based on Blockchain technology to ensure security and privacy, all that we provide with ease of use. 
 </p>
-<br>
 
 ## Goals
  <p>
