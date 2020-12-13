@@ -13,7 +13,7 @@ Graduation Project <a href="https://drive.google.com/file/d/1rRhZ9k5Vzstn3OoWslt
 
 ## Project Structure
 <p>
-  <img src="imgs/ps.png" width="1100" height= "650">
+  <img src="imgs/ps.png">
 </p>
 <br>
 
@@ -51,17 +51,17 @@ Our application provides transaction money or purchasing stuff with emails or sc
 
 ## ScreanShots
 <p>
-  <img src="imgs/1.png" width="1100" height= "650">
+  <img src="imgs/1.png">
 </p>
 <br>
 <p>
-  <img src="imgs/2.png" width="1100" height= "650">
+  <img src="imgs/2.png">
 </p>
 <br>
 <p>
-  <img src="imgs/3.png" width="1100" height= "650">
+  <img src="imgs/3.png">
  </p>
  <br>
 <p>
-  <img src="imgs/4.png" width="1100" height= "650">
+  <img src="imgs/4.png">
  </p>
